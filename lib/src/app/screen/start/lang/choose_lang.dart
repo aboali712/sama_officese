@@ -52,15 +52,7 @@ class _ChooseLangState extends State<ChooseLang> with StorageHelper {
         );
 
     return Scaffold(
-      appBar: AppBar(
-
-        flexibleSpace: const Image(
-          image: AssetImage('assets/images/signback.png'),
-          fit: BoxFit.cover,
-        ),toolbarHeight: 140,
-        backgroundColor: Colors.transparent,
-        automaticallyImplyLeading: false,
-      ),backgroundColor: Colors.white,
+    backgroundColor: Colors.white,
 
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.dark,
