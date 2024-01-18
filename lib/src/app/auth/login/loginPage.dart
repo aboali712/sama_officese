@@ -5,16 +5,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:sama_officese/src/app.dart';
 
-
-
+import '../../../app.dart';
 import '../../core/utils/input_validators.dart';
 import '../../core/values/colors.dart';
 import '../../core/widgets/phone_number_widget.dart';
-
 import '../register/signup_view.dart';
 import 'loginViewModel.dart';
+
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -294,6 +292,9 @@ class _LoginPageState extends LoginViewModel {
                                       onPressed: () {
                                     SamaOfficeApp.navKey.currentState!.push(
                                         MaterialPageRoute(builder: (context) => const SignUp(),));
+
+
+
                                       },
                                       child: Container(
                                         padding: const EdgeInsets.only(

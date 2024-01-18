@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -22,7 +24,7 @@ class _SignUpState extends SignUpViewModel {
           children: [
             const SizedBox(width: 20,),
             Text("تسجيل حساب",style: GoogleFonts.tajawal(color: Colors.white,
-                fontSize: 20,fontWeight: FontWeight.w500),),
+                fontSize:Platform.isIOS?25: 20,fontWeight: FontWeight.w500),),
           ],
         ),
         flexibleSpace: const Image(
@@ -32,10 +34,11 @@ class _SignUpState extends SignUpViewModel {
         backgroundColor: Colors.transparent,
           automaticallyImplyLeading: false,
       ),
-      body: Column(children: [
-      const SizedBox(
+      body:  Column(children: [
+      SizedBox(
         height: 40,
       ),
+
 
 
 

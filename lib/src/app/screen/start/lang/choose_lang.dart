@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:sama_officese/src/app.dart';
 
 import '../../../auth/login/loginPage.dart';
@@ -51,7 +52,16 @@ class _ChooseLangState extends State<ChooseLang> with StorageHelper {
         );
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      appBar: AppBar(
+
+        flexibleSpace: const Image(
+          image: AssetImage('assets/images/signback.png'),
+          fit: BoxFit.cover,
+        ),toolbarHeight: 140,
+        backgroundColor: Colors.transparent,
+        automaticallyImplyLeading: false,
+      ),backgroundColor: Colors.white,
+
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.dark,
         child: Column(
