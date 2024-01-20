@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -59,12 +61,12 @@ class _ChooseLangState extends State<ChooseLang> with StorageHelper {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(
-              height: 40,
+             SizedBox(
+              height: Platform.isIOS?60:40,
             ),
              Center(
                child: SvgPicture.asset("assets/images/Group.svg",
-                   height: 200,width: size.width,fit: BoxFit.cover,),
+                   height: Platform.isIOS? 220:200,width: size.width,fit: BoxFit.cover,),
              ),
             const SizedBox(
               height: 20,
