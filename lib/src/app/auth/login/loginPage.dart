@@ -138,110 +138,112 @@ class _LoginPageState extends LoginViewModel {
                               const SizedBox(
                                 height: 10,
                               ),
-                              TextFormField(
-                                autovalidateMode:
-                                AutovalidateMode.onUserInteraction,
-                                obscureText: obscureTxt,
-                                decoration: InputDecoration(
-                                  hintText: tr("EnterPassword"),
-                                  suffixIcon: GestureDetector(
-                                    onTap: () {
+                              SizedBox(height: 45,
+                                child: TextFormField(
+                                  autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
+                                  obscureText: obscureTxt,
+                                  decoration: InputDecoration(
+                                    hintText: tr("EnterPassword"),
+                                    suffixIcon: GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          obscureTxt = !obscureTxt;
+                                        });
+                                      },
+                                      child: Icon(
+                                        obscureTxt
+                                            ? Icons.visibility_off_outlined
+                                            : Icons.visibility_outlined,
+                                        color: obscureTxt
+                                            ? disabledColor
+                                            : grayColor,
+                                      ),
+                                    ),
+                                    errorStyle:
+                                    const TextStyle(color: accentColor),
+                                    contentPadding: const EdgeInsets.symmetric(
+                                        vertical: 17.0, horizontal: 10.0),
+                                    // prefixIcon: const Icon(
+                                    //   Icons.lock_outline,
+                                    //   size: 20,
+                                    // ),
+                                    filled: true,
+                                    //hintText: "Password".tr(),
+                                    fillColor: const Color(0xFFF3F3F5),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(8)),
+                                      borderSide:
+                                      BorderSide(width: 1, color: klightGray),
+                                    ),
+                                    disabledBorder: OutlineInputBorder(
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(8)),
+                                      borderSide: BorderSide(
+                                          width: .7, color: klightGray),
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(8)),
+                                      borderSide: BorderSide(
+                                        width: .7,
+                                        color: klightGray,
+                                      ),
+                                    ),
+                                    border: const OutlineInputBorder(
+                                        borderRadius:
+                                        BorderRadius.all(Radius.circular(8)),
+                                        borderSide: BorderSide(
+                                          width: 1,
+                                        )),
+                                    errorBorder: const OutlineInputBorder(
+                                        borderRadius:
+                                        BorderRadius.all(Radius.circular(8)),
+                                        borderSide: BorderSide(
+                                            width: 0.7, color: accentColor)),
+                                    focusedErrorBorder: const OutlineInputBorder(
+                                        borderRadius:
+                                        BorderRadius.all(Radius.circular(8)),
+                                        borderSide: BorderSide(
+                                            width: 0.7, color: accentColor)),
+                                    hintStyle: const TextStyle(
+                                        fontSize: 13,
+                                        color: Color.fromRGBO(196, 196, 196, 1)),
+                                  ),
+                                  onChanged: (value) {
+                                    if (value.isEmpty ||
+                                        value == null ||
+                                        !InputValidators().passwordValidator(
+                                            password: value, context: context)) {
                                       setState(() {
-                                        obscureTxt = !obscureTxt;
+                                        isValidationError = true;
+                                        password = value;
                                       });
-                                    },
-                                    child: Icon(
-                                      obscureTxt
-                                          ? Icons.visibility_off_outlined
-                                          : Icons.visibility_outlined,
-                                      color: obscureTxt
-                                          ? disabledColor
-                                          : grayColor,
-                                    ),
-                                  ),
-                                  errorStyle:
-                                  const TextStyle(color: accentColor),
-                                  contentPadding: const EdgeInsets.symmetric(
-                                      vertical: 17.0, horizontal: 10.0),
-                                  // prefixIcon: const Icon(
-                                  //   Icons.lock_outline,
-                                  //   size: 20,
-                                  // ),
-                                  filled: true,
-                                  //hintText: "Password".tr(),
-                                  fillColor: const Color(0xFFf5f9f9),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: const BorderRadius.all(
-                                        Radius.circular(8)),
-                                    borderSide:
-                                    BorderSide(width: 1, color: klightGray),
-                                  ),
-                                  disabledBorder: OutlineInputBorder(
-                                    borderRadius: const BorderRadius.all(
-                                        Radius.circular(8)),
-                                    borderSide: BorderSide(
-                                        width: .7, color: klightGray),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: const BorderRadius.all(
-                                        Radius.circular(8)),
-                                    borderSide: BorderSide(
-                                      width: .7,
-                                      color: klightGray,
-                                    ),
-                                  ),
-                                  border: const OutlineInputBorder(
-                                      borderRadius:
-                                      BorderRadius.all(Radius.circular(8)),
-                                      borderSide: BorderSide(
-                                        width: 1,
-                                      )),
-                                  errorBorder: const OutlineInputBorder(
-                                      borderRadius:
-                                      BorderRadius.all(Radius.circular(8)),
-                                      borderSide: BorderSide(
-                                          width: 0.7, color: accentColor)),
-                                  focusedErrorBorder: const OutlineInputBorder(
-                                      borderRadius:
-                                      BorderRadius.all(Radius.circular(8)),
-                                      borderSide: BorderSide(
-                                          width: 0.7, color: accentColor)),
-                                  hintStyle: const TextStyle(
-                                      fontSize: 13,
-                                      color: Color.fromRGBO(196, 196, 196, 1)),
+                                    } else {
+                                      setState(() {
+                                        isValidationError = false;
+                                        password = value;
+                                      });
+                                    }
+                                  },
+                                  onSaved: (value) {
+                                    password = value ?? "";
+                                  },
+                                  validator: (value) {
+                                    if (value!.isEmpty || value == null) {
+                                      return tr("EnterPassword");
+                                    } else if (InputValidators()
+                                        .passwordValidator(
+                                        password: value, context: context)) {
+                                      return null;
+                                    } else {
+                                      return null;
+                                    }
+                                  },
+                                  cursorColor: Colors.black,
+                                  keyboardType: TextInputType.text,
                                 ),
-                                onChanged: (value) {
-                                  if (value.isEmpty ||
-                                      value == null ||
-                                      !InputValidators().passwordValidator(
-                                          password: value, context: context)) {
-                                    setState(() {
-                                      isValidationError = true;
-                                      password = value;
-                                    });
-                                  } else {
-                                    setState(() {
-                                      isValidationError = false;
-                                      password = value;
-                                    });
-                                  }
-                                },
-                                onSaved: (value) {
-                                  password = value ?? "";
-                                },
-                                validator: (value) {
-                                  if (value!.isEmpty || value == null) {
-                                    return tr("EnterPassword");
-                                  } else if (InputValidators()
-                                      .passwordValidator(
-                                      password: value, context: context)) {
-                                    return null;
-                                  } else {
-                                    return null;
-                                  }
-                                },
-                                cursorColor: Colors.black,
-                                keyboardType: TextInputType.text,
                               ),
                               const SizedBox(
                                 height: 15,

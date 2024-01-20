@@ -5,7 +5,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:sama_officese/src/app/auth/register/signup_viewmodel.dart';
+import 'package:sama_officese/src/app/auth/register/steps/step_one.dart';
+import 'package:sama_officese/src/app/auth/register/steps/step_two.dart';
 
 import '../../core/values/colors.dart';
 
@@ -102,57 +105,25 @@ class _SignUpState extends SignUpViewModel {
                   ),
 
             ]),),
+
+
+          const SizedBox(height: 10,),
+          step==0?
+          StepOne(this)
+             : step==1?
+          StepTwo(this)
+              :const SizedBox.shrink(),
+
           const SizedBox(height: 20,),
 
-          Row(mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-
-            InkWell(onTap: () {
-           setState(() {
-             lan=0;
-           });
-            },
-              child: Container(height: 30,width: 30,
-                padding: const EdgeInsets.all(4),
-                decoration: BoxDecoration(borderRadius: BorderRadius.circular(5),
-                  color: lan==0? samaOfficeColor :Colors.grey ,
-                ),
-                child: Text("ع",
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.tajawal(color:lan==0? Colors.white: Colors.white,
-                      fontWeight: FontWeight.w500,fontSize: 14
-
-                  ),),),
-            ),
-              const SizedBox(width: 5,),
-
-
-              InkWell(onTap: () {
-              setState(() {
-                lan=1;
-              });
-              },
-                child: Container(height: 30,width: 30,
-                  padding: const EdgeInsets.all(4),
-                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(5),
-                    color: lan==1? samaOfficeColor :Colors.grey ,
-                  ),
-                  child: Text("en",
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.tajawal(color:lan==1? Colors.white: Colors.white,
-                        fontWeight: FontWeight.w500,fontSize: 14
-
-                    ),),),
-              ),
-
-
-          ],)
 
 
 
 
 
-            ]),
+
+
+        ]),
       ),);
   }
 

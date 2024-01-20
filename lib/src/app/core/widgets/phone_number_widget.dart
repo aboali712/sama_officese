@@ -383,12 +383,12 @@ class PhoneNumberSignUpWidgetState extends State<PhoneNumberSignUpWidget> {
           children: [
             Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.0),
-                color: const Color(0xFFf5f9f9),
+                borderRadius: BorderRadius.circular(5.0),
+                color: const Color(0xFFF3F3F5),
               ),
               alignment: Alignment.topCenter,
-              width: (MediaQuery.of(context).size.width * 0.23),
-              height: 50,
+              width: (MediaQuery.of(context).size.width * 0.24),
+              height: 45,
               child: DropdownButtonHideUnderline(
                 child: ButtonTheme(
                   alignedDropdown: true,
@@ -435,7 +435,7 @@ class PhoneNumberSignUpWidgetState extends State<PhoneNumberSignUpWidget> {
             ),
             SizedBox(
               width: MediaQuery.of(context).size.width * .64,
-              height: 50,
+              height: 48,
               child: KeyboardActions(
                 bottomAvoiderScrollPhysics:
                 const NeverScrollableScrollPhysics(),
@@ -448,42 +448,42 @@ class PhoneNumberSignUpWidgetState extends State<PhoneNumberSignUpWidget> {
                     decoration: InputDecoration(
                       floatingLabelBehavior: FloatingLabelBehavior.never,
                       contentPadding: const EdgeInsets.only(
-                          bottom: 15.0, top: 15, left: 3, right: 8),
+                          bottom: 5.0, top: 5, left: 3, right: 8),
                       filled: true,
-                      fillColor: const Color(0xFFf5f9f9),
+                      fillColor: const Color(0xFFF3F3F5),
                       labelStyle: GoogleFonts.tajawal(
                           color: disabledTextColor, fontSize: 13),
                       floatingLabelStyle: const TextStyle(color: textGrayColor),
                       errorStyle: const TextStyle(color: textError),
                       focusedBorder: OutlineInputBorder(
                         borderRadius:
-                        const BorderRadius.all(Radius.circular(8)),
+                        const BorderRadius.all(Radius.circular(5)),
                         borderSide: BorderSide(width: 1, color: klightGray),
                       ),
                       disabledBorder: OutlineInputBorder(
                         borderRadius:
-                        const BorderRadius.all(Radius.circular(8)),
+                        const BorderRadius.all(Radius.circular(5)),
                         borderSide: BorderSide(width: .7, color: klightGray),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius:
-                        const BorderRadius.all(Radius.circular(8)),
+                        const BorderRadius.all(Radius.circular(5)),
                         borderSide: BorderSide(
                           width: .7,
                           color: klightGray,
                         ),
                       ),
                       border: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(8)),
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
                           borderSide: BorderSide(
                             width: 1,
                           )),
                       errorBorder: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(8)),
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
                           borderSide:
                           BorderSide(width: 0.7, color: accentColor)),
                       focusedErrorBorder: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(8)),
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
                           borderSide:
                           BorderSide(width: 0.7, color: accentColor)),
                       labelText: widget.hintText,
