@@ -24,7 +24,7 @@ class StepOne extends StatelessWidget {
           child: Column(crossAxisAlignment: CrossAxisAlignment.start,
             children: [
             Text(
-              tr("الأسم الأول"),
+              tr("FirstName"),
               style: const TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.normal,
@@ -37,7 +37,7 @@ class StepOne extends StatelessWidget {
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 style: const TextStyle(fontSize: 15),
                 decoration: InputDecoration(
-                  hintText: (tr("الأسم الأول")),
+                  hintText: (tr("FirstName")),
                   hintStyle: GoogleFonts.tajawal(
                       fontSize: 12,
                       color: const Color.fromRGBO(196, 196, 196, 1)),
@@ -104,7 +104,7 @@ class StepOne extends StatelessWidget {
           child: Column(crossAxisAlignment: CrossAxisAlignment.start,
             children: [
             Text(
-              tr("الأسم الثانى"),
+              tr("LastName"),
               style: const TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.normal,
@@ -117,7 +117,7 @@ class StepOne extends StatelessWidget {
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   style: const TextStyle(fontSize: 15),
                   decoration: InputDecoration(
-                    hintText: (tr("الأسم الثانى")),
+                    hintText: (tr("LastName")),
                     hintStyle: GoogleFonts.tajawal(
                         fontSize: 12,
                         color: const Color.fromRGBO(196, 196, 196, 1)),
@@ -192,7 +192,7 @@ class StepOne extends StatelessWidget {
               fontSize: 15),
           textAlign: TextAlign.center,
         ),
-        PhoneNumberSignUpWidget(
+        PhoneNumberSignUpWidget(controllerPhone: signUpViewModel.phoneControl,
           isPhone: signUpViewModel.isPhone,
           focusNode: signUpViewModel.focusPhone,
           hintText: tr("EnterMobile"),
@@ -220,6 +220,7 @@ class StepOne extends StatelessWidget {
           },
           onSaved: (value) {
             signUpViewModel.phoneSetState(value!);
+
           },
         ),
 
@@ -307,6 +308,115 @@ class StepOne extends StatelessWidget {
               keyboardType: TextInputType.emailAddress,
             ),
           ),
+
+
+
+
+          const SizedBox(height: 20,),
+
+          Text(
+            tr("Password"),
+            style: const TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.normal,
+                fontSize: 15),
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 45,
+            child: TextFormField(
+              controller: signUpViewModel.passwordControl,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              style: const TextStyle(fontSize: 15),
+              obscureText: signUpViewModel.obscureTxt,
+              decoration: InputDecoration(
+                hintText: tr("Password"),
+                hintStyle: GoogleFonts.tajawal(
+                    fontSize: 12,
+                    color: const Color.fromRGBO(196, 196, 196, 1)),
+                suffixIcon: GestureDetector(
+                  onTap: () {
+                    signUpViewModel.passwordEyeSetState(!signUpViewModel.obscureTxt);
+
+                  },
+                  child: Icon(
+                    signUpViewModel.obscureTxt
+                        ? Icons.visibility_off_outlined
+                        : Icons.visibility_outlined,
+                    color: signUpViewModel.obscureTxt ? disabledColor : grayColor,
+                  ),
+                ),
+
+                errorStyle: const TextStyle(color: accentColor),
+                contentPadding: const EdgeInsets.symmetric(
+                    vertical: 17.0, horizontal: 10.0),
+
+                filled: true,
+
+                fillColor: const Color(0xFFF3F3F5),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius:
+                  const BorderRadius.all(Radius.circular(8)),
+                  borderSide: BorderSide(width: 1, color: klightGray),
+                ),
+                disabledBorder: OutlineInputBorder(
+                  borderRadius:
+                  const BorderRadius.all(Radius.circular(8)),
+                  borderSide: BorderSide(width: .7, color: klightGray),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius:
+                  const BorderRadius.all(Radius.circular(8)),
+                  borderSide: BorderSide(
+                    width: .7,
+                    color: klightGray,
+                  ),
+                ),
+                border: const OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(8)),
+                    borderSide: BorderSide(
+                      width: 1,
+                    )),
+                errorBorder: const OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(8)),
+                    borderSide:
+                    BorderSide(width: 0.7, color: accentColor)),
+                focusedErrorBorder: const OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(8)),
+                    borderSide:
+                    BorderSide(width: 0.7, color: accentColor)),
+              ),
+              onChanged: (value) {
+                if (value.isEmpty ||
+                    value == null ||
+                    !InputValidators()
+                        .passwordValidator(password:  value, context: context)) {
+                  // setState(() {
+                  //   isValidationEmail = true;
+                  //   email = value;
+                  // });
+                } else {
+                  // setState(() {
+                  //   isValidationEmail = false;
+                  //   email = value;
+                  // });
+                }
+              },
+              onSaved: (value) {
+                // email = value ?? "";
+              },
+
+              cursorColor: Colors.black,
+              keyboardType: TextInputType.text,
+            ),
+          ),
+
+
+
+
+
+
+
+          const SizedBox(height: 70,)
 
       ],),
     );

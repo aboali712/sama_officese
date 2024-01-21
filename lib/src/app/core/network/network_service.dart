@@ -16,7 +16,7 @@ class NetworkService extends Interceptor with StorageHelper {
   }
 
 
-  final String _baseUrl1 = "https://xworld-api-00eee6c028f9.herokuapp.com";
+  final String _baseUrl1 = "https://samaapp.com/api/";
   late final Dio dio;
 
   NetworkService._init() {

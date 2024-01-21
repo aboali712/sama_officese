@@ -12,7 +12,7 @@ void onRequest(
   String? lang = await getLang();
 
 
-  //options.headers['lang'] = lang;
+  options.headers['lang'] = lang;
 
   if(token!=null) {
       options.headers['Authorization'] = "Bearer $token";

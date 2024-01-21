@@ -8,6 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sama_officese/src/app/auth/register/signup_viewmodel.dart';
 import 'package:sama_officese/src/app/auth/register/steps/step_one.dart';
+import 'package:sama_officese/src/app/auth/register/steps/step_three.dart';
 import 'package:sama_officese/src/app/auth/register/steps/step_two.dart';
 
 import '../../core/values/colors.dart';
@@ -29,7 +30,7 @@ class _SignUpState extends SignUpViewModel {
         title: Row(
           children: [
             const SizedBox(width: 20,),
-            Text("تسجيل حساب",style: GoogleFonts.tajawal(color: Colors.white,
+            Text(tr("CreateAnAccount"),style: GoogleFonts.tajawal(color: Colors.white,
                 fontSize:Platform.isIOS?25: 20,fontWeight: FontWeight.w500),),
           ],
         ),
@@ -40,98 +41,152 @@ class _SignUpState extends SignUpViewModel {
         backgroundColor: Colors.transparent,
           automaticallyImplyLeading: false,
       ),
-      body:  Padding(
-        padding: const EdgeInsets.only(left: 10,right: 10),
-        child: Column(children: [
+      body:  Stack(
+        children: [
 
-        Container(height: 50,width: size.width-10,
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),
-              border:Border.all(width: .7,color: Colors.grey.shade300) ),
-            child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
+          Padding(
+          padding: const EdgeInsets.only(left: 10,right: 10),
+          child: Column(children: [
 
-              InkWell(onTap: () {
-                setState(() {
-                  step=0;
-                });
+          Container(height: 50,width: size.width-10,
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),
+                border:Border.all(width: .7,color: Colors.grey.shade300) ),
+              child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+
+                InkWell(onTap: () {
+                  setState(() {
+                    step=0;
+                  });
+                },
+                  child: Container(height: 45,width: 120,
+                    padding: const EdgeInsets.all(11),
+                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),
+                      color: step==0? samaColor :Colors.white ,
+                       ),
+                    child: Text(tr("AboutResponsible"),
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.tajawal(color:step==0? Colors.white: Colors.grey,
+                          fontWeight: FontWeight.w500,fontSize: 14
+
+                    ),),),
+                ),
+
+                    InkWell(onTap: () {
+                      setState(() {
+                        step=1;
+                      });
+                    },
+                      child: Container(height: 45,width: 120,
+                        padding: const EdgeInsets.all(11),
+                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),
+                          color: step==1? samaColor :Colors.white ,
+                        ),
+                        child: Text(tr("AboutOffice"),
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.tajawal(color:step==1? Colors.white: Colors.grey,
+                              fontWeight: FontWeight.w500,fontSize: 14
+
+                          ),),),
+                    ),
+
+                    InkWell(onTap: () {
+                      setState(() {
+                        step=2;
+                      });
+                    },
+                      child: Container(height: 45,width: 120,
+                        padding: const EdgeInsets.all(11),
+                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),
+                          color: step==2? samaColor :Colors.white ,
+                        ),
+                        child: Text(tr("payingOff"),
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.tajawal(color:step==2? Colors.white: Colors.grey,
+                              fontWeight: FontWeight.w500,fontSize: 14
+
+                          ),),),
+                    ),
+
+              ]),),
+
+
+            const SizedBox(height: 10,),
+
+         Expanded(
+           child: SingleChildScrollView(
+             child: Column(children: [
+               step==0?
+               StepOne(this)
+                   : step==1?
+               StepTwo(this)
+                   : step==2?
+                   StepThree(this)
+                   :const SizedBox.shrink(),
+
+               const SizedBox(height: 20,),
+
+
+             ],),
+           ),
+         )
+
+
+
+
+
+
+          ]),
+        ),
+
+          Positioned(bottom: 0,left: 0,right: 0,
+            child: Container(height: 80,
+              decoration: const BoxDecoration(color: Colors.white),
+            ),
+          ),
+
+
+          Positioned(bottom: 40,left: 20,right: 20,
+            child: TextButton(
+              style: TextButton.styleFrom(
+                  primary: Colors.white,
+                  padding: const EdgeInsets.all(0),
+                  fixedSize: const Size(75, 50),
+                  shape: RoundedRectangleBorder(
+
+                      side: const BorderSide(
+                          color: Color(0xffea8024)),
+                      borderRadius:
+                      BorderRadius.circular(15)),
+                  backgroundColor: const Color(0xffea8024)),
+              onPressed: () {
+
               },
-                child: Container(height: 45,width: 120,
-                  padding: const EdgeInsets.all(11),
-                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),
-                    color: step==0? samaColor :Colors.white ,
-                     ),
-                  child: Text("عن المسؤل",
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.tajawal(color:step==0? Colors.white: Colors.grey,
-                        fontWeight: FontWeight.w500,fontSize: 14
-
-                  ),),),
+              child: Text(
+                step==2?
+                    tr("Register")
+               : tr('Next'),
+                style: const TextStyle(
+                    fontSize: 16,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500),
               ),
-
-                  InkWell(onTap: () {
-                    setState(() {
-                      step=1;
-                    });
-                  },
-                    child: Container(height: 45,width: 120,
-                      padding: const EdgeInsets.all(11),
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),
-                        color: step==1? samaColor :Colors.white ,
-                      ),
-                      child: Text("عن المكتب",
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.tajawal(color:step==1? Colors.white: Colors.grey,
-                            fontWeight: FontWeight.w500,fontSize: 14
-
-                        ),),),
-                  ),
-
-                  InkWell(onTap: () {
-                    setState(() {
-                      step=2;
-                    });
-                  },
-                    child: Container(height: 45,width: 120,
-                      padding: const EdgeInsets.all(11),
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),
-                        color: step==2? samaColor :Colors.white ,
-                      ),
-                      child: Text("الدفع",
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.tajawal(color:step==2? Colors.white: Colors.grey,
-                            fontWeight: FontWeight.w500,fontSize: 14
-
-                        ),),),
-                  ),
-
-            ]),),
-
-
-          const SizedBox(height: 10,),
-
-       Expanded(
-         child: SingleChildScrollView(
-           child: Column(children: [
-             step==0?
-             StepOne(this)
-                 : step==1?
-             StepTwo(this)
-                 :const SizedBox.shrink(),
-
-             const SizedBox(height: 20,),
-
-
-           ],),
-         ),
-       )
+            ),
+          ),
 
 
 
 
 
 
-        ]),
-      ),);
+          isLoading==true?
+          SizedBox(
+              height: size.height/1,
+              child: const Center(child: CircularProgressIndicator(color: samaColor,
+               )))
+              :const SizedBox.shrink()
+
+        ]),);
   }
 
 
