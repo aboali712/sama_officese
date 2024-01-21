@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_quill/flutter_quill.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -279,6 +281,321 @@ class StepTwo extends StatelessWidget {
         keyboardType: TextInputType.name,
       ),
     ),
+
+          const SizedBox(height: 20,),
+
+          Row(mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+
+              InkWell(onTap: () {
+                signUpViewModel.lanDescriptionSetState(0);
+                print(signUpViewModel.lanDescription);
+
+              },
+                child: Container(height: 30,width: 30,
+                  padding: const EdgeInsets.all(4),
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(5),
+                    color: signUpViewModel.lanDescription==0? samaOfficeColor :Colors.grey ,
+                  ),
+                  child: Text("ع",
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.tajawal(color:signUpViewModel.lanDescription==0? Colors.white: Colors.white,
+                        fontWeight: FontWeight.w500,fontSize: 14
+
+                    ),),),
+              ),
+              const SizedBox(width: 5,),
+
+
+              InkWell(onTap: () {
+                signUpViewModel.lanDescriptionSetState(1);
+                print(signUpViewModel.lanDescription);
+              },
+                child: Container(height: 30,width: 30,
+                  padding: const EdgeInsets.all(4),
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(5),
+                    color:signUpViewModel.lanDescription==1? samaOfficeColor :Colors.grey ,
+                  ),
+                  child: Text("en",
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.tajawal(color:signUpViewModel.lanDescription==1? Colors.white: Colors.white,
+                        fontWeight: FontWeight.w500,fontSize: 14
+
+                    ),),),
+              ),
+
+
+            ],),
+
+          Text(
+            tr("الوصف"),
+            style: const TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.normal,
+                fontSize: 15),
+            textAlign: TextAlign.center,
+          ),
+
+
+
+        Column( children: [
+
+          Container(width: size.width,
+            decoration: BoxDecoration(color: const Color(0xFFF3F3F5),borderRadius: BorderRadius.circular(5)),
+            child: QuillToolbar.simple( configurations:
+            QuillSimpleToolbarConfigurations(
+              // fontFamilyValues:  const {'Small': '7', 'Medium': '20.5', 'Large': '40'} ,
+              toolbarIconAlignment:WrapAlignment.start,
+              sectionDividerSpace: 1,
+              toolbarSize: 1,
+              toolbarSectionSpacing: 1,
+              controller: signUpViewModel.controller,
+
+            ) ,
+            ),
+          ),
+
+            signUpViewModel.lanDescription==0?
+          Stack(
+              children: [ Container(height: 150,width: size.width,
+                padding: const EdgeInsets.only(top: 15,left: 10,right: 10),
+
+                decoration: BoxDecoration(color: const Color(0xFFF3F3F5),borderRadius: BorderRadius.circular(5)),
+                child: QuillEditor(
+                    scrollController: ScrollController(), // ScrollController(),
+
+                    focusNode: signUpViewModel.focusPhone, // FocusNode(canRequestFocus: false),
+                    configurations: QuillEditorConfigurations(
+                      placeholder: "الوصف بالعربى",
+
+
+                      controller: signUpViewModel.controller,
+                      readOnly: false,
+                      sharedConfigurations: const QuillSharedConfigurations(
+                        locale: Locale('de'),
+                      ),
+                    )
+                ),
+              ),
+
+                const Divider(height: 5,thickness: 1,color: Colors.grey,)
+              ])
+          : Stack(
+                children: [ Container(height: 150,width: size.width,
+                  padding: const EdgeInsets.only(top: 15,left: 10,right: 10),
+
+                  decoration: BoxDecoration(color: const Color(0xFFF3F3F5),borderRadius: BorderRadius.circular(5)),
+                  child: QuillEditor(
+                      scrollController: ScrollController(), // ScrollController(),
+
+                      focusNode: signUpViewModel.focusPhone, // FocusNode(canRequestFocus: false),
+                      configurations: QuillEditorConfigurations(
+                        placeholder: "الوصف بالأنجليزى",
+                        controller: signUpViewModel.controller,
+                        readOnly: false,
+                        sharedConfigurations: const QuillSharedConfigurations(
+                          locale: Locale('de'),
+                        ),
+                      )
+                  ),
+                ),
+
+                  const Divider(height: 5,thickness: 1,color: Colors.grey,)
+                ]),
+        ],),
+
+          const SizedBox(height: 20,),
+          
+          // Text(signUpViewModel.controller.document.toPlainText().toString(),style: GoogleFonts.tajawal(color: Colors.black),)
+
+
+          Row(mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+
+              InkWell(onTap: () {
+                signUpViewModel.lanAddressSetState(0);
+                print(signUpViewModel.lanAddress);
+
+              },
+                child: Container(height: 30,width: 30,
+                  padding: const EdgeInsets.all(4),
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(5),
+                    color: signUpViewModel.lanAddress==0? samaOfficeColor :Colors.grey ,
+                  ),
+                  child: Text("ع",
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.tajawal(color:signUpViewModel.lanAddress==0? Colors.white: Colors.white,
+                        fontWeight: FontWeight.w500,fontSize: 14
+
+                    ),),),
+              ),
+              const SizedBox(width: 5,),
+
+
+              InkWell(onTap: () {
+                signUpViewModel.lanAddressSetState(1);
+                print(signUpViewModel.lanAddress);
+              },
+                child: Container(height: 30,width: 30,
+                  padding: const EdgeInsets.all(4),
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(5),
+                    color:signUpViewModel.lanAddress==1? samaOfficeColor :Colors.grey ,
+                  ),
+                  child: Text("en",
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.tajawal(color:signUpViewModel.lanAddress==1? Colors.white: Colors.white,
+                        fontWeight: FontWeight.w500,fontSize: 14
+
+                    ),),),
+              ),
+
+
+            ],),
+
+          Text(
+            tr("العنوان"),
+            style: const TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.normal,
+                fontSize: 15),
+            textAlign: TextAlign.center,
+          ),
+          signUpViewModel.lanAddress==0?
+          SizedBox(height: 45,
+            child: TextFormField(
+              controller: signUpViewModel.addressArControl,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              style: const TextStyle(fontSize: 15),
+              decoration: InputDecoration(
+                hintText: (tr("العنوان بالعربى")),
+                hintStyle: GoogleFonts.tajawal(
+                    fontSize: 12,
+                    color: const Color.fromRGBO(196, 196, 196, 1)),
+
+                errorStyle: const TextStyle(color: accentColor),
+                contentPadding: const EdgeInsets.symmetric(
+                    vertical: 17.0, horizontal: 10.0),
+
+                filled: true,
+                fillColor: const Color(0xFFF3F3F5),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius:
+                  const BorderRadius.all(Radius.circular(5)),
+                  borderSide: BorderSide(width: 1, color: klightGray),
+                ),
+                disabledBorder: OutlineInputBorder(
+                  borderRadius:
+                  const BorderRadius.all(Radius.circular(5)),
+                  borderSide: BorderSide(width: .7, color: klightGray),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius:
+                  const BorderRadius.all(Radius.circular(5)),
+                  borderSide: BorderSide(
+                    width: .7,
+                    color: klightGray,
+                  ),
+                ),
+                border: const OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                    borderSide: BorderSide(
+                      width: 1,
+                    )),
+                errorBorder: const OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                    borderSide:
+                    BorderSide(width: 0.7, color: accentColor)),
+                focusedErrorBorder: const OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                    borderSide:
+                    BorderSide(width: 0.7, color: accentColor)),
+              ),
+              onChanged: (value) {
+                if (value.isEmpty ||
+                    value == null ||
+                    !InputValidators()
+                        .nameValidator(name: value, context: context)) {
+
+                } else {
+
+                }
+              },
+              onSaved: (value) {
+
+              },
+
+              cursorColor: Colors.black,
+              keyboardType: TextInputType.name,
+            ),
+          )
+              : SizedBox(height: 45,
+            child: TextFormField(
+              controller: signUpViewModel.addressEnControl,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              style: const TextStyle(fontSize: 15),
+              decoration: InputDecoration(
+                hintText: (tr("العنوان بالأنجليزى")),
+                hintStyle: GoogleFonts.tajawal(
+                    fontSize: 12,
+                    color: const Color.fromRGBO(196, 196, 196, 1)),
+
+                errorStyle: const TextStyle(color: accentColor),
+                contentPadding: const EdgeInsets.symmetric(
+                    vertical: 17.0, horizontal: 10.0),
+
+                filled: true,
+                fillColor: const Color(0xFFF3F3F5),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius:
+                  const BorderRadius.all(Radius.circular(5)),
+                  borderSide: BorderSide(width: 1, color: klightGray),
+                ),
+                disabledBorder: OutlineInputBorder(
+                  borderRadius:
+                  const BorderRadius.all(Radius.circular(5)),
+                  borderSide: BorderSide(width: .7, color: klightGray),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius:
+                  const BorderRadius.all(Radius.circular(5)),
+                  borderSide: BorderSide(
+                    width: .7,
+                    color: klightGray,
+                  ),
+                ),
+                border: const OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                    borderSide: BorderSide(
+                      width: 1,
+                    )),
+                errorBorder: const OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                    borderSide:
+                    BorderSide(width: 0.7, color: accentColor)),
+                focusedErrorBorder: const OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                    borderSide:
+                    BorderSide(width: 0.7, color: accentColor)),
+              ),
+              onChanged: (value) {
+                if (value.isEmpty ||
+                    value == null ||
+                    !InputValidators()
+                        .nameValidator(name: value, context: context)) {
+
+                } else {
+
+                }
+              },
+              onSaved: (value) {
+
+              },
+
+              cursorColor: Colors.black,
+              keyboardType: TextInputType.name,
+            ),
+          ),
+
 
 
 

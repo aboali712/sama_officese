@@ -108,15 +108,22 @@ class _SignUpState extends SignUpViewModel {
 
 
           const SizedBox(height: 10,),
-          step==0?
-          StepOne(this)
-             : step==1?
-          StepTwo(this)
-              :const SizedBox.shrink(),
 
-          const SizedBox(height: 20,),
+       Expanded(
+         child: SingleChildScrollView(
+           child: Column(children: [
+             step==0?
+             StepOne(this)
+                 : step==1?
+             StepTwo(this)
+                 :const SizedBox.shrink(),
+
+             const SizedBox(height: 20,),
 
 
+           ],),
+         ),
+       )
 
 
 
