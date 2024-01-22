@@ -47,7 +47,24 @@
   "AboutOffice": "About office",
   "payingOff": "paying off",
   "Next": "Next",
-  "CreateAnAccount": "Create an account"
-
-
+  "CreateAnAccount": "Create an account",
+  "IAgree": "I agree",
+  "Terms and Conditions": "Terms and Conditions",
+  "EnterFirstName": "Enter first name",
+  "EnterTheLastName": "Enter the last name",
+  "PleaseEnterTheMobileNumber": "Please enter the mobile number",
+  "EnterEmail": "Enter email",
+  "EnterCorrectEmail": "Enter correct email",
+  "ChooseTheOfficeLogo": "Choose the office logo",
+  "EnterTheOfficeNameInArabic": "Enter the office name in Arabic",
+  "EnterTheOfficeNameInEnglish": "Enter the office name in English",
+  "EnterTheDescriptionInArabic": "Enter the description in Arabic",
+  "EnterTheDescriptionInEnglish": "Enter the description in English",
+  "EnterTheAddressInArabic": "Enter the address in Arabic",
+  "EnterTheAddressInEnglish": "Enter the address in English",
+  "ChooseTheOfficeBranch": "Choose the office branch",
+  "EnterTheNameOfTheBank": "Enter the name of the bank",
+  "EnterTheAccountNumber": "Enter the account number",
+  "EnterTheIBANNumber": "Enter the IBAN number",
+  "ChooseTheSubscriptionPlan": "Choose the subscription plan"
 }

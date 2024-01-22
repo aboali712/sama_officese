@@ -387,6 +387,62 @@ class StepThree extends StatelessWidget {
             ),
           ),
 
+          const SizedBox(
+            height: 20,
+          ),
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Checkbox(activeColor: samaColor,
+                value: signUpViewModel.terms,
+                onChanged: (bool? value) {
+                signUpViewModel.termsSetState(value!);
+
+                },
+              ),
+              const SizedBox(
+                width: 5,
+              ),
+              Text(
+                tr("IAgree"),
+                style: const TextStyle(
+                  fontFamily: "Tajawal",
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(
+                width: 5,
+              ),
+              InkWell(
+                onTap: () {
+                  // MoreViewModelPage.typePage = "3";
+                  //
+                  // SamaOfficesApp.navKey.currentState!.push(
+                  //     MaterialPageRoute(
+                  //         builder: (context) =>
+                  //         const AboutUs()));
+
+                },
+                child:  Text(
+                  tr("Terms and Conditions"),
+                  style: const TextStyle(
+                      fontFamily: "Tajawal",
+                      decoration: TextDecoration.underline,
+                      decorationThickness: 20,
+
+                      fontSize:14,
+                      fontWeight: FontWeight.bold,
+                      color: samaColor),
+                ),
+              ),
+            ],
+          ),
+
+
+
+
 
           const SizedBox(height: 70,)
 

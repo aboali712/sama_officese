@@ -5,6 +5,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:elegant_notification/elegant_notification.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:upgrader/upgrader.dart';
 
 
 // late StreamSubscription<DatabaseEvent> messagesSubscriptions;
@@ -87,15 +88,15 @@ toastAppSuccess(String msg, BuildContext context) {
 //   String get nonBreaking => replaceAll('&nbsp;','  ');
 // }
 
-// class MyUpgraderMessages extends UpgraderMessages {
-//   @override
-//   String get buttonTitleUpdate => tr('UpdaTeNow');
-//   @override
-//   String get title => tr('UpdaTe');
-//   @override
-//   String get body => tr("Pl");
-//   @override
-//   String get releaseNotes => "";
-//   @override
-//   String get prompt => "";
-// }
+class MyUpgraderMessages extends UpgraderMessages {
+  @override
+  String get buttonTitleUpdate => tr('UpdaTeNow');
+  @override
+  String get title => tr('UpdaTe');
+  @override
+  String get body => tr("Pl");
+  @override
+  String get releaseNotes => "";
+  @override
+  String get prompt => "";
+}

@@ -10,6 +10,8 @@ import '../../../app.dart';
 import '../../core/utils/input_validators.dart';
 import '../../core/values/colors.dart';
 import '../../core/widgets/phone_number_widget.dart';
+import '../../home_core.dart';
+import '../../screen/home/home_view.dart';
 import '../register/signup_view.dart';
 import 'loginViewModel.dart';
 
@@ -274,7 +276,8 @@ class _LoginPageState extends LoginViewModel {
                                               color: samaOfficeColor)),
                                       backgroundColor: samaOfficeColor),
                                   onPressed: () {
-
+                                    SamaOfficeApp.navKey.currentState!.push(
+                                        MaterialPageRoute(builder: (context) =>  HomeCore(),));
                                   },
                                   child: Text(
                                     tr("Login"),

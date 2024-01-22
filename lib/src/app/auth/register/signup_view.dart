@@ -34,10 +34,14 @@ class _SignUpState extends SignUpViewModel {
                 fontSize:Platform.isIOS?25: 20,fontWeight: FontWeight.w500),),
           ],
         ),
-        flexibleSpace:  Image(
-          image: const AssetImage('assets/images/signback.png'),
-          fit: BoxFit.cover,width: size.width,
-        ),toolbarHeight: 140,
+        flexibleSpace:  Stack(
+          children: [
+            Container(height: 30,color: const Color(0xff62b3ff),),
+            Image(
+            image: const AssetImage('assets/images/signback.png'),
+            fit: BoxFit.cover,width: size.width,
+          ),
+       ] ),toolbarHeight: 140,
         backgroundColor: Colors.transparent,
           automaticallyImplyLeading: false,
       ),
@@ -160,6 +164,9 @@ class _SignUpState extends SignUpViewModel {
                       BorderRadius.circular(15)),
                   backgroundColor: const Color(0xffea8024)),
               onPressed: () {
+
+                 checkValidationRegister();
+                // con();
 
               },
               child: Text(

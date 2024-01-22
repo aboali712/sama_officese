@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/extensions.dart';
 import 'package:flutter_quill/flutter_quill.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 
 import 'package:google_fonts/google_fonts.dart';
@@ -84,11 +85,12 @@ class StepTwo extends StatelessWidget {
                           signUpViewModel.imageSetState();
                         },
                           child: Container(height: 35,width: 35,
+                            padding: const EdgeInsets.all(5),
                             decoration:BoxDecoration(
                                 border: Border.all(color: samaColor,width: 1),
                                 color: samaColor,
                                 borderRadius: BorderRadius.circular(50),
-                            ) ,child:  Image.asset("assets/images/pin.png",height: 15,color: Colors.white,),
+                            ) ,child:  SvgPicture.asset("assets/images/pin.svg",height: 15,color: Colors.white,),
 
                           ),
                         ),
@@ -923,6 +925,19 @@ class StepTwo extends StatelessWidget {
                    TimeOfDay? pickedTime = await showTimePicker(
                      initialTime: TimeOfDay.now(),
                      context: context,
+                     builder: (BuildContext context, Widget? child) {
+                       return Theme(
+                           data: Theme.of(context).copyWith(
+                               colorScheme: const ColorScheme.light(
+                                 // primaryContainer: Colors.black,
+                                 background: Colors.white,
+                                 primary: samaOfficeColor,
+                               )),
+                           child: MediaQuery(
+                             data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: false),
+                             child: child!,
+                           ));
+                     },
                    );
 
                    if (pickedTime != null) {
@@ -989,6 +1004,19 @@ class StepTwo extends StatelessWidget {
                    TimeOfDay? pickedTime = await showTimePicker(
                      initialTime: TimeOfDay.now(),
                      context: context,
+                     builder: (BuildContext context, Widget? child) {
+                       return Theme(
+                           data: Theme.of(context).copyWith(
+                               colorScheme: const ColorScheme.light(
+                                 // primaryContainer: Colors.black,
+                                 background: Colors.white,
+                                 primary: samaOfficeColor,
+                               )),
+                           child: MediaQuery(
+                             data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: false),
+                             child: child!,
+                           ));
+                     },
                    );
 
                    if (pickedTime != null) {
@@ -1096,6 +1124,19 @@ class StepTwo extends StatelessWidget {
                       TimeOfDay? pickedTime = await showTimePicker(
                         initialTime: TimeOfDay.now(),
                         context: context,
+                        builder: (BuildContext context, Widget? child) {
+                          return Theme(
+                              data: Theme.of(context).copyWith(
+                                  colorScheme: const ColorScheme.light(
+                                    // primaryContainer: Colors.black,
+                                    background: Colors.white,
+                                    primary: samaOfficeColor,
+                                  )),
+                              child: MediaQuery(
+                                data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: false),
+                                child: child!,
+                              ));
+                        },
                       );
 
                       if (pickedTime != null) {
@@ -1162,6 +1203,19 @@ class StepTwo extends StatelessWidget {
                       TimeOfDay? pickedTime = await showTimePicker(
                         initialTime: TimeOfDay.now(),
                         context: context,
+                        builder: (BuildContext context, Widget? child) {
+                          return Theme(
+                              data: Theme.of(context).copyWith(
+                                  colorScheme: const ColorScheme.light(
+                                    // primaryContainer: Colors.black,
+                                    background: Colors.white,
+                                    primary: samaOfficeColor,
+                                  )),
+                              child: MediaQuery(
+                                data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: false),
+                                child: child!,
+                              ));
+                        },
                       );
 
                       if (pickedTime != null) {
@@ -1269,6 +1323,19 @@ class StepTwo extends StatelessWidget {
                       TimeOfDay? pickedTime = await showTimePicker(
                         initialTime: TimeOfDay.now(),
                         context: context,
+                        builder: (BuildContext context, Widget? child) {
+                          return Theme(
+                              data: Theme.of(context).copyWith(
+                                  colorScheme: const ColorScheme.light(
+                                    // primaryContainer: Colors.black,
+                                    background: Colors.white,
+                                    primary: samaOfficeColor,
+                                  )),
+                              child: MediaQuery(
+                                data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: false),
+                                child: child!,
+                              ));
+                        },
                       );
 
                       if (pickedTime != null) {
@@ -1335,6 +1402,19 @@ class StepTwo extends StatelessWidget {
                       TimeOfDay? pickedTime = await showTimePicker(
                         initialTime: TimeOfDay.now(),
                         context: context,
+                        builder: (BuildContext context, Widget? child) {
+                          return Theme(
+                              data: Theme.of(context).copyWith(
+                                  colorScheme: const ColorScheme.light(
+                                    // primaryContainer: Colors.black,
+                                    background: Colors.white,
+                                    primary: samaOfficeColor,
+                                  )),
+                              child: MediaQuery(
+                                data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: false),
+                                child: child!,
+                              ));
+                        },
                       );
 
                       if (pickedTime != null) {
@@ -1442,6 +1522,19 @@ class StepTwo extends StatelessWidget {
                       TimeOfDay? pickedTime = await showTimePicker(
                         initialTime: TimeOfDay.now(),
                         context: context,
+                        builder: (BuildContext context, Widget? child) {
+                          return Theme(
+                              data: Theme.of(context).copyWith(
+                                  colorScheme: const ColorScheme.light(
+                                    // primaryContainer: Colors.black,
+                                    background: Colors.white,
+                                    primary: samaOfficeColor,
+                                  )),
+                              child: MediaQuery(
+                                data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: false),
+                                child: child!,
+                              ));
+                        },
                       );
 
                       if (pickedTime != null) {
@@ -1508,6 +1601,19 @@ class StepTwo extends StatelessWidget {
                       TimeOfDay? pickedTime = await showTimePicker(
                         initialTime: TimeOfDay.now(),
                         context: context,
+                        builder: (BuildContext context, Widget? child) {
+                          return Theme(
+                              data: Theme.of(context).copyWith(
+                                  colorScheme: const ColorScheme.light(
+                                    // primaryContainer: Colors.black,
+                                    background: Colors.white,
+                                    primary: samaOfficeColor,
+                                  )),
+                              child: MediaQuery(
+                                data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: false),
+                                child: child!,
+                              ));
+                        },
                       );
 
                       if (pickedTime != null) {
@@ -1615,6 +1721,19 @@ class StepTwo extends StatelessWidget {
                       TimeOfDay? pickedTime = await showTimePicker(
                         initialTime: TimeOfDay.now(),
                         context: context,
+                        builder: (BuildContext context, Widget? child) {
+                          return Theme(
+                              data: Theme.of(context).copyWith(
+                                  colorScheme: const ColorScheme.light(
+                                    // primaryContainer: Colors.black,
+                                    background: Colors.white,
+                                    primary: samaOfficeColor,
+                                  )),
+                              child: MediaQuery(
+                                data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: false),
+                                child: child!,
+                              ));
+                        },
                       );
 
                       if (pickedTime != null) {
@@ -1681,6 +1800,19 @@ class StepTwo extends StatelessWidget {
                       TimeOfDay? pickedTime = await showTimePicker(
                         initialTime: TimeOfDay.now(),
                         context: context,
+                        builder: (BuildContext context, Widget? child) {
+                          return Theme(
+                              data: Theme.of(context).copyWith(
+                                  colorScheme: const ColorScheme.light(
+                                    // primaryContainer: Colors.black,
+                                    background: Colors.white,
+                                    primary: samaOfficeColor,
+                                  )),
+                              child: MediaQuery(
+                                data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: false),
+                                child: child!,
+                              ));
+                        },
                       );
 
                       if (pickedTime != null) {
@@ -1789,6 +1921,19 @@ class StepTwo extends StatelessWidget {
                       TimeOfDay? pickedTime = await showTimePicker(
                         initialTime: TimeOfDay.now(),
                         context: context,
+                        builder: (BuildContext context, Widget? child) {
+                          return Theme(
+                              data: Theme.of(context).copyWith(
+                                  colorScheme: const ColorScheme.light(
+                                    // primaryContainer: Colors.black,
+                                    background: Colors.white,
+                                    primary: samaOfficeColor,
+                                  )),
+                              child: MediaQuery(
+                                data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: false),
+                                child: child!,
+                              ));
+                        },
                       );
 
                       if (pickedTime != null) {
@@ -1855,6 +2000,19 @@ class StepTwo extends StatelessWidget {
                       TimeOfDay? pickedTime = await showTimePicker(
                         initialTime: TimeOfDay.now(),
                         context: context,
+                        builder: (BuildContext context, Widget? child) {
+                          return Theme(
+                              data: Theme.of(context).copyWith(
+                                  colorScheme: const ColorScheme.light(
+                                    // primaryContainer: Colors.black,
+                                    background: Colors.white,
+                                    primary: samaOfficeColor,
+                                  )),
+                              child: MediaQuery(
+                                data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: false),
+                                child: child!,
+                              ));
+                        },
                       );
 
                       if (pickedTime != null) {
@@ -1963,6 +2121,19 @@ class StepTwo extends StatelessWidget {
                       TimeOfDay? pickedTime = await showTimePicker(
                         initialTime: TimeOfDay.now(),
                         context: context,
+                        builder: (BuildContext context, Widget? child) {
+                          return Theme(
+                              data: Theme.of(context).copyWith(
+                                  colorScheme: const ColorScheme.light(
+                                    // primaryContainer: Colors.black,
+                                    background: Colors.white,
+                                    primary: samaOfficeColor,
+                                  )),
+                              child: MediaQuery(
+                                data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: false),
+                                child: child!,
+                              ));
+                        },
                       );
 
                       if (pickedTime != null) {
@@ -2029,6 +2200,19 @@ class StepTwo extends StatelessWidget {
                       TimeOfDay? pickedTime = await showTimePicker(
                         initialTime: TimeOfDay.now(),
                         context: context,
+                        builder: (BuildContext context, Widget? child) {
+                          return Theme(
+                              data: Theme.of(context).copyWith(
+                                  colorScheme: const ColorScheme.light(
+                                    // primaryContainer: Colors.black,
+                                    background: Colors.white,
+                                    primary: samaOfficeColor,
+                                  )),
+                              child: MediaQuery(
+                                data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: false),
+                                child: child!,
+                              ));
+                        },
                       );
 
                       if (pickedTime != null) {

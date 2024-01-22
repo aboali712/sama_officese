@@ -47,8 +47,24 @@
   "AboutOffice": "عن المكتب",
   "payingOff": "الدفع",
   "Next": "التالى",
-  "CreateAnAccount": "تسجيل حساب"
-
-
-
+  "CreateAnAccount": "تسجيل حساب",
+  "IAgree": "أوافق على",
+  "Terms and Conditions": "الشروط والأحكام",
+  "EnterFirstName": "أدخل الأسم الأول",
+  "EnterTheLastName": "أدخل الأسم الأخير",
+  "PleaseEnterTheMobileNumber": "من فضلك أدخل رقم الجوال",
+  "EnterEmail":"أدخل البريد الألكترونى",
+  "EnterCorrectEmail":"أدخل البريد الألكترونى الصحيح",
+  "ChooseTheOfficeLogo": "أختر شعار المكتب",
+  "EnterTheOfficeNameInArabic": "أدخل أسم المكتب بالعربى",
+  "EnterTheOfficeNameInEnglish": "أدخل أسم المكتب بالأنجليزى",
+  "EnterTheDescriptionInArabic": "أدخل الوصف بالعربى",
+  "EnterTheDescriptionInEnglish": "أدخل الوصف بالأنجليزى",
+  "EnterTheAddressInArabic": "أدخل العنوان بالعربى",
+  "EnterTheAddressInEnglish": "أدخل العنوان بالأنجليزى",
+  "ChooseTheOfficeBranch": "أختر فرع المكتب",
+  "EnterTheNameOfTheBank": "أدخل إسم البنك",
+  "EnterTheAccountNumber": "أدخل رقم الحساب",
+  "EnterTheIBANNumber": "أدخل رقم الأيبان",
+  "ChooseTheSubscriptionPlan": "أختر خطة الأشتراك"
 }
