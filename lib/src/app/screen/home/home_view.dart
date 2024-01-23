@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sama_officese/src/app.dart';
+import 'package:sama_officese/src/app/screen/home/packages/packages_view.dart';
+import 'package:sama_officese/src/app/screen/home/packages_order/packages_order_view.dart';
 import 'package:sama_officese/src/app/screen/home/services/sevices_view.dart';
 
 import 'home_viewmodel.dart';
@@ -133,75 +135,15 @@ class _HomePageState extends HomeViewModel {
                 ]),),
             ),
 
-            Container( height: 165,width: 170,
-              padding: const EdgeInsets.only(left: 20,right: 20,top: 15,bottom: 15),
-              decoration: BoxDecoration(
-                borderRadius:  BorderRadius.circular(20) ,
-                color: const Color(0xffCAEBED),
-
-              ),child: Column( crossAxisAlignment:  CrossAxisAlignment.start,
-                  children: [
-
-                    Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                            height: 53,width: 58,
-                            padding: const EdgeInsets.all(14),
-                            decoration: BoxDecoration(borderRadius:  BorderRadius.circular(14),
-                                color:const Color(0xff00a8a5) ),
-                            child: SvgPicture.asset("assets/images/planee.svg",)),
-
-
-                        Container(
-                            height: 27,width: 27,
-                            padding: const EdgeInsets.all(5),
-                            decoration: BoxDecoration(borderRadius:  BorderRadius.circular(14),
-                                color:const Color(0xff8A8C8E) ),
-                            child: Center(
-                              child: Text("0",style: GoogleFonts.tajawal( color: Colors.white,fontSize: 13,
-                                  fontWeight: FontWeight.w400
-                              ),),
-                            )),
-
-                      ],
-                    ),
-
-
-                    const SizedBox(height: 30,),
-                    const Column(crossAxisAlignment: CrossAxisAlignment.start,
-
-                      children: [
-                        Text(
-                          "طلبات الباكيدجات",
-                          style: TextStyle(
-                              color:  Colors.black,
-                              fontSize: 15, fontWeight: FontWeight.w500),
-                        ),
-                        Text(
-                          "لا يوجد حاليا طلبات",
-                          style: TextStyle(
-                              color:  Colors.grey,
-                              fontSize: 13, fontWeight: FontWeight.w400),
-                        ),
-
-                      ],
-                    )
-                  ]),),
-
-          ],),
-          const SizedBox(height: 20,),
-
-
-
-          Row( mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-
-              Container( height: 165,width: 170,
+            InkWell(onTap: () {
+              SamaOfficeApp.navKey.currentState!.push(
+                  MaterialPageRoute(builder: (context) => const PackagesOrderView(),));
+            },
+              child: Container( height: 165,width: 170,
                 padding: const EdgeInsets.only(left: 20,right: 20,top: 15,bottom: 15),
                 decoration: BoxDecoration(
                   borderRadius:  BorderRadius.circular(20) ,
-                  color: const Color(0xffF8E3D3),
+                  color: const Color(0xffCAEBED),
 
                 ),child: Column( crossAxisAlignment:  CrossAxisAlignment.start,
                     children: [
@@ -213,17 +155,17 @@ class _HomePageState extends HomeViewModel {
                               height: 53,width: 58,
                               padding: const EdgeInsets.all(14),
                               decoration: BoxDecoration(borderRadius:  BorderRadius.circular(14),
-                                  color:const Color(0xffea8024) ),
-                              child: SvgPicture.asset("assets/images/plancc.svg",)),
+                                  color:const Color(0xff00a8a5) ),
+                              child: SvgPicture.asset("assets/images/planee.svg",)),
 
 
                           Container(
                               height: 27,width: 27,
                               padding: const EdgeInsets.all(5),
                               decoration: BoxDecoration(borderRadius:  BorderRadius.circular(14),
-                                  color:const Color(0xff5AC41A) ),
+                                  color:const Color(0xff8A8C8E) ),
                               child: Center(
-                                child: Text("6",style: GoogleFonts.tajawal( color: Colors.white,fontSize: 13,
+                                child: Text("0",style: GoogleFonts.tajawal( color: Colors.white,fontSize: 13,
                                     fontWeight: FontWeight.w400
                                 ),),
                               )),
@@ -237,13 +179,13 @@ class _HomePageState extends HomeViewModel {
 
                         children: [
                           Text(
-                            "الباكيدجات",
+                            "طلبات الباكيدجات",
                             style: TextStyle(
                                 color:  Colors.black,
                                 fontSize: 15, fontWeight: FontWeight.w500),
                           ),
                           Text(
-                            "6 باكيدجات",
+                            "لا يوجد حاليا طلبات",
                             style: TextStyle(
                                 color:  Colors.grey,
                                 fontSize: 13, fontWeight: FontWeight.w400),
@@ -252,6 +194,76 @@ class _HomePageState extends HomeViewModel {
                         ],
                       )
                     ]),),
+            ),
+
+          ],),
+          const SizedBox(height: 20,),
+
+
+
+          Row( mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+
+              InkWell(onTap: () {
+                SamaOfficeApp.navKey.currentState!.push(
+                    MaterialPageRoute(builder: (context) => const PackagesView(),));
+              },
+                child: Container( height: 165,width: 170,
+                  padding: const EdgeInsets.only(left: 20,right: 20,top: 15,bottom: 15),
+                  decoration: BoxDecoration(
+                    borderRadius:  BorderRadius.circular(20) ,
+                    color: const Color(0xffF8E3D3),
+
+                  ),child: Column( crossAxisAlignment:  CrossAxisAlignment.start,
+                      children: [
+
+                        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                                height: 53,width: 58,
+                                padding: const EdgeInsets.all(14),
+                                decoration: BoxDecoration(borderRadius:  BorderRadius.circular(14),
+                                    color:const Color(0xffea8024) ),
+                                child: SvgPicture.asset("assets/images/plancc.svg",)),
+
+
+                            Container(
+                                height: 27,width: 27,
+                                padding: const EdgeInsets.all(5),
+                                decoration: BoxDecoration(borderRadius:  BorderRadius.circular(14),
+                                    color:const Color(0xff5AC41A) ),
+                                child: Center(
+                                  child: Text("6",style: GoogleFonts.tajawal( color: Colors.white,fontSize: 13,
+                                      fontWeight: FontWeight.w400
+                                  ),),
+                                )),
+
+                          ],
+                        ),
+
+
+                        const SizedBox(height: 30,),
+                        const Column(crossAxisAlignment: CrossAxisAlignment.start,
+
+                          children: [
+                            Text(
+                              "الباكيدجات",
+                              style: TextStyle(
+                                  color:  Colors.black,
+                                  fontSize: 15, fontWeight: FontWeight.w500),
+                            ),
+                            Text(
+                              "6 باكيدجات",
+                              style: TextStyle(
+                                  color:  Colors.grey,
+                                  fontSize: 13, fontWeight: FontWeight.w400),
+                            ),
+
+                          ],
+                        )
+                      ]),),
+              ),
               Container( height: 165,width: 170,
                 padding: const EdgeInsets.only(left: 20,right: 20,top: 15,bottom: 15),
                 decoration: BoxDecoration(

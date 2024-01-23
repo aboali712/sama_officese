@@ -50,6 +50,9 @@ dependencies:
   dropdown_button2: ^2.3.9
   flutter_switch: ^0.3.2
   upgrader: ^8.1.0
+  carousel_slider: ^4.2.1
+  easy_image_viewer: ^1.2.1
+  smooth_page_indicator: ^1.1.0
 
 
 
