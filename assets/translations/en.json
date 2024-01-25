@@ -66,5 +66,15 @@
   "EnterTheNameOfTheBank": "Enter the name of the bank",
   "EnterTheAccountNumber": "Enter the account number",
   "EnterTheIBANNumber": "Enter the IBAN number",
-  "ChooseTheSubscriptionPlan": "Choose the subscription plan"
+  "ChooseTheSubscriptionPlan": "Choose the subscription plan",
+  "Countries": "Countries",
+  "SelectCountries": "Select countries",
+  "Back": "Back",
+  "SearchForACountry": "Search for a country",
+  "SearchForACity": "Search for a city",
+  "cities": "Cities",
+  "SelectCities": "Select cities",
+  "ChooseDate": "Choose Package Date",
+  "Normal": "Normal",
+  "Weekend": "Weekend"
 }

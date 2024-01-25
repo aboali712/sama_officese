@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sama_officese/src/app/screen/home/packages_order/packages_details/packages_order_details_view.dart';
+import 'package:sama_officese/src/app/screen/home/packages_order/packages_order_details/packages_order_details_view.dart';
 
 abstract class PackagesOrderDetailsViewModel extends State<PackagesOrderDetailsView>{
   int changeState=0;

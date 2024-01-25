@@ -10,6 +10,7 @@ import 'package:sama_officese/src/app/screen/home/packages/packages_view.dart';
 import 'package:sama_officese/src/app/screen/home/packages_order/packages_order_view.dart';
 import 'package:sama_officese/src/app/screen/home/services/sevices_view.dart';
 
+import 'create_package/create_package_view.dart';
 import 'home_viewmodel.dart';
 
 class HomePage extends StatefulWidget {
@@ -264,47 +265,52 @@ class _HomePageState extends HomeViewModel {
                         )
                       ]),),
               ),
-              Container( height: 165,width: 170,
-                padding: const EdgeInsets.only(left: 20,right: 20,top: 15,bottom: 15),
-                decoration: BoxDecoration(
-                  borderRadius:  BorderRadius.circular(20) ,
-                  color: const Color(0xffE5E6E8),
+              InkWell(onTap: () {
+                SamaOfficeApp.navKey.currentState!.push(
+                    MaterialPageRoute(builder: (context) => const CreatePackageView(),));
+              },
+                child: Container( height: 165,width: 170,
+                  padding: const EdgeInsets.only(left: 20,right: 20,top: 15,bottom: 15),
+                  decoration: BoxDecoration(
+                    borderRadius:  BorderRadius.circular(20) ,
+                    color: const Color(0xffE5E6E8),
 
-                ),child: Column( crossAxisAlignment:  CrossAxisAlignment.start,
-                    children: [
+                  ),child: Column( crossAxisAlignment:  CrossAxisAlignment.start,
+                      children: [
 
-                      Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                              height: 53,width: 58,
-                              padding: const EdgeInsets.all(14),
-                              decoration: BoxDecoration(borderRadius:  BorderRadius.circular(14),
-                                  color:const Color(0xff8a8c8e) ),
-                              child: SvgPicture.asset("assets/images/add.svg",)),
-
-
-                        const SizedBox(width: 27,)
-
-                        ],
-                      ),
+                        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                                height: 53,width: 58,
+                                padding: const EdgeInsets.all(14),
+                                decoration: BoxDecoration(borderRadius:  BorderRadius.circular(14),
+                                    color:const Color(0xff8a8c8e) ),
+                                child: SvgPicture.asset("assets/images/add.svg",)),
 
 
-                      const SizedBox(height: 30,),
-                      const Column(crossAxisAlignment: CrossAxisAlignment.start,
+                          const SizedBox(width: 27,)
 
-                        children: [
-                          Text(
-                            "أنشاء باكيدج",
-                            style: TextStyle(
-                                color:  Colors.black,
-                                fontSize: 15, fontWeight: FontWeight.w500),
-                          ),
+                          ],
+                        ),
 
 
-                        ],
-                      )
-                    ]),),
+                        const SizedBox(height: 30,),
+                        const Column(crossAxisAlignment: CrossAxisAlignment.start,
+
+                          children: [
+                            Text(
+                              "أنشاء باكيدج",
+                              style: TextStyle(
+                                  color:  Colors.black,
+                                  fontSize: 15, fontWeight: FontWeight.w500),
+                            ),
+
+
+                          ],
+                        )
+                      ]),),
+              ),
 
             ],)
 

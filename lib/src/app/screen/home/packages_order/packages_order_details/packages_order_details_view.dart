@@ -3,7 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sama_officese/src/app/screen/home/packages_order/packages_details/packages_order_details_viewmodel.dart';
+import 'package:sama_officese/src/app.dart';
+import 'package:sama_officese/src/app/screen/home/packages_order/packages_order_details/packages_order_details_viewmodel.dart';
+
+import '../../packages/packages_details/packages_details_view.dart';
 
 class PackagesOrderDetailsView extends StatefulWidget {
   const PackagesOrderDetailsView({Key? key}) : super(key: key);
@@ -175,7 +178,7 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                                                 child: Column(crossAxisAlignment: CrossAxisAlignment.start,
                                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                   children: [
-                                                    Text(tr("رحلة سنغافورة السياحية"),style: GoogleFonts.tajawal(color: Colors.black,
+                                           Text(tr("رحلة سنغافورة السياحية"),style: GoogleFonts.tajawal(color: Colors.black,
                                                         fontSize:15,fontWeight: FontWeight.w500),),
 
                                                     Row(children: [
@@ -195,7 +198,8 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                                                       SvgPicture.asset("assets/images/money.svg") ,
                                                       const SizedBox(width: 10,),
 
-                                                      Text(tr("3600 ر.س"),style: GoogleFonts.tajawal(color:const Color(0xff00A8A5),
+                                                      Text(tr("3600 ر.س"),style: GoogleFonts.tajawal(
+                                                          color:const Color(0xff00A8A5),
                                                           fontSize:15,fontWeight: FontWeight.w400),),
                                                       const SizedBox(width: 10,),
 
@@ -254,7 +258,7 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                                               Column(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                 children: [
                                                   Column(children: [
-                                                    Text(tr("30 نوفمبر"),style: GoogleFonts.tajawal(color: const Color(0xff00A8A5),
+                                               Text(tr("30 نوفمبر"),style: GoogleFonts.tajawal(color: const Color(0xff00A8A5),
                                                         fontSize:17,fontWeight: FontWeight.w500),),
 
                                                     Text(tr("الأحد"),style: GoogleFonts.tajawal(color:Colors.grey,
@@ -280,7 +284,7 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                                               Column(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                 children: [
                                                   Column(children: [
-                                                    Text(tr("4 أفراد"),style: GoogleFonts.tajawal(color: const Color(0xff00A8A5),
+                                           Text(tr("4 أفراد"),style: GoogleFonts.tajawal(color: const Color(0xff00A8A5),
                                                         fontSize:17,fontWeight: FontWeight.w500),),
 
                                                     Text(tr("2بالغ-2أطفال"),style: GoogleFonts.tajawal(color:Colors.grey,
@@ -306,7 +310,8 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                                         Padding(
                                           padding: const EdgeInsets.all(10.0),
                                           child: InkWell(onTap: () {
-
+                                SamaOfficeApp.navKey.currentState!.push(
+                                    MaterialPageRoute(builder: (context) => const PackagesDetails(),));
                                           },
                                             child: Row(children: [
                                               Text(tr("المزيد من المعلومات"),style: GoogleFonts.tajawal(color: Colors.blue,

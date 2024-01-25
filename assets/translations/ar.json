@@ -66,5 +66,15 @@
   "EnterTheNameOfTheBank": "أدخل إسم البنك",
   "EnterTheAccountNumber": "أدخل رقم الحساب",
   "EnterTheIBANNumber": "أدخل رقم الأيبان",
-  "ChooseTheSubscriptionPlan": "أختر خطة الأشتراك"
+  "ChooseTheSubscriptionPlan": "أختر خطة الأشتراك",
+  "Countries": "الدول",
+  "SelectCountries": "أختر الدول",
+  "Back": "رجوع",
+  "SearchForACountry": "أبحث عن دولة",
+  "SearchForACity": "أبحث عن مدينة",
+  "cities": "المدن",
+  "SelectCities": "أختر المدن",
+  "ChooseDate": "أختر تاريخ الباكدج",
+  "Normal": "رحلة ",
+  "Weekend": "عطلة اسبوعية"
 }

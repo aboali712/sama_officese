@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sama_officese/src/app/screen/home/packages_order/packages_details/packages_order_details_view.dart';
+import 'package:sama_officese/src/app/screen/home/packages_order/packages_order_details/packages_order_details_view.dart';
 import 'package:sama_officese/src/app/screen/home/packages_order/packages_order_viewmodel.dart';
 
 

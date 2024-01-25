@@ -22,14 +22,14 @@ class NetworkService extends Interceptor with StorageHelper {
   NetworkService._init() {
     dio = Dio(BaseOptions(baseUrl: _baseUrl1));
           dio.interceptors.add(CustomInterceptor());
-          // dio.interceptors.add(LogInterceptor(
-          //   request: true,
-          //   requestHeader: true,
-          //   requestBody: true,
-          //   error: true,
-          //   responseHeader: true,
-          //   responseBody: true,
-          // ));
+          dio.interceptors.add(LogInterceptor(
+            request: true,
+            requestHeader: true,
+            requestBody: true,
+            error: true,
+            responseHeader: true,
+            responseBody: true,
+          ));
 
   }
 }

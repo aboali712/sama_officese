@@ -154,7 +154,7 @@ class StepTwo extends StatelessWidget {
           signUpViewModel.lan==0?
           SizedBox(height: 45,
             child: TextFormField(
-              controller: signUpViewModel.completeNameEnControl,
+              controller: signUpViewModel.completeNameArControl,
               autovalidateMode: AutovalidateMode.onUserInteraction,
               style: const TextStyle(fontSize: 15),
               decoration: InputDecoration(
