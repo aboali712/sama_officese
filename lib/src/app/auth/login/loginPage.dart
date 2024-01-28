@@ -276,8 +276,7 @@ class _LoginPageState extends LoginViewModel {
                                               color: samaOfficeColor)),
                                       backgroundColor: samaOfficeColor),
                                   onPressed: () {
-                                    SamaOfficeApp.navKey.currentState!.push(
-                                        MaterialPageRoute(builder: (context) =>  HomeCore(),));
+                                    checkLogin();
                                   },
                                   child: Text(
                                     tr("Login"),

@@ -76,5 +76,8 @@
   "SelectCities": "أختر المدن",
   "ChooseDate": "أختر تاريخ الباكدج",
   "Normal": "رحلة ",
-  "Weekend": "عطلة اسبوعية"
+  "Weekend": "عطلة اسبوعية",
+  "individual": "فردى",
+  "group": "جروب",
+  "PackageISVip": "هل الباكدج VIP ؟"
 }

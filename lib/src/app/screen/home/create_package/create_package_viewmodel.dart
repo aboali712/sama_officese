@@ -52,6 +52,8 @@ abstract class CreatePackageViewModel extends  State<CreatePackageView>{
   String endSelectedDate = '';
 
   String selectStatus="normal";
+  String offerType="individual";
+  bool switchValue= false;
 
   @override
   void initState() {

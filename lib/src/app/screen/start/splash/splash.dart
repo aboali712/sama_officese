@@ -8,8 +8,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:sama_officese/src/app.dart';
 
+import '../../../auth/login/loginPage.dart';
 import '../../../core/local/storagehelper.dart';
 import '../../../core/values/auth_manager.dart';
+import '../../../home_core.dart';
 import '../lang/choose_lang.dart';
 
 
@@ -24,27 +26,23 @@ class SplashViewState extends State<SplashView> with StorageHelper {
   Future<void> controlToApp() async {
     await readAuthManager.fetchUserIsFirst();
     await Future.delayed(const Duration(seconds: 1));
-    SamaOfficeApp.navKey.currentState!.pushReplacement(
-      MaterialPageRoute(builder: (context) => const ChooseLang()),
-    );
 
-    // if (readAuthManager.isFirst == false) {
-    //
-    //   token==""?
-    //   SamaOfficeApp.navKey.currentState!.pushReplacement(
-    //     MaterialPageRoute(builder: (context) =>  const LoginPage()),
-    //   )
-    //       :   SamaOfficeApp.navKey.currentState!.pushReplacement(
-    //     MaterialPageRoute(builder: (context) =>   HomeCore()),
-    //   );
-    //
-    // } else {
-    //
-    //   SamaOfficeApp.navKey.currentState!.pushReplacement(
-    //     MaterialPageRoute(builder: (context) => const ChooseLang()),
-    //   );
-    //
-    // }
+
+    if (readAuthManager.isFirst == false) {
+      if(readAuthManager.isLogin){
+        SamaOfficeApp.navKey.currentState!.pushReplacement(
+          MaterialPageRoute(builder: (context) =>  HomeCore()),);
+      }else {
+        SamaOfficeApp.navKey.currentState!.pushReplacement(
+          MaterialPageRoute(builder: (context) => const LoginPage()),);
+      }
+    } else {
+
+      SamaOfficeApp.navKey.currentState!.pushReplacement(
+        MaterialPageRoute(builder: (context) => const ChooseLang()),
+      );
+
+    }
 
   }
 

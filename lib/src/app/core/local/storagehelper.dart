@@ -1,22 +1,39 @@
-
-
-
+import 'dart:async';
 import 'dart:convert';
 
+
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../auth/auth_model/user_model.dart';
+
+
 
 
 
 mixin StorageHelper {
   Future<bool> saveToken(String token) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString(CacheManagerKey.user_token.toString(), token);
+    await prefs.setString(CacheManagerKey.token.toString(), token);
     return true;
   }
 
   Future<String?> getToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? ln = prefs.getString(CacheManagerKey.user_token.toString());
+    String? ln = prefs.getString(CacheManagerKey.token.toString());
+    ln ??= "";
+    return ln;
+  }
+
+  Future<bool> saveDeviceToken(String token) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString(CacheManagerKey.tokenDevice.toString(), token);
+    return true;
+  }
+
+  Future<String?> getDeviceToken() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? ln = prefs.getString(CacheManagerKey.tokenDevice.toString());
+    ln ??= "";
     return ln;
   }
 
@@ -26,9 +43,9 @@ mixin StorageHelper {
     return true;
   }
 
-  Future<bool> getFirst() async {
+  Future<bool?> getFirst() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getBool(CacheManagerKey.isFirst.toString())??true;
+    return prefs.getBool(CacheManagerKey.isFirst.toString());
   }
 
   Future<bool> saveLang(String lang) async {
@@ -43,27 +60,28 @@ mixin StorageHelper {
     ln ??= "ar";
     return ln;
   }
-  // Future<bool> saveUser(UserData? customer) async {
-  //   SharedPreferences pref = await SharedPreferences.getInstance();
-  //   String user = jsonEncode(customer);
-  //   pref.setString(CacheManagerKey.user.toString(), user);
-  //   return true;
-  // }
+  Future<bool> saveUser(UserModel? customer) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    String user = jsonEncode(customer);
+    pref.setString(CacheManagerKey.user.toString(), user);
+    return true;
+  }
 
-  // Future<UserData?> getUser() async {
-  //   SharedPreferences pref = await SharedPreferences.getInstance();
-  //   if (pref.getString(CacheManagerKey.user.toString()) != null &&
-  //       pref.getString(CacheManagerKey.user.toString()) != "null") {
-  //     print(pref.getString(CacheManagerKey.user.toString()));
-  //     Map<String, dynamic> jsonDatais =
-  //     jsonDecode(pref.getString(CacheManagerKey.user.toString())!);
-  //     var user = UserData.fromJson(jsonDatais);
-  //     return user;
-  //   }
-  //   return null;
-  // }
+  Future<UserModel?> getUser() async
+  {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    if (pref.getString(CacheManagerKey.user.toString()) != null &&
+        pref.getString(CacheManagerKey.user.toString()) != "null") {
+      print(pref.getString(CacheManagerKey.user.toString()));
+      Map<String, dynamic> jsonDatais = jsonDecode(
+          pref.getString(CacheManagerKey.user.toString())!);
+      var user = UserModel.fromJson(jsonDatais);
+      return user;
+    }
+    return null;
+  }
 
 
 }
 
-enum CacheManagerKey { user_token, isFirst, lang, currency, user,home, fave,cart,userApple,tokenDevice }
+enum CacheManagerKey { tokenDevice,token, isFirst, lang, currency, user, fave,cart,userApple }

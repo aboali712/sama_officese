@@ -46,56 +46,59 @@ class _NotificationsViewState extends NotificationsViewModel {
       ),
       body: Padding(
         padding: const EdgeInsets.only(left: 10,right: 10),
-        child: Expanded(
-          child: SingleChildScrollView( 
-            child: Column(children: [
-              const SizedBox(height: 10,),
-            
-              Column(children: [1,2,3,4,5,6,7].map((e) =>   Card(elevation: 5,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                child: Container(height: 100,width: size.width,
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration( color: Colors.white,borderRadius: BorderRadius.circular(10)),
-                  child: Row(crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-            
-                        SvgPicture.asset("assets/images/lognoti.svg",),
-                        const SizedBox(width: 10,),
-            
-                        Column(crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(tr("أبدأ 2024 بعروضك المميزة"),style: GoogleFonts.tajawal(color: Colors.black,
-                                fontSize:15,fontWeight: FontWeight.w500),),
-            
-            
-                            Text(tr("أضف عروضك المميزة وأبهر عملائك"),style: GoogleFonts.tajawal(color: Colors.black,
-                                fontSize:12,fontWeight: FontWeight.w400),),
-            
-            
-                            Row(crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                SvgPicture.asset("assets/images/time.svg"),
-                                const SizedBox(width: 5,),
-                                Text(tr("25Feb,2023"),style: GoogleFonts.tajawal(color: const Color(0xff9196AE),
-                                    fontSize:12,fontWeight: FontWeight.w400),),
-                              ],
-                            ),
-            
-                          ],)
-            
-            
-                      ]) ,
-                ),
-              )).toList(),)
-            
-            
-            
-            
-            
-            ]),
+        child: Flex(
+          direction: Axis.horizontal,
+          children: [ Expanded(
+            child: SingleChildScrollView(
+              child: Column(children: [
+                const SizedBox(height: 10,),
+
+                Column(children: [1,2,3,4,5,6,7].map((e) =>   Card(elevation: 5,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                  child: Container(height: 100,width: size.width,
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration( color: Colors.white,borderRadius: BorderRadius.circular(10)),
+                    child: Row(crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+
+                          SvgPicture.asset("assets/images/lognoti.svg",),
+                          const SizedBox(width: 10,),
+
+                          Column(crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(tr("أبدأ 2024 بعروضك المميزة"),style: GoogleFonts.tajawal(color: Colors.black,
+                                  fontSize:15,fontWeight: FontWeight.w500),),
+
+
+                              Text(tr("أضف عروضك المميزة وأبهر عملائك"),style: GoogleFonts.tajawal(color: Colors.black,
+                                  fontSize:12,fontWeight: FontWeight.w400),),
+
+
+                              Row(crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  SvgPicture.asset("assets/images/time.svg"),
+                                  const SizedBox(width: 5,),
+                                  Text(tr("25Feb,2023"),style: GoogleFonts.tajawal(color: const Color(0xff9196AE),
+                                      fontSize:12,fontWeight: FontWeight.w400),),
+                                ],
+                              ),
+
+                            ],)
+
+
+                        ]) ,
+                  ),
+                )).toList(),)
+
+
+
+
+
+              ]),
+            ),
           ),
-        ),
+        ]),
       ),
 
 
