@@ -7,7 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sama_officese/src/app.dart';
+import 'package:sama_officese/src/app/screen/home/home_viewmodel.dart';
 import 'package:sama_officese/src/app/screen/home/packages/packages_details/packages_details_viewmodel.dart';
+import 'package:sama_officese/src/app/screen/home/packages/update_package/upDate_view.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../../core/values/colors.dart';
@@ -32,17 +35,17 @@ class _PackagesDetailsState extends PackagesDetailsVieModel {
         flexibleSpace:  Stack(
             children: [
 
-
+             offer!=null?
               CarouselSlider(
-                items: productImage
-                    .map(
+                items: offer!.images
+                    !.map(
                       (e) => GestureDetector(
                       onTap: () {
 
 
                         MultiImageProvider multiImageProvider =
-                        MultiImageProvider(productImage.map((e) =>
-                        Image.network(e.url).image).toList());
+                        MultiImageProvider(offer!.images!.map((e) =>
+                        Image.network(e.image!).image).toList());
                         showImageViewerPager(context, multiImageProvider,
                             swipeDismissible: true, doubleTapZoomable: true);
                       },
@@ -53,7 +56,7 @@ class _PackagesDetailsState extends PackagesDetailsVieModel {
                             borderRadius: BorderRadius.circular(20),
                             image: DecorationImage(
                               image: NetworkImage(
-                                  e.url),
+                                  e.image!),
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -78,22 +81,24 @@ class _PackagesDetailsState extends PackagesDetailsVieModel {
                   const Duration(milliseconds: 1500),
                   viewportFraction: 1,
                 ),
-              ),
+              )
+                 :const SizedBox.shrink(),
 
 
 
-
+               offer!=null?
               Positioned(bottom: 20,left: 210,right: 210,
                 child: AnimatedSmoothIndicator(
                   activeIndex: activeIndex,
-                  count: productImage.length,
+                  count: offer!.images!.length,
                   effect: WormEffect(
                       dotHeight: 10,
                       dotWidth: 10,
                       dotColor: Colors.grey.shade400,
                       activeDotColor: const Color(0xffea8024)),
                 ),
-              ),
+              )
+              :const SizedBox.shrink(),
 
               InkWell( onTap: () {
                 Navigator.pop(context);
@@ -107,7 +112,9 @@ class _PackagesDetailsState extends PackagesDetailsVieModel {
         backgroundColor: Colors.transparent,
         automaticallyImplyLeading: false,
       ),
-      body: Stack(
+      body:
+      offer!=null?
+      Stack(
         children: [
 
           SizedBox(height: size.height,),
@@ -126,19 +133,24 @@ class _PackagesDetailsState extends PackagesDetailsVieModel {
                         child: Column(crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(tr("رحلة سنغافورة السياحية"),style: GoogleFonts.tajawal(color: Colors.black,
+                            Text(
+                              HomeViewModel.lang=="ar"?
+                              offer!.nameAr!
+                              :offer!.nameEn!
+                              ,style: GoogleFonts.tajawal(color: Colors.black,
                                 fontSize:15,fontWeight: FontWeight.w500),),
 
                             Row(children: [
                               SvgPicture.asset("assets/images/calender.svg") ,
                               const SizedBox(width: 10,),
 
-                              Text(tr("7أيام و 6ليالى"),style: GoogleFonts.tajawal(color: Colors.black,
-                                  fontSize:14,fontWeight: FontWeight.w400),),
+                              Text("${offer!.numOfDays} ${tr("Days")} ${offer!.num_of_nights} ${tr("Nights")}",
+                                style: GoogleFonts.tajawal(color: Colors.black,
+                                    fontSize:14,fontWeight: FontWeight.w400),),
 
                               const SizedBox(width: 10,),
 
-                              Text(tr("24نوفمبر - 30نوفمبر"),style: GoogleFonts.tajawal(color: Colors.grey,
+                              Text("${offer!.startDate} - ${offer!.endDate}",style: GoogleFonts.tajawal(color: Colors.grey,
                                   fontSize:12,fontWeight: FontWeight.w400),),
                             ],),
 
@@ -149,13 +161,14 @@ class _PackagesDetailsState extends PackagesDetailsVieModel {
                                 SvgPicture.asset("assets/images/money.svg") ,
                                 const SizedBox(width: 10,),
 
-                                Text(tr("3600 ر.س"),style: GoogleFonts.tajawal(
+                                Text("${offer!.priceAfter!} ${tr("Sar")}",style: GoogleFonts.tajawal(
                                     color:const Color(0xff00A8A5),
                                     fontSize:15,fontWeight: FontWeight.w400),),
                                 const SizedBox(width: 10,),
 
-                                Text(tr("4000 ر.س"),style: GoogleFonts.tajawal(color:Colors.grey,
-                                    fontSize:15,fontWeight: FontWeight.w400),),
+                                Text("${offer!.priceBefore!} ${tr("Sar")}",
+                                  style: GoogleFonts.tajawal(color:Colors.grey,
+                                      fontSize:15,fontWeight: FontWeight.w400),),
 
 
                               ],),
@@ -168,12 +181,17 @@ class _PackagesDetailsState extends PackagesDetailsVieModel {
                                 SvgPicture.asset("assets/images/packplan.svg") ,
                                 const SizedBox(width: 10,),
 
-                                Text(tr("نوع الرحلة :"),style: GoogleFonts.tajawal(
+                                Text(tr("${tr("TripType")} :"),style: GoogleFonts.tajawal(
                                     color:Colors.black,
                                     fontSize:15,fontWeight: FontWeight.w500),),
                                 const SizedBox(width: 10,),
 
-                                Text(tr("جماعى"),style: GoogleFonts.tajawal(color:Colors.black,
+                                Text(
+                                  offer!.type=="normal"?
+                                  tr("Normal")
+                                 :tr("Weekend")
+
+                                  ,style: GoogleFonts.tajawal(color:Colors.black,
                                     fontSize:15,fontWeight: FontWeight.w500),),
 
 
@@ -196,10 +214,11 @@ class _PackagesDetailsState extends PackagesDetailsVieModel {
                             children: [
 
                               Column(children: [
-                                Text(tr("1"),style: GoogleFonts.tajawal(color: const Color(0xff00A8A5),
+                                Text(offer!.num_of_persons!.toString(),
+                                  style: GoogleFonts.tajawal(color: const Color(0xff00A8A5),
                                     fontSize:17,fontWeight: FontWeight.w500),),
 
-                                Text(tr("أجمالى عدد الأشخاص"),style: GoogleFonts.tajawal(color:Colors.grey,
+                                Text(tr("TotalNumberOfPeople"),style: GoogleFonts.tajawal(color:Colors.grey,
                                     fontSize:10,fontWeight: FontWeight.w500),),
                               ],),
 
@@ -214,10 +233,11 @@ class _PackagesDetailsState extends PackagesDetailsVieModel {
 
 
                               Column(children: [
-                                Text(tr("3"),style: GoogleFonts.tajawal(color: const Color(0xff00A8A5),
+                                Text(offer!.num_of_reserved_persons.toString(),
+                                  style: GoogleFonts.tajawal(color: const Color(0xff00A8A5),
                                     fontSize:17,fontWeight: FontWeight.w500),),
 
-                                Text(tr("عدد المحجوزين"),style: GoogleFonts.tajawal(color:Colors.grey,
+                                Text(tr("numOfReservedPersons"),style: GoogleFonts.tajawal(color:Colors.grey,
                                     fontSize:10,fontWeight: FontWeight.w500),),
                               ],),
 
@@ -232,10 +252,16 @@ class _PackagesDetailsState extends PackagesDetailsVieModel {
 
 
                               Column(children: [
-                                Text(tr("2"),style: GoogleFonts.tajawal(color: const Color(0xff00A8A5),
-                                    fontSize:17,fontWeight: FontWeight.w500),),
+                                Builder(
+                                  builder: (context) {
+                                    var result= offer!.num_of_persons!-
+                                        int.parse(offer!.num_of_reserved_persons.toString()??"");
+                                    return Text(result.toString(),style: GoogleFonts.tajawal(color: const Color(0xff00A8A5),
+                                        fontSize:17,fontWeight: FontWeight.w500),);
+                                  }
+                                ),
 
-                                Text(tr("العدد المتبقى"),style: GoogleFonts.tajawal(color:Colors.grey,
+                                Text(tr("TheRemainingNumber"),style: GoogleFonts.tajawal(color:Colors.grey,
                                     fontSize:10,fontWeight: FontWeight.w500),),
                               ],),
 
@@ -249,14 +275,16 @@ class _PackagesDetailsState extends PackagesDetailsVieModel {
                       Divider(height: 10,thickness: 1,color: Colors.grey.shade300,),
                           const SizedBox(height: 10,),
 
-                      Text(tr("التفاصيل"),style: GoogleFonts.tajawal(color: Colors.black,
+                      Text(tr("Details"),style: GoogleFonts.tajawal(color: Colors.black,
                           fontSize:17,fontWeight: FontWeight.w500),),
 
                           const SizedBox(height: 15,),
 
 
-                          Text(tr("اكتشف اجمل المناطق السياحية في سنغافورة يشمل"
-                              " النقل والتوصيل من والي المطار + رحلات يومية + فنادق ٤ و ٥ نجوم مع الافطار"),
+                          Text(
+                            HomeViewModel.lang=="ar"?
+                            offer!.descriptionAr!
+                            :offer!.descriptionEn!,
                             style: GoogleFonts.tajawal(color: Colors.black,
                               fontSize:14,fontWeight: FontWeight.w400),),
                           const SizedBox(height: 10,),
@@ -273,6 +301,12 @@ class _PackagesDetailsState extends PackagesDetailsVieModel {
               ),
               ]),
         ),
+          isLoading==true?
+          SizedBox(
+              height: size.height/1.5,
+              child: const Center(child: CircularProgressIndicator(color: samaOfficeColor,
+              )))
+              :const SizedBox.shrink(),
 
 
 
@@ -293,10 +327,16 @@ class _PackagesDetailsState extends PackagesDetailsVieModel {
                         children: [
 
                   Row(children: [
-                    Text(tr("حالة الباكدج"),style: GoogleFonts.tajawal(color: Colors.black,
+                    Text(tr("PackageCondition"),style: GoogleFonts.tajawal(color: Colors.black,
                         fontSize:15,fontWeight: FontWeight.w500),),
                     const SizedBox(width: 8,),
-                    Text(tr("نشط الأن"),style: GoogleFonts.tajawal(color: const Color(0xff7DC11F),
+                    Text(
+                      offer!.status=="active"?
+                      tr("نشط الأن")
+                      :tr("مغلق الأن"),style: GoogleFonts.tajawal(
+                        color: offer!.status=="active"?
+                          const Color(0xff7DC11F)
+                        :Colors.red,
                         fontSize:12,fontWeight: FontWeight.w500),),
                   ],),
 
@@ -316,6 +356,7 @@ class _PackagesDetailsState extends PackagesDetailsVieModel {
                             onToggle: (val) {
                              setState(() {
                                switchValue=val;
+                               changeOfferApi( offer!.status=="active" ? "inactive":"active");
                              });
                               print(val);
                             },
@@ -341,6 +382,8 @@ class _PackagesDetailsState extends PackagesDetailsVieModel {
                             backgroundColor: const Color(0xff00A8A5)),
                         onPressed: () {
 
+                          SamaOfficeApp.navKey.currentState!.push(
+                              MaterialPageRoute(builder: (context) => const UpDateView(),));
 
                         },
                         child: Text(
@@ -361,7 +404,11 @@ class _PackagesDetailsState extends PackagesDetailsVieModel {
 
 
 
-      ]),
+      ])
+      : SizedBox(
+          height: size.height/1.5,
+          child: const Center(child: CircularProgressIndicator(color: samaOfficeColor,
+          ))),
 
 
     );

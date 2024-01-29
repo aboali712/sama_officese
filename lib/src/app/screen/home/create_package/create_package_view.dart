@@ -46,9 +46,9 @@ class _CreatePackageViewState extends CreatePackageViewModel {
                   Navigator.pop(context);
                 }
                     ,child: const Icon(Icons.arrow_back_ios,color: Colors.white,)),
-                const Text(
-                  "أنشاء باكيدج",
-                  style: TextStyle(
+                 Text(
+                  tr("CreatePackage"),
+                  style: const TextStyle(
                       color:  Colors.white,
                       fontSize: 21, fontWeight: FontWeight.w500),
                 ),
@@ -113,17 +113,17 @@ class _CreatePackageViewState extends CreatePackageViewModel {
                                     SvgPicture.asset("assets/images/upload.svg") ,
                                     const SizedBox(height: 10,),
 
-                                const Text(
-                                  "تحميل صورة الباكيدج",
-                                  style: TextStyle(
+                                 Text(
+                                  tr("UploadThePackageImage"),
+                                  style: const TextStyle(
                                       color:  Colors.white,
                                       fontSize: 16, fontWeight: FontWeight.w500),
                                 ),
                                     const SizedBox(height: 10,),
-                                    const Text(
+                                     Text(
                                       textAlign: TextAlign.center,
-                                      "قم بتحميل ما يصل إلى 6 صور، واجعل الصورة الأولى مميزة لأن هذه ستكون الصورة الرئيسية",
-                                      style: TextStyle(
+                                      tr("UploadUpTo6Photos,MakeTheFirstPhotoStandOutAsThisWillBeTheMainPhoto"),
+                                      style: const TextStyle(
                                           color:  Colors.white,
                                           fontSize: 13, fontWeight: FontWeight.w400),
                                     ),
@@ -162,6 +162,7 @@ class _CreatePackageViewState extends CreatePackageViewModel {
                                         child: InkWell(onTap: () {
                                           setState(() {
                                             imageFileList!.removeAt(index);
+                                            compressedListImages;
                                           });
                                         },
                                           child: Card(elevation: 10,shape: RoundedRectangleBorder(
@@ -180,9 +181,9 @@ class _CreatePackageViewState extends CreatePackageViewModel {
 
                                   ]),
                                   index==0?
-                                  const Text(
-                                    "الصورة الرئيسية",
-                                    style: TextStyle(
+                                   Text(
+                                    tr("MainImage"),
+                                    style: const TextStyle(
                                         color:  Colors.black,
                                         fontSize: 10, fontWeight: FontWeight.w500),
                                   ):const SizedBox.shrink(),
@@ -242,7 +243,7 @@ class _CreatePackageViewState extends CreatePackageViewModel {
                         ],),
 
                       Text(
-                        tr("أسم الباكيدج"),
+                        tr("PackageName"),
                         style: const TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.normal,
@@ -256,7 +257,7 @@ class _CreatePackageViewState extends CreatePackageViewModel {
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           style: const TextStyle(fontSize: 15),
                           decoration: InputDecoration(
-                            hintText: (tr("أسم الباكيدج بالعربى")),
+                            hintText: (tr("TheNameOfThePackageInArabic")),
                             hintStyle: GoogleFonts.tajawal(
                                 fontSize: 12,
                                 color: const Color.fromRGBO(196, 196, 196, 1)),
@@ -323,7 +324,7 @@ class _CreatePackageViewState extends CreatePackageViewModel {
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           style: const TextStyle(fontSize: 15),
                           decoration: InputDecoration(
-                            hintText: (tr("أسم الباكيدج بالأنجليزى")),
+                            hintText: (tr("PackageNameInEnglish")),
                             hintStyle: GoogleFonts.tajawal(
                                 fontSize: 12,
                                 color: const Color.fromRGBO(196, 196, 196, 1)),
@@ -386,54 +387,54 @@ class _CreatePackageViewState extends CreatePackageViewModel {
                       ),
 
                       const SizedBox(height: 20,),
-                          Row(mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              InkWell(onTap: () {
-                                setState(() {
-                                  description=0;
-                                });
-                                print(description);
-                              },
-                                child: Container(height: 30,width: 30,
-                                  padding: const EdgeInsets.all(4),
-                                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(5),
-                                    color: description==0? samaOfficeColor :Colors.grey ,
-                                  ),
-                                  child: Text("ع",
-                                    textAlign: TextAlign.center,
-                                    style: GoogleFonts.tajawal(color:description==0? Colors.white: Colors.white,
-                                        fontWeight: FontWeight.w500,fontSize: 14
-
-                                    ),),),
-                              ),
-                              const SizedBox(width: 5,),
-
-
-                              InkWell(onTap: () {
-                                setState(() {
-                                  description=1;
-
-                                });
-                                print(description);
-                              },
-                                child: Container(height: 30,width: 30,
-                                  padding: const EdgeInsets.all(4),
-                                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(5),
-                                    color:description==1? samaOfficeColor :Colors.grey ,
-                                  ),
-                                  child: Text("en",
-                                    textAlign: TextAlign.center,
-                                    style: GoogleFonts.tajawal(color:description==1? Colors.white: Colors.white,
-                                        fontWeight: FontWeight.w500,fontSize: 14
-
-                                    ),),),
-                              ),
-
-
-                            ],),
+                          // Row(mainAxisAlignment: MainAxisAlignment.end,
+                          //   children: [
+                          //     InkWell(onTap: () {
+                          //       setState(() {
+                          //         description=0;
+                          //       });
+                          //       print(description);
+                          //     },
+                          //       child: Container(height: 30,width: 30,
+                          //         padding: const EdgeInsets.all(4),
+                          //         decoration: BoxDecoration(borderRadius: BorderRadius.circular(5),
+                          //           color: description==0? samaOfficeColor :Colors.grey ,
+                          //         ),
+                          //         child: Text("ع",
+                          //           textAlign: TextAlign.center,
+                          //           style: GoogleFonts.tajawal(color:description==0? Colors.white: Colors.white,
+                          //               fontWeight: FontWeight.w500,fontSize: 14
+                          //
+                          //           ),),),
+                          //     ),
+                          //     const SizedBox(width: 5,),
+                          //
+                          //
+                          //     InkWell(onTap: () {
+                          //       setState(() {
+                          //         description=1;
+                          //
+                          //       });
+                          //       print(description);
+                          //     },
+                          //       child: Container(height: 30,width: 30,
+                          //         padding: const EdgeInsets.all(4),
+                          //         decoration: BoxDecoration(borderRadius: BorderRadius.circular(5),
+                          //           color:description==1? samaOfficeColor :Colors.grey ,
+                          //         ),
+                          //         child: Text("en",
+                          //           textAlign: TextAlign.center,
+                          //           style: GoogleFonts.tajawal(color:description==1? Colors.white: Colors.white,
+                          //               fontWeight: FontWeight.w500,fontSize: 14
+                          //
+                          //           ),),),
+                          //     ),
+                          //
+                          //
+                          //   ],),
 
                           Text(
-                            tr("تفاصيل الباكيدج"),
+                            tr("PackageDetailsInArabic"),
                             style: const TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.normal,
@@ -441,7 +442,7 @@ class _CreatePackageViewState extends CreatePackageViewModel {
                             textAlign: TextAlign.center,
                           ),
 
-                          description==0?
+
                           Container(
                             height: 160,width: size.width,
                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(5),
@@ -460,7 +461,7 @@ class _CreatePackageViewState extends CreatePackageViewModel {
                                     print(detailsAr);
                                   }),
                               htmlEditorOptions: HtmlEditorOptions(
-                                  hint: tr("الوصف بالعربى") ,
+                                  hint: tr("DescriptionInArabic") ,
                                   initialText: detailsAr
                                 //initalText: "text content initial, if any",
                               ),
@@ -473,9 +474,19 @@ class _CreatePackageViewState extends CreatePackageViewModel {
                                 height: 400,
                               ),
                             ),
-                          )
+                          ),
+                          const SizedBox(height: 20,),
 
-                         : Container(
+                          Text(
+                            tr("PackageDetailsInEnglish"),
+                            style: const TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.normal,
+                                fontSize: 15),
+                            textAlign: TextAlign.center,
+                          ),
+
+                         Container(
                             height: 160,width: size.width,
                             decoration: BoxDecoration(borderRadius: BorderRadius.circular(5),
                                 color: const Color(0xFFF3F3F5)),
@@ -493,7 +504,7 @@ class _CreatePackageViewState extends CreatePackageViewModel {
                                     print(detailsEn);
                                   }),
                               htmlEditorOptions: HtmlEditorOptions(
-                                  hint: tr("الوصف بالأنجليزى"),
+                                  hint: tr("DescriptionInEnglish"),
                                   initialText: detailsEn
                                 //initalText: "text content initial, if any",
                               ),
@@ -515,7 +526,7 @@ class _CreatePackageViewState extends CreatePackageViewModel {
                                 child: Column(crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      tr("سعر الباكيدج"),
+                                      tr("PackagePrice"),
                                       style: const TextStyle(
                                           color: Colors.black,
                                           fontWeight: FontWeight.normal,
@@ -528,7 +539,7 @@ class _CreatePackageViewState extends CreatePackageViewModel {
                                         autovalidateMode: AutovalidateMode.onUserInteraction,
                                         style: const TextStyle(fontSize: 15),
                                         decoration: InputDecoration(
-                                          hintText: (tr("سعر الباكيدج")),
+                                          hintText: (tr("PackagePrice")),
                                           hintStyle: GoogleFonts.tajawal(
                                               fontSize: 12,
                                               color: const Color.fromRGBO(196, 196, 196, 1)),
@@ -595,7 +606,7 @@ class _CreatePackageViewState extends CreatePackageViewModel {
                                 child: Column(crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      tr("سعر الباكيدج بعد الخصم"),
+                                      tr("PackagePriceAfterDiscount"),
                                       style: const TextStyle(
                                           color: Colors.black,
                                           fontWeight: FontWeight.normal,
@@ -608,7 +619,7 @@ class _CreatePackageViewState extends CreatePackageViewModel {
                                         autovalidateMode: AutovalidateMode.onUserInteraction,
                                         style: const TextStyle(fontSize: 15),
                                         decoration: InputDecoration(
-                                          hintText: (tr("سعر الباكيدج بعد الخصم")),
+                                          hintText: (tr("PackagePriceAfterDiscount")),
                                           hintStyle: GoogleFonts.tajawal(
                                               fontSize: 12,
                                               color: const Color.fromRGBO(196, 196, 196, 1)),
@@ -680,7 +691,7 @@ class _CreatePackageViewState extends CreatePackageViewModel {
                                 child: Column(crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      tr("عدد الأيام"),
+                                      tr("NumberOfDays"),
                                       style: const TextStyle(
                                           color: Colors.black,
                                           fontWeight: FontWeight.normal,
@@ -693,7 +704,7 @@ class _CreatePackageViewState extends CreatePackageViewModel {
                                         autovalidateMode: AutovalidateMode.onUserInteraction,
                                         style: const TextStyle(fontSize: 15),
                                         decoration: InputDecoration(
-                                          hintText: (tr("عدد الأيام")),
+                                          hintText: (tr("NumberOfDays")),
                                           hintStyle: GoogleFonts.tajawal(
                                               fontSize: 12,
                                               color: const Color.fromRGBO(196, 196, 196, 1)),
@@ -760,7 +771,7 @@ class _CreatePackageViewState extends CreatePackageViewModel {
                                 child: Column(crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      tr("عدد الليالى"),
+                                      tr("NumberOfNights"),
                                       style: const TextStyle(
                                           color: Colors.black,
                                           fontWeight: FontWeight.normal,
@@ -773,7 +784,7 @@ class _CreatePackageViewState extends CreatePackageViewModel {
                                         autovalidateMode: AutovalidateMode.onUserInteraction,
                                         style: const TextStyle(fontSize: 15),
                                         decoration: InputDecoration(
-                                          hintText: (tr("عدد الليالى")),
+                                          hintText: (tr("NumberOfNights")),
                                           hintStyle: GoogleFonts.tajawal(
                                               fontSize: 12,
                                               color: const Color.fromRGBO(196, 196, 196, 1)),
@@ -1008,7 +1019,7 @@ class _CreatePackageViewState extends CreatePackageViewModel {
                           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                tr("أختر نوع الباكيدج"),
+                                tr("ChooseTheTypeOfPackage"),
                                 style: const TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold,
@@ -1092,7 +1103,7 @@ class _CreatePackageViewState extends CreatePackageViewModel {
                           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                tr("أختر نوع العرض"),
+                                tr("ChooseTheDisplayType"),
                                 style: const TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold,
@@ -1167,6 +1178,92 @@ class _CreatePackageViewState extends CreatePackageViewModel {
                             ],
                           ),
 
+                          const SizedBox(height: 20,),
+                          offerType=="group"?
+                          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                            Text(
+                              tr("EnterTheNumberOfGroup"),
+                              style: const TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 14),
+                              textAlign: TextAlign.center,
+                            ),
+
+
+                            SizedBox(width: size.width/2-25,
+                              child: SizedBox(height: 45,
+                                child: TextFormField(
+                                  controller: numOfPersonControl,
+                                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                                  style: const TextStyle(fontSize: 15),
+                                  decoration: InputDecoration(
+                                    hintText: (tr("EnterTheNumberOfGroup")),
+                                    hintStyle: GoogleFonts.tajawal(
+                                        fontSize: 12,
+                                        color: const Color.fromRGBO(196, 196, 196, 1)),
+
+                                    errorStyle: const TextStyle(color: accentColor),
+                                    contentPadding: const EdgeInsets.symmetric(
+                                        vertical: 17.0, horizontal: 10.0),
+
+                                    filled: true,
+                                    fillColor: const Color(0xFFF3F3F5),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius:
+                                      const BorderRadius.all(Radius.circular(5)),
+                                      borderSide: BorderSide(width: 1, color: klightGray),
+                                    ),
+                                    disabledBorder: OutlineInputBorder(
+                                      borderRadius:
+                                      const BorderRadius.all(Radius.circular(5)),
+                                      borderSide: BorderSide(width: .7, color: klightGray),
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius:
+                                      const BorderRadius.all(Radius.circular(5)),
+                                      borderSide: BorderSide(
+                                        width: .7,
+                                        color: klightGray,
+                                      ),
+                                    ),
+                                    border: const OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(Radius.circular(5)),
+                                        borderSide: BorderSide(
+                                          width: 1,
+                                        )),
+                                    errorBorder: const OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(Radius.circular(5)),
+                                        borderSide:
+                                        BorderSide(width: 0.7, color: accentColor)),
+                                    focusedErrorBorder: const OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(Radius.circular(5)),
+                                        borderSide:
+                                        BorderSide(width: 0.7, color: accentColor)),
+                                  ),
+                                  onChanged: (value) {
+                                    if (value.isEmpty ||
+                                        value == null ||
+                                        !InputValidators()
+                                            .nameValidator(name: value, context: context)) {
+
+                                    } else {
+
+                                    }
+                                  },
+                                  onSaved: (value) {
+
+                                  },
+
+                                  cursorColor: Colors.black,
+                                  keyboardType: TextInputType.number,
+                                ),
+                              ),
+                            ),
+
+                          ],)
+                          :const SizedBox.shrink(),
 
                           const SizedBox(
                             height: 30,
@@ -1214,6 +1311,14 @@ class _CreatePackageViewState extends CreatePackageViewModel {
               ]),
         ),
 
+          isLoading==true?
+          SizedBox(
+              height: size.height/1,
+              child: const Center(child: CircularProgressIndicator(color: samaOfficeColor,
+              )))
+              :const SizedBox.shrink(),
+
+
 
           Positioned(bottom: -5,left: -5,right: -5,
             child: Card( elevation: 20,color: Colors.white,shape: const RoundedRectangleBorder(
@@ -1240,10 +1345,10 @@ class _CreatePackageViewState extends CreatePackageViewModel {
                         backgroundColor: const Color(0xffEA8024)),
                     onPressed: () {
 
-
+                      addOfferApiCall();
                     },
                     child: Text(
-                      tr('أنشاء الباكيدج'),
+                           tr("CreatePackage"),
                       style: const TextStyle(
                           fontSize: 16,
                           color: Colors.white,

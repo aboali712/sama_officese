@@ -72,7 +72,8 @@ class _ServiceViewState extends ServicesViewModel {
                                   decoration: BoxDecoration(borderRadius:  BorderRadius.circular(14),
                                       color:const Color(0xff5AC41A) ),
                                   child: Center(
-                                    child: Text("3",style: GoogleFonts.tajawal( color: Colors.white,fontSize: 12,
+                                    child: Text(servicesPending.length.toString(),
+                                      style: GoogleFonts.tajawal( color: Colors.white,fontSize: 12,
                                         fontWeight: FontWeight.w400
                                     ),),
                                   )),
@@ -94,16 +95,33 @@ class _ServiceViewState extends ServicesViewModel {
                         });
                       },
                         child: Container(height: 43,width: 110,
-                          padding: const EdgeInsets.all(13),
+                          padding: const EdgeInsets.all(9),
                           decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),
                             color: serviceStat==1?Colors.white :Colors.transparent,
                           ),
-                          child: Text(tr("قيد التنفيذ"),
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.tajawal(color:serviceStat==1? Colors.black: Colors.grey,
-                                fontWeight: FontWeight.w500,fontSize: 14
+                          child: Row(
+                            children: [
+                              serviceStat==1?
+                              Container(
+                                  height: 18,width: 18,
+                                  padding: const EdgeInsets.all(3),
+                                  decoration: BoxDecoration(borderRadius:  BorderRadius.circular(14),
+                                      color:const Color(0xff5AC41A) ),
+                                  child: Center(
+                                    child: Text(servicesInReview.length.toString(),
+                                      style: GoogleFonts.tajawal( color: Colors.white,fontSize: 12,
+                                          fontWeight: FontWeight.w400
+                                      ),),
+                                  )):const SizedBox.shrink(),
+                              const SizedBox(width: 5,),
+                              Text(tr("قيد التنفيذ"),
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.tajawal(color:serviceStat==1? Colors.black: Colors.grey,
+                                    fontWeight: FontWeight.w500,fontSize: 14
 
-                            ),),),
+                                ),),
+                            ],
+                          ),),
                       ),
 
                       InkWell(onTap: () {
@@ -116,12 +134,29 @@ class _ServiceViewState extends ServicesViewModel {
                           decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),
                             color: serviceStat==2? Colors.white :Colors.transparent ,
                           ),
-                          child: Text(tr("مكتملة"),
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.tajawal(color:serviceStat==2? Colors.black: Colors.grey,
-                                fontWeight: FontWeight.w500,fontSize: 14
+                          child: Row(
+                            children: [
+                              serviceStat==2?
+                              Container(
+                                  height: 18,width: 18,
+                                  padding: const EdgeInsets.all(3),
+                                  decoration: BoxDecoration(borderRadius:  BorderRadius.circular(14),
+                                      color:const Color(0xff5AC41A) ),
+                                  child: Center(
+                                    child: Text(servicesCompleted.length.toString(),
+                                      style: GoogleFonts.tajawal( color: Colors.white,fontSize: 12,
+                                          fontWeight: FontWeight.w400
+                                      ),),
+                                  )):const SizedBox.shrink(),
+                              const SizedBox(width: 5,),
+                              Text(tr("مكتملة"),
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.tajawal(color:serviceStat==2? Colors.black: Colors.grey,
+                                    fontWeight: FontWeight.w500,fontSize: 14
 
-                            ),),),
+                                ),),
+                            ],
+                          ),),
                       ),
 
                     ]),),
@@ -147,8 +182,11 @@ class _ServiceViewState extends ServicesViewModel {
             child: SingleChildScrollView(
               child: Column(children: [
                 const SizedBox(height: 10,),
-
-               Column(children: [0,1,2,3,4,5,6,7].map((e) =>  Card(elevation: 5,
+                 serviceStat==0?
+                     servicesPending.isNotEmpty?
+                        Column(children:
+               services.isNotEmpty?
+               servicesPending.map((e) =>  Card(elevation: 5,
                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                  child: Container(width: size.width,
 
@@ -161,20 +199,41 @@ class _ServiceViewState extends ServicesViewModel {
                          child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                            crossAxisAlignment: CrossAxisAlignment.end,
                            children: [
-                             Text(tr("#45432"),style: GoogleFonts.tajawal(color: Colors.black,
+                             Text("#${e.id}",style: GoogleFonts.tajawal(color: Colors.black,
                                  fontSize:15,fontWeight: FontWeight.w400),),
 
-                             Container(height: 25,width: 80,
+                             Container(height: 25,
                                padding: const EdgeInsets.all(5),
                                decoration: BoxDecoration(borderRadius:  BorderRadius.circular(20),
                                    color:const Color(0xffCCD9E5) ),
                                child: Row(mainAxisAlignment: MainAxisAlignment.center,
 
                                    children: [
-                                     SvgPicture.asset("assets/images/passport.svg",),
+                                     e.services![0].serviceId==4?
+                                     SvgPicture.asset("assets/images/ticket.svg",)
+                                         : SvgPicture.asset("assets/images/passport.svg",),
+
                                      const SizedBox(width: 3,),
-                                     Text(tr("تأشيرة"),style: GoogleFonts.tajawal(color: Colors.black,
-                                         fontSize:12,fontWeight: FontWeight.w500),),
+
+
+
+                                     Text(
+                                       e.services![0].serviceId== 1
+                                           ? tr("Vises")
+                                           : e.services![0].serviceId ==2
+                                           ? tr("CarRent")
+                                           : e.services![0].serviceId ==3
+                                           ? tr("HotelBookings")
+                                           : e.services![0].serviceId ==4
+                                           ? tr("FlightTickets")
+                                           : tr("Licenses"),
+                                       style: const TextStyle(
+                                           color: Colors.black,
+                                           fontSize: 12,
+                                           fontWeight:
+                                           FontWeight.w600),
+                                     ),
+
                                    ]),
                              )
 
@@ -192,8 +251,8 @@ class _ServiceViewState extends ServicesViewModel {
                              padding: const EdgeInsets.all(11),
                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: const Color(0xff8a8c8e),
                                  border: Border.all(width: 1.5,color: Colors.white,),
-                                 image: const DecorationImage(
-                                   image: AssetImage("assets/images/Rectangle.png"), )
+                                 image:  DecorationImage(
+                                   image: NetworkImage(e.user!.image!),fit: BoxFit.cover )
                              ),
                            ),
 
@@ -202,9 +261,9 @@ class _ServiceViewState extends ServicesViewModel {
                            Column(crossAxisAlignment: CrossAxisAlignment.start,
                              children: [
 
-                               Text("حمد هاشم",style: GoogleFonts.tajawal(color: Colors.black,
+                               Text("${e.user!.firstName} ${e.user!.lastName}",style: GoogleFonts.tajawal(color: Colors.black,
                                    fontSize:15,fontWeight: FontWeight.w500),),
-                               Text("تأشيرة دولة الأمارات",style: GoogleFonts.tajawal(color: Colors.black,
+                               Text(e.services![0].countryTitle!,style: GoogleFonts.tajawal(color: Colors.black,
                                    fontSize:13,fontWeight: FontWeight.w400),),
 
                              ],)
@@ -224,7 +283,8 @@ class _ServiceViewState extends ServicesViewModel {
                                children: [
                                  SvgPicture.asset("assets/images/time.svg"),
                                  const SizedBox(width: 5,),
-                                 Text(tr("25Feb,2023"),style: GoogleFonts.tajawal(color: const Color(0xff9196AE),
+                                 Text(DateFormat("MMM d,yyyy","en" ).format(DateTime.parse(e.createdAt!)),
+                                   style: GoogleFonts.tajawal(color: const Color(0xff9196AE),
                                      fontSize:12,fontWeight: FontWeight.w400),),
                                ],
                              ),
@@ -254,9 +314,439 @@ class _ServiceViewState extends ServicesViewModel {
                      ],
                    ) ,
                  ),
-               )).toList(),),
+               )).toList() :[],)
+                       : Container(
+                   margin: EdgeInsets.only(
+                       top: MediaQuery.of(context).size.height / 5),
+                   child: Column(
+                     children: [
+                       SvgPicture.asset("assets/images/empty_orders.svg"),
+                       const SizedBox(
+                         height: 20,
+                       ),
+                       Text(
+                         tr("no_orders"),
+                         style: const TextStyle(
+                             fontSize: 17, fontWeight: FontWeight.bold),
+                       ),
+                       const SizedBox(
+                         height: 10,
+                       ),
+                       Text(textAlign: TextAlign.center,
+                         tr("NoOrdersDesc"),
+                         style: const TextStyle(
+                             fontSize: 15, fontWeight: FontWeight.w500),
+                       ),
+                     ],
+                   ),
+                 )
+                       :serviceStat==1?
+                        servicesInReview.isNotEmpty?
+                        Column(children:
+                        services.isNotEmpty?
+                        servicesInReview.map((e) =>  Card(elevation: 5,
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                          child: Container(width: size.width,
 
-                const SizedBox(height: 30,),
+                            decoration: BoxDecoration( color: Colors.white,borderRadius: BorderRadius.circular(10)),
+                            child: Column(
+                              children: [
+
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 10,right: 10,top: 10,bottom: 5),
+                                  child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      Text("#${e.id}",style: GoogleFonts.tajawal(color: Colors.black,
+                                          fontSize:15,fontWeight: FontWeight.w400),),
+
+                                      Container(height: 25,
+                                        padding: const EdgeInsets.all(5),
+                                        decoration: BoxDecoration(borderRadius:  BorderRadius.circular(20),
+                                            color:const Color(0xffCCD9E5) ),
+                                        child: Row(mainAxisAlignment: MainAxisAlignment.center,
+
+                                            children: [
+                                              e.services![0].serviceId==4?
+                                              SvgPicture.asset("assets/images/ticket.svg",)
+                                                  : SvgPicture.asset("assets/images/passport.svg",),
+                                              const SizedBox(width: 3,),
+                                              Text(
+                                                e.services![0].serviceId== 1
+                                                    ? tr("Vises")
+                                                    : e.services![0].serviceId ==2
+                                                    ? tr("CarRent")
+                                                    : e.services![0].serviceId ==3
+                                                    ? tr("HotelBookings")
+                                                    : e.services![0].serviceId ==4
+                                                    ? tr("FlightTickets")
+                                                    : tr("Licenses"),
+                                                style: const TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 12,
+                                                    fontWeight:
+                                                    FontWeight.w600),
+                                              ),
+                                            ]),
+                                      )
+
+                                    ],),
+                                ),
+
+                                Divider(height: 5,thickness: 1,color: Colors.grey.shade300,),
+
+
+                                Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Row(children: [
+                                    Container(
+                                      height: 45,width: 50,
+                                      padding: const EdgeInsets.all(11),
+                                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),
+                                          color: const Color(0xff8a8c8e),
+                                          border: Border.all(width: 1.5,color: Colors.white,),
+                                          image:  DecorationImage(
+                                              image: NetworkImage(e.user!.image!),fit: BoxFit.cover )
+                                      ),
+                                    ),
+
+                                    const SizedBox(width: 10,),
+
+                                    SizedBox(width: 250,
+                                      child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+
+                                          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text("${e.user!.firstName} ${e.user!.lastName}",
+                                                style: GoogleFonts.tajawal(color: Colors.black,
+                                                    fontSize:15,fontWeight: FontWeight.w500),),
+
+
+
+                                              Text(
+                                                e.status == "pending"
+                                                    ? tr("Pending")
+                                                    : e.status == "accepted"
+                                                    ? tr("Accepted")
+                                                    : e.status ==
+                                                    "completed"
+                                                    ? tr("Completed")
+                                                    : e.status ==
+                                                    "canceled"
+                                                    ? tr(
+                                                    "Cancelled")
+                                                    :   e.status ==
+                                                    "inReview"
+                                                    ? tr(
+                                                    "Reviewing")
+                                                    : "",
+                                                style: TextStyle(
+                                                    fontWeight:
+                                                    FontWeight.w400,
+                                                    fontSize: 14,
+                                                    color: e.status == "canceled"
+                                                        ? const Color(
+                                                        0xFFEA3224)
+                                                        : const Color(
+                                                        0xFF00AE9F)),
+                                              ),
+
+
+                                            ],
+                                          ),
+
+                                          Text(
+                                            e.services![0].ticketClass ==  "first"?
+                                            "${tr("TravelClass")} : ${tr("FirstClass")}"
+                                                : e.services![0].ticketClass == "economy"
+                                                ? "${tr("TravelClass")} : ${tr("Economic")}"
+                                                : e.services![0].ticketClass == "economy"?
+                                            "${tr("TravelClass")} : ${tr("Business")}"
+                                                :e.services![0].countryTitle!
+
+                                            ,style: GoogleFonts.tajawal(color: Colors.black,
+                                              fontSize:13,fontWeight: FontWeight.w400),),
+
+                                        ],),
+                                    )
+
+
+
+                                  ],),
+                                ),
+
+                                Divider(height: 5,thickness: 1,color: Colors.grey.shade300,),
+
+                                Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          SvgPicture.asset("assets/images/time.svg"),
+                                          const SizedBox(width: 5,),
+                                          Text(DateFormat("MMM d,yyyy","en" ).format(DateTime.parse(e.createdAt!)),
+                                            style: GoogleFonts.tajawal(color: const Color(0xff9196AE),
+                                                fontSize:12,fontWeight: FontWeight.w400),),
+                                        ],
+                                      ),
+
+
+                                      InkWell(onTap: () {
+                                        SamaOfficeApp.navKey.currentState!.push
+                                          (MaterialPageRoute(builder: (context) => const ServiceDetails(),));
+                                      },
+                                        child: Row(children: [
+                                          Text(tr("تفاصيل"),style: GoogleFonts.tajawal(color: Colors.blue,
+                                              fontSize:13,fontWeight: FontWeight.w400),),
+                                          const SizedBox(width: 5,),
+
+                                          const Icon(Icons.arrow_forward_ios,size: 18,color: Colors.grey,)
+
+                                        ],),
+                                      )
+
+
+
+                                    ],
+                                  ),
+                                ),
+
+
+                              ],
+                            ) ,
+                          ),
+                        )).toList() :[],)
+                        : Container(
+                       margin: EdgeInsets.only(
+                           top: MediaQuery.of(context).size.height / 5),
+                       child: Column(
+                         children: [
+                           SvgPicture.asset("assets/images/empty_orders.svg"),
+                           const SizedBox(
+                             height: 20,
+                           ),
+                           Text(
+                             tr("no_orders"),
+                             style: const TextStyle(
+                                 fontSize: 17, fontWeight: FontWeight.bold),
+                           ),
+                           const SizedBox(
+                             height: 10,
+                           ),
+                           Text(textAlign: TextAlign.center,
+                             tr("NoOrdersDesc"),
+                             style: const TextStyle(
+                                 fontSize: 15, fontWeight: FontWeight.w500),
+                           ),
+                         ],
+                       ),
+                     )
+                        :serviceStat==2?
+                      servicesCompleted.isNotEmpty?
+                      Column(children:
+                 services.isNotEmpty?
+                 servicesCompleted.map((e) =>  Card(elevation: 5,
+                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                   child: Container(width: size.width,
+
+                     decoration: BoxDecoration( color: Colors.white,borderRadius: BorderRadius.circular(10)),
+                     child: Column(
+                       children: [
+
+                         Padding(
+                           padding: const EdgeInsets.only(left: 10,right: 10,top: 10,bottom: 5),
+                           child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                             crossAxisAlignment: CrossAxisAlignment.end,
+                             children: [
+                               Text("#${e.id}",style: GoogleFonts.tajawal(color: Colors.black,
+                                   fontSize:15,fontWeight: FontWeight.w400),),
+
+                               Container(height: 25,
+                                 padding: const EdgeInsets.all(5),
+                                 decoration: BoxDecoration(borderRadius:  BorderRadius.circular(20),
+                                     color:const Color(0xffCCD9E5) ),
+                                 child: Row(mainAxisAlignment: MainAxisAlignment.center,
+
+                                     children: [
+                                       e.services![0].serviceId==4?
+                                       SvgPicture.asset("assets/images/ticket.svg",)
+                                      : SvgPicture.asset("assets/images/passport.svg",),
+                                       const SizedBox(width: 3,),
+                                       Text(
+                                         e.services![0].serviceId== 1
+                                             ? tr("Vises")
+                                             : e.services![0].serviceId ==2
+                                             ? tr("CarRent")
+                                             : e.services![0].serviceId ==3
+                                             ? tr("HotelBookings")
+                                             : e.services![0].serviceId ==4
+                                             ? tr("FlightTickets")
+                                             : tr("Licenses"),
+                                         style: const TextStyle(
+                                             color: Colors.black,
+                                             fontSize: 12,
+                                             fontWeight:
+                                             FontWeight.w600),
+                                       ),
+                                     ]),
+                               )
+
+                             ],),
+                         ),
+
+                         Divider(height: 5,thickness: 1,color: Colors.grey.shade300,),
+
+
+                         Padding(
+                           padding: const EdgeInsets.all(10.0),
+                           child: Row(children: [
+                             Container(
+                               height: 45,width: 50,
+                               padding: const EdgeInsets.all(11),
+                               decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: const Color(0xff8a8c8e),
+                                   border: Border.all(width: 1.5,color: Colors.white,),
+                                   image:  DecorationImage(
+                                       image: NetworkImage(e.user!.image!),fit: BoxFit.cover )
+                               ),
+                             ),
+
+                             const SizedBox(width: 10,),
+
+                             SizedBox(width: 250,
+                               child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                                 children: [
+
+                                   Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                     children: [
+                                       Text("${e.user!.firstName} ${e.user!.lastName}",
+                                         style: GoogleFonts.tajawal(color: Colors.black,
+                                           fontSize:15,fontWeight: FontWeight.w500),),
+
+
+
+                                       Text(
+                                         e.status == "pending"
+                                             ? tr("Pending")
+                                             : e.status == "accepted"
+                                             ? tr("Accepted")
+                                             : e.status ==
+                                             "completed"
+                                             ? tr("Completed")
+                                             : e.status ==
+                                             "canceled"
+                                             ? tr(
+                                             "Cancelled")
+                                             :   e.status ==
+                                             "inReview"
+                                             ? tr(
+                                             "Reviewing")
+                                             : "",
+                                         style: TextStyle(
+                                             fontWeight:
+                                             FontWeight.w400,
+                                             fontSize: 14,
+                                             color: e.status == "canceled"
+                                                 ? const Color(
+                                                 0xFFEA3224)
+                                                 : const Color(
+                                                 0xFF00AE9F)),
+                                       ),
+
+
+                                     ],
+                                   ),
+
+                                   Text(
+                                     e.services![0].ticketClass ==  "first"?
+                                          "${tr("TravelClass")} : ${tr("FirstClass")}"
+                                      : e.services![0].ticketClass == "economy"
+                                           ? "${tr("TravelClass")} : ${tr("Economic")}"
+                                               : e.services![0].ticketClass == "economy"?
+                                           "${tr("TravelClass")} : ${tr("Business")}"
+                                     :e.services![0].countryTitle!
+
+                                     ,style: GoogleFonts.tajawal(color: Colors.black,
+                                       fontSize:13,fontWeight: FontWeight.w400),),
+
+                                 ],),
+                             )
+
+
+
+                           ],),
+                         ),
+
+                         Divider(height: 5,thickness: 1,color: Colors.grey.shade300,),
+
+                         Padding(
+                           padding: const EdgeInsets.all(10.0),
+                           child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                             children: [
+                               Row(crossAxisAlignment: CrossAxisAlignment.center,
+                                 children: [
+                                   SvgPicture.asset("assets/images/time.svg"),
+                                   const SizedBox(width: 5,),
+                                   Text(DateFormat("MMM d,yyyy","en" ).format(DateTime.parse(e.createdAt!)),
+                                     style: GoogleFonts.tajawal(color: const Color(0xff9196AE),
+                                         fontSize:12,fontWeight: FontWeight.w400),),
+                                 ],
+                               ),
+
+
+                               InkWell(onTap: () {
+                                 SamaOfficeApp.navKey.currentState!.push
+                                   (MaterialPageRoute(builder: (context) => const ServiceDetails(),));
+                               },
+                                 child: Row(children: [
+                                   Text(tr("تفاصيل"),style: GoogleFonts.tajawal(color: Colors.blue,
+                                       fontSize:13,fontWeight: FontWeight.w400),),
+                                   const SizedBox(width: 5,),
+
+                                   const Icon(Icons.arrow_forward_ios,size: 18,color: Colors.grey,)
+
+                                 ],),
+                               )
+
+
+
+                             ],
+                           ),
+                         ),
+
+
+                       ],
+                     ) ,
+                   ),
+                 )).toList() :[],)
+                    : Container(
+                         margin: EdgeInsets.only(
+                             top: MediaQuery.of(context).size.height / 5),
+                         child: Column(
+                           children: [
+                             SvgPicture.asset("assets/images/empty_orders.svg"),
+                             const SizedBox(
+                               height: 20,
+                             ),
+                             Text(
+                               tr("no_orders"),
+                               style: const TextStyle(
+                                   fontSize: 17, fontWeight: FontWeight.bold),
+                             ),
+                             const SizedBox(
+                               height: 10,
+                             ),
+                             Text(textAlign: TextAlign.center,
+                               tr("NoOrdersDesc"),
+                               style: const TextStyle(
+                                   fontSize: 15, fontWeight: FontWeight.w500),
+                             ),
+                           ],
+                         ),
+                       )
+                     :const SizedBox.shrink(),
+                     const SizedBox(height: 30,),
 
 
               ]),

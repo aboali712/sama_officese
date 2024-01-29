@@ -5,7 +5,12 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sama_officese/src/app.dart';
 import 'package:sama_officese/src/app/screen/home/packages/packages_details/packages_details_view.dart';
+import 'package:sama_officese/src/app/screen/home/packages/packages_details/packages_details_viewmodel.dart';
 import 'package:sama_officese/src/app/screen/home/packages/packages_viewmodel.dart';
+import 'package:sama_officese/src/app/screen/home/packages/update_package/upDate_viewModel.dart';
+
+import '../../../core/values/colors.dart';
+import '../home_viewmodel.dart';
 
 class PackagesView extends StatefulWidget {
   const PackagesView({Key? key}) : super(key: key);
@@ -60,136 +65,166 @@ class _PackagesViewState extends PackagesViewModel {
         backgroundColor: Colors.transparent,
         automaticallyImplyLeading: false,
       ),
-      body: Padding(
-        padding: const EdgeInsets.only(left: 10,right: 10),
-        child: Flex(direction: Axis.horizontal,
-            children: [ Expanded(
-              child: SingleChildScrollView(
-                child: Column(children: [
-                   const SizedBox(height: 10,),
+      body: Stack(
+        children: [
+          Padding(
+          padding: const EdgeInsets.only(left: 10,right: 10),
+          child: Flex(direction: Axis.horizontal,
+              children: [ Expanded(
+                child: SingleChildScrollView(
+                  child: Column(children: [
+                     const SizedBox(height: 10,),
 
 
-                  Column(children: [1,2,3,4,5].map((e) =>
-                      Column(
-                        children: [
-                          Card(elevation: 5,
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                            child: Container(width: size.width,
+                    Column(children:
+                    offerPageModel!.isNotEmpty?
+                    offerPageModel!.map((e) =>
+                        Column(
+                          children: [
+                            Card(elevation: 5,
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                              child: Container(width: size.width,
 
-                              decoration: BoxDecoration( color: Colors.white,borderRadius: BorderRadius.circular(10)),
-                              child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                                decoration: BoxDecoration( color: Colors.white,borderRadius: BorderRadius.circular(10)),
+                                child: Column(crossAxisAlignment: CrossAxisAlignment.start,
 
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(8),
-                                      child: Row(
-                                        children: [
-
-
-                                          Container(height: 90,width: 115,
-                                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(15),
-                                                image: const DecorationImage(image: AssetImage("assets/images/packpic.png"),
-                                                    fit: BoxFit.cover ) ),
-                                          ),
-                                          const SizedBox(width: 10,),
-
-                                          SizedBox(height: 90,
-                                            child: Column(crossAxisAlignment: CrossAxisAlignment.start,
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                Text(tr("رحلة سنغافورة السياحية"),style: GoogleFonts.tajawal(
-                                                    color: Colors.black,
-                                                    fontSize:15,fontWeight: FontWeight.w500),),
-
-                                                Row(children: [
-                                                  SvgPicture.asset("assets/images/calender.svg") ,
-                                                  const SizedBox(width: 10,),
-
-                                                  Text(tr("7أيام و 6ليالى"),style: GoogleFonts.tajawal(color: Colors.black,
-                                                      fontSize:14,fontWeight: FontWeight.w400),),
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(8),
+                                        child: Row(
+                                          children: [
 
 
-                                                ],),
-
-
-
-                                                Row(
-                                                  children: [
-                                                    SvgPicture.asset("assets/images/money.svg") ,
-                                                    const SizedBox(width: 10,),
-
-                                                    Text(tr("3600 ر.س"),style: GoogleFonts.tajawal(
-                                                        color:const Color(0xff00A8A5),
-                                                        fontSize:15,fontWeight: FontWeight.w400),),
-                                                    const SizedBox(width: 10,),
-
-                                                    Text(tr("4000 ر.س"),style: GoogleFonts.tajawal(color:Colors.grey,
-                                                        fontSize:15,fontWeight: FontWeight.w400),),
-
-
-                                                  ],)
-
-
-
-
-                                              ],
+                                            Container(height: 90,width: 115,
+                                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(15),
+                                   image:  DecorationImage(image: NetworkImage(e.image!),
+                                                      fit: BoxFit.cover ) ),
                                             ),
-                                          ),
-                                        ],
+                                            const SizedBox(width: 10,),
+
+                                            SizedBox(height: 90,
+                                              child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    HomeViewModel.lang=="ar"?
+                                                    e.nameAr!
+                                                    :e.nameEn!
+                                                    ,style: GoogleFonts.tajawal(
+                                                      color: Colors.black,
+                                                      fontSize:15,fontWeight: FontWeight.w500),),
+
+                                                  Row(children: [
+                                                    SvgPicture.asset("assets/images/calender.svg") ,
+                                                    const SizedBox(width: 10,),
+
+                                           Text("${e.numOfDays} ${tr("Days")} ${e.num_of_nights} ${tr("Nights")}",
+                                                      style: GoogleFonts.tajawal(color: Colors.black,
+                                                        fontSize:14,fontWeight: FontWeight.w400),),
+
+
+                                                  ],),
+
+
+
+                                                  Row(
+                                                    children: [
+                                                      SvgPicture.asset("assets/images/money.svg") ,
+                                                      const SizedBox(width: 10,),
+
+                                                      Text("${e.priceAfter!} ${tr("Sar")}",style: GoogleFonts.tajawal(
+                                                          color:const Color(0xff00A8A5),
+                                                          fontSize:15,fontWeight: FontWeight.w400),),
+                                                      const SizedBox(width: 10,),
+
+                                                      Text("${e.priceBefore!} ${tr("Sar")}",
+                                              style: GoogleFonts.tajawal(color:Colors.grey,
+                                                          fontSize:15,fontWeight: FontWeight.w400),),
+
+
+                                                    ],)
+
+
+
+
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                    Divider(height: 10,thickness: 1,color: Colors.grey.shade300,),
+                                      Divider(height: 10,thickness: 1,color: Colors.grey.shade300,),
 
 
 
 
-                                    Padding(
-                                      padding: const EdgeInsets.all(10.0),
-                                      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(10.0),
+                                        child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
 
-                                          Text(tr("نشط الأن"),style: GoogleFonts.tajawal(color: const Color(0xff7DC11F),
-                                              fontSize:13,fontWeight: FontWeight.w400),),
+                                            Text(
+                                              e.status=="active"?
+                                              tr("نشط الأن")
+                                              :tr("مغلق الأن")
+                                              ,style: GoogleFonts.tajawal(color:
+                                            e.status=="active"?
+                                            const Color(0xff7DC11F)
+                                                :Colors.red,
+                                                fontSize:13,fontWeight: FontWeight.w400),),
 
 
-                                          InkWell(onTap: () {
-                                      SamaOfficeApp.navKey.currentState!.push(
-                                          MaterialPageRoute(builder: (context) => const PackagesDetails(),));
-                                          },
-                                            child: Row(children: [
-                                              Text(tr("المزيد من المعلومات"),style: GoogleFonts.tajawal(color: Colors.blue,
-                                                  fontSize:13,fontWeight: FontWeight.w400),),
-                                              const SizedBox(width: 10,),
+                                            InkWell(onTap: () {
+                                              UpDateViewModel.offerModel=e;
+                                              PackagesDetailsVieModel.offerId=e.id.toString();
+                                              SamaOfficeApp.navKey.currentState!.push(
+                                                  MaterialPageRoute(builder: (context) =>const PackagesDetails() ,));
+                                            },
+                                              child: Row(children: [
+                                                Text(tr("المزيد من المعلومات"),style: GoogleFonts.tajawal(color: Colors.blue,
+                                                    fontSize:13,fontWeight: FontWeight.w400),),
+                                                const SizedBox(width: 10,),
 
-                                              const Icon(Icons.arrow_forward_ios,size: 18,color: Colors.grey,)
+                                                const Icon(Icons.arrow_forward_ios,size: 18,color: Colors.grey,)
 
-                                            ],),
-                                          ),
-                                        ],
+                                              ],),
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                    ),
 
-                                  ]) ,
+                                    ]) ,
+                              ),
                             ),
-                          ),
-                          const SizedBox(height: 10,)
-                        ],
-                      )
+                            const SizedBox(height: 10,)
+                          ],
+                        )
 
-                    ,).toList(),),
-
+                      ,).toList() :[],),
 
 
 
 
-                  const SizedBox(height: 30,),
+
+                    const SizedBox(height: 30,),
 
 
-                ]),
+                  ]),
+                ),
               ),
-            ),
-            ]),
-      ),
+              ]),
+        ),
+
+          isLoading==true?
+          SizedBox(
+              height: size.height/1,
+              child: const Center(child: CircularProgressIndicator(color: samaOfficeColor,
+              )))
+              :const SizedBox.shrink(),
+
+
+
+        ]),
 
 
     );
