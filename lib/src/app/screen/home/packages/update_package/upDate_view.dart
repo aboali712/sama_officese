@@ -134,12 +134,12 @@ class _UpDateViewState extends UpDateViewModel {
                                 ),
                               ),
                               const SizedBox(height: 10,),
-                              packageImages!.isNotEmpty || imageFileList!.isNotEmpty?
+                              packageImages!.isNotEmpty || imageFileList.isNotEmpty?
                               SizedBox(height: 100,
-                                child: imageFileList!.isNotEmpty?
+                                child: imageFileList.isNotEmpty?
                                 ListView.builder(
                                   scrollDirection:  Axis.horizontal,
-                                  itemCount: imageFileList!.length,
+                                  itemCount: imageFileList.length,
                                   itemBuilder: (BuildContext context, int index) {
                                     return SizedBox(width: 85,height: 85,
                                       child: Column(

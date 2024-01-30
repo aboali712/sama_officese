@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sama_officese/src/app/screen/home/services/services_details/service_details_viewmodel.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import '../../../../core/values/colors.dart';
 
 class ServiceDetails extends StatefulWidget {
   const ServiceDetails({Key? key}) : super(key: key);
@@ -32,9 +35,9 @@ class _ServiceDetailsState extends ServiceDetailsViewModel {
                   Navigator.pop(context);
                 }
                     ,child: const Icon(Icons.arrow_back_ios,color: Colors.white,)),
-                const Text(
-                  "#45432",
-                  style: TextStyle(
+                 Text(
+                  "#${serviceDetails!.id!}",
+                  style: const TextStyle(
                       color:  Colors.white,
                       fontSize: 21, fontWeight: FontWeight.w400),
                 ),
@@ -49,17 +52,28 @@ class _ServiceDetailsState extends ServiceDetailsViewModel {
                       const SizedBox(width: 10,),
                       SvgPicture.asset("assets/images/time.svg",color: Colors.white,),
                       const SizedBox(width: 5,),
-                      Text(tr("25Feb,2023"),style: GoogleFonts.tajawal(color: Colors.white,
+                      Text(DateFormat("MMM d,yyyy","en" ).format(DateTime.parse(serviceDetails!.createdAt!)),
+                        style: GoogleFonts.tajawal(color: Colors.white,
                           fontSize:13,fontWeight: FontWeight.w400),),
                     ],
                   ),
 
-                  Container(height: 25,width: 60,
+                  Container(height: 25,
                     padding: const EdgeInsets.all(5),
                     decoration: BoxDecoration(borderRadius:  BorderRadius.circular(20),
                         color:const Color(0xff5AC41A) ),
                     child: Center(
-                      child: Text(tr("جديد"),style: GoogleFonts.tajawal(color: Colors.white,
+                      child: Text(
+                          serviceDetails!.status=="pending"?
+                        tr("جديد")
+                          : serviceDetails!.status=="inReview"?
+                              tr("قيد التنفيذ")
+                              : serviceDetails!.status=="canceled"  ?
+                              tr("ملغى")
+                           : serviceDetails!.status=="completed"?
+                         tr("مكتمل")
+                              :tr("قيد التنفيذ")
+                        ,style: GoogleFonts.tajawal(color: Colors.white,
                           fontSize:12,fontWeight: FontWeight.w500),),
                     ),
                   )
@@ -109,10 +123,11 @@ class _ServiceDetailsState extends ServiceDetailsViewModel {
                               Container(
                                 height: 45,width: 50,
                                 padding: const EdgeInsets.all(11),
-                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: const Color(0xff8a8c8e),
+                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),
+                                    color: const Color(0xff8a8c8e),
                                     border: Border.all(width: 1.5,color: Colors.white,),
-                                    image: const DecorationImage(
-                                      image: AssetImage("assets/images/Rectangle.png"), )
+                                    image:  DecorationImage(
+                                      image: NetworkImage(serviceDetails!.user!.image!),fit: BoxFit.cover )
                                 ),
                               ),
 
@@ -121,15 +136,20 @@ class _ServiceDetailsState extends ServiceDetailsViewModel {
                               Column(crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
 
-                                  Text("حمد هاشم",style: GoogleFonts.tajawal(color: Colors.black,
+                                  Text("${serviceDetails!.user!.firstName!} ${serviceDetails!.user!.lastName}",
+                                    style: GoogleFonts.tajawal(color: Colors.black,
                                       fontSize:15,fontWeight: FontWeight.w500),),
-                                  Text("+966558377647",style: GoogleFonts.tajawal(color: Colors.black,
+                                  Text(serviceDetails!.user!.phone!,style: GoogleFonts.tajawal(color: Colors.black,
                                       fontSize:13,fontWeight: FontWeight.w400),),
 
                                 ],)
                             ],),
 
-                            SvgPicture.asset("assets/images/phone.svg")
+                            InkWell(onTap: () {
+                              launchUrl(Uri.parse(
+                                  "tel://${serviceDetails!.user!.phone!}"));
+
+                            },child: SvgPicture.asset("assets/images/phone.svg"))
 
 
                           ],
@@ -147,13 +167,13 @@ class _ServiceDetailsState extends ServiceDetailsViewModel {
                                fontSize:17,fontWeight: FontWeight.w500),),
 
 
-                           Text(tr("2 خدمة"),style: GoogleFonts.tajawal(color: Colors.black,
+                           Text(serviceDetails!.services!.length.toString(),style: GoogleFonts.tajawal(color: Colors.black,
                                fontSize:14,fontWeight: FontWeight.w500),),
 
                          ],),
                        ),
                   const SizedBox(height: 5,),
-                Column(children: [0,1].map((e) =>
+                Column(children: serviceDetails!.services!.map((e) =>
                     Column(
                       children: [
                         Card(elevation: 5,
@@ -165,14 +185,29 @@ class _ServiceDetailsState extends ServiceDetailsViewModel {
                             children: [
                               Padding(
                                 padding: const EdgeInsets.all(8),
-                                child: Text(tr("تأشيرة السعودية"),style: GoogleFonts.tajawal(color: Colors.black,
+                                child: Text(
+                                       e.serviceId== 1
+                                      ? "${ tr("Vises")} ${e.countryTitle}"
+                                      : e.serviceId ==2
+                                      ? tr("CarRent")
+                                      : e.serviceId ==3
+                                      ? tr("HotelBookings")
+                                      : e.serviceId ==4
+                                      ? tr("FlightTickets")
+                                      : tr("Licenses"),
+
+
+                                        style: GoogleFonts.tajawal(color: Colors.black,
                                     fontSize:16,fontWeight: FontWeight.w500),),
                               ),
                               Divider(height: 5,thickness: 1,color: Colors.grey.shade300,),
 
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: Column(children: [
+                                child:
+                                    e.serviceId==1?
+
+                                Column(children: [
 
                                   Row(
                                     children: [
@@ -182,7 +217,7 @@ class _ServiceDetailsState extends ServiceDetailsViewModel {
                                       ),
 
 
-                                      Text(tr("سعودى"),style: GoogleFonts.tajawal(color: Colors.black,
+                                      Text(e.nationalityTitle!,style: GoogleFonts.tajawal(color: Colors.black,
                                           fontSize:15,fontWeight: FontWeight.w500),),
                                     ],
                                   ),
@@ -196,7 +231,7 @@ class _ServiceDetailsState extends ServiceDetailsViewModel {
                                       ),
 
 
-                                      Text(tr("الأمارات"),style: GoogleFonts.tajawal(color: Colors.black,
+                                      Text(e.countryTitle!,style: GoogleFonts.tajawal(color: Colors.black,
                                           fontSize:15,fontWeight: FontWeight.w500),),
                                     ],
                                   ),
@@ -210,12 +245,148 @@ class _ServiceDetailsState extends ServiceDetailsViewModel {
                                       ),
 
 
-                                      Text(tr("لايوجد"),style: GoogleFonts.tajawal(color: Colors.black,
+                                      Text(e.notes??"",style: GoogleFonts.tajawal(color: Colors.black,
                                           fontSize:15,fontWeight: FontWeight.w500),),
                                     ],
                                   ),
 
-                                ],),
+                                ],)
+                                :Column(
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment
+                                          .start,
+                                      children: [
+                                        Text(
+                                          e.ticketType! ==
+                                              "go"
+                                              ? "${tr("TicketType")} : ${tr("OneWay")}"
+                                              : e.ticketType! == "go_back"
+                                              ? "${tr("TicketType")} : ${tr("RoundTrip")}"
+                                              : "${tr("TicketType")} : ${tr("MultipleCities")}",
+                                          style: const TextStyle(
+                                              color: Colors
+                                                  .black,
+                                              fontSize:
+                                              14,
+                                              fontWeight:
+                                              FontWeight.w500),
+                                        ),
+                                        const SizedBox(
+                                          height: 5,
+                                        ),
+                                        Text(
+                                          e.ticketClass! ==
+                                              "first"
+                                              ? "${tr("TravelClass")} : ${tr("FirstClass")}"
+                                              : e.ticketClass == "economy"
+                                              ? "${tr("TravelClass")} : ${tr("Economic")}"
+                                              : "${tr("TravelClass")} : ${tr("Business")}",
+                                          style: const TextStyle(
+                                              color: Colors
+                                                  .black,
+                                              fontSize:
+                                              14,
+                                              fontWeight:
+                                              FontWeight.w500),
+                                        ),
+                                        const SizedBox(
+                                          height: 5,
+                                        ),
+                                        e.ticketType ==
+                                            "multi_cities"
+                                            ? SizedBox(
+                                          height:
+                                          (80 * double.parse(e.transits!.length.toString())),
+                                          child:
+                                          ListView.builder(
+                                            itemBuilder: (BuildContext context, int inex) {
+                                              return Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  const SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  Text(
+                                                    "${tr("From")} : ${e.transits![inex].startCity!}",
+                                                    style: const TextStyle(color: Colors.black,
+                                                        fontSize: 14, fontWeight: FontWeight.w500),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  Text(
+                                                    "${tr("To")} : ${e.transits![inex].endCity!}",
+                                                    style: const TextStyle(color: Colors.black,
+                                                        fontSize: 14, fontWeight: FontWeight.w500),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  Text(
+                                                    "${tr("DepartuareDate")} : ${e.transits![inex].startDate!}",
+                                                    style: const TextStyle(color: Colors.black,
+                                                        fontSize: 14, fontWeight: FontWeight.w500),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  Text(
+                                                    "${tr("ArrivalDate")} : ${e.transits![inex].endDate!}",
+                                                    style: const TextStyle(color: Colors.black,
+                                                        fontSize: 14, fontWeight: FontWeight.w500),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 5,
+                                                  ),
+
+                                                ],
+                                              );
+                                            },
+                                            itemCount: e.transits!.length,
+                                          ),
+                                        )
+                                            : Column(
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "${tr("From")} : ${e.startPlace!}",
+                                              style: GoogleFonts.tajawal(color: Colors.black,
+                                                  fontSize: 14, fontWeight: FontWeight.w500),
+                                            ),
+                                            const SizedBox(
+                                              height: 5,
+                                            ),
+                                            Text(
+                                              "${tr("To")} : ${e.endPlace!}",
+                                              style: const TextStyle(color: Colors.black,
+                                                  fontSize: 14, fontWeight: FontWeight.w500),
+                                            ),
+                                            const SizedBox(
+                                              height: 5,
+                                            ),
+                                            Text(
+                                              "${tr("DepartuareDate")} : ${e.startDate!}",
+                                              style: const TextStyle(color: Colors.black,
+                                                  fontSize: 14, fontWeight: FontWeight.w500),
+                                            ),
+                                            const SizedBox(
+                                              height: 5,
+                                            ),
+                                            Text(
+                                              "${tr("ArrivalDate")} : ${e.endDate!}",
+                                              style: GoogleFonts.tajawal(color: Colors.black,
+                                                  fontSize: 14, fontWeight: FontWeight.w500),
+                                            ),
+                                            const SizedBox(
+                                              height: 5,
+                                            ),
+
+                                          ],
+                                        )
+                                      ],
+                                    )
+                                ,
                               )
 
                             ]) ,
@@ -227,7 +398,7 @@ class _ServiceDetailsState extends ServiceDetailsViewModel {
 
                   ,).toList(),),
 
-                  const SizedBox(height: 30,),
+                  const SizedBox(height: 120,),
 
 
                 ]),
@@ -235,6 +406,12 @@ class _ServiceDetailsState extends ServiceDetailsViewModel {
             ),
           ]),
         ),
+          isLoading==true?
+          SizedBox(
+              height: size.height/1,
+              child: const Center(child: CircularProgressIndicator(color: samaOfficeColor,
+              )))
+              :const SizedBox.shrink(),
 
 
           Positioned(bottom: -5,left: -5,right: -5,
@@ -254,6 +431,10 @@ class _ServiceDetailsState extends ServiceDetailsViewModel {
                       const SizedBox(height: 10,),
 
                       InkWell(onTap: () {
+
+                      setState(() {
+                        changeState=serviceDetails!.status!;
+                      });
                         changeStatus();
                       },
                         child: Container(height: 40,width: size.width,
@@ -263,7 +444,17 @@ class _ServiceDetailsState extends ServiceDetailsViewModel {
 
                           child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(tr("جديد"),style: GoogleFonts.tajawal(color: Colors.black,
+                                Text(
+                                  serviceDetails!.status=="pending"?
+                                  tr("جديد")
+                                      : serviceDetails!.status=="inReview"?
+                                  tr("قيد التنفيذ")
+                                      : serviceDetails!.status=="canceled"  ?
+                                  tr("ملغى")
+                                      : serviceDetails!.status=="completed"?
+                                  tr("مكتمل")
+                                      :tr("قيد التنفيذ")
+                            ,style: GoogleFonts.tajawal(color: Colors.black,
                                     fontSize:15,fontWeight: FontWeight.w500),),
 
                                 const Icon(Icons.keyboard_arrow_down,color: Color(0xff8e8e93),),

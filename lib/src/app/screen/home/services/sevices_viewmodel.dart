@@ -42,7 +42,7 @@ abstract class ServicesViewModel extends State<ServiceView>{
       setState(() {
         services = rs.data!;
         servicesPending=services.where((element) => element.status=="pending").toList();
-        servicesInReview=services.where((element) => element.status=="inReview" ).toList();
+        servicesInReview=services.where((element) => element.status=="inReview"||element.status=="processing" ).toList();
         servicesCompleted=services.where((element) => element.status=="canceled" || element.status=="completed").toList();
 
       });

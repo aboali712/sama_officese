@@ -133,5 +133,22 @@
   "Cancelled": "ملغي",
   "Pending": " قيد الانتظار",
   "Accepted": "تم الموافقة",
-  "Reviewing": "قيد المراجعة"
+  "Reviewing": "قيد المراجعة",
+  "From": "من",
+  "OneWay": "ذهاب فقط",
+  "RoundTrip": "ذهاب و عودة",
+  "DepartuareDate": "تاريخ المغادرة",
+  "ArrivalDate": "تاريخ الوصول",
+  "Processing": "جاري التنفيذ",
+  "Subject": "الموضوع",
+  "yourInquiry": "استفسارك",
+  "Language": "تغير اللغة",
+  "ConnectUs": "تواصل معنا",
+  "AboutUs": "من نحن",
+  "UsageInstructions": "تعليمات الأستخدام",
+  "Privacy": "سياسة الخصوصية",
+  "DeleteAccount": "حذف الحساب",
+  "Logout": "تسجيل خروج",
+  "AnnualPackage": "الباقة السنوية",
+  "SubscriptionEndsIn": "الأشتراك ينتهى فى"
 }

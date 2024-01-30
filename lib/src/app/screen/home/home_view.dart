@@ -32,7 +32,7 @@ class _HomePageState extends HomeViewModel {
         title: Row(
           children: [
             const SizedBox(width: 5,),
-             profileModel==null?
+            HomeViewModel.profileModel==null?
              Container(
                height: 50,width: 50,
                padding: const EdgeInsets.all(11),
@@ -41,14 +41,14 @@ class _HomePageState extends HomeViewModel {
                ),
                child:Center(child: SvgPicture.asset("assets/images/user.svg",)) ,)
 
-            : profileModel!.image!=""||profileModel!.image!=null?
+            :  HomeViewModel.profileModel!.image!=""|| HomeViewModel.profileModel!.image!=null?
             Container(
               height: 50,width: 50,
               padding: const EdgeInsets.all(11),
               decoration: BoxDecoration(borderRadius: BorderRadius.circular(50),color: const Color(0xff8a8c8e),
                   border: Border.all(width: 1.5,color: Colors.white)
                   ,image: DecorationImage(image:
-                  NetworkImage(profileModel!.image!))
+                  NetworkImage( HomeViewModel.profileModel!.image!))
               ),
               )
             : Container(
@@ -66,8 +66,8 @@ class _HomePageState extends HomeViewModel {
                 Text(tr("مرحبا بعودتك"),style: GoogleFonts.tajawal(color: Colors.white,
                     fontSize:10,fontWeight: FontWeight.w500),),
                 const SizedBox(height: 10,),
-                profileModel!=null?
-                Text("${profileModel!.firstName??""} ${profileModel!.lastName??""}",
+                HomeViewModel.profileModel!=null?
+                Text("${ HomeViewModel.profileModel!.firstName??""} ${ HomeViewModel.profileModel!.lastName??""}",
                   style: GoogleFonts.tajawal(color: Colors.white,
                     fontSize:Platform.isIOS?25: 20,fontWeight: FontWeight.w500),)
                 :const SizedBox.shrink(),

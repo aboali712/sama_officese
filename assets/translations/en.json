@@ -134,5 +134,22 @@
   "Accepted": "Accepted",
   "Reviewing": "Reviewing",
   "Completed": "Completed",
-  "Cancelled": "Cancelled"
+  "Cancelled": "Cancelled",
+  "From": "From",
+  "OneWay": "One way",
+  "RoundTrip": "Round Trip",
+  "DepartuareDate": "Departure Date",
+  "ArrivalDate": "Arrival Date",
+  "Processing": "Processing",
+  "Subject": "Subject",
+  "yourInquiry": "Your Inquiry",
+  "Language": "Language",
+  "ConnectUs": "Connect Us",
+  "AboutUs": "About Us",
+  "UsageInstructions": "Usage Instructions",
+  "Privacy": "Privacy",
+  "DeleteAccount": "Delete account",
+  "Logout": "Logout",
+  "AnnualPackage": "Annual package",
+  "SubscriptionEndsIn": "Subscription ends in"
 }

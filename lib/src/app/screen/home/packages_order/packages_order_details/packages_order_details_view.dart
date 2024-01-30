@@ -4,9 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sama_officese/src/app.dart';
+import 'package:sama_officese/src/app/screen/home/home_viewmodel.dart';
 import 'package:sama_officese/src/app/screen/home/packages_order/packages_order_details/packages_order_details_viewmodel.dart';
+import 'package:url_launcher/url_launcher.dart';
 
+import '../../../../core/values/colors.dart';
 import '../../packages/packages_details/packages_details_view.dart';
+import '../../packages/packages_details/packages_details_viewmodel.dart';
 
 class PackagesOrderDetailsView extends StatefulWidget {
   const PackagesOrderDetailsView({Key? key}) : super(key: key);
@@ -35,9 +39,9 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                   Navigator.pop(context);
                 }
                     ,child: const Icon(Icons.arrow_back_ios,color: Colors.white,)),
-                const Text(
-                  "#45432",
-                  style: TextStyle(
+                 Text(
+                  "#${packageDetails!.id!}",
+                  style: const TextStyle(
                       color:  Colors.white,
                       fontSize: 21, fontWeight: FontWeight.w400),
                 ),
@@ -57,12 +61,22 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                     ],
                   ),
 
-                  Container(height: 25,width: 60,
+                  Container(height: 25,
                     padding: const EdgeInsets.all(5),
                     decoration: BoxDecoration(borderRadius:  BorderRadius.circular(20),
                         color:const Color(0xff5AC41A) ),
                     child: Center(
-                      child: Text(tr("جديد"),style: GoogleFonts.tajawal(color: Colors.white,
+                      child: Text(
+                        packageDetails!.status=="pending"?
+                        tr("جديد")
+                            : packageDetails!.status=="inReview"?
+                        tr("قيد التنفيذ")
+                            : packageDetails!.status=="canceled"  ?
+                        tr("ملغى")
+                            : packageDetails!.status=="completed"?
+                        tr("مكتمل")
+                            :tr("قيد التنفيذ")
+                      ,style: GoogleFonts.tajawal(color: Colors.white,
                           fontSize:12,fontWeight: FontWeight.w500),),
                     ),
                   )
@@ -116,8 +130,9 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),
                                         color: const Color(0xff8a8c8e),
                                         border: Border.all(width: 1.5,color: Colors.white,),
-                                        image: const DecorationImage(
-                                          image: AssetImage("assets/images/Rectangle.png"), )
+                                        image:  DecorationImage(
+                                          image: NetworkImage(packageDetails!.user!.image!),
+                                            fit: BoxFit.cover )
                                     ),
                                   ),
 
@@ -126,15 +141,20 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                                   Column(crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
 
-                                      Text("حمد هاشم",style: GoogleFonts.tajawal(color: Colors.black,
+                                      Text("${packageDetails!.user!.firstName!} ${packageDetails!.user!.lastName}",
+                                        style: GoogleFonts.tajawal(color: Colors.black,
                                           fontSize:15,fontWeight: FontWeight.w500),),
-                                      Text("+966558377647",style: GoogleFonts.tajawal(color: Colors.black,
+                                      Text(packageDetails!.user!.phone!,style: GoogleFonts.tajawal(color: Colors.black,
                                           fontSize:13,fontWeight: FontWeight.w400),),
 
                                     ],)
                                 ],),
 
-                                SvgPicture.asset("assets/images/phone.svg")
+                                InkWell(onTap: () {
+                                  launchUrl(Uri.parse(
+                                      "tel://${packageDetails!.user!.phone!}"));
+
+                                },child: SvgPicture.asset("assets/images/phone.svg"))
 
 
                               ],
@@ -169,7 +189,7 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
 
                                              Container(height: 90,width: 115,
                                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(15),
-                                             image: const DecorationImage(image: AssetImage("assets/images/packpic.png"),
+                                             image:  DecorationImage(image: NetworkImage(packageDetails!.offer!.image!),
                                              fit: BoxFit.cover ) ),
                                              ),
                                               const SizedBox(width: 10,),
@@ -178,14 +198,20 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                                                 child: Column(crossAxisAlignment: CrossAxisAlignment.start,
                                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                   children: [
-                                           Text(tr("رحلة سنغافورة السياحية"),style: GoogleFonts.tajawal(color: Colors.black,
+                                           Text(
+                                                  HomeViewModel.lang=="ar"?
+                                                      packageDetails!.offer!.nameAr!
+                                                      :packageDetails!.offer!.nameEn!
+                                                  ,style: GoogleFonts.tajawal(color: Colors.black,
                                                         fontSize:15,fontWeight: FontWeight.w500),),
 
                                                     Row(children: [
                                                       SvgPicture.asset("assets/images/calender.svg") ,
                                                       const SizedBox(width: 10,),
 
-                                                      Text(tr("7أيام و 6ليالى"),style: GoogleFonts.tajawal(color: Colors.black,
+                Text("${packageDetails!.offer!.numOfDays} ${tr("أيام")} -"
+                    " ${packageDetails!.offer!.num_of_nights} ${tr("ليالى")}",
+                              style: GoogleFonts.tajawal(color: Colors.black,
                                                           fontSize:14,fontWeight: FontWeight.w400),),
 
 
@@ -198,12 +224,14 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                                                       SvgPicture.asset("assets/images/money.svg") ,
                                                       const SizedBox(width: 10,),
 
-                                                      Text(tr("3600 ر.س"),style: GoogleFonts.tajawal(
+                     Text("${packageDetails!.offer!.priceBefore!} ${tr("Sar")}",
+                       style: GoogleFonts.tajawal(
                                                           color:const Color(0xff00A8A5),
                                                           fontSize:15,fontWeight: FontWeight.w400),),
                                                       const SizedBox(width: 10,),
 
-                                                      Text(tr("4000 ر.س"),style: GoogleFonts.tajawal(color:Colors.grey,
+                    Text("${packageDetails!.offer!.priceAfter!} ${tr("Sar")}",
+                      style: GoogleFonts.tajawal(color:Colors.grey,
                                                           fontSize:15,fontWeight: FontWeight.w400),),
 
 
@@ -232,10 +260,12 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                                               Column(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                 children: [
                                                Column(children: [
-                                                 Text(tr("24 نوفمبر"),style: GoogleFonts.tajawal(color: const Color(0xff00A8A5),
+                                           Text(DateFormat.MMMd().format(DateTime.parse(packageDetails!.offer!.startDate!)),
+                                                 style: GoogleFonts.tajawal(color: const Color(0xff00A8A5),
                                                      fontSize:17,fontWeight: FontWeight.w500),),
 
-                                                 Text(tr("الجمعة"),style: GoogleFonts.tajawal(color:Colors.grey,
+                                      Text(DateFormat.EEEE().format(DateTime.parse(packageDetails!.offer!.startDate!)),
+                                                   style: GoogleFonts.tajawal(color:Colors.grey,
                                                      fontSize:11,fontWeight: FontWeight.w500),),
                                                ],),
 
@@ -258,11 +288,13 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                                               Column(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                 children: [
                                                   Column(children: [
-                                               Text(tr("30 نوفمبر"),style: GoogleFonts.tajawal(color: const Color(0xff00A8A5),
-                                                        fontSize:17,fontWeight: FontWeight.w500),),
+                                        Text(DateFormat.MMMd().format(DateTime.parse(packageDetails!.offer!.endDate!)),
+                                                      style: GoogleFonts.tajawal(color: const Color(0xff00A8A5),
+                                                          fontSize:17,fontWeight: FontWeight.w500),),
 
-                                                    Text(tr("الأحد"),style: GoogleFonts.tajawal(color:Colors.grey,
-                                                        fontSize:11,fontWeight: FontWeight.w500),),
+                                        Text(DateFormat.EEEE().format(DateTime.parse(packageDetails!.offer!.endDate!)),
+                                                      style: GoogleFonts.tajawal(color:Colors.grey,
+                                                          fontSize:11,fontWeight: FontWeight.w500),),
                                                   ],),
 
                                                   Text(tr("الفترة الى"),style: GoogleFonts.tajawal(color:Colors.black,
@@ -284,10 +316,13 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                                               Column(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                 children: [
                                                   Column(children: [
-                                           Text(tr("4 أفراد"),style: GoogleFonts.tajawal(color: const Color(0xff00A8A5),
+                                           Text("${packageDetails!.offer!.num_of_persons!.toString()} ${tr("أفراد")}",
+                                             style: GoogleFonts.tajawal(color: const Color(0xff00A8A5),
                                                         fontSize:17,fontWeight: FontWeight.w500),),
 
-                                                    Text(tr("2بالغ-2أطفال"),style: GoogleFonts.tajawal(color:Colors.grey,
+                                            Text("${packageDetails!.adultsCount!} ${tr("فرد")} -"
+                                                " ${packageDetails!.childrenCount} ${tr("أطفال")}",
+                                                      style: GoogleFonts.tajawal(color:Colors.grey,
                                                         fontSize:11,fontWeight: FontWeight.w500),),
                                                   ],),
 
@@ -310,6 +345,9 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                                         Padding(
                                           padding: const EdgeInsets.all(10.0),
                                           child: InkWell(onTap: () {
+                                          setState(() {
+                                            PackagesDetailsVieModel.offerId=packageDetails!.offer!.id.toString();
+                                          });
                                 SamaOfficeApp.navKey.currentState!.push(
                                     MaterialPageRoute(builder: (context) => const PackagesDetails(),));
                                           },
@@ -342,6 +380,12 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
               ]),
             ),
 
+            isLoading==true?
+            SizedBox(
+                height: size.height/1,
+                child: const Center(child: CircularProgressIndicator(color: samaOfficeColor,
+                )))
+                :const SizedBox.shrink(),
 
             Positioned(bottom: -5,left: -5,right: -5,
               child: Card( elevation: 20,color: Colors.white,shape: const RoundedRectangleBorder(
@@ -360,6 +404,9 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                         const SizedBox(height: 10,),
 
                         InkWell(onTap: () {
+                          setState(() {
+                            changeState=packageDetails!.status!;
+                          });
                           changeStatus();
                         },
                           child: Container(height: 40,width: size.width,
@@ -369,7 +416,17 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
 
                             child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(tr("جديد"),style: GoogleFonts.tajawal(color: Colors.black,
+                                  Text(
+                                    packageDetails!.status=="pending"?
+                                    tr("جديد")
+                                        : packageDetails!.status=="inReview"?
+                                    tr("قيد التنفيذ")
+                                        : packageDetails!.status=="canceled"  ?
+                                    tr("ملغى")
+                                        : packageDetails!.status=="completed"?
+                                    tr("مكتمل")
+                                        :tr("قيد التنفيذ")
+                                    ,style: GoogleFonts.tajawal(color: Colors.black,
                                       fontSize:15,fontWeight: FontWeight.w500),),
 
                                   const Icon(Icons.keyboard_arrow_down,color: Color(0xff8e8e93),),

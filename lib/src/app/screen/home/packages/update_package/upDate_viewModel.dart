@@ -25,7 +25,6 @@ import '../models/imageModel.dart';
 
 import 'dart:io';
 
-import 'package:uri_to_file/uri_to_file.dart';
 
 abstract class UpDateViewModel extends State<UpDateView>{
   final Dio dio = NetworkService.instance.dio;
@@ -63,7 +62,7 @@ abstract class UpDateViewModel extends State<UpDateView>{
 
   String selectStatus="normal";
   String offerType="individual";
-  bool? switchValue;
+  bool? switchValue=false;
   bool isLoading=false;
  static OfferModel?offerModel;
  bool? isVIP;
@@ -109,17 +108,17 @@ abstract class UpDateViewModel extends State<UpDateView>{
 
     if (selectedImages.isNotEmpty) {
       print("${selectedImages.map((e) => e.path)} 3333333333333333333333333333333");
-      imageFileList!.addAll(selectedImages);
+      imageFileList.addAll(selectedImages);
     }
-    print("Image List Length:" + imageFileList!.length.toString());
+    print("Image List Length:" + imageFileList.length.toString());
     setState((){});
   }
 
 
   Future<void> addImages() async {
 
-    for (int i = 0; i < imageFileList!.length; i++) {
-      var path = File(imageFileList![i].path);
+    for (int i = 0; i < imageFileList.length; i++) {
+      var path = File(imageFileList[i].path);
 
       var result = await FlutterImageCompress.compressAndGetFile(
         path.absolute.path,
@@ -166,7 +165,7 @@ abstract class UpDateViewModel extends State<UpDateView>{
     }
   }
 
-  List<ImagesModel>?packageImages;
+  List<ImagesModel>?packageImages=[];
 
 
 

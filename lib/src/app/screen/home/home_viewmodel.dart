@@ -10,7 +10,7 @@ import 'home_view.dart';
 abstract class HomeViewModel extends State<HomePage> with StorageHelper{
   final Dio dio = NetworkService.instance.dio;
 
-  UserModel? profileModel;
+ static UserModel? profileModel;
   bool isLoading=false;
  static String lang="";
   @override

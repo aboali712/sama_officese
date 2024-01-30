@@ -62,7 +62,8 @@ dependencies:
   firebase_database: ^10.0.8
   firebase_storage: ^11.0.9
   firebase_messaging: ^14.0.2
-  uri_to_file: ^1.0.0
+  url_launcher: ^6.1.6
+  flutter_html: any
 
 
 

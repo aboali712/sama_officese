@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sama_officese/src/app/screen/home/home_view.dart';
+import 'package:sama_officese/src/app/screen/home/more/more_view.dart';
 import 'package:sama_officese/src/app/screen/notifications/notification_view.dart';
 import 'package:upgrader/upgrader.dart';
 
@@ -63,11 +64,11 @@ class HomeCorePage extends State<HomeCore> with StorageHelper {
       case 1:
         child =  const NotificationsView();
         break;
-      case 3:
+      case 2:
         child =   Container();
         break;
-      case 2:
-        child =    Container();
+      case 3:
+        child =    const MoreView();
         break;
     }
     return MaterialApp(

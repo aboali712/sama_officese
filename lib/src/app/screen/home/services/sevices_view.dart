@@ -7,6 +7,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sama_officese/src/app.dart';
 import 'package:sama_officese/src/app/screen/home/services/services_details/service_details_view.dart';
+import 'package:sama_officese/src/app/screen/home/services/services_details/service_details_viewmodel.dart';
 import 'package:sama_officese/src/app/screen/home/services/sevices_viewmodel.dart';
 
 import '../../../core/values/colors.dart';
@@ -291,6 +292,10 @@ class _ServiceViewState extends ServicesViewModel {
 
 
                              InkWell(onTap: () {
+                               setState(() {
+                                 ServiceDetailsViewModel.bookingsServiceModel=e;
+                               });
+
                           SamaOfficeApp.navKey.currentState!.push
                             (MaterialPageRoute(builder: (context) => const ServiceDetails(),));
                              },
@@ -494,6 +499,10 @@ class _ServiceViewState extends ServicesViewModel {
 
 
                                       InkWell(onTap: () {
+                                        setState(() {
+                                          ServiceDetailsViewModel.bookingsServiceModel=e;
+                                        });
+
                                         SamaOfficeApp.navKey.currentState!.push
                                           (MaterialPageRoute(builder: (context) => const ServiceDetails(),));
                                       },
@@ -696,6 +705,10 @@ class _ServiceViewState extends ServicesViewModel {
 
 
                                InkWell(onTap: () {
+                                 setState(() {
+                                   ServiceDetailsViewModel.bookingsServiceModel=e;
+                                 });
+
                                  SamaOfficeApp.navKey.currentState!.push
                                    (MaterialPageRoute(builder: (context) => const ServiceDetails(),));
                                },

@@ -1,12 +1,64 @@
+import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sama_officese/src/app/screen/home/services/services_details/service_details_view.dart';
 
-abstract class ServiceDetailsViewModel extends State<ServiceDetails>{
+import '../../../../auth/auth_model/empty_response.dart';
+import '../../../../core/network/network_service.dart';
+import '../../../../core/utils/helper_manager.dart';
+import '../model/booking_servive_model.dart';
 
-  int changeState=0;
+abstract class ServiceDetailsViewModel extends State<ServiceDetails>{
+  final Dio dio = NetworkService.instance.dio;
+
+  String changeState="";
+  List listStatues= ["pending","accepted","inReview","processing","completed","cancelled" ];
+
+  static BookingsServiceModel?bookingsServiceModel;
+   BookingsServiceModel?serviceDetails;
+   bool isLoading=false;
+  @override
+  void initState() {
+    setState(() {
+      serviceDetails=bookingsServiceModel;
+
+    });
+
+    super.initState();
+  }
+
+
+
+  Future<void> changeStatusApi() async {
+    Map<String, String> mp = {};
+    setState(() {
+      isLoading=true;
+    });
+    mp["reservation_id"]=serviceDetails!.id.toString();
+
+    mp["status"] = changeState;
+    final response =
+    await dio.post("v1/office/changeStatus", data: mp);
+    setState(() {
+      isLoading=false;
+    });
+    var rs = EmptyResponse(response.data!);
+    if (rs.status == 200) {
+      toastAppSuccess(rs.msg!, context);
+      Navigator.pop(context);
+      setState(() {
+        serviceDetails!.status=changeState;
+      });
+    }else{
+      toastApp(rs.msg!, context);
+
+    }
+  }
+
+
+
 
   void changeStatus() {
     Size size = MediaQuery.of(context).size;
@@ -20,7 +72,7 @@ abstract class ServiceDetailsViewModel extends State<ServiceDetails>{
         builder: (context) {
           return StatefulBuilder(builder: (context, setState) {
             return  SizedBox(
-              height: 400,
+              height: 450,
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
@@ -39,119 +91,60 @@ abstract class ServiceDetailsViewModel extends State<ServiceDetails>{
                     ),
                     const SizedBox(height: 30,),
 
-                    Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
 
-                        Text(tr("قيد الأنتظار"),style: GoogleFonts.tajawal(color: Colors.black,
-                            fontSize:14,fontWeight: FontWeight.w400),),
+                    Column(children:listStatues.map((e) =>
+                        Column(
+                          children: [
+                            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  children: [
+                            Text(
+                              e=="pending"?
+                                  tr("Pending")
+                             : e=="accepted"?
+                                  tr("Accepted")
+                                  : e=="inReview"?
+                                  tr("Reviewing")
+                                  : e=="processing"?
+                                  tr("Processing")
+                                  : e=="completed"?
+                                  tr("Completed")
+                                  :e=="cancelled"?
+                                  tr("Cancelled")
+                                 : tr("")
 
-                       InkWell(onTap: () {
-                         setState((){
-                           changeState=0;
-                         });
-                       },
-                         child: Container(height: 30,width: 30,
-                         padding: const EdgeInsets.all(3),
-                         decoration: BoxDecoration(borderRadius: BorderRadius.circular(50),
-                           color: changeState==0?const Color(0xff00A8A5) :Colors.transparent,
-                           border: Border.all(width: 1,color:const Color(0xff00A8A5) )
+                              ,style: GoogleFonts.tajawal(color: Colors.black,
+                                fontSize:14,fontWeight: FontWeight.w400),),
 
-                         ),
-                           child:  Center(child: Icon(Icons.done,size: 20,
-                           color: changeState==0? Colors.white:Colors.grey.shade200,
-                           )),
-                         ),
-                       ) 
-                      ],
-                    ),
+                            InkWell(onTap: () {
+                              setState((){
+                                changeState=e;
+                                print(changeState);
+                              });
+                            },
+                              child: Container(height: 30,width: 30,
+                                padding: const EdgeInsets.all(3),
+                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(50),
+                                    color: changeState==e?const Color(0xff00A8A5) :Colors.transparent,
+                                    border: Border.all(width: 1,color:const Color(0xff00A8A5) )
 
-                    const SizedBox(height: 15,),
-
-                    Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-
-                        Text(tr("تم الموافقة"),style: GoogleFonts.tajawal(color: Colors.black,
-                            fontSize:14,fontWeight: FontWeight.w400),),
-                        InkWell(onTap: () {
-                          setState((){
-                            changeState=1;
-                          });
-                        },
-                          child: Container(height: 30,width: 30,
-                            padding: const EdgeInsets.all(3),
-                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(50),
-                                color: changeState==1?const Color(0xff00A8A5) :Colors.transparent,
-                                border: Border.all(width: 1,color:const Color(0xff00A8A5) )
-
-                            ),
-                            child:  Center(child: Icon(Icons.done,size: 20,
-                            color: changeState==1? Colors.white:Colors.grey.shade200,
-                            )),
-                          ),
-                        )
-                      ],
-                    ),
+                                ),
+                                child:  Center(child: Icon(Icons.done,size: 20,
+                                  color: changeState==e? Colors.white:Colors.grey.shade200,
+                                )),
+                              ),
+                            )
+                                                  ],
+                                                ),
+                            const SizedBox(height: 10,),
+                          ],
+                        ),).toList() ,),
 
 
 
 
 
-                    const SizedBox(height: 15,),
 
-                    Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-
-                        Text(tr("قيد المراجعة"),style: GoogleFonts.tajawal(color: Colors.black,
-                            fontSize:14,fontWeight: FontWeight.w400),),
-                        InkWell(onTap: () {
-                          setState((){
-                            changeState=2;
-                          });
-                        },
-                          child: Container(height: 30,width: 30,
-                            padding: const EdgeInsets.all(3),
-                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(50),
-                                color: changeState==2?const Color(0xff00A8A5) :Colors.transparent,
-                                border: Border.all(width: 1,color:const Color(0xff00A8A5) )
-
-                            ),
-                            child:  Center(child: Icon(Icons.done,size: 20,
-                            color: changeState==2? Colors.white:Colors.grey.shade200,
-                            )),
-                          ),
-                        )
-                      ],
-                    ),
-
-
-                    const SizedBox(height: 15,),
-
-                    Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-
-                        Text(tr("جارى التنفيذ"),style: GoogleFonts.tajawal(color: Colors.black,
-                            fontSize:14,fontWeight: FontWeight.w400),),
-                        InkWell(onTap: () {
-                          setState((){
-                            changeState=3;
-                          });
-                        },
-                          child: Container(height: 30,width: 30,
-                            padding: const EdgeInsets.all(3),
-                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(50),
-                                color: changeState==3?const Color(0xff00A8A5) :Colors.transparent,
-                                border: Border.all(width: 1,color:const Color(0xff00A8A5) )
-
-                            ),
-                            child:  Center(child: Icon(Icons.done,size: 20,
-                              color: changeState==3? Colors.white:Colors.grey.shade200,)),
-                          ),
-                        )
-                      ],
-                    ),
-
-
-                    const SizedBox(height: 80,),
+                    const SizedBox(height: 50,),
 
 
                     TextButton(
@@ -168,7 +161,7 @@ abstract class ServiceDetailsViewModel extends State<ServiceDetails>{
                           backgroundColor: const Color(0xffea8024)),
                       onPressed: () {
 
-
+                        changeStatusApi();
                       },
                       child: Text(
                         tr('حفظ التغيرات'),
