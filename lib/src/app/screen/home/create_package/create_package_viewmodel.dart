@@ -118,7 +118,7 @@ abstract class CreatePackageViewModel extends  State<CreatePackageView>{
         quality: 50,
       );
       setState(() {
-        compressedListImages = result;
+        compressedListImages = File(result!.path);
       });
       print(compressedListImages!.path);
 

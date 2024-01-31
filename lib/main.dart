@@ -2,7 +2,9 @@
 
 
 
+
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:sama_officese/src/app.dart';
@@ -12,6 +14,9 @@ String? tokenDevice;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+
+
+
 
 
   runApp(

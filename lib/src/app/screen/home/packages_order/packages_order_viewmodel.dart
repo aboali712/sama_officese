@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
@@ -48,7 +48,7 @@ bool isLoading=false;
         packageCompleted=packages.where((element) => element.status=="canceled" || element.status=="completed").toList();
       });
 
-      log(packages.map((e) => e.toJson()).toString());
+      // log(packages.map((e) => e.toJson()).toString());
     }
   }
 

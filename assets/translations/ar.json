@@ -150,5 +150,7 @@
   "DeleteAccount": "حذف الحساب",
   "Logout": "تسجيل خروج",
   "AnnualPackage": "الباقة السنوية",
-  "SubscriptionEndsIn": "الأشتراك ينتهى فى"
+  "SubscriptionEndsIn": "الأشتراك ينتهى فى",
+  "Notifications": "الأشعارات",
+  "accountSettings": "أعدادات الحساب"
 }

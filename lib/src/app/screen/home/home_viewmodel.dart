@@ -1,3 +1,4 @@
+
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:sama_officese/src/app/core/local/storagehelper.dart';
@@ -34,6 +35,7 @@ abstract class HomeViewModel extends State<HomePage> with StorageHelper{
         profileModel = rs.data;
 
       });
+
     }
 
   }

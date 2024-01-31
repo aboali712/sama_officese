@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
@@ -49,7 +48,7 @@ abstract class ServicesViewModel extends State<ServiceView>{
 
 
 
-      log(servicesCompleted.map((e) => e.toJson()).toString());
+      // log(servicesCompleted.map((e) => e.toJson()).toString());
     }
   }
 

@@ -151,5 +151,7 @@
   "DeleteAccount": "Delete account",
   "Logout": "Logout",
   "AnnualPackage": "Annual package",
-  "SubscriptionEndsIn": "Subscription ends in"
+  "SubscriptionEndsIn": "Subscription ends in",
+  "Notifications": "Notifications",
+  "accountSettings": "Account settings"
 }

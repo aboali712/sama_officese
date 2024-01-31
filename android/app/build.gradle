@@ -22,9 +22,13 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'com.google.gms.google-services'
+
 android {
     namespace "com.example.sama_officese"
-    compileSdkVersion flutter.compileSdkVersion
+    compileSdkVersion 33
     ndkVersion flutter.ndkVersion
 
     compileOptions {
@@ -64,4 +68,10 @@ flutter {
     source '../..'
 }
 
-dependencies {}
+dependencies {
+//    implementation 'com.google.android.gms:play-services-maps:18.2.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation platform('com.google.firebase:firebase-bom:32.0.0')
+    implementation 'com.google.firebase:firebase-messaging'
+//    implementation 'com.google.android.gms:play-services-location:21.1.0'
+}

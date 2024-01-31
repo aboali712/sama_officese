@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sama_officese/src/app/screen/home/home_view.dart';
 import 'package:sama_officese/src/app/screen/home/more/more_view.dart';
+import 'package:sama_officese/src/app/screen/home/update_profile/update_profile_view.dart';
 import 'package:sama_officese/src/app/screen/notifications/notification_view.dart';
 import 'package:upgrader/upgrader.dart';
 
@@ -65,7 +66,7 @@ class HomeCorePage extends State<HomeCore> with StorageHelper {
         child =  const NotificationsView();
         break;
       case 2:
-        child =   Container();
+        child =   const UpDateProfileView();
         break;
       case 3:
         child =    const MoreView();
@@ -79,10 +80,10 @@ class HomeCorePage extends State<HomeCore> with StorageHelper {
         theme: AppTheme.of(context),
         home:UpgradeAlert(
           upgrader: Upgrader(
-              showReleaseNotes: false,
-              dialogStyle: Platform.isIOS ? UpgradeDialogStyle.cupertino : UpgradeDialogStyle.material,
-              showLater: false,
-              showIgnore: false,
+              // showReleaseNotes: false,
+              // dialogStyle: Platform.isIOS ? UpgradeDialogStyle.cupertino : UpgradeDialogStyle.material,
+              // showLater: false,
+              // showIgnore: false,
               messages: MyUpgraderMessages()),
           child: Scaffold(
             body: AnnotatedRegion<SystemUiOverlayStyle>(

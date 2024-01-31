@@ -23,7 +23,6 @@ import '../../../../core/utils/helper_manager.dart';
 import '../../../../core/widgets/calender_dialog.dart';
 import '../models/imageModel.dart';
 
-import 'dart:io';
 
 
 abstract class UpDateViewModel extends State<UpDateView>{
@@ -126,7 +125,7 @@ abstract class UpDateViewModel extends State<UpDateView>{
         quality: 50,
       );
       setState(() {
-        compressedListImages = result;
+        compressedListImages = File(result!.path);
       });
       print(compressedListImages!.path);
 
