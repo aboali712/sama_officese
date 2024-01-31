@@ -4,9 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:place_picker/entities/location_result.dart';
-import 'package:place_picker/place_picker.dart';
-import 'package:place_picker/widgets/place_picker.dart';
+
+
 import 'package:sama_officese/src/app.dart';
 import 'package:sama_officese/src/app/core/local/storagehelper.dart';
 import 'package:sama_officese/src/app/screen/home/home_viewmodel.dart';
@@ -98,7 +97,7 @@ abstract class UpDateProfileViewModel  extends State<UpDateProfileView> with Sto
   bool switchValueWed = true;
   bool switchValueThur = true;
   bool switchValueFri = false;
-  LocationResult? result;
+  // LocationResult? result;
 
 
   @override
@@ -188,20 +187,20 @@ abstract class UpDateProfileViewModel  extends State<UpDateProfileView> with Sto
   }
   // LatLng? customLocation;
 
-  void showPlacePicker() async {
-
-    var re = await Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => Expanded(
-          flex: 1,
-          child: PlacePicker("AIzaSyBjGBuxESDmS-jcsTpuiYyhEo-UoTHg6eo",
-          ),
-        )));
-    setState(() {
-      result=re;
-      print("${result} 333333333333333333333333333333333333333333333333333333333333");
-    });
-
-  }
+  // void showPlacePicker() async {
+  //
+  //   var re = await Navigator.of(context).push(
+  //       MaterialPageRoute(builder: (context) => Expanded(
+  //         flex: 1,
+  //         child: PlacePicker("AIzaSyBjGBuxESDmS-jcsTpuiYyhEo-UoTHg6eo",
+  //         ),
+  //       )));
+  //   setState(() {
+  //     result=re;
+  //     print("${result} 333333333333333333333333333333333333333333333333333333333333");
+  //   });
+  //
+  // }
 
 
 
