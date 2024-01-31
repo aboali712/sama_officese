@@ -187,14 +187,13 @@ abstract class UpDateProfileViewModel  extends State<UpDateProfileView> with Sto
 
   }
   // LatLng? customLocation;
-  LatLng customLocation = const LatLng(25.69893, 32.6421);
+
   void showPlacePicker() async {
 
     var re = await Navigator.of(context).push(
         MaterialPageRoute(builder: (context) => Expanded(
           flex: 1,
           child: PlacePicker("AIzaSyBjGBuxESDmS-jcsTpuiYyhEo-UoTHg6eo",
-            displayLocation: customLocation,
           ),
         )));
     setState(() {
