@@ -65,7 +65,7 @@ dependencies:
   url_launcher: ^6.1.6
   flutter_html: any
   place_picker: ^0.10.0
-  location: ^5.0.0
+
 
 
 
