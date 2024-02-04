@@ -84,7 +84,7 @@ abstract class ServiceDetailsViewModel extends State<ServiceDetails>{
                         },
                             child: Icon(Icons.arrow_circle_right,size: 35,color: Colors.grey.shade400,)),
 
-                        Text(tr("تغير حالة الطلب"),style: GoogleFonts.tajawal(color: Colors.black,
+                        Text(tr("RequestStatusChanged"),style: GoogleFonts.tajawal(color: Colors.black,
                             fontSize:16,fontWeight: FontWeight.w500),),
                         const SizedBox(width: 50,)
                       ],
@@ -149,8 +149,7 @@ abstract class ServiceDetailsViewModel extends State<ServiceDetails>{
 
                     TextButton(
                       style: TextButton.styleFrom(
-                          primary: Colors.white,
-                          padding: const EdgeInsets.all(0),
+                          foregroundColor: Colors.white, padding: const EdgeInsets.all(0),
                           fixedSize:  Size(size.width, 50),
                           shape: RoundedRectangleBorder(
 
@@ -164,7 +163,7 @@ abstract class ServiceDetailsViewModel extends State<ServiceDetails>{
                         changeStatusApi();
                       },
                       child: Text(
-                        tr('حفظ التغيرات'),
+                        tr('SaveChanges'),
                         style: const TextStyle(
                             fontSize: 16,
                             color: Colors.white,

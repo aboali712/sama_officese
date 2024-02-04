@@ -10,6 +10,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../core/utils/input_validators.dart';
@@ -221,7 +222,7 @@ class StepTwo extends StatelessWidget {
           )
           : SizedBox(height: 45,
           child: TextFormField(
-        controller: signUpViewModel.completeNameArControl,
+        controller: signUpViewModel.completeNameEnControl,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         style: const TextStyle(fontSize: 15),
         decoration: InputDecoration(
@@ -289,51 +290,10 @@ class StepTwo extends StatelessWidget {
 
           const SizedBox(height: 20,),
 
-          Row(mainAxisAlignment: MainAxisAlignment.end,
-            children: [
 
-              InkWell(onTap: () {
-                signUpViewModel.lanDescriptionSetState(0);
-                print(signUpViewModel.lanDescription);
-
-              },
-                child: Container(height: 30,width: 30,
-                  padding: const EdgeInsets.all(4),
-                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(5),
-                    color: signUpViewModel.lanDescription==0? samaOfficeColor :Colors.grey ,
-                  ),
-                  child: Text("ع",
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.tajawal(color:signUpViewModel.lanDescription==0? Colors.white: Colors.white,
-                        fontWeight: FontWeight.w500,fontSize: 14
-
-                    ),),),
-              ),
-              const SizedBox(width: 5,),
-
-
-              InkWell(onTap: () {
-                signUpViewModel.lanDescriptionSetState(1);
-                print(signUpViewModel.lanDescription);
-              },
-                child: Container(height: 30,width: 30,
-                  padding: const EdgeInsets.all(4),
-                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(5),
-                    color:signUpViewModel.lanDescription==1? samaOfficeColor :Colors.grey ,
-                  ),
-                  child: Text("en",
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.tajawal(color:signUpViewModel.lanDescription==1? Colors.white: Colors.white,
-                        fontWeight: FontWeight.w500,fontSize: 14
-
-                    ),),),
-              ),
-
-
-            ],),
 
           Text(
-            tr("Description"),
+            tr("PackageDetailsInArabic"),
             style: const TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.normal,
@@ -341,93 +301,81 @@ class StepTwo extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
 
-         signUpViewModel.lanDescription==0?
-          Column( children: [
 
-            Container(width: size.width,
-              decoration: BoxDecoration(color: const Color(0xFFF3F3F5),borderRadius: BorderRadius.circular(5)),
-              child: QuillToolbar.simple( configurations:
-              QuillSimpleToolbarConfigurations(
+          Container(
+            height: 160,width: size.width,
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(5),
+                color: const Color(0xFFF3F3F5)),
+            child: HtmlEditor(
+              controller: signUpViewModel.controllerDetailsAr, //required
+              callbacks: Callbacks(
+                  onInit: () {
+                    signUpViewModel.controllerDetailsAr.editorController!.evaluateJavascript(
+                        source: "\$('div.note-editable').attr('dir', 'rtl');");
+                  },
+                  onChangeContent: (String? changed) {
+                    signUpViewModel.descArSetState(changed!);
 
-                toolbarIconAlignment:WrapAlignment.start,
-                sectionDividerSpace: 1,
-                toolbarSize: 1,
-                toolbarSectionSpacing: 1,
-                controller: signUpViewModel.arController,
+                    print(signUpViewModel.detailsAr);
+                  }),
+              htmlEditorOptions: HtmlEditorOptions(
+                  hint: tr("DescriptionInArabic") ,
+                  initialText: signUpViewModel.detailsAr
+                //initalText: "text content initial, if any",
+              ),
+              htmlToolbarOptions: const HtmlToolbarOptions(
 
-              ) ,
+                  toolbarPosition: ToolbarPosition.aboveEditor, //by default
+                  toolbarType: ToolbarType.nativeScrollable),
+              otherOptions:  OtherOptions(decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5) ),
+                height: 400,
               ),
             ),
+          ),
+          const SizedBox(height: 20,),
 
+          Text(
+            tr("PackageDetailsInEnglish"),
+            style: const TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.normal,
+                fontSize: 15),
+            textAlign: TextAlign.center,
+          ),
 
-            Stack(
-                children: [ Container(height: 150,width: size.width,
-                  padding: const EdgeInsets.only(top: 15,left: 10,right: 10),
+          Container(
+            height: 160,width: size.width,
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(5),
+                color: const Color(0xFFF3F3F5)),
+            child: HtmlEditor(
+              controller: signUpViewModel.controllerDetailsEn, //required
+              callbacks: Callbacks(
+                  onInit: () {
+                    signUpViewModel.controllerDetailsEn.editorController!.evaluateJavascript(
+                        source: "\$('div.note-editable').attr('dir', 'rtl');");
+                  },
+                  onChangeContent: (String? changed) {
+                    signUpViewModel.descEnSetState(changed!);
 
-                  decoration: BoxDecoration(color: const Color(0xFFF3F3F5),borderRadius: BorderRadius.circular(5)),
-                  child: QuillEditor(
-                      scrollController: ScrollController(), // ScrollController(),
+                    print(signUpViewModel.detailsEn);
+                  }),
+              htmlEditorOptions: HtmlEditorOptions(
+                  hint: tr("DescriptionInEnglish"),
+                  initialText: signUpViewModel.detailsEn
+                //initalText: "text content initial, if any",
+              ),
+              htmlToolbarOptions: const HtmlToolbarOptions(
 
-                      focusNode: signUpViewModel.focusPhone, // FocusNode(canRequestFocus: false),
-                      configurations: QuillEditorConfigurations(
-                        placeholder: tr("DescriptionInArabic"),
-
-
-                        controller: signUpViewModel.arController,
-                        readOnly: false,
-                        sharedConfigurations: const QuillSharedConfigurations(
-                          locale: Locale('de'),
-                        ),
-                      )
-                  ),
-                ),
-
-                  const Divider(height: 5,thickness: 1,color: Colors.grey,)
-                ])
-
-          ],)
-
-
-        :Column( children: [
-
-          Container(width: size.width,
-            decoration: BoxDecoration(color: const Color(0xFFF3F3F5),borderRadius: BorderRadius.circular(5)),
-            child: QuillToolbar.simple( configurations:
-            QuillSimpleToolbarConfigurations(
-
-              toolbarIconAlignment:WrapAlignment.start,
-              sectionDividerSpace: 1,
-              toolbarSize: 1,
-              toolbarSectionSpacing: 1,
-              controller: signUpViewModel.enController,
-
-            ) ,
+                  toolbarPosition: ToolbarPosition.aboveEditor, //by default
+                  toolbarType: ToolbarType.nativeScrollable),
+              otherOptions:  OtherOptions(decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5) ),
+                height: 400,
+              ),
             ),
           ),
 
-           Stack(
-                children: [ Container(height: 150,width: size.width,
-                  padding: const EdgeInsets.only(top: 15,left: 10,right: 10),
-
-                  decoration: BoxDecoration(color: const Color(0xFFF3F3F5),borderRadius: BorderRadius.circular(5)),
-                  child: QuillEditor(
-                      scrollController: ScrollController(), // ScrollController(),
-
-                      focusNode: signUpViewModel.focusPhone, // FocusNode(canRequestFocus: false),
-                      configurations: QuillEditorConfigurations(
-                        placeholder: tr("DescriptionInEnglish"),
-                        controller: signUpViewModel.enController,
-                        readOnly: false,
-                        sharedConfigurations: const QuillSharedConfigurations(
-                          locale: Locale('de'),
-                        ),
-                      )
-                  ),
-                ),
-
-                  const Divider(height: 5,thickness: 1,color: Colors.grey,)
-                ]),
-        ],),
 
           const SizedBox(height: 20,),
           
@@ -620,8 +568,30 @@ class StepTwo extends StatelessWidget {
               keyboardType: TextInputType.name,
             ),
           ),
+          const SizedBox(height: 20,),
 
-
+          Text(tr("ChooseAddressFrom"),
+              style: GoogleFonts.tajawal()),
+          const SizedBox(
+            height: 10,
+          ),
+          InkWell(
+            onTap: (){
+              signUpViewModel.showPlacePicker();
+            },
+            child: Container(
+                height: 45,
+                decoration: BoxDecoration(
+                    color: const Color(0xFFF3F3F5),
+                    borderRadius: BorderRadius.circular(5)
+                ),
+                padding: const EdgeInsets.all(10),
+                alignment: AlignmentDirectional.centerStart,
+                width: MediaQuery.of(context).size.width,
+                child: Text(signUpViewModel.result!=null ?
+                signUpViewModel.result!.formattedAddress! : tr("ChooseAddressFrom"),
+                    style: GoogleFonts.tajawal(fontSize: 12))),
+          ),
 
           const SizedBox(height: 20,),
           Text(

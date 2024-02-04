@@ -2,8 +2,11 @@ import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:map_location_picker/map_location_picker.dart';
+
 
 
 import 'package:sama_officese/src/app.dart';
@@ -97,7 +100,7 @@ abstract class UpDateProfileViewModel  extends State<UpDateProfileView> with Sto
   bool switchValueWed = true;
   bool switchValueThur = true;
   bool switchValueFri = false;
-  // LocationResult? result;
+   // LocationResult? result;
 
 
   @override
@@ -185,22 +188,32 @@ abstract class UpDateProfileViewModel  extends State<UpDateProfileView> with Sto
     }
 
   }
-  // LatLng? customLocation;
+  GeocodingResult? result;
+  void showPlacePicker() async {
 
-  // void showPlacePicker() async {
-  //
-  //   var re = await Navigator.of(context).push(
-  //       MaterialPageRoute(builder: (context) => Expanded(
-  //         flex: 1,
-  //         child: PlacePicker("AIzaSyBjGBuxESDmS-jcsTpuiYyhEo-UoTHg6eo",
-  //         ),
-  //       )));
-  //   setState(() {
-  //     result=re;
-  //     print("${result} 333333333333333333333333333333333333333333333333333333333333");
-  //   });
-  //
-  // }
+    Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) => MapLocationPicker
+          (
+          language: HomeViewModel.lang,
+          currentLatLng: LatLng(HomeViewModel.currentPosition!.latitude,HomeViewModel.currentPosition!.longitude) ,
+          apiKey: "AIzaSyBeAsv9F4ONue2XY9a6redv-o6rKxLuBGc",
+          onNext: (GeocodingResult? resu) {
+            setState(() {
+              result=resu;
+              print(result!.formattedAddress!);
+              print(result!.geometry.location.lat);
+              print(result!.geometry.location.lng);
+
+              Navigator.pop(context);
+            });
+          },
+        )));
+    // setState(() {
+    //   result=re;
+    //   print(result);
+    // });
+
+  }
 
 
 
@@ -271,13 +284,13 @@ abstract class UpDateProfileViewModel  extends State<UpDateProfileView> with Sto
       formData["city_id"]= selectedCityID;
     }
 
-    // if(result==null){
-    //   formData["lat"]= HomeViewModel.profileModel!.office!.lat!.toString();
-    //   formData["lng"]= HomeViewModel.profileModel!.office!.lng!.toString();
-    // }else{
-    //   formData["lat"]= result!.latLng!.latitude.toString();
-    //   formData["lng"]=result!.latLng!.longitude.toString();
-    // }
+    if(result==null){
+      formData["lat"]= HomeViewModel.profileModel!.office!.lat!.toString();
+      formData["lng"]= HomeViewModel.profileModel!.office!.lng!.toString();
+    }else{
+      formData["lat"]= result!.geometry.location.lat.toString();
+      formData["lng"]=result!.geometry.location.lng.toString();
+    }
     formData["start_work_at"]=timeInSatControl.value.text;
     formData["end_work_at"]=timeoutSatControl.value.text;
     formData["working_hours_ar"]="من ${timeInSatControl.value.text} الى ${timeoutSatControl.value.text}";
@@ -299,6 +312,9 @@ abstract class UpDateProfileViewModel  extends State<UpDateProfileView> with Sto
 
       toastAppSuccess(rs.msg!,context);
       await saveUser(rs.data);
+      setState(() {
+        HomeCorePage.index=0;
+      });
       SamaOfficeApp.navKey.currentState!.pushReplacement(
         MaterialPageRoute(builder: (context) =>  HomeCore()),
       );

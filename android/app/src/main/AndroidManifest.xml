@@ -3,15 +3,18 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-feature android:name="android.hardware.location.network" android:required="false"/>
+    <uses-feature android:name="android.hardware.location.gps" android:required="false"/>
+
     <application
         android:label="sama_officese"
         android:name="${applicationName}"
         android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher"
+        android:networkSecurityConfig="@xml/network_security_config"
         tools:targetApi="m">
         <meta-data android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBjGBuxESDmS-jcsTpuiYyhEo-UoTHg6eo"/>
-
+            android:value="AIzaSyBeAsv9F4ONue2XY9a6redv-o6rKxLuBGc"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"

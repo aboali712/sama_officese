@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:sama_officese/src/app/core/local/storagehelper.dart';
 
+import '../main.dart';
 import 'app/core/network/network_service.dart';
 import 'app/core/values/theme.dart';
 import 'app/screen/start/splash/splash.dart';
@@ -23,6 +25,8 @@ class _SamaOfficeAppState extends State<SamaOfficeApp> {
   @override
   void initState() {
     super.initState();
+    getTokenDevice();
+
   }
 
   @override
@@ -36,7 +40,7 @@ class _SamaOfficeAppState extends State<SamaOfficeApp> {
         theme: AppTheme.of(context),
 
 
-        home: const SplashView());
+        home:  const SplashView());
   }
 }
 

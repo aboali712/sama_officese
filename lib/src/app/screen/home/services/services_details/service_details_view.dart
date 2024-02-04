@@ -65,14 +65,14 @@ class _ServiceDetailsState extends ServiceDetailsViewModel {
                     child: Center(
                       child: Text(
                           serviceDetails!.status=="pending"?
-                        tr("جديد")
+                        tr("New")
                           : serviceDetails!.status=="inReview"?
-                              tr("قيد التنفيذ")
+                              tr("Underway")
                               : serviceDetails!.status=="canceled"  ?
-                              tr("ملغى")
+                              tr("Canceled")
                            : serviceDetails!.status=="completed"?
-                         tr("مكتمل")
-                              :tr("قيد التنفيذ")
+                         tr("Complete")
+                              :tr("Underway")
                         ,style: GoogleFonts.tajawal(color: Colors.white,
                           fontSize:12,fontWeight: FontWeight.w500),),
                     ),
@@ -163,7 +163,7 @@ class _ServiceDetailsState extends ServiceDetailsViewModel {
                          padding: const EdgeInsets.all(8),
                          child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                            children: [
-                           Text(tr("الخدمات"),style: GoogleFonts.tajawal(color: Colors.black,
+                           Text(tr("Services"),style: GoogleFonts.tajawal(color: Colors.black,
                                fontSize:17,fontWeight: FontWeight.w500),),
 
 
@@ -212,7 +212,8 @@ class _ServiceDetailsState extends ServiceDetailsViewModel {
                                   Row(
                                     children: [
                                       SizedBox(width: 90,
-                                        child: Text(tr("الجنسية : "),style: GoogleFonts.tajawal(color: Colors.black,
+                                        child: Text(tr("${tr("Nationality")} : "),
+                                          style: GoogleFonts.tajawal(color: Colors.black,
                                             fontSize:15,fontWeight: FontWeight.w500),),
                                       ),
 
@@ -226,7 +227,8 @@ class _ServiceDetailsState extends ServiceDetailsViewModel {
                                   Row(
                                     children: [
                                       SizedBox(width: 90,
-                                        child: Text(tr("الدولة : "),style: GoogleFonts.tajawal(color: Colors.black,
+                                        child: Text(tr("${tr("Country")} : "),
+                                          style: GoogleFonts.tajawal(color: Colors.black,
                                             fontSize:15,fontWeight: FontWeight.w500),),
                                       ),
 
@@ -240,7 +242,8 @@ class _ServiceDetailsState extends ServiceDetailsViewModel {
                                   Row(
                                     children: [
                                       SizedBox(width: 90,
-                                        child: Text(tr("الملاحظات : "),style: GoogleFonts.tajawal(color: Colors.black,
+                                        child: Text(tr("${tr("Notes")} : "),
+                                          style: GoogleFonts.tajawal(color: Colors.black,
                                             fontSize:15,fontWeight: FontWeight.w500),),
                                       ),
 
@@ -426,7 +429,7 @@ class _ServiceDetailsState extends ServiceDetailsViewModel {
 
                 child: Column(crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                  Text(tr("تغير حالة الطلب"),style: GoogleFonts.tajawal(color: Colors.black,
+                  Text(tr("RequestStatusChanged"),style: GoogleFonts.tajawal(color: Colors.black,
                       fontSize:15,fontWeight: FontWeight.w500),),
                       const SizedBox(height: 10,),
 
@@ -446,14 +449,14 @@ class _ServiceDetailsState extends ServiceDetailsViewModel {
                               children: [
                                 Text(
                                   serviceDetails!.status=="pending"?
-                                  tr("جديد")
+                                  tr("New")
                                       : serviceDetails!.status=="inReview"?
-                                  tr("قيد التنفيذ")
+                                  tr("Underway")
                                       : serviceDetails!.status=="canceled"  ?
-                                  tr("ملغى")
+                                  tr("Canceled")
                                       : serviceDetails!.status=="completed"?
-                                  tr("مكتمل")
-                                      :tr("قيد التنفيذ")
+                                  tr("Complete")
+                                      :tr("Underway")
                             ,style: GoogleFonts.tajawal(color: Colors.black,
                                     fontSize:15,fontWeight: FontWeight.w500),),
 

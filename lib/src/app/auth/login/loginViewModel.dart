@@ -5,6 +5,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:map_location_picker/map_location_picker.dart';
 import 'package:sama_officese/src/app.dart';
 
 import '../../core/local/storagehelper.dart';
@@ -13,6 +14,8 @@ import '../../core/utils/helper_manager.dart';
 import '../../core/widgets/phone_number_widget.dart';
 import '../../home_core.dart';
 import '../auth_model/auth_response.dart';
+import '../verify_code/verify_code_view.dart';
+import '../verify_code/verify_code_view_model.dart';
 import 'loginPage.dart';
 
 abstract class LoginViewModel extends State<LoginPage> with StorageHelper {
@@ -29,10 +32,44 @@ abstract class LoginViewModel extends State<LoginPage> with StorageHelper {
 
   @override
   void initState() {
+    getCurrentLocation();
     getDeviceToken().then((value) => setState(() {
       tokenDevice = value!;
     }));
+    print("${tokenDevice} 3333333333333333333333330");
     super.initState();
+  }
+
+
+
+
+
+  static LocationPermission? permission;
+  static Position? currentPosition;
+
+  Future<void> getCurrentLocation() async {
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      toastApp("Location permission are denied", context);
+
+      if (permission == LocationPermission.deniedForever) {
+        toastApp("Location permission are permanetly denied", context);
+      }
+    }
+    Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high,
+        forceAndroidLocationManager: true)
+        .then((Position position) {
+      setState(() {
+        currentPosition = position;
+        // print("${currentPosition!.latitude} 5555555555555555555");
+        // print("${currentPosition!.longitude} 5555555555555555555");
+
+      });
+    }).catchError((e) {
+      toastApp(e.toString(), context);
+    });
   }
 
   bool chekValidationLogin() {
@@ -84,11 +121,11 @@ abstract class LoginViewModel extends State<LoginPage> with StorageHelper {
         });
 
         if (response.status == 201) {
-          // VerifyCodeViewModel.phone = ph;
-          // VerifyCodeViewModel.pageType = "0";
-          // SamaOfficeApp.navKey.currentState!.push(
-          //   MaterialPageRoute(builder: (context) => const VrifyCode()),
-          // );
+          VerifyCodeViewModel.phone = ph;
+          VerifyCodeViewModel.pageType = "0";
+          SamaOfficeApp.navKey.currentState!.push(
+            MaterialPageRoute(builder: (context) => const VrifyCode()),
+          );
         }
       }
     }

@@ -1,20 +1,36 @@
 
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
+import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:map_location_picker/map_location_picker.dart';
+import 'package:sama_officese/src/app.dart';
 import 'package:sama_officese/src/app/auth/register/signup_view.dart';
+import 'package:sama_officese/src/app/core/local/storagehelper.dart';
 
+import '../../../../main.dart';
 import '../../core/network/network_service.dart';
 import '../../core/utils/helper_manager.dart';
 import '../../core/utils/input_validators.dart';
+import '../../core/widgets/phone_number_widget.dart';
+import '../../screen/home/home_viewmodel.dart';
+import '../auth_model/empty_response.dart';
+import '../login/loginViewModel.dart';
+import '../verify_code/verify_code_view.dart';
+import '../verify_code/verify_code_view_model.dart';
 import 'all_filter/cities_model.dart';
 import 'all_filter/city_response.dart';
 import 'all_filter/filter_model.dart';
 import 'all_filter/filter_response.dart';
+import 'all_filter/service_model.dart';
 
-abstract class SignUpViewModel extends State<SignUp>{
+abstract class SignUpViewModel extends State<SignUp> with StorageHelper{
   final Dio dio = NetworkService.instance.dio;
 
   int step = 0;
@@ -56,6 +72,12 @@ abstract class SignUpViewModel extends State<SignUp>{
   TextEditingController bankNumberControl = TextEditingController();
   TextEditingController ibanNumberControl = TextEditingController();
 
+  HtmlEditorController controllerDetailsAr = HtmlEditorController();
+  HtmlEditorController controllerDetailsEn = HtmlEditorController();
+
+  String detailsAr="";
+  String detailsEn="";
+
   bool obscureTxt = true;
 
   String phoneNumber="";
@@ -86,10 +108,16 @@ abstract class SignUpViewModel extends State<SignUp>{
 
   bool terms = false;
 
+
+  late  List<ServiceModel> selectServices = [];
+  String planPrice="";
+  String tokenDevice="";
+
+
   @override
   void initState() {
     getFilterDataApi();
-
+    getDeviceToken().then((value) => setState((){tokenDevice=value!;}));
     super.initState();
   }
 
@@ -132,6 +160,20 @@ abstract class SignUpViewModel extends State<SignUp>{
 
   void termsSetState(bool time ){ setState(() {terms=time;});}
 
+  void descArSetState(String time ){ setState(() {detailsAr=time;});}
+  void descEnSetState(String time ){ setState(() {detailsEn=time;});}
+
+  ServiceModel? serviceModel;
+  void serviceSetState(ServiceModel service ){ setState(() {
+    serviceModel=service;
+   if( selectServices.contains(service)==false){
+     selectServices.add(service);
+   }else{
+     selectServices.remove(service);
+   }
+   print(selectServices.map((e) => e.id));
+
+  });}
 
   Future<void> getFilterDataApi() async {
     setState(() {
@@ -168,7 +210,32 @@ abstract class SignUpViewModel extends State<SignUp>{
     }
 
   }
+  GeocodingResult? result;
+  void showPlacePicker() async {
 
+    Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) => MapLocationPicker
+          (
+          language:"ar",
+          currentLatLng: LatLng(LoginViewModel.currentPosition!.latitude,LoginViewModel.currentPosition!.longitude) ,
+          apiKey: "AIzaSyBeAsv9F4ONue2XY9a6redv-o6rKxLuBGc",
+          onNext: (GeocodingResult? resu) {
+            setState(() {
+              result=resu;
+              print(result!.formattedAddress!);
+              print(result!.geometry.location.lat);
+              print(result!.geometry.location.lng);
+
+              Navigator.pop(context);
+            });
+          },
+        )));
+    // setState(() {
+    //   result=re;
+    //   print(result);
+    // });
+
+  }
 
 
   bool checkValidationRegister(){
@@ -239,7 +306,10 @@ abstract class SignUpViewModel extends State<SignUp>{
       return false;
     }
 
-
+    if(selectServices.length==0){
+      toastApp(tr("ChooseServices"),context);
+      return false;
+    }
 
     if(bankNameControl.text==""){
       toastApp(tr("EnterTheNameOfTheBank"),context);
@@ -267,28 +337,99 @@ abstract class SignUpViewModel extends State<SignUp>{
   }
 
 
-  Future<void>   con() async {
-     // print(arController.document.toPlainText().toString());
-  await for (final change in arController.changes) {
-  final oldDelta = change.change[0];
-  final changeDelta = change.change[1];
-  final changeSource = change.source;
-
-  if (changeSource != ChangeSource.remote) {
-    print(ChangeSource.remote);
-  print("An API call triggered this change.");
-  } else if (changeSource != ChangeSource.local) {
-  print("A user action triggered this change.");
-  }
-  }
 
 
-    // arController.document.changes.listen((event) {
-    //   print(event); //Delta
-    //   // print(event.item2); //Delta
-    //   // print(event.item3); //ChangeSource
-    // });
+
+  Future<void> registerCallApi() async {
+
+
+
+
+
+    var ph=phoneNumber;
+    if (ph.startsWith("0")) {
+      ph = phoneNumber.substring(1);
+    }
+
+    ph = PhoneNumberSignUpWidgetState.codePhone + ph;
+
+    //+201030025254
+    setState(() {
+      isLoading=true;
+    });
+
+    // tokenDevice=(await FirebaseMessaging.instance.getToken())!;
+
+
+    String imageOfficeName = imageOffice!.path.split('/').last;
+    String imageCommercialName = imageOffice!.path.split('/').last;
+    Map<String,dynamic> mp={};
+    mp["name"]="${firstNameControl.value.text} ${lastNameControl.value.text}";
+    mp["email"]=emailControl.value.text;
+    mp["device_token"]=tokenDevice;
+    mp["phone"]=ph;
+    mp["password"]=passwordControl.value.text;
+    mp["country_id"]=selectedOfficeBranchID.toString();
+    mp["city_id"]=selectedCityID.toString();
+    mp["plan_id"]=planId.toString();
+    mp["address"]=addressArControl.value.text;
+    mp["office_name"]=completeNameArControl.value.text;
+    mp["lat"]=result!.geometry.location.lat.toString();
+    mp["lng"]=result!.geometry.location.lng.toString();
+    mp["bank_name"]=bankNameControl.value.text;
+    mp["bank_account"]=bankNumberControl.value.text;
+    mp["iban"]=ibanNumberControl.value.text;
+    mp["working_hours"]="من ${timeInSatControl.value.text} الى ${timeoutSatControl.value.text}";
+    mp["start_work_at"]=timeInSatControl.value.text;
+    mp["end_work_at"]=timeoutSatControl.value.text;
+
+
+
+
+    selectServices.asMap().forEach((index, element)  {mp[ "services[$index]"] =element.id.toString(); });
+
+
+    mp["image"]=
+    await MultipartFile.fromFile(imageOffice!.path, filename:imageOfficeName);
+
+    mp["commercial_registeration_no"]=await MultipartFile.fromFile(imageOffice!.path, filename:imageCommercialName);
+
+
+
+    await Future.delayed(const Duration(seconds: 2));
+
+  log(mp.toString());
+
+
+    var rs = await dio.post("v1/office/register",data:FormData.fromMap(mp));
+    var response = EmptyResponse(rs.data!!);
+
+    if(response.status==201){
+      VerifyCodeViewModel.phone=ph;
+      VerifyCodeViewModel.pageType="0";
+
+      if(planPrice!="0"){
+        setState(() {
+          VerifyCodeViewModel.subscriptionPage=true;
+        });
+      }
+
+      toastAppSuccess(response.msg!,context);
+      SamaOfficeApp.navKey.currentState!.pushReplacement(
+        MaterialPageRoute(builder: (context) => const VrifyCode()),
+      );
+      setState(() {
+        isLoading=false;
+      });
+    }else{
+      toastApp(response.msg!,context);
+      setState(() {
+        isLoading=false;
+      });
+    }
   }
+
+
 
 
 

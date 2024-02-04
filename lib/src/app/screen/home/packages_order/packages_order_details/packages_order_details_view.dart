@@ -56,7 +56,8 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                       const SizedBox(width: 10,),
                       SvgPicture.asset("assets/images/time.svg",color: Colors.white,),
                       const SizedBox(width: 5,),
-                      Text(tr("25Feb,2023"),style: GoogleFonts.tajawal(color: Colors.white,
+                      Text(DateFormat("MMM d,yyyy","en" ).format(DateTime.parse(packageDetails!.createdAt!)),
+                        style: GoogleFonts.tajawal(color: Colors.white,
                           fontSize:13,fontWeight: FontWeight.w400),),
                     ],
                   ),
@@ -68,14 +69,14 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                     child: Center(
                       child: Text(
                         packageDetails!.status=="pending"?
-                        tr("جديد")
+                        tr("New")
                             : packageDetails!.status=="inReview"?
-                        tr("قيد التنفيذ")
+                        tr("Underway")
                             : packageDetails!.status=="canceled"  ?
-                        tr("ملغى")
+                        tr("Canceled")
                             : packageDetails!.status=="completed"?
-                        tr("مكتمل")
-                            :tr("قيد التنفيذ")
+                        tr("Complete")
+                            :tr("Underway ")
                       ,style: GoogleFonts.tajawal(color: Colors.white,
                           fontSize:12,fontWeight: FontWeight.w500),),
                     ),
@@ -166,7 +167,7 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
 
                       Padding(
                         padding: const EdgeInsets.all(8),
-                        child: Text(tr("تفاصيل الحجز"),style: GoogleFonts.tajawal(color: Colors.black,
+                        child: Text(tr("BookingDetails"),style: GoogleFonts.tajawal(color: Colors.black,
                             fontSize:17,fontWeight: FontWeight.w500),),
                       ),
                       const SizedBox(height: 5,),
@@ -209,8 +210,8 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                                                       SvgPicture.asset("assets/images/calender.svg") ,
                                                       const SizedBox(width: 10,),
 
-                Text("${packageDetails!.offer!.numOfDays} ${tr("أيام")} -"
-                    " ${packageDetails!.offer!.num_of_nights} ${tr("ليالى")}",
+                Text("${packageDetails!.offer!.numOfDays} ${tr("Days")} -"
+                    " ${packageDetails!.offer!.num_of_nights} ${tr("Nights")}",
                               style: GoogleFonts.tajawal(color: Colors.black,
                                                           fontSize:14,fontWeight: FontWeight.w400),),
 
@@ -260,16 +261,17 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                                               Column(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                 children: [
                                                Column(children: [
-                                           Text(DateFormat.MMMd().format(DateTime.parse(packageDetails!.offer!.startDate!)),
+                                           Text(DateFormat("MMMd","en").format(
+                                               DateTime.parse(packageDetails!.offer!.startDate!)),
                                                  style: GoogleFonts.tajawal(color: const Color(0xff00A8A5),
                                                      fontSize:17,fontWeight: FontWeight.w500),),
 
-                                      Text(DateFormat.EEEE().format(DateTime.parse(packageDetails!.offer!.startDate!)),
+                                      Text(DateFormat("EEEE","en").format(DateTime.parse(packageDetails!.offer!.startDate!)),
                                                    style: GoogleFonts.tajawal(color:Colors.grey,
                                                      fontSize:11,fontWeight: FontWeight.w500),),
                                                ],),
 
-                                                Text(tr("الفترة من"),style: GoogleFonts.tajawal(color:Colors.black,
+                                                Text(tr("PeriodFrom"),style: GoogleFonts.tajawal(color:Colors.black,
                                                     fontSize:13,fontWeight: FontWeight.w500),),
 
 
@@ -288,16 +290,16 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                                               Column(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                 children: [
                                                   Column(children: [
-                                        Text(DateFormat.MMMd().format(DateTime.parse(packageDetails!.offer!.endDate!)),
+                                        Text(DateFormat("MMMd","en").format(DateTime.parse(packageDetails!.offer!.endDate!)),
                                                       style: GoogleFonts.tajawal(color: const Color(0xff00A8A5),
                                                           fontSize:17,fontWeight: FontWeight.w500),),
 
-                                        Text(DateFormat.EEEE().format(DateTime.parse(packageDetails!.offer!.endDate!)),
+                                        Text(DateFormat("EEEE","en").format(DateTime.parse(packageDetails!.offer!.endDate!)),
                                                       style: GoogleFonts.tajawal(color:Colors.grey,
                                                           fontSize:11,fontWeight: FontWeight.w500),),
                                                   ],),
 
-                                                  Text(tr("الفترة الى"),style: GoogleFonts.tajawal(color:Colors.black,
+                                                  Text(tr("PeriodTo"),style: GoogleFonts.tajawal(color:Colors.black,
                                                       fontSize:13,fontWeight: FontWeight.w500),),
 
 
@@ -316,17 +318,17 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                                               Column(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                 children: [
                                                   Column(children: [
-                                           Text("${packageDetails!.offer!.num_of_persons!.toString()} ${tr("أفراد")}",
+                                           Text("${packageDetails!.offer!.num_of_persons!.toString()} ${tr("Individuals")}",
                                              style: GoogleFonts.tajawal(color: const Color(0xff00A8A5),
                                                         fontSize:17,fontWeight: FontWeight.w500),),
 
-                                            Text("${packageDetails!.adultsCount!} ${tr("فرد")} -"
-                                                " ${packageDetails!.childrenCount} ${tr("أطفال")}",
+                                            Text("${packageDetails!.adultsCount!} ${tr("AnIndividual")} -"
+                                                " ${packageDetails!.childrenCount} ${tr("children")}",
                                                       style: GoogleFonts.tajawal(color:Colors.grey,
                                                         fontSize:11,fontWeight: FontWeight.w500),),
                                                   ],),
 
-                                                  Text(tr("عدد الضيوف"),style: GoogleFonts.tajawal(color:Colors.black,
+                                                  Text(tr("numberOfGuests"),style: GoogleFonts.tajawal(color:Colors.black,
                                                       fontSize:13,fontWeight: FontWeight.w500),),
 
 
@@ -352,7 +354,7 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                                     MaterialPageRoute(builder: (context) => const PackagesDetails(),));
                                           },
                                             child: Row(children: [
-                                              Text(tr("المزيد من المعلومات"),style: GoogleFonts.tajawal(color: Colors.blue,
+                                              Text(tr("moreInformation"),style: GoogleFonts.tajawal(color: Colors.blue,
                                                   fontSize:13,fontWeight: FontWeight.w400),),
                                               const SizedBox(width: 20,),
 
@@ -399,7 +401,7 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
 
                   child: Column(crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(tr("تغير حالة الطلب"),style: GoogleFonts.tajawal(color: Colors.black,
+                        Text(tr("RequestStatusChanged"),style: GoogleFonts.tajawal(color: Colors.black,
                             fontSize:15,fontWeight: FontWeight.w500),),
                         const SizedBox(height: 10,),
 
@@ -418,14 +420,14 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                                 children: [
                                   Text(
                                     packageDetails!.status=="pending"?
-                                    tr("جديد")
+                                    tr("New")
                                         : packageDetails!.status=="inReview"?
-                                    tr("قيد التنفيذ")
+                                    tr("Underway")
                                         : packageDetails!.status=="canceled"  ?
-                                    tr("ملغى")
+                                    tr("Canceled")
                                         : packageDetails!.status=="completed"?
-                                    tr("مكتمل")
-                                        :tr("قيد التنفيذ")
+                                    tr("Complete")
+                                        :tr("Underway")
                                     ,style: GoogleFonts.tajawal(color: Colors.black,
                                       fontSize:15,fontWeight: FontWeight.w500),),
 

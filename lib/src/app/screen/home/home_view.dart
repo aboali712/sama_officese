@@ -63,7 +63,7 @@ class _HomePageState extends HomeViewModel {
             
             Column(crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(tr("مرحبا بعودتك"),style: GoogleFonts.tajawal(color: Colors.white,
+                Text(tr("welcomeBack"),style: GoogleFonts.tajawal(color: Colors.white,
                     fontSize:10,fontWeight: FontWeight.w500),),
                 const SizedBox(height: 10,),
                 HomeViewModel.profileModel!=null?
@@ -108,7 +108,7 @@ class _HomePageState extends HomeViewModel {
 
                     },
                       child: Container( height: 165,width: 170,
-                        padding: const EdgeInsets.only(left: 20,right: 20,top: 15,bottom: 15),
+                        padding: const EdgeInsets.only(left: 20,right: 20,top: 15,bottom: 10),
                         decoration: BoxDecoration(
                             borderRadius:  BorderRadius.circular(20) ,
                             color: const Color(0xffCAD7E5),
@@ -133,7 +133,11 @@ class _HomePageState extends HomeViewModel {
                                   decoration: BoxDecoration(borderRadius:  BorderRadius.circular(14),
                                       color:const Color(0xff5AC41A) ),
                                   child: Center(
-                                    child: Text("3",style: GoogleFonts.tajawal( color: Colors.white,fontSize: 13,
+                                    child: Text(
+                                      services.isNotEmpty?
+                                      servicesPending.length.toString()
+                                      :"0",
+                                      style: GoogleFonts.tajawal( color: Colors.white,fontSize: 13,
                                     fontWeight: FontWeight.w400
                                     ),),
                                   )),
@@ -142,21 +146,25 @@ class _HomePageState extends HomeViewModel {
                           ),
 
 
-                          const SizedBox(height: 30,),
-                          const Column(crossAxisAlignment: CrossAxisAlignment.start,
+                          const SizedBox(height: 20,),
+                           Column(crossAxisAlignment: CrossAxisAlignment.start,
 
                             children: [
                               Text(
-                                "طلبات الخدمات",
-                                style: TextStyle(
+                                tr("ServiceRequests"),
+                                style: const TextStyle(
                                     color:  Colors.black,
                                     fontSize: 15, fontWeight: FontWeight.w500),
                               ),
-                              Text(
-                                "3 طلبات جديدة",
-                                style: TextStyle(
+                               Text(
+                                 servicesPending.isNotEmpty?
+                            "${servicesPending.length.toString()} ${tr("newRequests")}"
+                                 :tr("ThereAreCurrentlyNoRequests"),
+                                style:  TextStyle(
                                     color:  Colors.grey,
-                                    fontSize: 13, fontWeight: FontWeight.w400),
+                                    fontSize:
+                                    servicesPending.isNotEmpty?
+                                    13 : 12, fontWeight: FontWeight.w400),
                               ),
 
                             ],
@@ -169,7 +177,7 @@ class _HomePageState extends HomeViewModel {
                           MaterialPageRoute(builder: (context) => const PackagesOrderView(),));
                     },
                       child: Container( height: 165,width: 170,
-                        padding: const EdgeInsets.only(left: 20,right: 20,top: 15,bottom: 15),
+                        padding: const EdgeInsets.only(left: 20,right: 20,top: 15,bottom: 10),
                         decoration: BoxDecoration(
                           borderRadius:  BorderRadius.circular(20) ,
                           color: const Color(0xffCAEBED),
@@ -194,7 +202,9 @@ class _HomePageState extends HomeViewModel {
                                       decoration: BoxDecoration(borderRadius:  BorderRadius.circular(14),
                                           color:const Color(0xff8A8C8E) ),
                                       child: Center(
-                                        child: Text("0",style: GoogleFonts.tajawal( color: Colors.white,fontSize: 13,
+                                        child: Text( packages.isNotEmpty?
+                                        packagePending.length.toString()
+                                            :"0",style: GoogleFonts.tajawal( color: Colors.white,fontSize: 13,
                                             fontWeight: FontWeight.w400
                                         ),),
                                       )),
@@ -203,23 +213,26 @@ class _HomePageState extends HomeViewModel {
                               ),
 
 
-                              const SizedBox(height: 30,),
-                              const Column(crossAxisAlignment: CrossAxisAlignment.start,
+                              const SizedBox(height: 20,),
+                               Column(crossAxisAlignment: CrossAxisAlignment.start,
 
                                 children: [
-                                  Text(
-                                    "طلبات الباكيدجات",
-                                    style: TextStyle(
+                                   Text(
+                                    tr("PackageRequests"),
+                                    style: const TextStyle(
                                         color:  Colors.black,
                                         fontSize: 15, fontWeight: FontWeight.w500),
                                   ),
                                   Text(
-                                    "لا يوجد حاليا طلبات",
-                                    style: TextStyle(
+                                    packagePending.isNotEmpty?
+                                    "${packagePending.length.toString()} ${tr("newRequests")}"
+                                        :tr("ThereAreCurrentlyNoRequests"),
+                                    style:  TextStyle(
                                         color:  Colors.grey,
-                                        fontSize: 13, fontWeight: FontWeight.w400),
+                                        fontSize:
+                                        packagePending.isNotEmpty?
+                                        13 : 12, fontWeight: FontWeight.w400),
                                   ),
-
                                 ],
                               )
                             ]),),
@@ -238,7 +251,7 @@ class _HomePageState extends HomeViewModel {
                             MaterialPageRoute(builder: (context) => const PackagesView(),));
                       },
                         child: Container( height: 165,width: 170,
-                          padding: const EdgeInsets.only(left: 20,right: 20,top: 15,bottom: 15),
+                          padding: const EdgeInsets.only(left: 20,right: 20,top: 15,bottom: 10),
                           decoration: BoxDecoration(
                             borderRadius:  BorderRadius.circular(20) ,
                             color: const Color(0xffF8E3D3),
@@ -263,7 +276,10 @@ class _HomePageState extends HomeViewModel {
                                         decoration: BoxDecoration(borderRadius:  BorderRadius.circular(14),
                                             color:const Color(0xff5AC41A) ),
                                         child: Center(
-                                          child: Text("6",style: GoogleFonts.tajawal( color: Colors.white,fontSize: 13,
+                                          child: Text(
+                                              offerPageModel!.isNotEmpty?
+                                            offerPageModel!.length.toString() :"0",
+                                            style: GoogleFonts.tajawal( color: Colors.white,fontSize: 13,
                                               fontWeight: FontWeight.w400
                                           ),),
                                         )),
@@ -272,19 +288,22 @@ class _HomePageState extends HomeViewModel {
                                 ),
 
 
-                                const SizedBox(height: 30,),
-                                const Column(crossAxisAlignment: CrossAxisAlignment.start,
+                                const SizedBox(height: 20,),
+                                 Column(crossAxisAlignment: CrossAxisAlignment.start,
 
                                   children: [
                                     Text(
-                                      "الباكيدجات",
-                                      style: TextStyle(
+                                      tr("Packages"),
+                                      style: const TextStyle(
                                           color:  Colors.black,
                                           fontSize: 15, fontWeight: FontWeight.w500),
                                     ),
-                                    Text(
-                                      "6 باكيدجات",
-                                      style: TextStyle(
+                                     Text(
+                                      offerPageModel!.isNotEmpty?
+                                      " ${tr("Packages")} ${offerPageModel!.length}"
+                                       :tr("ThereAreNoPackages")
+                                       ,
+                                      style: const TextStyle(
                                           color:  Colors.grey,
                                           fontSize: 13, fontWeight: FontWeight.w400),
                                     ),
@@ -324,12 +343,12 @@ class _HomePageState extends HomeViewModel {
 
 
                                 const SizedBox(height: 30,),
-                                const Column(crossAxisAlignment: CrossAxisAlignment.start,
+                                 Column(crossAxisAlignment: CrossAxisAlignment.start,
 
                                   children: [
                                     Text(
-                                      "أنشاء باكيدج",
-                                      style: TextStyle(
+                                      tr("CreatePackage"),
+                                      style: const TextStyle(
                                           color:  Colors.black,
                                           fontSize: 15, fontWeight: FontWeight.w500),
                                     ),
@@ -340,7 +359,10 @@ class _HomePageState extends HomeViewModel {
                               ]),),
                       ),
 
-                    ],)
+                    ],),
+
+
+
 
 
 

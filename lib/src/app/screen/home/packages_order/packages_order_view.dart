@@ -37,9 +37,9 @@ class _PackagesOrderViewState extends PackagesOrderViewModel {
                   Navigator.pop(context);
                 }
                     ,child: const Icon(Icons.arrow_back_ios,color: Colors.white,)),
-                const Text(
-                  "طلبات الباكيدجات",
-                  style: TextStyle(
+                 Text(
+                  tr("PackageRequests"),
+                  style: const TextStyle(
                       color:  Colors.white,
                       fontSize: 21, fontWeight: FontWeight.w500),
                 ),
@@ -79,7 +79,7 @@ class _PackagesOrderViewState extends PackagesOrderViewModel {
                                   )),
                               const SizedBox(width: 5,),
 
-                              Text(tr("جديدة"),
+                              Text(tr("New"),
                                 textAlign: TextAlign.center,
                                 style: GoogleFonts.tajawal(color:packageStat==0?  Colors.black: Colors.grey,
                                     fontWeight: FontWeight.w500,fontSize: 14
@@ -115,7 +115,7 @@ class _PackagesOrderViewState extends PackagesOrderViewModel {
                                   )):const SizedBox.shrink(),
                               const SizedBox(width: 5,),
 
-                              Text(tr("قيد التنفيذ"),
+                              Text(tr("Underway"),
                                 textAlign: TextAlign.center,
                                 style: GoogleFonts.tajawal(color:packageStat==1? Colors.black: Colors.grey,
                                     fontWeight: FontWeight.w500,fontSize: 14
@@ -131,7 +131,7 @@ class _PackagesOrderViewState extends PackagesOrderViewModel {
                         });
                       },
                         child: Container(height: 43,width: 110,
-                          padding: const EdgeInsets.all(13),
+                          padding: const EdgeInsets.all(11),
                           decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),
                             color: packageStat==2? Colors.white :Colors.transparent ,
                           ),
@@ -151,7 +151,7 @@ class _PackagesOrderViewState extends PackagesOrderViewModel {
                                   )) :const SizedBox.shrink(),
                               const SizedBox(width: 5,),
 
-                              Text(tr("مكتملة"),
+                              Text(tr("Complete"),
                                 textAlign: TextAlign.center,
                                 style: GoogleFonts.tajawal(color:packageStat==2? Colors.black: Colors.grey,
                                     fontWeight: FontWeight.w500,fontSize: 14
@@ -216,8 +216,8 @@ class _PackagesOrderViewState extends PackagesOrderViewModel {
                                            const SizedBox(width: 3,),
                                            Text(
                                              e.offer!.type=="weekend"?
-                                             tr("عطلة أسبوعية")
-                                                 :tr("رحلة"),style: GoogleFonts.tajawal(color: Colors.black,
+                                             tr("weekend")
+                                                 :tr("aTrip"),style: GoogleFonts.tajawal(color: Colors.black,
                                                fontSize:12,fontWeight: FontWeight.w500),),
                                          ]),
                                    )
@@ -288,7 +288,7 @@ class _PackagesOrderViewState extends PackagesOrderViewModel {
                                        (MaterialPageRoute(builder: (context) => const PackagesOrderDetailsView(),));
                                    },
                                      child: Row(children: [
-                                       Text(tr("تفاصيل"),style: GoogleFonts.tajawal(color: Colors.blue,
+                                       Text(tr("Details"),style: GoogleFonts.tajawal(color: Colors.blue,
                                            fontSize:13,fontWeight: FontWeight.w400),),
                                        const SizedBox(width: 5,),
 
@@ -365,8 +365,8 @@ class _PackagesOrderViewState extends PackagesOrderViewModel {
                                             const SizedBox(width: 3,),
                                             Text(
                                               e.offer!.type=="weekend"?
-                                              tr("عطلة أسبوعية")
-                                                  :tr("رحلة"),style: GoogleFonts.tajawal(color: Colors.black,
+                                              tr("weekend")
+                                                  :tr("aTrip"),style: GoogleFonts.tajawal(color: Colors.black,
                                                 fontSize:12,fontWeight: FontWeight.w500),),
                                           ]),
                                     )
@@ -437,7 +437,7 @@ class _PackagesOrderViewState extends PackagesOrderViewModel {
                                         (MaterialPageRoute(builder: (context) => const PackagesOrderDetailsView(),));
                                     },
                                       child: Row(children: [
-                                        Text(tr("تفاصيل"),style: GoogleFonts.tajawal(color: Colors.blue,
+                                        Text(tr("Details"),style: GoogleFonts.tajawal(color: Colors.blue,
                                             fontSize:13,fontWeight: FontWeight.w400),),
                                         const SizedBox(width: 5,),
 
@@ -513,8 +513,8 @@ class _PackagesOrderViewState extends PackagesOrderViewModel {
                                             const SizedBox(width: 3,),
                                             Text(
                                               e.offer!.type=="weekend"?
-                                              tr("عطلة أسبوعية")
-                                                  :tr("رحلة"),style: GoogleFonts.tajawal(color: Colors.black,
+                                              tr("weekend")
+                                                  :tr("aTrip"),style: GoogleFonts.tajawal(color: Colors.black,
                                                 fontSize:12,fontWeight: FontWeight.w500),),
                                           ]),
                                     )
@@ -585,7 +585,7 @@ class _PackagesOrderViewState extends PackagesOrderViewModel {
                                         (MaterialPageRoute(builder: (context) => const PackagesOrderDetailsView(),));
                                     },
                                       child: Row(children: [
-                                        Text(tr("تفاصيل"),style: GoogleFonts.tajawal(color: Colors.blue,
+                                        Text(tr("Details"),style: GoogleFonts.tajawal(color: Colors.blue,
                                             fontSize:13,fontWeight: FontWeight.w400),),
                                         const SizedBox(width: 5,),
 

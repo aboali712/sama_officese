@@ -21,6 +21,58 @@ class StepThree extends StatelessWidget {
         children: [
         const SizedBox(height: 10,),
 
+
+
+          Text(tr("ChooseServices"),
+              style: GoogleFonts.tajawal(
+                  fontSize: 15, fontWeight: FontWeight.bold)),
+          const SizedBox(
+            height: 20,
+          ),
+          Column(
+              children:signUpViewModel.filterModel != null
+                  ?signUpViewModel.filterModel!.services!
+                  .map((e) => Row(
+                children: [
+                  Column(
+                    children: [
+                      Row(
+                        children: [
+                          SizedBox(
+                            width: 30,
+                            height: 40,
+                            child: Checkbox(
+                              activeColor: samaColor,
+
+                              value: signUpViewModel.selectServices.contains(e),
+                              onChanged: (newValue) {
+                                signUpViewModel.serviceSetState(e);
+
+                              },
+                            ),
+                          ),
+                          Text(e.name!,
+                              style: GoogleFonts.tajawal(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 14)),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                    ],
+                  ),
+                ],
+              ))
+                  .toList()
+                  : []),
+
+
+          const SizedBox(
+            height: 20,
+          ),
+
+
         Text(
           tr("BankAccountInformation"),
           style: const TextStyle(

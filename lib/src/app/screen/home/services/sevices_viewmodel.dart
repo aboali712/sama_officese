@@ -45,10 +45,6 @@ abstract class ServicesViewModel extends State<ServiceView>{
         servicesCompleted=services.where((element) => element.status=="canceled" || element.status=="completed").toList();
 
       });
-
-
-
-      // log(servicesCompleted.map((e) => e.toJson()).toString());
     }
   }
 

@@ -118,6 +118,10 @@ class _UpDateProfileViewState extends UpDateProfileViewModel {
                 Expanded(
                   child: SingleChildScrollView(
                     child: Column(children: [
+
+
+
+
                       step==0?
                       StepOneProfile(this)
                           : step==1?
@@ -151,8 +155,7 @@ class _UpDateProfileViewState extends UpDateProfileViewModel {
             Positioned(bottom: 40,left: 20,right: 20,
               child: TextButton(
                 style: TextButton.styleFrom(
-                    primary: Colors.white,
-                    padding: const EdgeInsets.all(0),
+                    foregroundColor: Colors.white, padding: const EdgeInsets.all(0),
                     fixedSize: const Size(75, 50),
                     shape: RoundedRectangleBorder(
 

@@ -38,9 +38,9 @@ class _ServiceViewState extends ServicesViewModel {
                   Navigator.pop(context);
                 }
                   ,child: const Icon(Icons.arrow_back_ios,color: Colors.white,)),
-                const Text(
-                  "طلبات الخدمات",
-                  style: TextStyle(
+                 Text(
+                  tr("ServiceRequests"),
+                  style: const TextStyle(
                       color:  Colors.white,
                       fontSize: 21, fontWeight: FontWeight.w500),
                 ),
@@ -80,7 +80,7 @@ class _ServiceViewState extends ServicesViewModel {
                                   )),
                               const SizedBox(width: 5,),
 
-                              Text(tr("جديدة"),
+                              Text(tr("New"),
                                 textAlign: TextAlign.center,
                                 style: GoogleFonts.tajawal(color:serviceStat==0?  Colors.black: Colors.grey,
                                     fontWeight: FontWeight.w500,fontSize: 14
@@ -115,7 +115,7 @@ class _ServiceViewState extends ServicesViewModel {
                                       ),),
                                   )):const SizedBox.shrink(),
                               const SizedBox(width: 5,),
-                              Text(tr("قيد التنفيذ"),
+                              Text(tr("Underway"),
                                 textAlign: TextAlign.center,
                                 style: GoogleFonts.tajawal(color:serviceStat==1? Colors.black: Colors.grey,
                                     fontWeight: FontWeight.w500,fontSize: 14
@@ -131,7 +131,7 @@ class _ServiceViewState extends ServicesViewModel {
                         });
                       },
                         child: Container(height: 43,width: 110,
-                          padding: const EdgeInsets.all(13),
+                          padding: const EdgeInsets.all(11),
                           decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),
                             color: serviceStat==2? Colors.white :Colors.transparent ,
                           ),
@@ -150,7 +150,7 @@ class _ServiceViewState extends ServicesViewModel {
                                       ),),
                                   )):const SizedBox.shrink(),
                               const SizedBox(width: 5,),
-                              Text(tr("مكتملة"),
+                              Text(tr("Complete"),
                                 textAlign: TextAlign.center,
                                 style: GoogleFonts.tajawal(color:serviceStat==2? Colors.black: Colors.grey,
                                     fontWeight: FontWeight.w500,fontSize: 14
@@ -300,7 +300,7 @@ class _ServiceViewState extends ServicesViewModel {
                             (MaterialPageRoute(builder: (context) => const ServiceDetails(),));
                              },
                                child: Row(children: [
-                                 Text(tr("تفاصيل"),style: GoogleFonts.tajawal(color: Colors.blue,
+                                 Text(tr("Details"),style: GoogleFonts.tajawal(color: Colors.blue,
                                      fontSize:13,fontWeight: FontWeight.w400),),
                                  const SizedBox(width: 5,),
 
@@ -507,7 +507,7 @@ class _ServiceViewState extends ServicesViewModel {
                                           (MaterialPageRoute(builder: (context) => const ServiceDetails(),));
                                       },
                                         child: Row(children: [
-                                          Text(tr("تفاصيل"),style: GoogleFonts.tajawal(color: Colors.blue,
+                                          Text(tr("Details"),style: GoogleFonts.tajawal(color: Colors.blue,
                                               fontSize:13,fontWeight: FontWeight.w400),),
                                           const SizedBox(width: 5,),
 
@@ -713,7 +713,7 @@ class _ServiceViewState extends ServicesViewModel {
                                    (MaterialPageRoute(builder: (context) => const ServiceDetails(),));
                                },
                                  child: Row(children: [
-                                   Text(tr("تفاصيل"),style: GoogleFonts.tajawal(color: Colors.blue,
+                                   Text(tr("Details"),style: GoogleFonts.tajawal(color: Colors.blue,
                                        fontSize:13,fontWeight: FontWeight.w400),),
                                    const SizedBox(width: 5,),
 

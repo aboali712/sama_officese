@@ -37,17 +37,13 @@ class _ContactUsViewState extends ContactUsViewModel {
                 }
                     ,child: const Icon(Icons.arrow_back_ios,color: Colors.white,)),
                 Text(
-                  tr("تواصل معنا"),
+                  tr("ContactUs"),
                   style: const TextStyle(
                       color:  Colors.white,
                       fontSize: 21, fontWeight: FontWeight.w500),
                 ),
 
               ],),
-
-
-
-
 
             ],
           ),
@@ -77,12 +73,15 @@ class _ContactUsViewState extends ContactUsViewModel {
                             children: [
                               const SizedBox(height: 10,),
 
-                              Text("نحن دائما هنا لمساعدك",style: GoogleFonts.tajawal(color: Colors.black,
+                              Text(
+                                textAlign: TextAlign.center,
+                                tr("WeAreAlwaysHereToHelpYou"),style: GoogleFonts.tajawal(color: Colors.black,
                                   fontSize:25,fontWeight: FontWeight.w500),),
                               const SizedBox(height: 10,),
 
 
-                              Text("إذا كان لديك سؤال، اقتراح، أو تحتاج إلى ذلك خدمة العملاء راسلنا عبر البريد الإلكتروني الآن",
+                              Text(tr("IfYouHaveAQuestion"),
+                                textAlign: TextAlign.center,
                                 style: GoogleFonts.tajawal(color: Colors.grey,
                                   fontSize:17,fontWeight: FontWeight.w400),),
                               const SizedBox(height: 20,),
@@ -226,8 +225,7 @@ class _ContactUsViewState extends ContactUsViewModel {
                               Center(
                                 child: TextButton(
                                   style: TextButton.styleFrom(
-                                      primary: Colors.white,
-                                      padding: const EdgeInsets.all(0),
+                                      foregroundColor: Colors.white, padding: const EdgeInsets.all(0),
                                       fixedSize:  Size(size.width-20, 50),
                                       shape: RoundedRectangleBorder(
 
@@ -241,7 +239,7 @@ class _ContactUsViewState extends ContactUsViewModel {
 
                                   },
                                   child: Text(
-                                    tr("أرسال"),
+                                    tr("Send"),
                                     style: const TextStyle(
                                         fontSize: 16,
                                         color: Colors.white,
@@ -252,7 +250,7 @@ class _ContactUsViewState extends ContactUsViewModel {
 
                               const SizedBox(height: 20,),
 
-                              Text("أو تواصل معنا عبر",style: GoogleFonts.tajawal(color: Colors.grey,
+                              Text(tr("OrContactUsVia"),style: GoogleFonts.tajawal(color: Colors.grey,
                                   fontSize:16,fontWeight: FontWeight.w400),),
 
                               const SizedBox(height: 30,),
@@ -269,7 +267,7 @@ class _ContactUsViewState extends ContactUsViewModel {
 
                                   Column(crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Text("رقم الجوال",style: GoogleFonts.tajawal(color: Colors.black,
+                                      Text(tr("Phone"),style: GoogleFonts.tajawal(color: Colors.black,
                                           fontSize:16,fontWeight: FontWeight.w500),),
                                       const SizedBox(height: 5,),
                                       Text(phone,
@@ -289,7 +287,7 @@ class _ContactUsViewState extends ContactUsViewModel {
 
                                   Column(crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Text("البريد الألكترونى",style: GoogleFonts.tajawal(color: Colors.black,
+                                      Text(tr("E-mail"),style: GoogleFonts.tajawal(color: Colors.black,
                                           fontSize:16,fontWeight: FontWeight.w500),),
                                       const SizedBox(height: 5,),
                                       Text(MoreViewModel.settingsModel!.email!,

@@ -44,6 +44,7 @@ dependencies:
   flutter_svg: ^2.0.9
   keyboard_actions: ^4.2.0
   flag: ^7.0.0
+  location: ^5.0.3
   elegant_notification: ^1.8.0
   image_picker: ^1.0.7
   flutter_quill: any
@@ -64,7 +65,11 @@ dependencies:
   firebase_messaging: ^14.0.2
   url_launcher: ^6.1.6
   flutter_html: any
-#  place_picker: ^0.10.0
+  map_location_picker: ^1.2.8+3
+  flutter_countdown_timer: ^4.1.0
+  pin_code_fields: ^7.4.0
+
+
 
 
 

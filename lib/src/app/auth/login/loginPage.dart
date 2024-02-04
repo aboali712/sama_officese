@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../app.dart';
 import '../../core/utils/input_validators.dart';
@@ -12,6 +13,7 @@ import '../../core/values/colors.dart';
 import '../../core/widgets/phone_number_widget.dart';
 import '../../home_core.dart';
 import '../../screen/home/home_view.dart';
+import '../forget_password/forget_password_view.dart';
 import '../register/signup_view.dart';
 import 'loginViewModel.dart';
 
@@ -38,6 +40,27 @@ class _LoginPageState extends LoginViewModel {
 
     return Scaffold(
         backgroundColor: Colors.white,
+
+        appBar: AppBar(
+          title: Row(
+            children: [
+              const SizedBox(width: 20,),
+              Text(tr("Login"),style: GoogleFonts.tajawal(color: Colors.white,
+                  fontSize:Platform.isIOS?23: 18,fontWeight: FontWeight.w500),),
+            ],
+          ),
+          flexibleSpace:  Stack(
+              children: [
+                Container(height: 30,color: const Color(0xff231f20),),
+                Image(
+                  image: const AssetImage('assets/images/signback.png'),
+                  fit: BoxFit.cover,width: size.width,
+                ),
+              ] ),toolbarHeight: 140,
+          backgroundColor: Colors.transparent,
+          automaticallyImplyLeading: false,
+        ),
+
         body: AnnotatedRegion<SystemUiOverlayStyle>(
             value: SystemUiOverlayStyle.dark,
             child: Stack(
@@ -48,12 +71,8 @@ class _LoginPageState extends LoginViewModel {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Platform.isIOS
-                          ? const SizedBox(
-                        height: 120,
-                      )
-                          : const SizedBox(
-                        height: 100,
+                      const SizedBox(
+                        height: 20,
                       ),
 
                       Center(
@@ -64,7 +83,7 @@ class _LoginPageState extends LoginViewModel {
                         ),
                       ),
                       const SizedBox(
-                        height: 30,
+                        height: 10,
                       ),
 
                     ],
@@ -73,7 +92,7 @@ class _LoginPageState extends LoginViewModel {
                 Container(
                   padding: const EdgeInsets.all(10),
                   margin: EdgeInsets.only(
-                      top: size.height - (size.height / 1.3),
+                      top: size.height - (size.height / 1.12),
                       left: 10,
                       right: 10),
                   height: size.height - (size.height / 2.6),
@@ -253,7 +272,10 @@ class _LoginPageState extends LoginViewModel {
                               Center(
                                 child: TextButton(
                                     onPressed: () {
-
+                                      SamaOfficeApp.navKey.currentState!.push(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                              const ForgetPassword()));
                                     },
                                     child: Text(
                                       tr("ForgetPassword"),
@@ -268,13 +290,13 @@ class _LoginPageState extends LoginViewModel {
                               ),
                               TextButton(
                                   style: TextButton.styleFrom(
-                                      fixedSize: Size(size.width, 55),
+                                      fixedSize: Size(size.width, 50),
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
-                                          BorderRadius.circular(10.0),
+                                          BorderRadius.circular(15.0),
                                           side: const BorderSide(
-                                              color: samaOfficeColor)),
-                                      backgroundColor: samaOfficeColor),
+                                              color: Color(0xffea8024))),
+                                      backgroundColor: const Color(0xffea8024)),
                                   onPressed: () {
                                     checkLogin();
                                   },

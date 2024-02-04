@@ -31,7 +31,7 @@ class _SignUpState extends SignUpViewModel {
           children: [
             const SizedBox(width: 20,),
             Text(tr("CreateAnAccount"),style: GoogleFonts.tajawal(color: Colors.white,
-                fontSize:Platform.isIOS?25: 20,fontWeight: FontWeight.w500),),
+                fontSize:Platform.isIOS?23: 18,fontWeight: FontWeight.w500),),
           ],
         ),
         flexibleSpace:  Stack(
@@ -153,8 +153,7 @@ class _SignUpState extends SignUpViewModel {
           Positioned(bottom: 40,left: 20,right: 20,
             child: TextButton(
               style: TextButton.styleFrom(
-                  primary: Colors.white,
-                  padding: const EdgeInsets.all(0),
+                  foregroundColor: Colors.white, padding: const EdgeInsets.all(0),
                   fixedSize: const Size(75, 50),
                   shape: RoundedRectangleBorder(
 
@@ -165,8 +164,10 @@ class _SignUpState extends SignUpViewModel {
                   backgroundColor: const Color(0xffea8024)),
               onPressed: () {
 
-                 checkValidationRegister();
-                // con();
+                if( checkValidationRegister()){
+                  registerCallApi();
+                }
+
 
               },
               child: Text(

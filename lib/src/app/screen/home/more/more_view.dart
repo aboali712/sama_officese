@@ -160,8 +160,7 @@ class _MoreViewState extends MoreViewModel {
                           SizedBox(height: 30,
                             child: TextButton(
                               style: TextButton.styleFrom(
-                                  primary: Colors.white,
-                                  padding: const EdgeInsets.all(0),
+                                  foregroundColor: Colors.white, padding: const EdgeInsets.all(0),
                                   fixedSize:  const Size(80, 35),
                                   shape: RoundedRectangleBorder(
 
@@ -202,8 +201,7 @@ class _MoreViewState extends MoreViewModel {
                           SizedBox(height: 30,
                             child: TextButton(
                               style: TextButton.styleFrom(
-                                  primary: Colors.white,
-                                  padding: const EdgeInsets.all(0),
+                                  foregroundColor: Colors.white, padding: const EdgeInsets.all(0),
                                   fixedSize:  const Size(80, 35),
                                   shape: RoundedRectangleBorder(
 

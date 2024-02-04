@@ -1033,8 +1033,7 @@ class _CreatePackageViewState extends CreatePackageViewModel {
 
                                 TextButton(
                                   style: TextButton.styleFrom(
-                                      primary: Colors.white,
-                                      padding: const EdgeInsets.all(0),
+                                      foregroundColor: Colors.white, padding: const EdgeInsets.all(0),
                                       fixedSize:  const Size(100, 45),
                                       shape: RoundedRectangleBorder(
 
@@ -1063,8 +1062,7 @@ class _CreatePackageViewState extends CreatePackageViewModel {
 
                                 TextButton(
                                   style: TextButton.styleFrom(
-                                      primary: Colors.white,
-                                      padding: const EdgeInsets.all(0),
+                                      foregroundColor: Colors.white, padding: const EdgeInsets.all(0),
                                       fixedSize:  const Size(100, 45),
                                       shape: RoundedRectangleBorder(
 
@@ -1115,8 +1113,7 @@ class _CreatePackageViewState extends CreatePackageViewModel {
 
                                 TextButton(
                                   style: TextButton.styleFrom(
-                                      primary: Colors.white,
-                                      padding: const EdgeInsets.all(0),
+                                      foregroundColor: Colors.white, padding: const EdgeInsets.all(0),
                                       fixedSize:  const Size(100, 45),
                                       shape: RoundedRectangleBorder(
 
@@ -1145,8 +1142,7 @@ class _CreatePackageViewState extends CreatePackageViewModel {
 
                                 TextButton(
                                   style: TextButton.styleFrom(
-                                      primary: Colors.white,
-                                      padding: const EdgeInsets.all(0),
+                                      foregroundColor: Colors.white, padding: const EdgeInsets.all(0),
                                       fixedSize:  const Size(100, 45),
                                       shape: RoundedRectangleBorder(
 
@@ -1333,8 +1329,7 @@ class _CreatePackageViewState extends CreatePackageViewModel {
                 child: Center(
                   child: TextButton(
                     style: TextButton.styleFrom(
-                        primary: Colors.white,
-                        padding: const EdgeInsets.all(0),
+                        foregroundColor: Colors.white, padding: const EdgeInsets.all(0),
                         fixedSize:  Size(size.width-20, 50),
                         shape: RoundedRectangleBorder(
 

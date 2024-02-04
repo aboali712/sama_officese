@@ -370,8 +370,7 @@ class _PackagesDetailsState extends PackagesDetailsVieModel {
 
                       TextButton(
                         style: TextButton.styleFrom(
-                            primary: Colors.white,
-                            padding: const EdgeInsets.all(0),
+                            foregroundColor: Colors.white, padding: const EdgeInsets.all(0),
                             fixedSize:  Size(size.width-20, 50),
                             shape: RoundedRectangleBorder(
 
