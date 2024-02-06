@@ -29,7 +29,7 @@ class _MoreViewState extends MoreViewModel {
       backgroundColor: Colors.white,
       appBar:  AppBar(
         title:
-        HomeViewModel.profileModel!=null?
+        HomeViewModel.profileModel!.office!=null?
         Row(
           children: [
             const SizedBox(width: 5,),
@@ -125,7 +125,7 @@ class _MoreViewState extends MoreViewModel {
                                         Text(tr("SubscriptionEndsIn"),style: GoogleFonts.tajawal(color: Colors.white70,
                                             fontSize:13,fontWeight: FontWeight.w400),),
 
-                                        HomeViewModel.profileModel!=null?
+                                        HomeViewModel.profileModel!.office!=null?
                                         Text(DateFormat("MMM d,yyyy","en" ).format(DateTime.parse(
                                             HomeViewModel.profileModel!.office!.subscription_end_date!)),
                                           style: GoogleFonts.tajawal(color: Colors.white70,
@@ -153,7 +153,7 @@ class _MoreViewState extends MoreViewModel {
                          const SizedBox(width: 15,),
 
                          Text(tr("Language"),style: GoogleFonts.tajawal(color: Colors.black,
-                             fontSize:16,fontWeight: FontWeight.w500),),
+                             fontSize:15,fontWeight: FontWeight.w500),),
                        ],),
 
                         Row(children: [
@@ -256,7 +256,7 @@ class _MoreViewState extends MoreViewModel {
                           const SizedBox(width: 15,),
 
                           Text(tr("ConnectUs"),style: GoogleFonts.tajawal(color: Colors.black,
-                              fontSize:16,fontWeight: FontWeight.w500),),
+                              fontSize:15,fontWeight: FontWeight.w500),),
                         ],),
                       ),
 
@@ -273,7 +273,7 @@ class _MoreViewState extends MoreViewModel {
                           const SizedBox(width: 15,),
 
                           Text(tr("AboutUs"),style: GoogleFonts.tajawal(color: Colors.black,
-                              fontSize:16,fontWeight: FontWeight.w500),),
+                              fontSize:15,fontWeight: FontWeight.w500),),
                         ],),
                       ),
 
@@ -290,7 +290,7 @@ class _MoreViewState extends MoreViewModel {
                           const SizedBox(width: 15,),
 
                           Text(tr('UsageInstructions'),style: GoogleFonts.tajawal(color: Colors.black,
-                              fontSize:16,fontWeight: FontWeight.w500),),
+                              fontSize:15,fontWeight: FontWeight.w500),),
                         ],),
                       ),
 
@@ -307,7 +307,7 @@ class _MoreViewState extends MoreViewModel {
                           const SizedBox(width: 15,),
 
                           Text(tr("Privacy"),style: GoogleFonts.tajawal(color: Colors.black,
-                              fontSize:16,fontWeight: FontWeight.w500),),
+                              fontSize:15,fontWeight: FontWeight.w500),),
                         ],),
                       ),
 
@@ -323,7 +323,7 @@ class _MoreViewState extends MoreViewModel {
                           const SizedBox(width: 15,),
 
                           Text(tr("DeleteAccount"),style: GoogleFonts.tajawal(color: Colors.black,
-                              fontSize:16,fontWeight: FontWeight.w500),),
+                              fontSize:15,fontWeight: FontWeight.w500),),
                         ],),
                       ),
 
@@ -339,7 +339,7 @@ class _MoreViewState extends MoreViewModel {
                           const SizedBox(width: 15,),
 
                           Text(tr("Logout"),style: GoogleFonts.tajawal(color: Colors.black,
-                              fontSize:16,fontWeight: FontWeight.w500),),
+                              fontSize:15,fontWeight: FontWeight.w500),),
                         ],),
                       ),
 

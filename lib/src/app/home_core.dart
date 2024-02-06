@@ -86,8 +86,7 @@ class HomeCorePage extends State<HomeCore> with StorageHelper {
               // showIgnore: false,
               messages: MyUpgraderMessages()),
           child: Scaffold(
-            body: AnnotatedRegion<SystemUiOverlayStyle>(
-                value: SystemUiOverlayStyle.dark, child: child),
+            body: child,
             bottomNavigationBar: BottomMenu(
               bottomMenuIndex: index,
               onChanged: (newIndex) => setState(() => index = newIndex),

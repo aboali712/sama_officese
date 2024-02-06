@@ -1018,13 +1018,16 @@ class _CreatePackageViewState extends CreatePackageViewModel {
 
                           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                tr("ChooseTheTypeOfPackage"),
-                                style: const TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15),
-                                textAlign: TextAlign.center,
+                              SizedBox(width: 130,
+                                child: Text(
+
+                                  tr("ChooseTheTypeOfPackage"),
+                                  style: const TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15),
+                                  textAlign: TextAlign.start,
+                                ),
                               ),
 
 
@@ -1100,13 +1103,15 @@ class _CreatePackageViewState extends CreatePackageViewModel {
 
                           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                tr("ChooseTheDisplayType"),
-                                style: const TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15),
-                                textAlign: TextAlign.center,
+                              SizedBox(width: 130,
+                                child: Text(
+                                  tr("ChooseTheDisplayType"),
+                                  style: const TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15),
+                                  textAlign: TextAlign.start,
+                                ),
                               ),
 
                               Row(children: [

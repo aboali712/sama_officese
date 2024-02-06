@@ -59,7 +59,9 @@ class StepTwoProfile extends StatelessWidget {
                               fit: BoxFit.cover)
                                   : DecorationImage(
                                   image:
-                                  NetworkImage(
+                                      HomeViewModel.profileModel!.office==null?
+                                      const NetworkImage("https://samaapp.com/storage/default.png")
+                                 : NetworkImage(
                                     HomeViewModel.profileModel!.office!.image?? "",
                                   ),
                                   fit: BoxFit.cover)
@@ -748,7 +750,7 @@ class StepTwoProfile extends StatelessWidget {
             child: DropdownButtonFormField2(
               isExpanded: true,
               decoration: InputDecoration(
-                hintText: HomeViewModel.profileModel!.office!.country_name,
+                hintText: HomeViewModel.profileModel!.office!=null? HomeViewModel.profileModel!.office!.country_name : "",
                 floatingLabelBehavior: FloatingLabelBehavior.never,
                 contentPadding: const EdgeInsets.only(
                     bottom: 15.0, top: 10, left: 10, right: 10),
@@ -844,7 +846,7 @@ class StepTwoProfile extends StatelessWidget {
             child: DropdownButtonFormField2(
               isExpanded: true,
               decoration: InputDecoration(
-                hintText: HomeViewModel.profileModel!.office!.city_name,
+                hintText: HomeViewModel.profileModel!.office!=null? HomeViewModel.profileModel!.office!.city_name :"",
                 floatingLabelBehavior: FloatingLabelBehavior.never,
                 contentPadding: const EdgeInsets.only(
                     bottom: 15.0, top: 10, left: 10, right: 10),

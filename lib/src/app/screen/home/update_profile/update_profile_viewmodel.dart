@@ -106,7 +106,9 @@ abstract class UpDateProfileViewModel  extends State<UpDateProfileView> with Sto
   @override
   void initState() {
     getFilterDataApi();
-    setData();
+    HomeViewModel.profileModel!.office!=null?
+    setData()
+    : null;
 
     super.initState();
   }
@@ -237,7 +239,7 @@ abstract class UpDateProfileViewModel  extends State<UpDateProfileView> with Sto
 
       PhoneNumberSignUpWidgetState.dropdownValue=phoneNumber;
 
-      detailsAr=HomeViewModel.profileModel!.office!.description.toString();
+      detailsAr=HomeViewModel.profileModel!.office!.description.toString()??"";
       completeNameArControl.text=HomeViewModel.profileModel!.office!.name.toString();
       addressArControl.text=HomeViewModel.profileModel!.office!.address.toString();
       // workHoursControl.text=HomeViewModel.profileModel!.office!.workingHours.toString();

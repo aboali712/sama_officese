@@ -198,5 +198,7 @@
   "numberOfGuests": "عدد الضيوف",
   "Individuals": "أفراد",
   "moreInformation": "المزيد من المعلومات",
-  "SaveChanges": "حفظ التغيرات"
+  "SaveChanges": "حفظ التغيرات",
+  "NoPackages": "لا يوجد باكدجات",
+  "NoPackagesDes": "لا يوجد باكدجات ابدأ بالترويج الآن"
 }

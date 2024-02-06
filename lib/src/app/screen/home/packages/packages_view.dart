@@ -38,9 +38,9 @@ class _PackagesViewState extends PackagesViewModel {
                   Navigator.pop(context);
                 }
                     ,child: const Icon(Icons.arrow_back_ios,color: Colors.white,)),
-                const Text(
-                  "الباكيدجات",
-                  style: TextStyle(
+                 Text(
+                  tr("Packages"),
+                  style: const TextStyle(
                       color:  Colors.white,
                       fontSize: 21, fontWeight: FontWeight.w500),
                 ),
@@ -75,7 +75,7 @@ class _PackagesViewState extends PackagesViewModel {
                   child: Column(children: [
                      const SizedBox(height: 10,),
 
-
+                     offerPageModel!.isNotEmpty?
                     Column(children:
                     offerPageModel!.isNotEmpty?
                     offerPageModel!.map((e) =>
@@ -200,7 +200,32 @@ class _PackagesViewState extends PackagesViewModel {
                           ],
                         )
 
-                      ,).toList() :[],),
+                      ,).toList() :[],)
+                         :Container(
+                       margin: EdgeInsets.only(
+                           top: MediaQuery.of(context).size.height / 5),
+                       child: Column(
+                         children: [
+                           SvgPicture.asset("assets/images/empty_orders.svg"),
+                           const SizedBox(
+                             height: 20,
+                           ),
+                           Text(
+                             tr("NoPackages"),
+                             style: const TextStyle(
+                                 fontSize: 17, fontWeight: FontWeight.bold),
+                           ),
+                           const SizedBox(
+                             height: 10,
+                           ),
+                           Text(textAlign: TextAlign.center,
+                             tr("NoPackagesDes"),
+                             style: const TextStyle(
+                                 fontSize: 15, fontWeight: FontWeight.w500),
+                           ),
+                         ],
+                       ),
+                     ),
 
 
 

@@ -199,7 +199,7 @@
   "numberOfGuests": "number of guests",
   "Individuals": "Individuals",
   "moreInformation": "more information",
-  "SaveChanges": "Save changes"
-
-
+  "SaveChanges": "Save changes",
+  "NoPackages": "No packages",
+  "NoPackagesDes": "you have no Packages in your history , start Now to have a history"
 }
