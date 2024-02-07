@@ -36,7 +36,7 @@ class _SignUpState extends SignUpViewModel {
         ),
         flexibleSpace:  Stack(
           children: [
-            Container(height: 30,color: const Color(0xff62b3ff),),
+            Container(height: 30,color: Colors.black,),
             Image(
             image: const AssetImage('assets/images/signback.png'),
             fit: BoxFit.cover,width: size.width,

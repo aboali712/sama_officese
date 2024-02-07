@@ -201,5 +201,17 @@
   "moreInformation": "more information",
   "SaveChanges": "Save changes",
   "NoPackages": "No packages",
-  "NoPackagesDes": "you have no Packages in your history , start Now to have a history"
+  "NoPackagesDes": "you have no Packages in your history , start Now to have a history",
+  "DearCustomer,ThereAre5DaysLeftUntilTheSubscriptionEnds": "Dear customer, there are 5 days left until the subscription ends",
+  "DearCustomer,ThereAre4DaysLeftUntilTheSubscriptionEnds": "Dear customer, there are 4 days left until the subscription ends",
+  "DearCustomer,ThereAre3DaysLeftUntilTheSubscriptionEnds": "Dear customer, there are 3 days left until the subscription ends",
+  "DearCustomer,ThereAre2DaysLeftUntilTheSubscriptionEnds": "Dear customer, there are 2 days left until the subscription ends",
+  "DearCustomer,ThereAre1DaysLeftUntilTheSubscriptionEnds": "Dear customer, there are 1 days left until the subscription ends",
+  "DearCustomer,TodayTheSubscriptionEnds": "Dear customer, today the subscription ends",
+  "payment": "payment",
+  "renewal": "Re new",
+  "NumberOfMonths": "Number of months",
+  "DearCustomer,TheVipSubscriptionPeriodHasExpired": "Dear customer, the subscription period has expired",
+  "ToRenew": "To renew",
+  "ReNew": "Re new"
 }

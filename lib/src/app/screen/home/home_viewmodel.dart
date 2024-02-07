@@ -1,8 +1,11 @@
 
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:map_location_picker/map_location_picker.dart';
+import 'package:sama_officese/src/app.dart';
 
 import 'package:sama_officese/src/app/core/local/storagehelper.dart';
 import 'package:sama_officese/src/app/screen/home/packages/models/OffersResponse.dart';
@@ -15,6 +18,7 @@ import '../../auth/auth_model/user_model.dart';
 import '../../core/network/network_service.dart';
 import '../../core/utils/helper_manager.dart';
 import 'home_view.dart';
+import 'is_office_subscribe_expired/ofice_subscribe_expired_view.dart';
 
 abstract class HomeViewModel extends State<HomePage> with StorageHelper{
   final Dio dio = NetworkService.instance.dio;
@@ -33,17 +37,74 @@ abstract class HomeViewModel extends State<HomePage> with StorageHelper{
 
 
   List<OfferModel>? offerPageModel=[];
+  static int? difference;
+  static bool? nullValue;
+  DateTime date =DateTime.now();
+  DateTime? valEnd;
+  static bool? valDate;
+  static int pageVipExpired=0;
+  DateTime? minus5Days;
+  static  bool? valDateMinus5Days;
+
 
   @override
   void initState() {
     getCurrentLocation();
-    getUserData();
+    getUserData().then((value) => { sub()});
     getLang().then((value) => setState((){lang=value!; }));
     getReservationsApi();
     getPackageOrderApi();
     getOffersDataApi();
     super.initState();
   }
+
+
+
+  void sub(){
+
+    if(profileModel!.office!.subscription_end_date==null){
+      setState((){
+        nullValue=true;
+      });
+
+      SamaOfficeApp.navKey.currentState!.pushReplacement(MaterialPageRoute(builder:
+          (context) => const OfficeSubscribeView(),));
+
+    }else{
+
+      valEnd = DateTime.parse(profileModel!.office!.subscription_end_date.toString()) ;
+      print(profileModel!.office!.subscription_end_date.toString());
+      minus5Days = valEnd!.subtract(const Duration(days: 5));
+      setState(() {
+        difference = valEnd!.difference(date).inDays ;
+        print(difference);
+      });
+      valDate = date.isBefore(valEnd!);
+      valDateMinus5Days = date.isBefore(minus5Days!);
+      print(valDateMinus5Days);
+
+
+      if(valDateMinus5Days==false ){
+
+        if(pageVipExpired==0){
+          valDate==false?
+          SamaOfficeApp.navKey.currentState!.pushReplacement(MaterialPageRoute(
+            builder: (context) => const OfficeSubscribeView(),))
+
+              :SamaOfficeApp.navKey.currentState!.push(MaterialPageRoute(
+            builder: (context) => const OfficeSubscribeView(),));
+
+          setState((){
+            HomeViewModel.pageVipExpired=1;
+
+          });
+        }
+
+
+      }
+    }
+  }
+
 
   Future<void> getUserData() async {
     setState(() {
@@ -59,7 +120,7 @@ abstract class HomeViewModel extends State<HomePage> with StorageHelper{
         profileModel = rs.data;
 
       });
-
+      log(profileModel!.toJson().toString());
     }
 
   }

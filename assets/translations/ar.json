@@ -200,5 +200,17 @@
   "moreInformation": "المزيد من المعلومات",
   "SaveChanges": "حفظ التغيرات",
   "NoPackages": "لا يوجد باكدجات",
-  "NoPackagesDes": "لا يوجد باكدجات ابدأ بالترويج الآن"
+  "NoPackagesDes": "لا يوجد باكدجات ابدأ بالترويج الآن",
+  "DearCustomer,ThereAre5DaysLeftUntilTheSubscriptionEnds": "عميلنا العزيز باقى 5 أيام على أنتهاء الأشتراك",
+  "DearCustomer,ThereAre4DaysLeftUntilTheSubscriptionEnds": "عميلنا العزيز باقى 4 أيام على أنتهاء الأشتراك",
+  "DearCustomer,ThereAre3DaysLeftUntilTheSubscriptionEnds": "عميلنا العزيز باقى 3 أيام على أنتهاء الأشتراك",
+  "DearCustomer,ThereAre2DaysLeftUntilTheSubscriptionEnds": "عميلنا العزيز باقى 2 يوم على أنتهاء الأشتراك",
+  "DearCustomer,ThereAre1DaysLeftUntilTheSubscriptionEnds": "عميلنا العزيز باقى 1 يوم على أنتهاء الأشتراك",
+  "DearCustomer,TodayTheSubscriptionEnds": "عميلنا العزيز اليوم يتم أنتهاء فيه الأشتراك",
+  "payment": "الدفع",
+  "renewal": "تجديد",
+  "NumberOfMonths": "عدد الشهور",
+  "DearCustomer,TheVipSubscriptionPeriodHasExpired": "عميلنا العزيز لقد تم أنتهاء مدة الأشتراك",
+  "ToRenew": "للتجديد",
+  "ReNew": "تجديد الأشتراك"
 }

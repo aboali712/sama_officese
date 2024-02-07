@@ -833,7 +833,7 @@ class StepTwo extends StatelessWidget {
                 FlutterSwitch(
                   inactiveColor: Colors.grey.shade300,
                   activeColor: AppColors.green,
-                  width: 60,
+                  width: 50,
                   height: 25.0,
                   valueFontSize: 25.0,
                   toggleSize: 25.0,
@@ -1032,7 +1032,7 @@ class StepTwo extends StatelessWidget {
                 FlutterSwitch(
                   inactiveColor: Colors.grey.shade300,
                   activeColor: AppColors.green,
-                  width: 60,
+                  width: 50,
                   height: 25.0,
                   valueFontSize: 25.0,
                   toggleSize: 25.0,
@@ -1231,7 +1231,7 @@ class StepTwo extends StatelessWidget {
                 FlutterSwitch(
                   inactiveColor: Colors.grey.shade300,
                   activeColor: AppColors.green,
-                  width: 60,
+                  width: 50,
                   height: 25.0,
                   valueFontSize: 25.0,
                   toggleSize: 25.0,
@@ -1430,7 +1430,7 @@ class StepTwo extends StatelessWidget {
                 FlutterSwitch(
                   inactiveColor: Colors.grey.shade300,
                   activeColor: AppColors.green,
-                  width: 60,
+                  width: 50,
                   height: 25.0,
                   valueFontSize: 25.0,
                   toggleSize: 25.0,
@@ -1629,7 +1629,7 @@ class StepTwo extends StatelessWidget {
                 FlutterSwitch(
                   inactiveColor: Colors.grey.shade300,
                   activeColor: AppColors.green,
-                  width: 60,
+                  width: 50,
                   height: 25.0,
                   valueFontSize: 25.0,
                   toggleSize: 25.0,
@@ -1829,7 +1829,7 @@ class StepTwo extends StatelessWidget {
                 FlutterSwitch(
                   inactiveColor: Colors.grey.shade300,
                   activeColor: AppColors.green,
-                  width: 60,
+                  width: 50,
                   height: 25.0,
                   valueFontSize: 25.0,
                   toggleSize: 25.0,
@@ -2029,7 +2029,7 @@ class StepTwo extends StatelessWidget {
                 FlutterSwitch(
                   inactiveColor: Colors.grey.shade300,
                   activeColor: AppColors.green,
-                  width: 60,
+                  width: 50,
                   height: 25.0,
                   valueFontSize: 25.0,
                   toggleSize: 25.0,
