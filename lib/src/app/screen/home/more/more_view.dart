@@ -67,7 +67,7 @@ class _MoreViewState extends MoreViewModel {
                 Text(
                   HomeViewModel.lang=="ar"?
                   HomeViewModel.profileModel!.office!.name!
-                  :  HomeViewModel.profileModel!.office!.name_en!
+                  :  HomeViewModel.profileModel!.office!.nameEn!
                   ,style: GoogleFonts.tajawal(color: Colors.white,
                     fontSize:15,fontWeight: FontWeight.w500),),
                 const SizedBox(height: 10,),
@@ -127,7 +127,7 @@ class _MoreViewState extends MoreViewModel {
 
                                         HomeViewModel.profileModel!.office!=null?
                                         Text(DateFormat("MMM d,yyyy","en" ).format(DateTime.parse(
-                                            HomeViewModel.profileModel!.office!.subscription_end_date!)),
+                                            HomeViewModel.profileModel!.office!.subscriptionEndDate!)),
                                           style: GoogleFonts.tajawal(color: Colors.white70,
                                             fontSize:14,fontWeight: FontWeight.w500),)
                                         :const SizedBox.shrink(),

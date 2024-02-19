@@ -104,6 +104,7 @@ abstract class VerifyCodeViewModel extends State<VrifyCode> with StorageHelper {
 
     }
   }
+
   Future<void> saveUserFirebase(String id) async {
     Map<String, String> mp = Map.of({"count_offers": "0", "counts": "0"});
 

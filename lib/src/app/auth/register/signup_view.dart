@@ -164,10 +164,27 @@ class _SignUpState extends SignUpViewModel {
                   backgroundColor: const Color(0xffea8024)),
               onPressed: () {
 
-                if( checkValidationRegister()){
-                  registerCallApi();
+                if(step==2){
+                  if(validStepThree()){
+                    registerCallApi();
+
+                  }
                 }
 
+                if(step==1){
+                  if(validStepTwo()){
+                    setState(() {
+                      step=2;
+                    });
+                  }
+                }
+                if(step==0){
+                  if(validStepOne()){
+                    setState(() {
+                      step=1;
+                    });
+                  }
+                }
 
               },
               child: Text(

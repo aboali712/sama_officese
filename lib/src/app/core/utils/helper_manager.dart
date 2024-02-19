@@ -16,7 +16,7 @@ toastApp(String msg, BuildContext context) {
   return ElegantNotification(
     iconSize: 26,
     width: MediaQuery.of(context).size.width,
-    height: 65,
+    height: 70,
     displayCloseButton: false,
     description: Text(
       msg,

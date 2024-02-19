@@ -213,5 +213,12 @@
   "NumberOfMonths": "Number of months",
   "DearCustomer,TheVipSubscriptionPeriodHasExpired": "Dear customer, the subscription period has expired",
   "ToRenew": "To renew",
-  "ReNew": "Re new"
+  "ReNew": "Re new",
+  "ChooseTermsAndConditions": "Choose terms and conditions",
+  "TotalSales": "Total sales",
+  "TotalReservations": "Total reservations",
+  "completedReservations": "Completed reservations",
+  "pendingReservations": "Pending reservations",
+  "NumberOfOffers": "Number of offers",
+  "Reports": "Reports"
 }

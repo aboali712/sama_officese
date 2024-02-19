@@ -62,7 +62,7 @@ abstract class HomeViewModel extends State<HomePage> with StorageHelper{
 
   void sub(){
 
-    if(profileModel!.office!.subscription_end_date==null){
+    if(profileModel!.office!.subscriptionEndDate==null){
       setState((){
         nullValue=true;
       });
@@ -72,8 +72,8 @@ abstract class HomeViewModel extends State<HomePage> with StorageHelper{
 
     }else{
 
-      valEnd = DateTime.parse(profileModel!.office!.subscription_end_date.toString()) ;
-      print(profileModel!.office!.subscription_end_date.toString());
+      valEnd = DateTime.parse(profileModel!.office!.subscriptionEndDate.toString()) ;
+      print(profileModel!.office!.subscriptionEndDate.toString());
       minus5Days = valEnd!.subtract(const Duration(days: 5));
       setState(() {
         difference = valEnd!.difference(date).inDays ;
@@ -120,7 +120,8 @@ abstract class HomeViewModel extends State<HomePage> with StorageHelper{
         profileModel = rs.data;
 
       });
-      log(profileModel!.toJson().toString());
+      log("${profileModel!.office!.toJson().toString()} 333333333333333333333333333333333333333333");
+
     }
 
   }

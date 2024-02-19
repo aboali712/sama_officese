@@ -29,6 +29,7 @@ import 'all_filter/city_response.dart';
 import 'all_filter/filter_model.dart';
 import 'all_filter/filter_response.dart';
 import 'all_filter/service_model.dart';
+import 'all_filter/work_hour_model.dart';
 
 abstract class SignUpViewModel extends State<SignUp> with StorageHelper{
   final Dio dio = NetworkService.instance.dio;
@@ -238,8 +239,8 @@ abstract class SignUpViewModel extends State<SignUp> with StorageHelper{
   }
 
 
-  bool checkValidationRegister(){
 
+  bool validStepOne(){
     if(firstNameControl.text==""){
       toastApp(tr("EnterFirstName"),context);
       return false;
@@ -266,6 +267,12 @@ abstract class SignUpViewModel extends State<SignUp> with StorageHelper{
       toastApp(tr("EnterPassword"),context);
       return false;
     }
+
+    return true;
+  }
+
+
+  bool validStepTwo(){
     if(imageOffice==null){
       toastApp(tr("ChooseTheOfficeLogo"),context);
       return false;
@@ -279,12 +286,12 @@ abstract class SignUpViewModel extends State<SignUp> with StorageHelper{
       return false;
     }
 
-    if(arController.plainTextEditingValue.text==""){
+    if(detailsAr==""){
       toastApp(tr("EnterTheDescriptionInArabic"),context);
       return false;
     }
 
-    if( enController.document.toPlainText()==""){
+    if( detailsEn==""){
       toastApp(tr("EnterTheDescriptionInEnglish"),context);
       return false;
     }
@@ -297,6 +304,12 @@ abstract class SignUpViewModel extends State<SignUp> with StorageHelper{
       toastApp(tr("EnterTheAddressInEnglish"),context);
       return false;
     }
+
+    if(result==null){
+      toastApp(tr("ChooseAddressFrom"),context);
+      return false;
+    }
+
     if(selectedOfficeBranch==null){
       toastApp(tr("ChooseTheOfficeBranch"),context);
       return false;
@@ -306,6 +319,64 @@ abstract class SignUpViewModel extends State<SignUp> with StorageHelper{
       return false;
     }
 
+    if(switchValueSat==true){
+      if(timeInSatControl.text==""){ toastApp("أدخل بداية عمل يوم السبت", context);return false; }
+      if(timeoutSatControl.text==""){ toastApp("أدخل نهاية عمل يوم السبت", context);return false; }
+
+    }
+
+    if(switchValueSun==true){
+      if(timeInSunControl.text==""){ toastApp("أدخل بداية عمل يوم الأحد", context);return false; }
+      if(timeoutSunControl.text==""){ toastApp("أدخل نهاية عمل يوم الأحد", context);return false; }
+
+    }
+
+
+    if(switchValueMon==true){
+      if(timeInMonControl.text==""){ toastApp("أدخل بداية عمل يوم الأثنين", context);return false; }
+      if(timeInMonControl.text==""){ toastApp("أدخل نهاية عمل يوم الأثنين", context);return false; }
+
+    }
+
+
+    if(switchValueTus==true){
+      if(timeInTusControl.text==""){ toastApp("أدخل بداية عمل يوم الثلاثاء", context);return false; }
+      if(timeoutTusControl.text==""){ toastApp("أدخل نهاية عمل يوم الثلاثاء", context);return false; }
+
+    }
+
+
+
+    if(switchValueWed==true){
+      if(timeInWedControl.text==""){ toastApp("أدخل بداية عمل يوم الأربعاء", context);return false; }
+      if(timeoutWedControl.text==""){ toastApp("أدخل نهاية عمل يوم الأربعاء", context);return false; }
+
+    }
+
+
+
+    if(switchValueThur==true){
+      if(timeInThurControl.text==""){ toastApp("أدخل بداية عمل يوم الخميس", context);return false; }
+      if(timeoutThurControl.text==""){ toastApp("أدخل نهاية عمل يوم الخميس", context);return false; }
+    }
+
+
+    if(switchValueFri==true){
+      if(timeInFriControl.text==""){ toastApp("أدخل بداية عمل يوم الجمعة", context);return false; }
+      if(timeoutFriControl.text==""){ toastApp("أدخل نهاية عمل يوم الجمعة", context);return false; }
+
+    }
+
+
+    return true;
+  }
+
+
+
+
+
+
+  bool validStepThree(){
     if(selectServices.length==0){
       toastApp(tr("ChooseServices"),context);
       return false;
@@ -361,6 +432,9 @@ abstract class SignUpViewModel extends State<SignUp> with StorageHelper{
     // tokenDevice=(await FirebaseMessaging.instance.getToken())!;
 
 
+
+
+
     String imageOfficeName = imageOffice!.path.split('/').last;
     String imageCommercialName = imageOffice!.path.split('/').last;
     Map<String,dynamic> mp={};
@@ -382,18 +456,42 @@ abstract class SignUpViewModel extends State<SignUp> with StorageHelper{
     mp["working_hours"]="من ${timeInSatControl.value.text} الى ${timeoutSatControl.value.text}";
     mp["start_work_at"]=timeInSatControl.value.text;
     mp["end_work_at"]=timeoutSatControl.value.text;
-
-
-
-
     selectServices.asMap().forEach((index, element)  {mp[ "services[$index]"] =element.id.toString(); });
-
-
     mp["image"]=
     await MultipartFile.fromFile(imageOffice!.path, filename:imageOfficeName);
-
     mp["commercial_registeration_no"]=await MultipartFile.fromFile(imageOffice!.path, filename:imageCommercialName);
 
+List<WorkHourModel> listWorkHour=[];
+
+   listWorkHour.add(WorkHourModel(id: 1,officeId:87,day: "saturday",startWorkAt:timeInSatControl.text,
+       endWorkAt: timeoutSatControl.text,status: switchValueSat==true?1:0 ));
+
+    listWorkHour.add(WorkHourModel(id: 2,officeId:87,day: "sunday",startWorkAt:timeInSunControl.text,
+        endWorkAt: timeoutSunControl.text,status: switchValueSun==true?1:0 ));
+
+    listWorkHour.add(WorkHourModel(id: 3,officeId:87,day: "monday",startWorkAt:timeInMonControl.text,
+        endWorkAt: timeoutMonControl.text,status: switchValueMon==true?1:0 ));
+
+    listWorkHour.add(WorkHourModel(id: 4,officeId:87,day: "tuesday",startWorkAt:timeInTusControl.text,
+        endWorkAt: timeoutTusControl.text,status: switchValueTus==true?1:0 ));
+
+    listWorkHour.add(WorkHourModel(id: 5,officeId:87,day: "wednesday",startWorkAt:timeInWedControl.text,
+        endWorkAt: timeoutWedControl.text,status: switchValueWed==true?1:0 ));
+
+    listWorkHour.add(WorkHourModel(id: 6,officeId:87,day: "thursday",startWorkAt:timeInThurControl.text,
+        endWorkAt: timeoutThurControl.text,status: switchValueThur==true?1:0 ));
+
+    listWorkHour.add(WorkHourModel(id: 7,officeId:87,day: "friday",startWorkAt:timeInFriControl.text,
+        endWorkAt: timeoutFriControl.text,status: switchValueFri==true?1:0 ));
+
+
+    for(var index=0; index< listWorkHour.length;index++){
+      mp["days[$index][day]"]=listWorkHour[index].day;
+      mp["days[$index][start_work_at]"]=listWorkHour[index].startWorkAt;
+      mp["days[$index][end_work_at]"]=listWorkHour[index].endWorkAt;
+      mp["days[$index][status]"]=listWorkHour[index].status;
+
+    }
 
 
     await Future.delayed(const Duration(seconds: 2));

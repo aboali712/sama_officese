@@ -750,7 +750,7 @@ class StepTwoProfile extends StatelessWidget {
             child: DropdownButtonFormField2(
               isExpanded: true,
               decoration: InputDecoration(
-                hintText: HomeViewModel.profileModel!.office!=null? HomeViewModel.profileModel!.office!.country_name : "",
+                hintText: HomeViewModel.profileModel!.office!=null? HomeViewModel.profileModel!.office!.countryName : "",
                 floatingLabelBehavior: FloatingLabelBehavior.never,
                 contentPadding: const EdgeInsets.only(
                     bottom: 15.0, top: 10, left: 10, right: 10),
@@ -846,7 +846,7 @@ class StepTwoProfile extends StatelessWidget {
             child: DropdownButtonFormField2(
               isExpanded: true,
               decoration: InputDecoration(
-                hintText: HomeViewModel.profileModel!.office!=null? HomeViewModel.profileModel!.office!.city_name :"",
+                hintText: HomeViewModel.profileModel!.office!=null? HomeViewModel.profileModel!.office!.cityName :"",
                 floatingLabelBehavior: FloatingLabelBehavior.never,
                 contentPadding: const EdgeInsets.only(
                     bottom: 15.0, top: 10, left: 10, right: 10),
@@ -1002,7 +1002,7 @@ class StepTwoProfile extends StatelessWidget {
                 ),
               ],),
 
-
+             upDateProfileViewModel.switchValueSat==true?
            Row(children: [
 
              SizedBox(height: 35,width: 90,
@@ -1163,6 +1163,7 @@ class StepTwoProfile extends StatelessWidget {
 
 
            ],)
+                 :const SizedBox.shrink()
 
             ],
           ),
@@ -1201,7 +1202,7 @@ class StepTwoProfile extends StatelessWidget {
                 ),
               ],),
 
-
+              upDateProfileViewModel.switchValueSun==true?
               Row(children: [
 
                 SizedBox(height: 35,width: 90,
@@ -1362,7 +1363,7 @@ class StepTwoProfile extends StatelessWidget {
 
 
               ],)
-
+                  :const SizedBox.shrink()
             ],
           ),
 
@@ -1400,7 +1401,7 @@ class StepTwoProfile extends StatelessWidget {
                 ),
               ],),
 
-
+                  upDateProfileViewModel.switchValueMon==true?
               Row(children: [
 
                 SizedBox(height: 35,width: 90,
@@ -1561,6 +1562,7 @@ class StepTwoProfile extends StatelessWidget {
 
 
               ],)
+                      :const SizedBox.shrink()
 
             ],
           ),
@@ -1599,7 +1601,7 @@ class StepTwoProfile extends StatelessWidget {
                 ),
               ],),
 
-
+                  upDateProfileViewModel.switchValueTus==true?
               Row(children: [
 
                 SizedBox(height: 35,width: 90,
@@ -1760,6 +1762,7 @@ class StepTwoProfile extends StatelessWidget {
 
 
               ],)
+                  :const SizedBox.shrink()
 
             ],
           ),
@@ -1798,7 +1801,7 @@ class StepTwoProfile extends StatelessWidget {
                 ),
               ],),
 
-
+               upDateProfileViewModel.switchValueWed==true?
               Row(children: [
 
                 SizedBox(height: 35,width: 90,
@@ -1959,7 +1962,7 @@ class StepTwoProfile extends StatelessWidget {
 
 
               ],)
-
+                  :const SizedBox.shrink()
             ],
           ),
 
@@ -1998,7 +2001,7 @@ class StepTwoProfile extends StatelessWidget {
                 ),
               ],),
 
-
+                upDateProfileViewModel.switchValueThur==true?
               Row(children: [
 
                 SizedBox(height: 35,width: 90,
@@ -2159,7 +2162,7 @@ class StepTwoProfile extends StatelessWidget {
 
 
               ],)
-
+                  :const SizedBox.shrink()
             ],
           ),
 
@@ -2198,7 +2201,7 @@ class StepTwoProfile extends StatelessWidget {
                 ),
               ],),
 
-
+              upDateProfileViewModel.switchValueFri==true?
               Row(children: [
 
                 SizedBox(height: 35,width: 90,
@@ -2359,7 +2362,7 @@ class StepTwoProfile extends StatelessWidget {
 
 
               ],)
-
+                  :const SizedBox.shrink()
             ],
           ),
 

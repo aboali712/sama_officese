@@ -858,7 +858,7 @@ class StepTwo extends StatelessWidget {
                 ),
               ],),
 
-
+              signUpViewModel.switchValueSat==true?
            Row(children: [
 
              SizedBox(height: 35,width: 90,
@@ -1019,12 +1019,15 @@ class StepTwo extends StatelessWidget {
 
 
            ],)
+                  :const SizedBox.shrink()
 
             ],
           ),
 
 
           const SizedBox(height: 15,),
+
+
           Row(crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -1057,7 +1060,7 @@ class StepTwo extends StatelessWidget {
                 ),
               ],),
 
-
+              signUpViewModel.switchValueSun==true?
               Row(children: [
 
                 SizedBox(height: 35,width: 90,
@@ -1218,12 +1221,14 @@ class StepTwo extends StatelessWidget {
 
 
               ],)
-
+                  :const SizedBox.shrink(),
             ],
           ),
 
 
+
           const SizedBox(height: 15,),
+
           Row(crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -1256,7 +1261,7 @@ class StepTwo extends StatelessWidget {
                 ),
               ],),
 
-
+              signUpViewModel.switchValueMon==true?
               Row(children: [
 
                 SizedBox(height: 35,width: 90,
@@ -1417,12 +1422,14 @@ class StepTwo extends StatelessWidget {
 
 
               ],)
-
+                  :const SizedBox.shrink(),
             ],
           ),
 
 
+
           const SizedBox(height: 15,),
+
           Row(crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -1455,7 +1462,7 @@ class StepTwo extends StatelessWidget {
                 ),
               ],),
 
-
+              signUpViewModel.switchValueTus==true?
               Row(children: [
 
                 SizedBox(height: 35,width: 90,
@@ -1616,12 +1623,14 @@ class StepTwo extends StatelessWidget {
 
 
               ],)
-
+                  :const SizedBox.shrink(),
             ],
           ),
 
 
+
           const SizedBox(height: 15,),
+
           Row(crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -1653,7 +1662,7 @@ class StepTwo extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
               ],),
-
+              signUpViewModel.switchValueWed==true?
 
               Row(children: [
 
@@ -1815,13 +1824,15 @@ class StepTwo extends StatelessWidget {
 
 
               ],)
-
+                  :const SizedBox.shrink(),
             ],
           ),
 
 
 
+
           const SizedBox(height: 15,),
+
           Row(crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -1853,7 +1864,7 @@ class StepTwo extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
               ],),
-
+              signUpViewModel.switchValueThur==true?
 
               Row(children: [
 
@@ -2015,6 +2026,7 @@ class StepTwo extends StatelessWidget {
 
 
               ],)
+                  :const SizedBox.shrink(),
 
             ],
           ),
@@ -2022,6 +2034,7 @@ class StepTwo extends StatelessWidget {
 
 
           const SizedBox(height: 15,),
+
           Row(crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -2054,7 +2067,7 @@ class StepTwo extends StatelessWidget {
                 ),
               ],),
 
-
+              signUpViewModel.switchValueFri==true?
               Row(children: [
 
                 SizedBox(height: 35,width: 90,
@@ -2215,9 +2228,10 @@ class StepTwo extends StatelessWidget {
 
 
               ],)
-
+                  :const SizedBox.shrink(),
             ],
           ),
+
 
 
 

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sama_officese/src/app/screen/home/home_view.dart';
 import 'package:sama_officese/src/app/screen/home/more/more_view.dart';
+import 'package:sama_officese/src/app/screen/home/reports/reports_view.dart';
 import 'package:sama_officese/src/app/screen/home/update_profile/update_profile_view.dart';
 import 'package:sama_officese/src/app/screen/notifications/notification_view.dart';
 import 'package:upgrader/upgrader.dart';
@@ -69,6 +70,9 @@ class HomeCorePage extends State<HomeCore> with StorageHelper {
         child =   const UpDateProfileView();
         break;
       case 3:
+        child =    const ReportsView();
+        break;
+      case 4:
         child =    const MoreView();
         break;
     }

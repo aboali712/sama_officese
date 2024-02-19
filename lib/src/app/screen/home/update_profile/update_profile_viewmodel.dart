@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,6 +21,7 @@ import '../../../auth/register/all_filter/cities_model.dart';
 import '../../../auth/register/all_filter/city_response.dart';
 import '../../../auth/register/all_filter/filter_model.dart';
 import '../../../auth/register/all_filter/filter_response.dart';
+import '../../../auth/register/all_filter/work_hour_model.dart';
 import '../../../core/network/network_service.dart';
 import '../../../core/utils/helper_manager.dart';
 import '../../../core/utils/input_validators.dart';
@@ -109,7 +112,6 @@ abstract class UpDateProfileViewModel  extends State<UpDateProfileView> with Sto
     HomeViewModel.profileModel!.office!=null?
     setData()
     : null;
-
     super.initState();
   }
 
@@ -243,16 +245,68 @@ abstract class UpDateProfileViewModel  extends State<UpDateProfileView> with Sto
       completeNameArControl.text=HomeViewModel.profileModel!.office!.name.toString();
       addressArControl.text=HomeViewModel.profileModel!.office!.address.toString();
       // workHoursControl.text=HomeViewModel.profileModel!.office!.workingHours.toString();
-      timeInSatControl.text=HomeViewModel.profileModel!.office!.start_work_at.toString();
-      timeoutSatControl.text=HomeViewModel.profileModel!.office!.end_work_at.toString();
-      completeNameEnControl.text=HomeViewModel.profileModel!.office!.name_en.toString();
-      detailsEn=HomeViewModel.profileModel!.office!.description_en.toString();
-      addressEnControl.text=HomeViewModel.profileModel!.office!.address_en.toString();
+      timeInSatControl.text=HomeViewModel.profileModel!.office!.startWorkAt.toString();
+      timeoutSatControl.text=HomeViewModel.profileModel!.office!.endWorkAt.toString();
+      completeNameEnControl.text=HomeViewModel.profileModel!.office!.nameEn.toString();
+      detailsEn=HomeViewModel.profileModel!.office!.descriptionEn.toString();
+      addressEnControl.text=HomeViewModel.profileModel!.office!.addressEn.toString();
       // workingHoursEnControl.text=HomeViewModel.profileModel!.office!.working_hours_en.toString();
       bankNameControl.text=HomeViewModel.profileModel!.office!.paymentInfo!.bankName!;
       bankNumberControl.text=HomeViewModel.profileModel!.office!.paymentInfo!.bankAccount!;
       ibanNumberControl.text=HomeViewModel.profileModel!.office!.paymentInfo!.iban!;
 
+      if( HomeViewModel.profileModel!.office!.workingDays!.isNotEmpty){
+        switchValueSat=HomeViewModel.profileModel!.office!.workingDays!.firstWhere((e) => e.day=="saturday").status==1?true:false;
+        switchValueSun=HomeViewModel.profileModel!.office!.workingDays!.firstWhere((e) => e.day=="sunday").status==1?true:false;
+        switchValueMon=HomeViewModel.profileModel!.office!.workingDays!.firstWhere((e) => e.day=="monday").status==1?true:false;
+        switchValueTus=HomeViewModel.profileModel!.office!.workingDays!.firstWhere((e) => e.day=="tuesday").status==1?true:false;
+        switchValueWed=HomeViewModel.profileModel!.office!.workingDays!.firstWhere((e) => e.day=="wednesday").status==1?true:false;
+        switchValueThur=HomeViewModel.profileModel!.office!.workingDays!.firstWhere((e) => e.day=="thursday").status==1?true:false;
+        switchValueFri=HomeViewModel.profileModel!.office!.workingDays!.firstWhere((e) => e.day=="friday").status==1?true:false;
+
+        timeInSatControl.text=HomeViewModel.profileModel!.office!.workingDays!.firstWhere((e) => e.day=="saturday")
+            .startWorkAt.toString();
+
+        timeoutSatControl.text=HomeViewModel.profileModel!.office!.workingDays!.firstWhere((e) => e.day=="saturday")
+            .endWorkAt.toString();
+
+        timeInSunControl.text=HomeViewModel.profileModel!.office!.workingDays!.firstWhere((e) => e.day=="sunday")
+            .startWorkAt.toString();
+
+        timeoutSunControl.text=HomeViewModel.profileModel!.office!.workingDays!.firstWhere((e) => e.day=="sunday")
+            .endWorkAt.toString();
+
+        timeInMonControl.text=HomeViewModel.profileModel!.office!.workingDays!.firstWhere((e) => e.day=="monday")
+            .startWorkAt.toString();
+
+        timeoutMonControl.text=HomeViewModel.profileModel!.office!.workingDays!.firstWhere((e) => e.day=="monday")
+            .endWorkAt.toString();
+
+        timeInTusControl.text=HomeViewModel.profileModel!.office!.workingDays!.firstWhere((e) => e.day=="tuesday")
+            .startWorkAt.toString();
+
+        timeoutTusControl.text=HomeViewModel.profileModel!.office!.workingDays!.firstWhere((e) => e.day=="tuesday")
+            .endWorkAt.toString();
+
+        timeInWedControl.text=HomeViewModel.profileModel!.office!.workingDays!.firstWhere((e) => e.day=="wednesday")
+            .startWorkAt.toString();
+
+        timeoutWedControl.text=HomeViewModel.profileModel!.office!.workingDays!.firstWhere((e) => e.day=="wednesday")
+            .endWorkAt.toString();
+
+        timeInThurControl.text=HomeViewModel.profileModel!.office!.workingDays!.firstWhere((e) => e.day=="thursday")
+            .startWorkAt.toString();
+
+        timeoutThurControl.text=HomeViewModel.profileModel!.office!.workingDays!.firstWhere((e) => e.day=="thursday")
+            .endWorkAt.toString();
+
+        timeInFriControl.text=HomeViewModel.profileModel!.office!.workingDays!.firstWhere((e) => e.day=="friday")
+            .startWorkAt.toString();
+
+        timeoutFriControl.text=HomeViewModel.profileModel!.office!.workingDays!.firstWhere((e) => e.day=="friday")
+            .endWorkAt.toString();
+
+      }
 
     });
 
@@ -304,7 +358,54 @@ abstract class UpDateProfileViewModel  extends State<UpDateProfileView> with Sto
     formData["bank_account"]=bankNumberControl.value.text;
     formData["iban"]=ibanNumberControl.value.text;
 
-    var up= await dio.post("v1/office/updateProfile",data:formData );
+
+    List<WorkHourModel> listWorkHour=[];
+
+    listWorkHour.add(WorkHourModel(id: 1,officeId:HomeViewModel.profileModel!.office!.id,
+        day: "saturday",startWorkAt:timeInSatControl.text,
+        endWorkAt: timeoutSatControl.text,status: switchValueSat==true?1:0 ));
+
+    listWorkHour.add(WorkHourModel(id: 2,officeId:HomeViewModel.profileModel!.office!.id,
+        day: "sunday",startWorkAt:timeInSunControl.text,
+        endWorkAt: timeoutSunControl.text,status: switchValueSun==true?1:0 ));
+
+    listWorkHour.add(WorkHourModel(id: 3,officeId:HomeViewModel.profileModel!.office!.id,
+        day: "monday",startWorkAt:timeInMonControl.text,
+        endWorkAt: timeoutMonControl.text,status: switchValueMon==true?1:0 ));
+
+    listWorkHour.add(WorkHourModel(id: 4,officeId:HomeViewModel.profileModel!.office!.id,
+        day: "tuesday",startWorkAt:timeInTusControl.text,
+        endWorkAt: timeoutTusControl.text,status: switchValueTus==true?1:0 ));
+
+    listWorkHour.add(WorkHourModel(id: 5,officeId:HomeViewModel.profileModel!.office!.id,
+        day: "wednesday",startWorkAt:timeInWedControl.text,
+        endWorkAt: timeoutWedControl.text,status: switchValueWed==true?1:0 ));
+
+    listWorkHour.add(WorkHourModel(id: 6,officeId:HomeViewModel.profileModel!.office!.id,
+        day: "thursday",startWorkAt:timeInThurControl.text,
+        endWorkAt: timeoutThurControl.text,status: switchValueThur==true?1:0 ));
+
+    listWorkHour.add(WorkHourModel(id: 7,officeId:HomeViewModel.profileModel!.office!.id,
+        day: "friday",startWorkAt:timeInFriControl.text,
+        endWorkAt: timeoutFriControl.text,status: switchValueFri==true?1:0 ));
+
+
+    for(var index=0; index< listWorkHour.length;index++){
+      formData["days[$index][day]"]=listWorkHour[index].day;
+      formData["days[$index][start_work_at]"]=listWorkHour[index].startWorkAt;
+      formData["days[$index][end_work_at]"]=listWorkHour[index].endWorkAt;
+      formData["days[$index][status]"]=listWorkHour[index].status;
+
+    }
+
+
+    await Future.delayed(const Duration(seconds: 2));
+
+    log(formData.toString());
+
+
+
+    var up= await dio.post("v1/office/updateProfile",data:FormData.fromMap(formData) );
     var rs=AuthResponse(up.data!);
     setState(() {
       isLoading = false;

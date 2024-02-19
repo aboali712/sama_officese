@@ -69,8 +69,8 @@ class BottomMenu extends StatelessWidget
               case 3:
                 onChanged!(3);
                 break;
-                // case 4:
-                //   onChanged!(4);
+                 case 4:
+                  onChanged!(4);
                 break;
             }
 
@@ -123,6 +123,23 @@ class BottomMenu extends StatelessWidget
               ),
               label: "",
             ),
+
+            BottomNavigationBarItem(
+              icon:  Container(
+                padding: const EdgeInsets.all(8),
+                height: 40,
+                width: 40,
+                child: Image.asset(
+                  'assets/images/reports2.png',
+                  height: 24.0,
+                  width: 24.0,
+                  color: bottomMenuIndex == 3 ?const Color(0xffEA8024) : Colors.grey,
+                ),
+              ),
+              label: "",
+            ),
+
+
             BottomNavigationBarItem(
                 icon:  Container(
                   padding: const EdgeInsets.all(8),
@@ -132,7 +149,7 @@ class BottomMenu extends StatelessWidget
                     'assets/images/Category.svg',
                     height: 24.0,
                     width: 24.0,
-                    color: bottomMenuIndex == 3 ? const Color(0xffEA8024) : Colors.grey,
+                    color: bottomMenuIndex == 4 ? const Color(0xffEA8024) : Colors.grey,
                   ),
                 ),
                 label: ""),

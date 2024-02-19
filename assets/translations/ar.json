@@ -162,7 +162,7 @@
   "EnterTheValidVerificationCode": "أدخل كود التحقق الصحيح",
   "PleaseWriteTheCodeThatWeSentToYourMobileNumber": "يرجى كتابة الرمز الذى أرسلناه الى رقم الجوال الخاص بك",
   "ForgotYourPassword": "نسيت كلمة المرور",
-  "SubmitVerificationCode": "أرسل كود التحقق",
+  "SubmitVerificationCode": "أرسال كود التحقق",
   "PleaseRe-enterYourPassword": "من فضلك اعد أدخال كلمة المرور",
   "YouAlreadyHavAnAccount": "لديك حساب بالفعل",
   "ResetYourPassword": "أعد كتابة كلمة المرور",
@@ -212,5 +212,13 @@
   "NumberOfMonths": "عدد الشهور",
   "DearCustomer,TheVipSubscriptionPeriodHasExpired": "عميلنا العزيز لقد تم أنتهاء مدة الأشتراك",
   "ToRenew": "للتجديد",
-  "ReNew": "تجديد الأشتراك"
+  "ReNew": "تجديد الأشتراك",
+  "ChooseTermsAndConditions": "أختر الشروط والأحكام",
+  "TotalSales": "إجمالي المبيعات",
+  "TotalReservations": "مجموع الحجوزات",
+  "completedReservations": "عدد الحجوزات المكتملة",
+  "pendingReservations": "عدد الحجوزات المعلقة",
+  "NumberOfOffers": "عدد العروض",
+  "Reports": "التقارير"
+
 }

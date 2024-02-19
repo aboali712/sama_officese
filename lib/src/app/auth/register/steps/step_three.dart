@@ -34,33 +34,29 @@ class StepThree extends StatelessWidget {
                   ?signUpViewModel.filterModel!.services!
                   .map((e) => Row(
                 children: [
-                  Column(
+                  Row(
                     children: [
-                      Row(
-                        children: [
-                          SizedBox(
-                            width: 30,
-                            height: 40,
-                            child: Checkbox(
-                              activeColor: samaColor,
+                      SizedBox(
+                        width: 30,
+                        height: 40,
+                        child: Checkbox(
+                          activeColor: samaColor,
 
-                              value: signUpViewModel.selectServices.contains(e),
-                              onChanged: (newValue) {
-                                signUpViewModel.serviceSetState(e);
+                          value: signUpViewModel.selectServices.contains(e),
+                          onChanged: (newValue) {
+                            signUpViewModel.serviceSetState(e);
 
-                              },
-                            ),
-                          ),
-                          Text(e.name!,
-                              style: GoogleFonts.tajawal(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 14)),
-                        ],
+                          },
+                        ),
                       ),
-                      const SizedBox(
-                        height: 10,
-                      ),
+                      Text(e.name!,
+                          style: GoogleFonts.tajawal(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 14)),
                     ],
+                  ),
+                  const SizedBox(
+                    height: 10,
                   ),
                 ],
               ))
@@ -340,7 +336,7 @@ class StepThree extends StatelessWidget {
               },
 
               cursorColor: Colors.black,
-              keyboardType: TextInputType.number,
+              keyboardType: TextInputType.text,
             ),
           ),
 
