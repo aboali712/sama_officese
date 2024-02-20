@@ -64,7 +64,7 @@ class _ReportsViewState extends ReportsViewModel {
                         Row( mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
 
-                            Container( height: 165,width: 170,
+                            Container( height: 165,width: size.width/2.2,
                               padding: const EdgeInsets.only(left: 20,right: 20,top: 15,bottom: 10),
                               decoration: BoxDecoration(
                                 borderRadius:  BorderRadius.circular(20) ,
@@ -116,7 +116,7 @@ class _ReportsViewState extends ReportsViewModel {
                                     )
                                   ]),),
 
-                            Container( height: 165,width: 170,
+                            Container( height: 165,width: size.width/2.2,
                               padding: const EdgeInsets.only(left: 20,right: 20,top: 15,bottom: 10),
                               decoration: BoxDecoration(
                                 borderRadius:  BorderRadius.circular(20) ,
@@ -175,7 +175,7 @@ class _ReportsViewState extends ReportsViewModel {
                         Row( mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
 
-                            Container( height: 165,width: 170,
+                            Container( height: 165,width: size.width/2.2,
                               padding: const EdgeInsets.only(left: 20,right: 20,top: 15,bottom: 10),
                               decoration: BoxDecoration(
                                 borderRadius:  BorderRadius.circular(20) ,
@@ -227,7 +227,7 @@ class _ReportsViewState extends ReportsViewModel {
                                       ],
                                     )
                                   ]),),
-                            Container( height: 165,width: 170,
+                            Container( height: 165,width: size.width/2.2,
                               padding: const EdgeInsets.only(left: 20,right: 20,top: 15,bottom: 15),
                               decoration: BoxDecoration(
                                 borderRadius:  BorderRadius.circular(20) ,
@@ -283,7 +283,7 @@ class _ReportsViewState extends ReportsViewModel {
                         const SizedBox(height: 20,),
 
 
-                        Container( height: 165,width: 170,
+                        Container( height: 165,width: size.width/2.2,
                           padding: const EdgeInsets.only(left: 20,right: 20,top: 15,bottom: 10),
                           decoration: BoxDecoration(
                             borderRadius:  BorderRadius.circular(20) ,

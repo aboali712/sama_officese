@@ -144,8 +144,8 @@ abstract class HomeViewModel extends State<HomePage> with StorageHelper{
         .then((Position position) {
       setState(() {
         currentPosition = position;
-        // print("${currentPosition!.latitude} 5555555555555555555");
-        // print("${currentPosition!.longitude} 5555555555555555555");
+        print("${currentPosition!.latitude} 5555555555555555555");
+        print("${currentPosition!.longitude} 5555555555555555555");
 
       });
     }).catchError((e) {

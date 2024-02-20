@@ -107,7 +107,7 @@ class _HomePageState extends HomeViewModel {
                           MaterialPageRoute(builder: (context) => const ServiceView(),));
 
                     },
-                      child: Container( height: 165,width: 170,
+                      child: Container( height: 165,width: size.width/2.2,
                         padding: const EdgeInsets.only(left: 20,right: 20,top: 15,bottom: 10),
                         decoration: BoxDecoration(
                             borderRadius:  BorderRadius.circular(20) ,
@@ -176,7 +176,7 @@ class _HomePageState extends HomeViewModel {
                       SamaOfficeApp.navKey.currentState!.push(
                           MaterialPageRoute(builder: (context) => const PackagesOrderView(),));
                     },
-                      child: Container( height: 165,width: 170,
+                      child: Container( height: 165,width: size.width/2.2,
                         padding: const EdgeInsets.only(left: 20,right: 20,top: 15,bottom: 10),
                         decoration: BoxDecoration(
                           borderRadius:  BorderRadius.circular(20) ,
@@ -250,7 +250,7 @@ class _HomePageState extends HomeViewModel {
                         SamaOfficeApp.navKey.currentState!.push(
                             MaterialPageRoute(builder: (context) => const PackagesView(),));
                       },
-                        child: Container( height: 165,width: 170,
+                        child: Container( height: 165,width: size.width/2.2,
                           padding: const EdgeInsets.only(left: 20,right: 20,top: 15,bottom: 10),
                           decoration: BoxDecoration(
                             borderRadius:  BorderRadius.circular(20) ,
@@ -316,7 +316,7 @@ class _HomePageState extends HomeViewModel {
                         SamaOfficeApp.navKey.currentState!.push(
                             MaterialPageRoute(builder: (context) => const CreatePackageView(),));
                       },
-                        child: Container( height: 165,width: 170,
+                        child: Container( height: 165,width: size.width/2.2,
                           padding: const EdgeInsets.only(left: 20,right: 20,top: 15,bottom: 15),
                           decoration: BoxDecoration(
                             borderRadius:  BorderRadius.circular(20) ,

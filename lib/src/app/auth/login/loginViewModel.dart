@@ -36,6 +36,7 @@ abstract class LoginViewModel extends State<LoginPage> with StorageHelper {
     getDeviceToken().then((value) => setState(() {
       tokenDevice = value!;
     }));
+    getCurrentLocation();
     print("${tokenDevice} 3333333333333333333333330");
     super.initState();
   }
@@ -63,8 +64,8 @@ abstract class LoginViewModel extends State<LoginPage> with StorageHelper {
         .then((Position position) {
       setState(() {
         currentPosition = position;
-        // print("${currentPosition!.latitude} 5555555555555555555");
-        // print("${currentPosition!.longitude} 5555555555555555555");
+        print("${currentPosition!.latitude} 5555555555555555555");
+        print("${currentPosition!.longitude} 5555555555555555555");
 
       });
     }).catchError((e) {
