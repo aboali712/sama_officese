@@ -315,21 +315,17 @@ abstract class UpDateViewModel extends State<UpDateView>{
 
 
 
-    if(imageFileList!=null) {
-      imageFileList?.asMap().forEach((index, element) async {
-        mp["images[$index]"] = await MultipartFile.fromFile(element.path,filename: element.path.split('/').last);
-      });
-    }
+    imageFileList.asMap().forEach((index, element) async {
+      mp["images[$index]"] = await MultipartFile.fromFile(element.path,filename: element.path.split('/').last);
+    });
+  
 
 
 
 
-
-    if(imageFileList!=null){
-      mp["image"]=
-      await MultipartFile.fromFile(imageFileList![0].path, filename:imageFileList![0].path.split('/').last);
-    }
-
+    mp["image"]=
+    await MultipartFile.fromFile(imageFileList[0].path, filename:imageFileList[0].path.split('/').last);
+  
 
     print(mp);
     final response = await dio.post("v1/office/offers/${offerModel!.id}/update", data: FormData.fromMap(mp));

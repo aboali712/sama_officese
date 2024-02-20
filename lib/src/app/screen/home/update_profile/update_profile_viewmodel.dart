@@ -24,7 +24,6 @@ import '../../../auth/register/all_filter/filter_response.dart';
 import '../../../auth/register/all_filter/work_hour_model.dart';
 import '../../../core/network/network_service.dart';
 import '../../../core/utils/helper_manager.dart';
-import '../../../core/utils/input_validators.dart';
 import '../../../core/widgets/phone_number_widget.dart';
 import '../../../home_core.dart';
 

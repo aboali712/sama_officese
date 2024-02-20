@@ -67,7 +67,7 @@ dependencies:
   flutter_html: any
   map_location_picker: ^1.2.8+3
   flutter_countdown_timer: ^4.1.0
-  pin_code_fields: ^7.4.0
+  pin_code_fields: ^8.0.1
   confetti: ^0.7.0
 
 
@@ -78,6 +78,8 @@ dependencies:
 
 
 
+  flutter_inappwebview: any
+  google_maps_flutter: any
 dev_dependencies:
   flutter_test:
     sdk: flutter

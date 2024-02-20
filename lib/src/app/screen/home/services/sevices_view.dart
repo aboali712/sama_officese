@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,7 +9,6 @@ import 'package:sama_officese/src/app/screen/home/services/services_details/serv
 import 'package:sama_officese/src/app/screen/home/services/services_details/service_details_viewmodel.dart';
 import 'package:sama_officese/src/app/screen/home/services/sevices_viewmodel.dart';
 
-import '../../../core/values/colors.dart';
 
 class ServiceView extends StatefulWidget {
   const ServiceView({Key? key}) : super(key: key);

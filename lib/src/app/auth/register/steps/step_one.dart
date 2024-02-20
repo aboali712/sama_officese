@@ -217,6 +217,7 @@ class StepOne extends StatelessWidget {
               //   phoneNumber = value;
               // });
             }
+            return null;
           },
           onSaved: (value) {
             signUpViewModel.phoneSetState(value!);

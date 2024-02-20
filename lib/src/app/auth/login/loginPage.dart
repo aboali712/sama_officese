@@ -11,8 +11,6 @@ import '../../../app.dart';
 import '../../core/utils/input_validators.dart';
 import '../../core/values/colors.dart';
 import '../../core/widgets/phone_number_widget.dart';
-import '../../home_core.dart';
-import '../../screen/home/home_view.dart';
 import '../forget_password/forget_password_view.dart';
 import '../register/signup_view.dart';
 import 'loginViewModel.dart';
@@ -139,6 +137,7 @@ class _LoginPageState extends LoginViewModel {
                                       phoneNumber = value;
                                     });
                                   }
+                                  return null;
                                 },
                                 onSaved: (value) {
                                   phoneNumber = value!;

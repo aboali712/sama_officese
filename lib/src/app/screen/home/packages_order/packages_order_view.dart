@@ -81,7 +81,7 @@ class _PackagesOrderViewState extends PackagesOrderViewModel {
 
                               Text(tr("New"),
                                 textAlign: TextAlign.center,
-                                style: GoogleFonts.tajawal(color:packageStat==0?  Colors.black: Colors.grey,
+                                style: GoogleFonts.tajawal(color:packageStat==0?  Colors.black: Colors.white54,
                                     fontWeight: FontWeight.w500,fontSize: 14
 
                                 ),),
@@ -117,7 +117,7 @@ class _PackagesOrderViewState extends PackagesOrderViewModel {
 
                               Text(tr("Underway"),
                                 textAlign: TextAlign.center,
-                                style: GoogleFonts.tajawal(color:packageStat==1? Colors.black: Colors.grey,
+                                style: GoogleFonts.tajawal(color:packageStat==1? Colors.black: Colors.white54,
                                     fontWeight: FontWeight.w500,fontSize: 14
 
                                 ),),
@@ -153,7 +153,7 @@ class _PackagesOrderViewState extends PackagesOrderViewModel {
 
                               Text(tr("Complete"),
                                 textAlign: TextAlign.center,
-                                style: GoogleFonts.tajawal(color:packageStat==2? Colors.black: Colors.grey,
+                                style: GoogleFonts.tajawal(color:packageStat==2? Colors.black: Colors.white54,
                                     fontWeight: FontWeight.w500,fontSize: 14
 
                                 ),),

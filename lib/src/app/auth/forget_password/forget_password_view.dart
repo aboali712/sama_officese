@@ -13,7 +13,6 @@ import '../../core/utils/input_validators.dart';
 import '../../core/values/colors.dart';
 import '../../core/widgets/phone_number_widget.dart';
 import '../login/loginPage.dart';
-import '../verify_code/verify_code_view.dart';
 import 'forget_password_view_model.dart';
 
 class ForgetPassword extends StatefulWidget {
@@ -124,6 +123,7 @@ class _ForgetPasswordState extends ForgetPasswordViewModel {
                                 phoneNumber = value;
                               });
                             }
+                            return null;
                           },
                           onSaved: (value) {
                             phoneNumber = value!;

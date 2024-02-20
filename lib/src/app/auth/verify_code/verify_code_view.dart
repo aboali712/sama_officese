@@ -15,9 +15,7 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 
 import 'package:sama_officese/src/app/auth/verify_code/verify_code_view_model.dart';
 
-import '../../../app.dart';
 import '../../core/values/colors.dart';
-import '../change_password/change_password_view.dart';
 
 class VrifyCode extends StatefulWidget {
   const VrifyCode({Key? key}) : super(key: key);

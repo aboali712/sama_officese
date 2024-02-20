@@ -225,6 +225,7 @@ class StepOneProfile extends StatelessWidget {
               //   phoneNumber = value;
               // });
             }
+            return null;
           },
           onSaved: (value) {
             upDateProfileViewModel.phoneSetState(value!);

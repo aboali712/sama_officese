@@ -607,6 +607,47 @@ class StepTwo extends StatelessWidget {
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
             child: DropdownButtonFormField2(
               isExpanded: true,
+              dropdownSearchData: DropdownSearchData(
+                searchController: signUpViewModel.textEditingController,
+                searchInnerWidgetHeight: 50,
+                searchInnerWidget: Container(
+                  height: 50,
+                  padding: const EdgeInsets.only(
+                    top: 8,
+                    bottom: 4,
+                    right: 8,
+                    left: 8,
+                  ),
+                  child: TextFormField(
+                    cursorColor: Colors.black,
+                    keyboardType: TextInputType.text,
+                    expands: true,
+                    maxLines: null,
+                    controller: signUpViewModel.textEditingController,
+                    decoration: InputDecoration(
+                      prefixIcon: const Icon(Icons.search,size: 20),
+                      isDense: true,
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 8,
+                      ),
+                      hintText: tr("SearchHere"),
+                      hintStyle: const TextStyle(fontSize: 12),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                  ),
+                ),
+                searchMatchFn: (item, searchValue) {
+                  return item.value.toString().contains(searchValue);
+                },
+              ),
+              onMenuStateChange: (isOpen) {
+                if (!isOpen) {
+                  signUpViewModel.textEditingController.clear();
+                }
+              },
               decoration: InputDecoration(
                 floatingLabelBehavior: FloatingLabelBehavior.never,
                 contentPadding: const EdgeInsets.only(

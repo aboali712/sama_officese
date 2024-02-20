@@ -14,12 +14,10 @@ import 'package:sama_officese/src/app.dart';
 import 'package:sama_officese/src/app/auth/register/signup_view.dart';
 import 'package:sama_officese/src/app/core/local/storagehelper.dart';
 
-import '../../../../main.dart';
 import '../../core/network/network_service.dart';
 import '../../core/utils/helper_manager.dart';
 import '../../core/utils/input_validators.dart';
 import '../../core/widgets/phone_number_widget.dart';
-import '../../screen/home/home_viewmodel.dart';
 import '../auth_model/empty_response.dart';
 import '../login/loginViewModel.dart';
 import '../verify_code/verify_code_view.dart';
@@ -75,6 +73,9 @@ abstract class SignUpViewModel extends State<SignUp> with StorageHelper{
 
   HtmlEditorController controllerDetailsAr = HtmlEditorController();
   HtmlEditorController controllerDetailsEn = HtmlEditorController();
+
+  final TextEditingController textEditingController = TextEditingController();
+
 
   String detailsAr="";
   String detailsEn="";

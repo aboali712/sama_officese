@@ -50,7 +50,7 @@ abstract class HomeViewModel extends State<HomePage> with StorageHelper{
   @override
   void initState() {
     getCurrentLocation();
-    getUserData().then((value) => { sub()});
+    getUserData();
     getLang().then((value) => setState((){lang=value!; }));
     getReservationsApi();
     getPackageOrderApi();
@@ -60,50 +60,50 @@ abstract class HomeViewModel extends State<HomePage> with StorageHelper{
 
 
 
-  void sub(){
-
-    if(profileModel!.office!.subscriptionEndDate==null){
-      setState((){
-        nullValue=true;
-      });
-
-      SamaOfficeApp.navKey.currentState!.pushReplacement(MaterialPageRoute(builder:
-          (context) => const OfficeSubscribeView(),));
-
-    }else{
-
-      valEnd = DateTime.parse(profileModel!.office!.subscriptionEndDate.toString()) ;
-      print(profileModel!.office!.subscriptionEndDate.toString());
-      minus5Days = valEnd!.subtract(const Duration(days: 5));
-      setState(() {
-        difference = valEnd!.difference(date).inDays ;
-        print(difference);
-      });
-      valDate = date.isBefore(valEnd!);
-      valDateMinus5Days = date.isBefore(minus5Days!);
-      print(valDateMinus5Days);
-
-
-      if(valDateMinus5Days==false ){
-
-        if(pageVipExpired==0){
-          valDate==false?
-          SamaOfficeApp.navKey.currentState!.pushReplacement(MaterialPageRoute(
-            builder: (context) => const OfficeSubscribeView(),))
-
-              :SamaOfficeApp.navKey.currentState!.push(MaterialPageRoute(
-            builder: (context) => const OfficeSubscribeView(),));
-
-          setState((){
-            HomeViewModel.pageVipExpired=1;
-
-          });
-        }
-
-
-      }
-    }
-  }
+  // void sub(){
+  //
+  //   if(profileModel!.office!.subscriptionEndDate==null){
+  //     setState((){
+  //       nullValue=true;
+  //     });
+  //
+  //     SamaOfficeApp.navKey.currentState!.pushReplacement(MaterialPageRoute(builder:
+  //         (context) => const OfficeSubscribeView(),));
+  //
+  //   }else{
+  //
+  //     valEnd = DateTime.parse(profileModel!.office!.subscriptionEndDate.toString()) ;
+  //     print(profileModel!.office!.subscriptionEndDate.toString());
+  //     minus5Days = valEnd!.subtract(const Duration(days: 5));
+  //     setState(() {
+  //       difference = valEnd!.difference(date).inDays ;
+  //       print(difference);
+  //     });
+  //     valDate = date.isBefore(valEnd!);
+  //     valDateMinus5Days = date.isBefore(minus5Days!);
+  //     print(valDateMinus5Days);
+  //
+  //
+  //     if(valDateMinus5Days==false ){
+  //
+  //       if(pageVipExpired==0){
+  //         valDate==false?
+  //         SamaOfficeApp.navKey.currentState!.pushReplacement(MaterialPageRoute(
+  //           builder: (context) => const OfficeSubscribeView(),))
+  //
+  //             :SamaOfficeApp.navKey.currentState!.push(MaterialPageRoute(
+  //           builder: (context) => const OfficeSubscribeView(),));
+  //
+  //         setState((){
+  //           HomeViewModel.pageVipExpired=1;
+  //
+  //         });
+  //       }
+  //
+  //
+  //     }
+  //   }
+  // }
 
 
   Future<void> getUserData() async {
@@ -144,8 +144,8 @@ abstract class HomeViewModel extends State<HomePage> with StorageHelper{
         .then((Position position) {
       setState(() {
         currentPosition = position;
-        // print("${currentPosition!.latitude} 5555555555555555555");
-        // print("${currentPosition!.longitude} 5555555555555555555");
+        print("${currentPosition!.latitude} 5555555555555555555");
+        print("${currentPosition!.longitude} 5555555555555555555");
 
       });
     }).catchError((e) {
