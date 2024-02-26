@@ -102,17 +102,19 @@ class _PackagesViewState extends PackagesViewModel {
                                             ),
                                             const SizedBox(width: 10,),
 
-                                            SizedBox(height: 90,
+                                            SizedBox(height: 100,
                                               child: Column(crossAxisAlignment: CrossAxisAlignment.start,
                                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                 children: [
-                                                  Text(
-                                                    HomeViewModel.lang=="ar"?
-                                                    e.nameAr!
-                                                    :e.nameEn!
-                                                    ,style: GoogleFonts.tajawal(
-                                                      color: Colors.black,
-                                                      fontSize:15,fontWeight: FontWeight.w500),),
+                                                  SizedBox(width: 200,
+                                                    child: Text(
+                                                      HomeViewModel.lang=="ar"?
+                                                      e.nameAr!
+                                                      :e.nameEn!
+                                                      ,style: GoogleFonts.tajawal(
+                                                        color: Colors.black,
+                                                        fontSize:15,fontWeight: FontWeight.w500),),
+                                                  ),
 
                                                   Row(children: [
                                                     SvgPicture.asset("assets/images/calender.svg") ,

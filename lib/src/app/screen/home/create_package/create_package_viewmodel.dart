@@ -59,6 +59,9 @@ abstract class CreatePackageViewModel extends  State<CreatePackageView>{
   String offerType="individual";
   bool switchValue= false;
   bool isLoading=false;
+  String isSingle="";
+  String isInternational="";
+
 
   @override
   void initState() {
@@ -167,7 +170,7 @@ abstract class CreatePackageViewModel extends  State<CreatePackageView>{
       return false;
     }
 
-    if(imageFileList!.length<2){
+    if(imageFileList!.length<1){
       toastApp(tr("PhotosMustBeAtLeast2Photos"), context);
       return false;
     }
@@ -220,6 +223,17 @@ abstract class CreatePackageViewModel extends  State<CreatePackageView>{
       return false;
     }
 
+    if(isSingle==""){
+      toastApp(tr("ChooseAPriceForOneOrTwoPeople"), context);
+      return false;
+    }
+
+    if(isInternational==""){
+      toastApp(tr("ChooseThePricePerPersonForInternationalFlight"), context);
+      return false;
+    }
+
+
 
     return true;
   }
@@ -256,6 +270,8 @@ abstract class CreatePackageViewModel extends  State<CreatePackageView>{
       mp["num_of_persons"]=offerType=="group"? numOfPersonControl.value.text: 1;
       mp["num_of_days"]=daysControl.value.text;
       mp["num_of_nights"]=nightsControl.value.text;
+      mp["is_single"]=isSingle;
+      mp["is_international"]=isInternational;
 
 
 

@@ -219,6 +219,14 @@
   "completedReservations": "عدد الحجوزات المكتملة",
   "pendingReservations": "عدد الحجوزات المعلقة",
   "NumberOfOffers": "عدد العروض",
-  "Reports": "التقارير"
+  "Reports": "التقارير",
+  "ThePriceIncludes": "السعر  يشمل",
+  "person": "شخص",
+  "twoPersons": "شخصين",
+  "PriceForInternationalFlight": "السعر للطيران الدولى",
+  "Includes": "يشمل",
+  "DoesNotInclude": "لا يشمل",
+  "ChooseAPriceForOneOrTwoPeople": "أختر السعر لشخص أو لشخصين",
+  "ChooseThePricePerPersonForInternationalFlight": "أختر السعر لشخص للطيران الدولى"
 
 }

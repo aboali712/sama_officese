@@ -220,5 +220,13 @@
   "completedReservations": "Completed reservations",
   "pendingReservations": "Pending reservations",
   "NumberOfOffers": "Number of offers",
-  "Reports": "Reports"
+  "Reports": "Reports",
+  "ThePriceIncludes": "The price includes",
+  "person": "person",
+  "twoPersons": "Two persons",
+  "PriceForInternationalFlight": "Price for international flight",
+  "Includes": "Includes",
+  "DoesNotInclude": "Does not include",
+  "ChooseAPriceForOneOrTwoPeople": "Choose a price for one or two people",
+  "ChooseThePricePerPersonForInternationalFlight": "Choose the price per person for international flight"
 }
