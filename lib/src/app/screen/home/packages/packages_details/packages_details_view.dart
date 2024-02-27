@@ -14,6 +14,7 @@ import 'package:sama_officese/src/app/screen/home/packages/update_package/upDate
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../../core/values/colors.dart';
+import '../update_package/upDate_viewModel.dart';
 
 class PackagesDetails extends StatefulWidget {
   const PackagesDetails({Key? key}) : super(key: key);
@@ -380,8 +381,8 @@ class _PackagesDetailsState extends PackagesDetailsVieModel {
                                 BorderRadius.circular(15)),
                             backgroundColor: const Color(0xff00A8A5)),
                         onPressed: () {
-
-                          SamaOfficeApp.navKey.currentState!.push(
+                          UpDateViewModel.offerModel=offer;
+                          SamaOfficeApp.navKey.currentState!.pushReplacement(
                               MaterialPageRoute(builder: (context) => const UpDateView(),));
 
                         },

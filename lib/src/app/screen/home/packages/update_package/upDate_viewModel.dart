@@ -65,6 +65,8 @@ abstract class UpDateViewModel extends State<UpDateView>{
   bool isLoading=false;
  static OfferModel?offerModel;
  bool? isVIP;
+  String isSingle="";
+  String isInternational="";
 
   @override
   void initState() {
@@ -181,16 +183,9 @@ abstract class UpDateViewModel extends State<UpDateView>{
     detailsAr=offerModel!.descriptionAr!;
     detailsEn=offerModel!.descriptionEn!;
    offerModel!.status.toString()=="active"?   selectStatus =="normal" :"weekend" ;
-
     packagePriceControl.text=offerModel!.priceBefore!.toString();
-
     packageImages=offerModel!.images;
-
-
     imageFileList=[];
-
-
-
   switchValue=offerModel!.is_vip.toString()=="1"? true :false;
     packageDiscountControl.text=offerModel!.priceAfter!.toString();
     selectedCountryId=offerModel!.countries_list!.toList();
@@ -198,7 +193,6 @@ abstract class UpDateViewModel extends State<UpDateView>{
     print(selectedCitesId);
     print(selectedCountryId);
     countryId = offerModel!.countryId.toString();
-
     offerType=offerModel!.offer_type!;
     if(offerType=="group"){
       setState(() {
@@ -207,10 +201,11 @@ abstract class UpDateViewModel extends State<UpDateView>{
     }
     daysControl.text=offerModel!.numOfDays.toString();
     nightsControl.text=offerModel!.num_of_nights.toString();
-
     startSelectedDate = DateFormat('yyyy-MM-dd', "en").format(DateFormat('yyyy-MM-dd', "en").parse(offerModel!.startDate!));
-
     endSelectedDate = DateFormat('yyyy-MM-dd', "en").format(DateFormat('yyyy-MM-dd', "en").parse(offerModel!.endDate!));
+
+    isSingle=offerModel!.is_single.toString();
+    isInternational=offerModel!.is_international.toString();
 
     setState(() {
       isLoading = false;
@@ -312,6 +307,8 @@ abstract class UpDateViewModel extends State<UpDateView>{
     mp["num_of_persons"]=offerType=="group"? numOfPersonControl.value.text: 1;
     mp["num_of_days"]=daysControl.value.text;
     mp["num_of_nights"]=nightsControl.value.text;
+    mp["is_single"]=isSingle;
+    mp["is_international"]=isInternational;
 
 
 
@@ -323,9 +320,10 @@ abstract class UpDateViewModel extends State<UpDateView>{
 
 
 
-    mp["image"]=
-    await MultipartFile.fromFile(imageFileList[0].path, filename:imageFileList[0].path.split('/').last);
-  
+   if(imageFileList.isNotEmpty){
+     mp["image"]=
+     await MultipartFile.fromFile(imageFileList[0].path, filename:imageFileList[0].path.split('/').last);
+   }
 
     print(mp);
     final response = await dio.post("v1/office/offers/${offerModel!.id}/update", data: FormData.fromMap(mp));
@@ -338,7 +336,8 @@ abstract class UpDateViewModel extends State<UpDateView>{
     if (rs.status == 200) {
     setState(() {
     toastAppSuccess(rs.msg!, context);
-    SamaOfficeApp.navKey.currentState!.pop(context);
+     SamaOfficeApp.navKey.currentState!.pop(context);
+
 
     });
     }else{

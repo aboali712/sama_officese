@@ -36,6 +36,8 @@ class OfferModel {
   int? num_of_persons;
   int? num_of_nights;
   int? num_of_reserved_persons;
+  String? is_single;
+  String? is_international;
 
 
   OfferModel(
@@ -63,7 +65,14 @@ class OfferModel {
         this.priceAfter,
         this.startDate,
         this.endDate,
-        this.numOfDays,this.offer_type,this.num_of_persons,this.num_of_nights,this.num_of_reserved_persons});
+        this.numOfDays,this.offer_type,
+        this.num_of_persons,
+        this.num_of_nights,
+        this.num_of_reserved_persons,
+        this.is_single,
+        this.is_international
+
+      });
 
   OfferModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -106,7 +115,8 @@ class OfferModel {
     num_of_persons = json['num_of_persons'];
     num_of_nights = json['num_of_nights'];
     num_of_reserved_persons = json['num_of_reserved_persons'];
-
+    is_single = json['is_single'];
+    is_international = json['is_international'];
 
   }
 
@@ -150,7 +160,8 @@ class OfferModel {
     data['num_of_nights'] = this.num_of_nights;
     data['num_of_reserved_persons'] = this.num_of_reserved_persons;
 
-
+    data['is_single'] = this.is_single;
+    data['is_international'] = this.is_international;
 
     return data;
   }

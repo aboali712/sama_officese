@@ -1029,6 +1029,179 @@ class _UpDateViewState extends UpDateViewModel {
                                   ),
                                 ),
                               ),
+
+
+
+                              const SizedBox(
+                                height: 20,
+                              ),
+
+                              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  SizedBox(width: 130,
+                                    child: Text(
+                                      tr("ThePriceIncludes"),
+                                      style: const TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 14),
+                                      textAlign: TextAlign.start,
+                                    ),
+                                  ),
+
+                                  Row(children: [
+
+                                    TextButton(
+                                      style: TextButton.styleFrom(
+                                          foregroundColor: Colors.white, padding: const EdgeInsets.all(0),
+                                          fixedSize:  const Size(100, 40),
+                                          shape: RoundedRectangleBorder(
+
+                                              side:  BorderSide(
+                                                  color:isSingle=="single" ?const Color(0xff00A8A5)
+                                                      :Colors.grey),
+                                              borderRadius:
+                                              BorderRadius.circular(5)),
+                                          backgroundColor: isSingle=="single" ?const Color(0xff00A8A5)
+                                              :Colors.white70),
+                                      onPressed: () {
+                                        setState(() {
+                                          isSingle="single";
+                                        });
+
+                                      },
+                                      child: Text(
+                                        tr('person'),
+                                        style:  TextStyle(
+                                            fontSize: 14,
+                                            color: isSingle=="single"?Colors.white :Colors.grey,
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 10,),
+
+                                    TextButton(
+                                      style: TextButton.styleFrom(
+                                          foregroundColor: Colors.white, padding: const EdgeInsets.all(0),
+                                          fixedSize:  const Size(100, 40),
+                                          shape: RoundedRectangleBorder(
+
+                                              side:  BorderSide(
+                                                  color: isSingle=="couple" ?const Color(0xff00A8A5)
+                                                      :Colors.grey),
+                                              borderRadius:
+                                              BorderRadius.circular(5)),
+                                          backgroundColor: isSingle=="couple" ?const Color(0xff00A8A5)
+                                              :Colors.white70),
+                                      onPressed: () {
+                                        setState(() {
+                                          isSingle="couple";
+                                        });
+
+                                      },
+                                      child: Text(
+                                        tr('twoPersons'),
+                                        style:  TextStyle(
+                                            fontSize: 14,
+                                            color:isSingle=="couple"?Colors.white :Colors.grey,
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                    )
+
+                                  ],),
+
+
+                                ],
+                              ),
+
+                              const SizedBox(
+                                height: 20,
+                              ),
+
+                              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  SizedBox(width: 130,
+                                    child: Text(
+                                      tr("PriceForInternationalFlight"),
+                                      style: const TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 14),
+                                      textAlign: TextAlign.start,
+                                    ),
+                                  ),
+
+                                  Row(children: [
+
+                                    TextButton(
+                                      style: TextButton.styleFrom(
+                                          foregroundColor: Colors.white, padding: const EdgeInsets.all(0),
+                                          fixedSize:  const Size(100, 40),
+                                          shape: RoundedRectangleBorder(
+
+                                              side:  BorderSide(
+                                                  color:isInternational=="international" ?const Color(0xff00A8A5)
+                                                      :Colors.grey),
+                                              borderRadius:
+                                              BorderRadius.circular(5)),
+                                          backgroundColor: isInternational=="international" ?const Color(0xff00A8A5)
+                                              :Colors.white70),
+                                      onPressed: () {
+                                        setState(() {
+                                          isInternational="international";
+                                        });
+
+                                      },
+                                      child: Text(
+                                        tr('Includes'),
+                                        style:  TextStyle(
+                                            fontSize: 14,
+                                            color: isInternational=="international"?Colors.white :Colors.grey,
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 10,),
+
+                                    TextButton(
+                                      style: TextButton.styleFrom(
+                                          foregroundColor: Colors.white, padding: const EdgeInsets.all(0),
+                                          fixedSize:  const Size(100, 40),
+                                          shape: RoundedRectangleBorder(
+
+                                              side:  BorderSide(
+                                                  color: isInternational=="local" ?const Color(0xff00A8A5)
+                                                      :Colors.grey),
+                                              borderRadius:
+                                              BorderRadius.circular(5)),
+                                          backgroundColor: isInternational=="local" ?const Color(0xff00A8A5)
+                                              :Colors.white70),
+                                      onPressed: () {
+                                        setState(() {
+                                          isInternational="local";
+                                        });
+
+                                      },
+                                      child: Text(
+                                        tr('DoesNotInclude'),
+                                        style:  TextStyle(
+                                            fontSize: 14,
+                                            color:isInternational=="local"?Colors.white :Colors.grey,
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                    )
+
+                                  ],),
+
+
+                                ],
+                              ),
+
+
+
+
+
+
+
                               const SizedBox(
                                 height: 20,
                               ),

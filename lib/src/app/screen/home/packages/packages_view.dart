@@ -177,13 +177,13 @@ class _PackagesViewState extends PackagesViewModel {
 
 
                                             InkWell(onTap: () {
-                                              UpDateViewModel.offerModel=e;
+                                              // UpDateViewModel.offerModel=e;
                                               PackagesDetailsVieModel.offerId=e.id.toString();
                                               SamaOfficeApp.navKey.currentState!.push(
                                                   MaterialPageRoute(builder: (context) =>const PackagesDetails() ,));
                                             },
                                               child: Row(children: [
-                                                Text(tr("المزيد من المعلومات"),style: GoogleFonts.tajawal(color: Colors.blue,
+                                                Text(tr("moreInformation"),style: GoogleFonts.tajawal(color: Colors.blue,
                                                     fontSize:13,fontWeight: FontWeight.w400),),
                                                 const SizedBox(width: 10,),
 
