@@ -165,15 +165,15 @@ abstract class CreatePackageViewModel extends  State<CreatePackageView>{
   Future<bool> checkData() async {
 
 
-    if(imageFileList!.isEmpty){
-      toastApp(tr("ChoosePackageImages"), context);
-      return false;
-    }
-
-    if(imageFileList!.length<1){
-      toastApp(tr("PhotosMustBeAtLeast2Photos"), context);
-      return false;
-    }
+    // if(imageFileList!.isEmpty){
+    //   toastApp(tr("ChoosePackageImages"), context);
+    //   return false;
+    // }
+    //
+    // if(imageFileList!.length<1){
+    //   toastApp(tr("PhotosMustBeAtLeast2Photos"), context);
+    //   return false;
+    // }
 
     if(packageNameArControl.text==""){
       toastApp(tr("EnterTheDisplayNameInArabic"), context);
@@ -276,12 +276,12 @@ abstract class CreatePackageViewModel extends  State<CreatePackageView>{
 
 
 
-      imageFileList?.asMap().forEach((index, element) async {
-        mp["images[$index]"]=
-        await MultipartFile.fromFile(element.path, filename:element.path.split('/').last);
-      });
-      mp["image"]=
-      await MultipartFile.fromFile(imageFileList![0].path, filename:imageFileList![0].path.split('/').last);
+      // imageFileList?.asMap().forEach((index, element) async {
+      //   mp["images[$index]"]=
+      //   await MultipartFile.fromFile(element.path, filename:element.path.split('/').last);
+      // });
+      // mp["image"]=
+      // await MultipartFile.fromFile(imageFileList![0].path, filename:imageFileList![0].path.split('/').last);
 
  print(mp);
       final response = await dio.post("v1/office/offers", data: FormData.fromMap(mp));

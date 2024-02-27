@@ -262,8 +262,10 @@ class _PackagesDetailsState extends PackagesDetailsVieModel {
                                   }
                                 ),
 
-                                Text(tr("TheRemainingNumber"),style: GoogleFonts.tajawal(color:Colors.grey,
-                                    fontSize:10,fontWeight: FontWeight.w500),),
+                                SizedBox(width: 75,
+                                  child: Text(tr("TheRemainingNumber"),style: GoogleFonts.tajawal(color:Colors.grey,
+                                      fontSize:10,fontWeight: FontWeight.w500),),
+                                ),
                               ],),
 
 
@@ -333,8 +335,8 @@ class _PackagesDetailsState extends PackagesDetailsVieModel {
                     const SizedBox(width: 8,),
                     Text(
                       offer!.status=="active"?
-                      tr("نشط الأن")
-                      :tr("مغلق الأن"),style: GoogleFonts.tajawal(
+                      tr("ActiveNow")
+                      :tr("ClosedNow"),style: GoogleFonts.tajawal(
                         color: offer!.status=="active"?
                           const Color(0xff7DC11F)
                         :Colors.red,

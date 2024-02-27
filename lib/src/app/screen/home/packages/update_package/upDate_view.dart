@@ -83,178 +83,178 @@ class _UpDateViewState extends UpDateViewModel {
                         padding: const EdgeInsets.all(8.0),
                         child: Column(crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const SizedBox(height: 10,),
-
-                              InkWell(onTap: () {
-                                selectImages();
-                                setState(() {});
-                              },
-                                child: Container(
-                                  height: 165,width: size.width,
-                                  padding: const EdgeInsets.all(10),
-                                  decoration: BoxDecoration(
-                                    borderRadius:  BorderRadius.circular(20) ,
-                                    color: const Color(0xff00A8A5),
-
-                                  ),
-                                  child: DottedBorder(
-                                    padding: const EdgeInsets.all(0),
-                                    borderType: BorderType.RRect,
-                                    radius: const Radius.circular(20),
-                                    dashPattern: const [5, 5],
-                                    color: Colors.white,
-                                    strokeWidth: 1.5,
-                                    child: Center(
-                                      child:  Column(
-                                          children: [
-
-                                            const SizedBox(height: 15,),
-                                            SvgPicture.asset("assets/images/upload.svg") ,
-                                            const SizedBox(height: 10,),
-
-                                            Text(
-                                              tr("UploadThePackageImage"),
-                                              style: const TextStyle(
-                                                  color:  Colors.white,
-                                                  fontSize: 16, fontWeight: FontWeight.w500),
-                                            ),
-                                            const SizedBox(height: 10,),
-                                            Text(
-                                              textAlign: TextAlign.center,
-                                              tr("UploadUpTo6Photos,MakeTheFirstPhotoStandOutAsThisWillBeTheMainPhoto"),
-                                              style: const TextStyle(
-                                                  color:  Colors.white,
-                                                  fontSize: 13, fontWeight: FontWeight.w400),
-                                            ),
-
-
-                                          ]),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(height: 10,),
-                              packageImages!.isNotEmpty || imageFileList.isNotEmpty?
-                              SizedBox(height: 100,
-                                child: imageFileList.isNotEmpty?
-                                ListView.builder(
-                                  scrollDirection:  Axis.horizontal,
-                                  itemCount: imageFileList.length,
-                                  itemBuilder: (BuildContext context, int index) {
-                                    return SizedBox(width: 85,height: 85,
-                                      child: Column(
-                                        children: [
-                                          Stack(
-                                              children: [
-
-
-
-
-                                                Container(
-                                                  height: 70,width: 70,
-                                                  margin: const EdgeInsets.all(5),
-                                                  decoration: BoxDecoration( borderRadius: BorderRadius.circular(15),
-                                                      border: Border.all(color: Colors.grey.shade300),
-                                          image: DecorationImage(image: FileImage(File(imageFileList![index].path,) ),
-                                                          fit: BoxFit.cover
-                                                      )
-                                                  ),
-                                                ),
-
-                                                Positioned(right: -3,top: -3,
-                                                  child: InkWell(onTap: () {
-                                                    setState(() {
-                                                      imageFileList!.removeAt(index);
-                                                    });
-                                                  },
-                                                    child: Card(elevation: 10,shape: RoundedRectangleBorder(
-                                                        borderRadius: BorderRadius.circular(50)
-                                                    ),
-                                                      child: Container(height: 20,width: 20,
-                                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(50),
-                                                            color: Colors.white70),
-                                                        child: const Icon(Icons.close,color: Colors.grey,size: 15,),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-
-
-
-                                              ]),
-                                          index==0?
-                                          Text(
-                                            tr("MainImage"),
-                                            style: const TextStyle(
-                                                color:  Colors.black,
-                                                fontSize: 10, fontWeight: FontWeight.w500),
-                                          ):const SizedBox.shrink(),
-
-                                        ],
-                                      ),
-                                    );
-                                  },
-                                )
-                              :  ListView.builder(
-                                  scrollDirection:  Axis.horizontal,
-                                  itemCount: packageImages!.length,
-                                  itemBuilder: (BuildContext context, int index) {
-                                    return SizedBox(width: 85,height: 85,
-                                      child: Column(
-                                        children: [
-                                          Stack(
-                                              children: [
-
-
-
-
-                                                Container(
-                                                  height: 70,width: 70,
-                                                  margin: const EdgeInsets.all(5),
-                                                  decoration: BoxDecoration( borderRadius: BorderRadius.circular(15),
-                                                      border: Border.all(color: Colors.grey.shade300),
-                                                image: DecorationImage(image: NetworkImage( packageImages![index].image!,),
-                                                          fit: BoxFit.cover
-                                                      )
-                                                  ),
-                                                ),
-
-                                                Positioned(right: -3,top: -3,
-                                                  child: InkWell(onTap: () {
-                                                    setState(() {
-                                                      packageImages!.removeAt(index);
-                                                    });
-                                                  },
-                                                    child: Card(elevation: 10,shape: RoundedRectangleBorder(
-                                                        borderRadius: BorderRadius.circular(50)
-                                                    ),
-                                                      child: Container(height: 20,width: 20,
-                                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(50),
-                                                            color: Colors.white70),
-                                                        child: const Icon(Icons.close,color: Colors.grey,size: 15,),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-
-
-
-                                              ]),
-                                          index==0?
-                                          Text(
-                                            tr("MainImage"),
-                                            style: const TextStyle(
-                                                color:  Colors.black,
-                                                fontSize: 10, fontWeight: FontWeight.w500),
-                                          ):const SizedBox.shrink(),
-
-                                        ],
-                                      ),
-                                    );
-                                  },
-                                ),
-                              )
-                                  :const SizedBox.shrink(),
+                              // const SizedBox(height: 10,),
+                              //
+                              // InkWell(onTap: () {
+                              //   selectImages();
+                              //   setState(() {});
+                              // },
+                              //   child: Container(
+                              //     height: 165,width: size.width,
+                              //     padding: const EdgeInsets.all(10),
+                              //     decoration: BoxDecoration(
+                              //       borderRadius:  BorderRadius.circular(20) ,
+                              //       color: const Color(0xff00A8A5),
+                              //
+                              //     ),
+                              //     child: DottedBorder(
+                              //       padding: const EdgeInsets.all(0),
+                              //       borderType: BorderType.RRect,
+                              //       radius: const Radius.circular(20),
+                              //       dashPattern: const [5, 5],
+                              //       color: Colors.white,
+                              //       strokeWidth: 1.5,
+                              //       child: Center(
+                              //         child:  Column(
+                              //             children: [
+                              //
+                              //               const SizedBox(height: 15,),
+                              //               SvgPicture.asset("assets/images/upload.svg") ,
+                              //               const SizedBox(height: 10,),
+                              //
+                              //               Text(
+                              //                 tr("UploadThePackageImage"),
+                              //                 style: const TextStyle(
+                              //                     color:  Colors.white,
+                              //                     fontSize: 16, fontWeight: FontWeight.w500),
+                              //               ),
+                              //               const SizedBox(height: 10,),
+                              //               Text(
+                              //                 textAlign: TextAlign.center,
+                              //                 tr("UploadUpTo6Photos,MakeTheFirstPhotoStandOutAsThisWillBeTheMainPhoto"),
+                              //                 style: const TextStyle(
+                              //                     color:  Colors.white,
+                              //                     fontSize: 13, fontWeight: FontWeight.w400),
+                              //               ),
+                              //
+                              //
+                              //             ]),
+                              //       ),
+                              //     ),
+                              //   ),
+                              // ),
+                              // const SizedBox(height: 10,),
+                              // packageImages!.isNotEmpty || imageFileList.isNotEmpty?
+                              // SizedBox(height: 100,
+                              //   child: imageFileList.isNotEmpty?
+                              //   ListView.builder(
+                              //     scrollDirection:  Axis.horizontal,
+                              //     itemCount: imageFileList.length,
+                              //     itemBuilder: (BuildContext context, int index) {
+                              //       return SizedBox(width: 85,height: 85,
+                              //         child: Column(
+                              //           children: [
+                              //             Stack(
+                              //                 children: [
+                              //
+                              //
+                              //
+                              //
+                              //                   Container(
+                              //                     height: 70,width: 70,
+                              //                     margin: const EdgeInsets.all(5),
+                              //                     decoration: BoxDecoration( borderRadius: BorderRadius.circular(15),
+                              //                         border: Border.all(color: Colors.grey.shade300),
+                              //             image: DecorationImage(image: FileImage(File(imageFileList![index].path,) ),
+                              //                             fit: BoxFit.cover
+                              //                         )
+                              //                     ),
+                              //                   ),
+                              //
+                              //                   Positioned(right: -3,top: -3,
+                              //                     child: InkWell(onTap: () {
+                              //                       setState(() {
+                              //                         imageFileList!.removeAt(index);
+                              //                       });
+                              //                     },
+                              //                       child: Card(elevation: 10,shape: RoundedRectangleBorder(
+                              //                           borderRadius: BorderRadius.circular(50)
+                              //                       ),
+                              //                         child: Container(height: 20,width: 20,
+                              //                           decoration: BoxDecoration(borderRadius: BorderRadius.circular(50),
+                              //                               color: Colors.white70),
+                              //                           child: const Icon(Icons.close,color: Colors.grey,size: 15,),
+                              //                         ),
+                              //                       ),
+                              //                     ),
+                              //                   ),
+                              //
+                              //
+                              //
+                              //                 ]),
+                              //             index==0?
+                              //             Text(
+                              //               tr("MainImage"),
+                              //               style: const TextStyle(
+                              //                   color:  Colors.black,
+                              //                   fontSize: 10, fontWeight: FontWeight.w500),
+                              //             ):const SizedBox.shrink(),
+                              //
+                              //           ],
+                              //         ),
+                              //       );
+                              //     },
+                              //   )
+                              // :  ListView.builder(
+                              //     scrollDirection:  Axis.horizontal,
+                              //     itemCount: packageImages!.length,
+                              //     itemBuilder: (BuildContext context, int index) {
+                              //       return SizedBox(width: 85,height: 85,
+                              //         child: Column(
+                              //           children: [
+                              //             Stack(
+                              //                 children: [
+                              //
+                              //
+                              //
+                              //
+                              //                   Container(
+                              //                     height: 70,width: 70,
+                              //                     margin: const EdgeInsets.all(5),
+                              //                     decoration: BoxDecoration( borderRadius: BorderRadius.circular(15),
+                              //                         border: Border.all(color: Colors.grey.shade300),
+                              //                   image: DecorationImage(image: NetworkImage( packageImages![index].image!,),
+                              //                             fit: BoxFit.cover
+                              //                         )
+                              //                     ),
+                              //                   ),
+                              //
+                              //                   Positioned(right: -3,top: -3,
+                              //                     child: InkWell(onTap: () {
+                              //                       setState(() {
+                              //                         packageImages!.removeAt(index);
+                              //                       });
+                              //                     },
+                              //                       child: Card(elevation: 10,shape: RoundedRectangleBorder(
+                              //                           borderRadius: BorderRadius.circular(50)
+                              //                       ),
+                              //                         child: Container(height: 20,width: 20,
+                              //                           decoration: BoxDecoration(borderRadius: BorderRadius.circular(50),
+                              //                               color: Colors.white70),
+                              //                           child: const Icon(Icons.close,color: Colors.grey,size: 15,),
+                              //                         ),
+                              //                       ),
+                              //                     ),
+                              //                   ),
+                              //
+                              //
+                              //
+                              //                 ]),
+                              //             index==0?
+                              //             Text(
+                              //               tr("MainImage"),
+                              //               style: const TextStyle(
+                              //                   color:  Colors.black,
+                              //                   fontSize: 10, fontWeight: FontWeight.w500),
+                              //             ):const SizedBox.shrink(),
+                              //
+                              //           ],
+                              //         ),
+                              //       );
+                              //     },
+                              //   ),
+                              // )
+                              //     :const SizedBox.shrink(),
 
 
                               const SizedBox(height: 10,),
@@ -1208,13 +1208,15 @@ class _UpDateViewState extends UpDateViewModel {
 
                               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(
-                                    tr("ChooseTheTypeOfPackage"),
-                                    style: const TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 15),
-                                    textAlign: TextAlign.center,
+                                  SizedBox(width: 130,
+                                    child: Text(
+                                      tr("ChooseTheTypeOfPackage"),
+                                      style: const TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 14),
+                                      textAlign: TextAlign.start,
+                                    ),
                                   ),
 
 
@@ -1224,7 +1226,7 @@ class _UpDateViewState extends UpDateViewModel {
                                     TextButton(
                                       style: TextButton.styleFrom(
                                           foregroundColor: Colors.white, padding: const EdgeInsets.all(0),
-                                          fixedSize:  const Size(100, 45),
+                                          fixedSize:  const Size(100, 40),
                                           shape: RoundedRectangleBorder(
 
                                               side:  BorderSide(
@@ -1253,7 +1255,7 @@ class _UpDateViewState extends UpDateViewModel {
                                     TextButton(
                                       style: TextButton.styleFrom(
                                           foregroundColor: Colors.white, padding: const EdgeInsets.all(0),
-                                          fixedSize:  const Size(100, 45),
+                                          fixedSize:  const Size(100, 40),
                                           shape: RoundedRectangleBorder(
 
                                               side:  BorderSide(
@@ -1290,13 +1292,15 @@ class _UpDateViewState extends UpDateViewModel {
 
                               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(
-                                    tr("ChooseTheDisplayType"),
-                                    style: const TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 15),
-                                    textAlign: TextAlign.center,
+                                  SizedBox(width: 130,
+                                    child: Text(
+                                      tr("ChooseTheDisplayType"),
+                                      style: const TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 14),
+                                      textAlign: TextAlign.start,
+                                    ),
                                   ),
 
                                   Row(children: [
@@ -1304,7 +1308,7 @@ class _UpDateViewState extends UpDateViewModel {
                                     TextButton(
                                       style: TextButton.styleFrom(
                                           foregroundColor: Colors.white, padding: const EdgeInsets.all(0),
-                                          fixedSize:  const Size(100, 45),
+                                          fixedSize:  const Size(100, 40),
                                           shape: RoundedRectangleBorder(
 
                                               side:  BorderSide(
@@ -1333,7 +1337,7 @@ class _UpDateViewState extends UpDateViewModel {
                                     TextButton(
                                       style: TextButton.styleFrom(
                                           foregroundColor: Colors.white, padding: const EdgeInsets.all(0),
-                                          fixedSize:  const Size(100, 45),
+                                          fixedSize:  const Size(100, 40),
                                           shape: RoundedRectangleBorder(
 
                                               side:  BorderSide(

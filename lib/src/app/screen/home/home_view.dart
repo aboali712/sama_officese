@@ -64,7 +64,7 @@ class _HomePageState extends HomeViewModel {
             Column(crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(tr("welcomeBack"),style: GoogleFonts.tajawal(color: Colors.white,
-                    fontSize:10,fontWeight: FontWeight.w500),),
+                    fontSize:12,fontWeight: FontWeight.w500),),
                 const SizedBox(height: 10,),
                 HomeViewModel.profileModel!=null?
                 Text("${ HomeViewModel.profileModel!.firstName??""} ${ HomeViewModel.profileModel!.lastName??""}",

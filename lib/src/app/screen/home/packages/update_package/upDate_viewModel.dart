@@ -185,7 +185,7 @@ abstract class UpDateViewModel extends State<UpDateView>{
    offerModel!.status.toString()=="active"?   selectStatus =="normal" :"weekend" ;
     packagePriceControl.text=offerModel!.priceBefore!.toString();
     packageImages=offerModel!.images;
-    imageFileList=[];
+     // imageFileList=[];
   switchValue=offerModel!.is_vip.toString()=="1"? true :false;
     packageDiscountControl.text=offerModel!.priceAfter!.toString();
     selectedCountryId=offerModel!.countries_list!.toList();
@@ -312,18 +312,15 @@ abstract class UpDateViewModel extends State<UpDateView>{
 
 
 
-    imageFileList.asMap().forEach((index, element) async {
-      mp["images[$index]"] = await MultipartFile.fromFile(element.path,filename: element.path.split('/').last);
-    });
-  
-
-
-
-
-   if(imageFileList.isNotEmpty){
-     mp["image"]=
-     await MultipartFile.fromFile(imageFileList[0].path, filename:imageFileList[0].path.split('/').last);
-   }
+   //  imageFileList.asMap().forEach((index, element) async {
+   //    mp["images[$index]"] = await MultipartFile.fromFile(element.path,filename: element.path.split('/').last);
+   //  });
+   //
+   //
+   // if(imageFileList.isNotEmpty){
+   //   mp["image"]=
+   //   await MultipartFile.fromFile(imageFileList[0].path, filename:imageFileList[0].path.split('/').last);
+   // }
 
     print(mp);
     final response = await dio.post("v1/office/offers/${offerModel!.id}/update", data: FormData.fromMap(mp));

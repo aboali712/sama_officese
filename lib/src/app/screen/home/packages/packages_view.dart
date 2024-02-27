@@ -167,8 +167,8 @@ class _PackagesViewState extends PackagesViewModel {
 
                                             Text(
                                               e.status=="active"?
-                                              tr("نشط الأن")
-                                              :tr("مغلق الأن")
+                                              tr("ActiveNow")
+                                              :tr("ClosedNow")
                                               ,style: GoogleFonts.tajawal(color:
                                             e.status=="active"?
                                             const Color(0xff7DC11F)

@@ -227,6 +227,8 @@
   "Includes": "يشمل",
   "DoesNotInclude": "لا يشمل",
   "ChooseAPriceForOneOrTwoPeople": "أختر السعر لشخص أو لشخصين",
-  "ChooseThePricePerPersonForInternationalFlight": "أختر السعر لشخص للطيران الدولى"
+  "ChooseThePricePerPersonForInternationalFlight": "أختر السعر لشخص للطيران الدولى",
+  "ActiveNow": "نشط الأن",
+  "ClosedNow": "مغلق الأن"
 
 }
