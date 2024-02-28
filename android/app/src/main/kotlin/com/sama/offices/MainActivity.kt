@@ -1,4 +1,4 @@
-package com.example.sama_officese
+package com.sama.offices
 
 import io.flutter.embedding.android.FlutterActivity
 

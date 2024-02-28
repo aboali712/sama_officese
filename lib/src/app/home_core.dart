@@ -66,14 +66,12 @@ class HomeCorePage extends State<HomeCore> with StorageHelper {
         child =  const NotificationsView();
         break;
       case 2:
-        child =   const UpDateProfileView();
+        child =   const ReportsView();
         break;
       case 3:
-        child =    const ReportsView();
-        break;
-      case 4:
         child =    const MoreView();
         break;
+
     }
     return MaterialApp(
         localizationsDelegates: context.localizationDelegates,

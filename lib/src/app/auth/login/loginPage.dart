@@ -40,11 +40,17 @@ class _LoginPageState extends LoginViewModel {
         backgroundColor: Colors.white,
 
         appBar: AppBar(
-          title: Row(
+          title: Column(
             children: [
-              const SizedBox(width: 20,),
-              Text(tr("Login"),style: GoogleFonts.tajawal(color: Colors.white,
-                  fontSize:Platform.isIOS?23: 18,fontWeight: FontWeight.w500),),
+              Row(
+                children: [
+                  const SizedBox(width: 20,),
+                  Text(tr("Login"),style: GoogleFonts.tajawal(color: Colors.white,
+                      fontSize:Platform.isIOS?23: 18,fontWeight: FontWeight.w500),),
+                ],
+              ),
+              SizedBox(height: Platform.isIOS? 20:0,),
+
             ],
           ),
           flexibleSpace:  Stack(

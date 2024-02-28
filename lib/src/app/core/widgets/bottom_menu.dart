@@ -69,9 +69,9 @@ class BottomMenu extends StatelessWidget
               case 3:
                 onChanged!(3);
                 break;
-                 case 4:
-                  onChanged!(4);
-                break;
+                //  case 4:
+                //   onChanged!(4);
+                // break;
             }
 
 
@@ -92,7 +92,7 @@ class BottomMenu extends StatelessWidget
                   color: bottomMenuIndex == 0 ? const Color(0xffEA8024) : Colors.grey,
                 ),
               ),
-              label: "",
+              label: tr("Home"),
             ),
             BottomNavigationBarItem(
                 icon: Container(
@@ -107,22 +107,9 @@ class BottomMenu extends StatelessWidget
                     color: bottomMenuIndex == 1 ? const Color(0xffEA8024)  : Colors.grey,
                   ),
                 ),
-                label: ""
+                label: tr("Notifications")
             ),
-            BottomNavigationBarItem(
-              icon:  Container(
-                padding: const EdgeInsets.all(8),
-                height: 40,
-                width: 40,
-                child: SvgPicture.asset(
-                  'assets/images/userbottom.svg',
-                  height: 24.0,
-                  width: 24.0,
-                  color: bottomMenuIndex == 2 ?const Color(0xffEA8024) : Colors.grey,
-                ),
-              ),
-              label: "",
-            ),
+
 
             BottomNavigationBarItem(
               icon:  Container(
@@ -133,10 +120,10 @@ class BottomMenu extends StatelessWidget
                   'assets/images/reports2.png',
                   height: 24.0,
                   width: 24.0,
-                  color: bottomMenuIndex == 3 ?const Color(0xffEA8024) : Colors.grey,
+                  color: bottomMenuIndex == 2 ?const Color(0xffEA8024) : Colors.grey,
                 ),
               ),
-              label: "",
+              label: tr("Reports"),
             ),
 
 
@@ -149,12 +136,12 @@ class BottomMenu extends StatelessWidget
                     'assets/images/Category.svg',
                     height: 24.0,
                     width: 24.0,
-                    color: bottomMenuIndex == 4 ? const Color(0xffEA8024) : Colors.grey,
+                    color: bottomMenuIndex == 3 ? const Color(0xffEA8024) : Colors.grey,
                   ),
                 ),
-                label: ""),
+                label: tr("More")),
           ],
-          selectedItemColor: Colors.black,
+          selectedItemColor: const Color(0xffEA8024),
           backgroundColor: Colors.white,
           unselectedItemColor: Colors.grey,
           unselectedIconTheme: const IconThemeData(size: 25),

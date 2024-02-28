@@ -9,6 +9,7 @@ import 'package:sama_officese/src/app.dart';
 import 'package:sama_officese/src/app/screen/home/packages/packages_view.dart';
 import 'package:sama_officese/src/app/screen/home/packages_order/packages_order_view.dart';
 import 'package:sama_officese/src/app/screen/home/services/sevices_view.dart';
+import 'package:sama_officese/src/app/screen/home/update_profile/update_profile_view.dart';
 
 import '../../core/values/colors.dart';
 import 'create_package/create_package_view.dart';
@@ -67,9 +68,11 @@ class _HomePageState extends HomeViewModel {
                     fontSize:12,fontWeight: FontWeight.w500),),
                 const SizedBox(height: 10,),
                 HomeViewModel.profileModel!=null?
-                Text("${ HomeViewModel.profileModel!.firstName??""} ${ HomeViewModel.profileModel!.lastName??""}",
-                  style: GoogleFonts.tajawal(color: Colors.white,
-                    fontSize:Platform.isIOS?25: 20,fontWeight: FontWeight.w500),)
+                SizedBox(width: 250,
+                  child: Text("${ HomeViewModel.profileModel!.firstName??""} ${ HomeViewModel.profileModel!.lastName??""}",
+                    style: GoogleFonts.tajawal(color: Colors.white,
+                      fontSize:Platform.isIOS?23: 18,fontWeight: FontWeight.w500),),
+                )
                 :const SizedBox.shrink(),
               ],
             ),
@@ -104,7 +107,7 @@ class _HomePageState extends HomeViewModel {
 
                     InkWell( onTap: () {
                       SamaOfficeApp.navKey.currentState!.push(
-                          MaterialPageRoute(builder: (context) => const ServiceView(),));
+                          MaterialPageRoute(builder: (context) => const UpDateProfileView(),));
 
                     },
                       child: Container( height: 165,width: size.width/2.2,
@@ -121,26 +124,26 @@ class _HomePageState extends HomeViewModel {
                             children: [
                               Container(
                                   height: 53,width: 58,
-                                  padding: const EdgeInsets.all(10),
+                                  padding: const EdgeInsets.all(15),
                                   decoration: BoxDecoration(borderRadius:  BorderRadius.circular(14),
                                       color:const Color(0xff00417e) ),
-                                  child: SvgPicture.asset("assets/images/plan.svg",)),
+                                  child: SvgPicture.asset("assets/images/userbottom.svg",)),
 
 
-                              Container(
-                                  height: 27,width: 27,
-                                  padding: const EdgeInsets.all(5),
-                                  decoration: BoxDecoration(borderRadius:  BorderRadius.circular(14),
-                                      color:const Color(0xff5AC41A) ),
-                                  child: Center(
-                                    child: Text(
-                                      services.isNotEmpty?
-                                      servicesPending.length.toString()
-                                      :"0",
-                                      style: GoogleFonts.tajawal( color: Colors.white,fontSize: 13,
-                                    fontWeight: FontWeight.w400
-                                    ),),
-                                  )),
+                              // Container(
+                              //     height: 27,width: 27,
+                              //     padding: const EdgeInsets.all(5),
+                              //     decoration: BoxDecoration(borderRadius:  BorderRadius.circular(14),
+                              //         color:const Color(0xff5AC41A) ),
+                              //     child: Center(
+                              //       child: Text(
+                              //         services.isNotEmpty?
+                              //         servicesPending.length.toString()
+                              //         :"0",
+                              //         style: GoogleFonts.tajawal( color: Colors.white,fontSize: 13,
+                              //       fontWeight: FontWeight.w400
+                              //       ),),
+                              //     )),
 
                             ],
                           ),
@@ -151,21 +154,21 @@ class _HomePageState extends HomeViewModel {
 
                             children: [
                               Text(
-                                tr("ServiceRequests"),
+                                tr("accountSettings"),
                                 style: const TextStyle(
                                     color:  Colors.black,
                                     fontSize: 15, fontWeight: FontWeight.w500),
                               ),
-                               Text(
-                                 servicesPending.isNotEmpty?
-                            "${servicesPending.length.toString()} ${tr("newRequests")}"
-                                 :tr("ThereAreCurrentlyNoRequests"),
-                                style:  TextStyle(
-                                    color:  Colors.grey,
-                                    fontSize:
-                                    servicesPending.isNotEmpty?
-                                    13 : 12, fontWeight: FontWeight.w400),
-                              ),
+                            //    Text(
+                            //      servicesPending.isNotEmpty?
+                            // "${servicesPending.length.toString()} ${tr("newRequests")}"
+                            //      :tr("ThereAreCurrentlyNoRequests"),
+                            //     style:  TextStyle(
+                            //         color:  Colors.grey,
+                            //         fontSize:
+                            //         servicesPending.isNotEmpty?
+                            //         13 : 12, fontWeight: FontWeight.w400),
+                            //   ),
 
                             ],
                           )

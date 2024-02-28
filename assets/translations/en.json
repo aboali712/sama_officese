@@ -230,6 +230,12 @@
   "ChooseAPriceForOneOrTwoPeople": "Choose a price for one or two people",
   "ChooseThePricePerPersonForInternationalFlight": "Choose the price per person for international flight",
   "ActiveNow": "Active now",
-  "ClosedNow": "Closed now"
-
+  "ClosedNow": "Closed now",
+  "Home": "Home",
+  "More": "More",
+  "UpdaTeNow": "New Version ",
+  "UpdaTe": "Update",
+  "IOsIsAvli": "A new version of sama is available!",
+  "Pl": "Please update your version to get all features",
+  "TalkToTheClient": "Talk to the client"
 }

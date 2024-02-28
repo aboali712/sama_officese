@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:sama_officese/src/app/screen/home/packages/packages_view.dart';
@@ -29,7 +31,10 @@ abstract class PackagesViewModel extends State<PackagesView>{
     if (rs.status == 200) {
       setState(() {
         offerPageModel = rs.data;
+
       });
+
+      print(offerPageModel!.map((e) => e.toJson()));
     }
   }
 

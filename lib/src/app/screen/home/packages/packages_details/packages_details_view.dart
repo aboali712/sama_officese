@@ -13,6 +13,7 @@ import 'package:sama_officese/src/app/screen/home/packages/packages_details/pack
 import 'package:sama_officese/src/app/screen/home/packages/update_package/upDate_view.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../../../../chat/chat_page.dart';
 import '../../../../core/values/colors.dart';
 import '../update_package/upDate_viewModel.dart';
 
@@ -130,7 +131,7 @@ class _PackagesDetailsState extends PackagesDetailsVieModel {
                         children: [
                       const SizedBox(height: 10,),
 
-                      SizedBox(height: 110,
+                      SizedBox(height: 125,
                         child: Column(crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -177,26 +178,34 @@ class _PackagesDetailsState extends PackagesDetailsVieModel {
 
 
 
-                            Row(
+                            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                SvgPicture.asset("assets/images/packplan.svg") ,
-                                const SizedBox(width: 10,),
+                                Row(
+                                  children: [
+                                    SvgPicture.asset("assets/images/packplan.svg") ,
+                                    const SizedBox(width: 10,),
 
-                                Text(tr("${tr("TripType")} :"),style: GoogleFonts.tajawal(
-                                    color:Colors.black,
-                                    fontSize:15,fontWeight: FontWeight.w500),),
-                                const SizedBox(width: 10,),
+                                    Text(tr("${tr("TripType")} :"),style: GoogleFonts.tajawal(
+                                        color:Colors.black,
+                                        fontSize:15,fontWeight: FontWeight.w500),),
+                                    const SizedBox(width: 10,),
 
-                                Text(
-                                  offer!.type=="normal"?
-                                  tr("Normal")
-                                 :tr("Weekend")
+                                    Text(
+                                      offer!.type=="normal"?
+                                      tr("Normal")
+                                     :tr("Weekend")
 
-                                  ,style: GoogleFonts.tajawal(color:Colors.black,
-                                    fontSize:15,fontWeight: FontWeight.w500),),
+                                      ,style: GoogleFonts.tajawal(color:Colors.black,
+                                        fontSize:15,fontWeight: FontWeight.w500),),
 
 
-                              ],),
+                                  ],),
+
+
+
+
+                              ],
+                            ),
 
                           ],
                         ),
@@ -295,7 +304,7 @@ class _PackagesDetailsState extends PackagesDetailsVieModel {
 
                           Divider(height: 10,thickness: 1,color: Colors.grey.shade300,),
 
-                      const SizedBox(height: 30,),
+                      const SizedBox(height: 150,),
 
 
                     ]),
@@ -389,7 +398,7 @@ class _PackagesDetailsState extends PackagesDetailsVieModel {
 
                         },
                         child: Text(
-                         tr('تعديل الباكدج'),
+                         tr('EditThePackage'),
                           style: const TextStyle(
                               fontSize: 16,
                               color: Colors.white,

@@ -1,4 +1,6 @@
 
+import 'dart:io';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -50,6 +52,7 @@ class _AboutUsState extends AboutUsViewModel {
                         fontWeight: FontWeight.w500,  fontSize: 20,color: Colors.white)),
 
               ],),
+              SizedBox(height: Platform.isIOS? 20:0,),
 
 
 
@@ -92,24 +95,24 @@ class _AboutUsState extends AboutUsViewModel {
                   const SizedBox(
                     height: 10,
                   ),
-                  Align(
-                    alignment: AlignmentDirectional.topStart,
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      child: Html(
-                        data: MoreViewModel.typePage == "0"
-                            ? MoreViewModel.settingsModel!.about!
-                            : MoreViewModel.typePage == "2"
-                            ? MoreViewModel.settingsModel!.privacy!
-                            : MoreViewModel.typePage == "3"
-                            ? MoreViewModel.settingsModel!.office_terms!
-                            : MoreViewModel.settingsModel!.terms!,
-                        style: {
-                          'div': Style(textAlign: TextAlign.start),
-                        },
-                      ),
-                    ),
-                  ),
+                  // Align(
+                  //   alignment: AlignmentDirectional.topStart,
+                  //   child: SizedBox(
+                  //     width: MediaQuery.of(context).size.width,
+                  //     child: Html(
+                  //       data: MoreViewModel.typePage == "0"
+                  //           ? MoreViewModel.settingsModel!.about!
+                  //           : MoreViewModel.typePage == "2"
+                  //           ? MoreViewModel.settingsModel!.privacy!
+                  //           : MoreViewModel.typePage == "3"
+                  //           ? MoreViewModel.settingsModel!.office_terms!
+                  //           : MoreViewModel.settingsModel!.terms!,
+                  //       style: {
+                  //         'div': Style(textAlign: TextAlign.start),
+                  //       },
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
             ),

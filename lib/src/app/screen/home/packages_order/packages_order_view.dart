@@ -250,11 +250,13 @@ class _PackagesOrderViewState extends PackagesOrderViewModel {
                                      Text("${e.user!.firstName} ${e.user!.lastName}",
                                        style: GoogleFonts.tajawal(color: Colors.black,
                                          fontSize:15,fontWeight: FontWeight.w500),),
-                                     Text(
-                                       HomeViewModel.lang=="ar"?
-                                       e.offer!.name!
-                                           :e.offer!.nameEn!,style: GoogleFonts.tajawal(color: Colors.black,
-                                         fontSize:13,fontWeight: FontWeight.w400),),
+                                     SizedBox(width: 250,
+                                       child: Text(
+                                         HomeViewModel.lang=="ar"?
+                                         e.offer!.name!
+                                             :e.offer!.nameEn!,style: GoogleFonts.tajawal(color: Colors.black,
+                                           fontSize:13,fontWeight: FontWeight.w400),),
+                                     ),
 
                                    ],)
 

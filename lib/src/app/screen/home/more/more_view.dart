@@ -103,48 +103,48 @@ class _MoreViewState extends MoreViewModel {
                   child: SingleChildScrollView(
                     child: Column(children: [
 
-                      Container( height: 70,width: size.width,
-                      padding: const EdgeInsets.only(left: 15,right: 15,top: 10,bottom: 10),
-                      decoration: BoxDecoration( borderRadius: BorderRadius.circular(15),
-                          color: const Color(0xffea8024)),
-                        child: Column(children: [
-                          Row(crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                            SvgPicture.asset("assets/images/tag.svg",),
-                            const SizedBox(width: 10,),
-                            SizedBox(height: 50,
-                              child: Column(crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(tr("AnnualPackage"),style: GoogleFonts.tajawal(color: Colors.white70,
-                                      fontSize:15,fontWeight: FontWeight.w500),),
-
-                                  SizedBox(width: 280,
-                                    child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(tr("SubscriptionEndsIn"),style: GoogleFonts.tajawal(color: Colors.white70,
-                                            fontSize:13,fontWeight: FontWeight.w400),),
-
-                                        HomeViewModel.profileModel!.office!=null?
-                                        Text(DateFormat("MMM d,yyyy","en" ).format(DateTime.parse(
-                                            HomeViewModel.profileModel!.office!.subscriptionEndDate!)),
-                                          style: GoogleFonts.tajawal(color: Colors.white70,
-                                            fontSize:14,fontWeight: FontWeight.w500),)
-                                        :const SizedBox.shrink(),
-
-                                      ],
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-                            ),
-
-                          ],)
-
-                        ]) ,
-                      ),
-                      const SizedBox(height: 20,),
+                      // Container( height: 70,width: size.width,
+                      // padding: const EdgeInsets.only(left: 15,right: 15,top: 10,bottom: 10),
+                      // decoration: BoxDecoration( borderRadius: BorderRadius.circular(15),
+                      //     color: const Color(0xffea8024)),
+                      //   child: Column(children: [
+                      //     Row(crossAxisAlignment: CrossAxisAlignment.start,
+                      //       children: [
+                      //       SvgPicture.asset("assets/images/tag.svg",),
+                      //       const SizedBox(width: 10,),
+                      //       SizedBox(height: 50,
+                      //         child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                      //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //           children: [
+                      //             Text(tr("AnnualPackage"),style: GoogleFonts.tajawal(color: Colors.white70,
+                      //                 fontSize:15,fontWeight: FontWeight.w500),),
+                      //
+                      //             SizedBox(width: 280,
+                      //               child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //                 children: [
+                      //                   Text(tr("SubscriptionEndsIn"),style: GoogleFonts.tajawal(color: Colors.white70,
+                      //                       fontSize:13,fontWeight: FontWeight.w400),),
+                      //
+                      //                   HomeViewModel.profileModel!.office!=null?
+                      //                   Text(DateFormat("MMM d,yyyy","en" ).format(DateTime.parse(
+                      //                       HomeViewModel.profileModel!.office!.subscriptionEndDate!)),
+                      //                     style: GoogleFonts.tajawal(color: Colors.white70,
+                      //                       fontSize:14,fontWeight: FontWeight.w500),)
+                      //                   :const SizedBox.shrink(),
+                      //
+                      //                 ],
+                      //               ),
+                      //             ),
+                      //
+                      //           ],
+                      //         ),
+                      //       ),
+                      //
+                      //     ],)
+                      //
+                      //   ]) ,
+                      // ),
+                      // const SizedBox(height: 20,),
 
                       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [

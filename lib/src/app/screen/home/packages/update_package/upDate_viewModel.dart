@@ -79,6 +79,7 @@ abstract class UpDateViewModel extends State<UpDateView>{
     });
     setData();
     getFilterDataApi();
+
     super.initState();
   }
 
@@ -182,7 +183,7 @@ abstract class UpDateViewModel extends State<UpDateView>{
     packageNameEnControl.text=offerModel!.nameEn!;
     detailsAr=offerModel!.descriptionAr!;
     detailsEn=offerModel!.descriptionEn!;
-   offerModel!.status.toString()=="active"?   selectStatus =="normal" :"weekend" ;
+    selectStatus= offerModel!.type.toString();
     packagePriceControl.text=offerModel!.priceBefore!.toString();
     packageImages=offerModel!.images;
      // imageFileList=[];
@@ -206,6 +207,7 @@ abstract class UpDateViewModel extends State<UpDateView>{
 
     isSingle=offerModel!.is_single.toString();
     isInternational=offerModel!.is_international.toString();
+
 
     setState(() {
       isLoading = false;

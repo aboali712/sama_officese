@@ -42,15 +42,21 @@ class _VrifyCodeState extends VerifyCodeViewModel {
       appBar: AppBar(
         title: Padding(
           padding: const EdgeInsets.only(left: 10,right: 10),
-          child: Row(crossAxisAlignment: CrossAxisAlignment.start,
+          child: Column(
             children: [
+              Row(crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
 
-              InkWell( onTap: () {
-                Navigator.pop(context);
-              }
-                  ,child: const Icon(Icons.arrow_back_ios,color: Colors.white,)),
-              Text(tr("MobileNumberVerification"),style: GoogleFonts.tajawal(color: Colors.white,
-                  fontSize:Platform.isIOS?23: 18,fontWeight: FontWeight.w500),),
+                  InkWell( onTap: () {
+                    Navigator.pop(context);
+                  }
+                      ,child: const Icon(Icons.arrow_back_ios,color: Colors.white,)),
+                  Text(tr("MobileNumberVerification"),style: GoogleFonts.tajawal(color: Colors.white,
+                      fontSize:Platform.isIOS?23: 18,fontWeight: FontWeight.w500),),
+                  SizedBox(height: Platform.isIOS? 20:0,),
+
+                ],
+              ),
             ],
           ),
         ),

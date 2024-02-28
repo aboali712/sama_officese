@@ -56,7 +56,7 @@ class _CreatePackageViewState extends CreatePackageViewModel {
               ],),
 
 
-
+              SizedBox(height: Platform.isIOS? 20:0,),
 
 
             ],

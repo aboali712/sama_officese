@@ -108,7 +108,7 @@ abstract class LoginViewModel extends State<LoginPage> with StorageHelper {
         toastAppSuccess(response.msg!, context);
         await saveUser(response.data!);
         await saveToken(response.token!);
-        // saveUserFirebase(response.data!.office!.id!.toString());
+       saveUserFirebase(response.data!.office!.id!.toString());
         SamaOfficeApp.navKey.currentState!.pushReplacement(
           MaterialPageRoute(builder: (context) =>  HomeCore()),
         );

@@ -1,13 +1,19 @@
 
+
+
+import 'dart:async';
+import 'dart:io';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:elegant_notification/elegant_notification.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:upgrader/upgrader.dart';
 
-
-// late StreamSubscription<DatabaseEvent> messagesSubscriptions;
-// late DatabaseReference messagesRef;
+late StreamSubscription<DatabaseEvent> messagesSubscriptions;
+late DatabaseReference messagesRef;
 
 
 toastApp(String msg, BuildContext context) {
@@ -54,37 +60,37 @@ toastAppSuccess(String msg, BuildContext context) {
   ).show(context);
 }
 
-// UploadTask uploadImageFiled(File image, String filename) {
-//   Reference reference = FirebaseStorage.instance.ref().child(filename);
-//   UploadTask uploadTask = reference.putFile(image);
-//   return uploadTask;
-// }
-// DatabaseReference getChatMessage(String groupChatId, int limit) {
-//   var database=FirebaseDatabase.instance;
-//   messagesRef=  database.ref("Chats/${groupChatId}");
-//
-//
-//   final messagesQuery =messagesRef
-//       .child(groupChatId).orderByChild("Chats/${groupChatId}/timeStamp").limitToFirst(limit);
-//
-//   messagesSubscriptions = messagesQuery.onChildAdded.listen(
-//         (DatabaseEvent event) {
-//       print('Child added: ${event.snapshot.value}');
-//     },
-//     onError: (Object o) {
-//       final error = o as FirebaseException;
-//       print('Error: ${error.code} ${error.message}');
-//     },
-//   );
-//
-//   return messagesRef;
-//
-// }
-// const int $nbsp = 0x00A0;
+UploadTask uploadImageFiled(File image, String filename) {
+  Reference reference = FirebaseStorage.instance.ref().child(filename);
+  UploadTask uploadTask = reference.putFile(image);
+  return uploadTask;
+}
+DatabaseReference getChatMessage(String groupChatId, int limit) {
+  var database=FirebaseDatabase.instance;
+  messagesRef=  database.ref("Chats/${groupChatId}");
 
-// extension StringExtension on String {
-//   String get nonBreaking => replaceAll('&nbsp;','  ');
-// }
+
+  final messagesQuery =messagesRef
+      .child(groupChatId).orderByChild("Chats/${groupChatId}/timeStamp").limitToFirst(limit);
+
+  messagesSubscriptions = messagesQuery.onChildAdded.listen(
+        (DatabaseEvent event) {
+      print('Child added: ${event.snapshot.value}');
+    },
+    onError: (Object o) {
+      final error = o as FirebaseException;
+      print('Error: ${error.code} ${error.message}');
+    },
+  );
+
+  return messagesRef;
+
+}
+const int $nbsp = 0x00A0;
+
+extension StringExtension on String {
+  String get nonBreaking => replaceAll('&nbsp;','  ');
+}
 
 class MyUpgraderMessages extends UpgraderMessages {
   @override

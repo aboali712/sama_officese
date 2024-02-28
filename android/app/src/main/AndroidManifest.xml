@@ -7,7 +7,7 @@
     <uses-feature android:name="android.hardware.location.gps" android:required="false"/>
 
     <application
-        android:label="sama_officese"
+        android:label="sama business"
         android:name="${applicationName}"
         android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher"

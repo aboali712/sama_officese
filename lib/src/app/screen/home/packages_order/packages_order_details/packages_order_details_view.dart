@@ -8,6 +8,7 @@ import 'package:sama_officese/src/app/screen/home/home_viewmodel.dart';
 import 'package:sama_officese/src/app/screen/home/packages_order/packages_order_details/packages_order_details_viewmodel.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../../chat/chat_page.dart';
 import '../../../../core/values/colors.dart';
 import '../../packages/packages_details/packages_details_view.dart';
 import '../../packages/packages_details/packages_details_viewmodel.dart';
@@ -137,6 +138,7 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                                     ),
                                   ),
 
+
                                   const SizedBox(width: 10,),
 
                                   Column(crossAxisAlignment: CrossAxisAlignment.start,
@@ -145,19 +147,45 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                                       Text("${packageDetails!.user!.firstName!} ${packageDetails!.user!.lastName}",
                                         style: GoogleFonts.tajawal(color: Colors.black,
                                           fontSize:15,fontWeight: FontWeight.w500),),
-                                      Text(packageDetails!.user!.phone!,style: GoogleFonts.tajawal(color: Colors.black,
-                                          fontSize:13,fontWeight: FontWeight.w400),),
+                                      // Text(packageDetails!.user!.phone!,style: GoogleFonts.tajawal(color: Colors.black,
+                                      //     fontSize:13,fontWeight: FontWeight.w400),),
 
                                     ],)
                                 ],),
 
-                                InkWell(onTap: () {
-                                  launchUrl(Uri.parse(
-                                      "tel://${packageDetails!.user!.phone!}"));
+                                // InkWell(onTap: () {
+                                //   launchUrl(Uri.parse(
+                                //       "tel://${packageDetails!.user!.phone!}"));
+                                //
+                                // },child: SvgPicture.asset("assets/images/phone.svg"))
 
-                                },child: SvgPicture.asset("assets/images/phone.svg"))
 
 
+                                TextButton(
+                                  style: TextButton.styleFrom(
+                                      foregroundColor: Colors.white, padding: const EdgeInsets.all(0),
+                                      fixedSize:  const Size(130, 35),
+                                      shape: RoundedRectangleBorder(
+
+                                          side: const BorderSide(
+                                              color: Color(0xff00A8A5)),
+                                          borderRadius:
+                                          BorderRadius.circular(10)),
+                                      backgroundColor: const Color(0xff00A8A5)),
+                                  onPressed: () {
+
+                                    SamaOfficeApp.navKey.currentState!.push(
+                                        MaterialPageRoute(builder: (context) => const ChatPage(),));
+
+                                  },
+                                  child: Text(
+                                    tr('TalkToTheClient'),
+                                    style: const TextStyle(
+                                        fontSize: 13,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                )
                               ],
                             ),
                           ) ,
@@ -188,23 +216,25 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                                             children: [
 
 
-                                             Container(height: 90,width: 115,
+                                             Container(height: 100,width: 115,
                                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(15),
                                              image:  DecorationImage(image: NetworkImage(packageDetails!.offer!.image!),
                                              fit: BoxFit.cover ) ),
                                              ),
                                               const SizedBox(width: 10,),
 
-                                              SizedBox(height: 90,
+                                              SizedBox(height: 100,
                                                 child: Column(crossAxisAlignment: CrossAxisAlignment.start,
                                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                   children: [
-                                           Text(
-                                                  HomeViewModel.lang=="ar"?
-                                                      packageDetails!.offer!.nameAr!
-                                                      :packageDetails!.offer!.nameEn!
-                                                  ,style: GoogleFonts.tajawal(color: Colors.black,
-                                                        fontSize:15,fontWeight: FontWeight.w500),),
+                                           SizedBox(width: 210,
+                                             child: Text(
+                                                    HomeViewModel.lang=="ar"?
+                                                        packageDetails!.offer!.nameAr!
+                                                        :packageDetails!.offer!.nameEn!
+                                                    ,style: GoogleFonts.tajawal(color: Colors.black,
+                                                          fontSize:15,fontWeight: FontWeight.w500),),
+                                           ),
 
                                                     Row(children: [
                                                       SvgPicture.asset("assets/images/calender.svg") ,
