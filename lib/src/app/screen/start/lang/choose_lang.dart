@@ -145,7 +145,7 @@ class _ChooseLangState extends State<ChooseLang> with StorageHelper {
               child: TextButton(
                   style: TextButton.styleFrom(
                     backgroundColor: const Color(0xff0ffea8024),
-                      fixedSize: const Size(110, 45),
+                      fixedSize: const Size(180, 50),
                       shape: RoundedRectangleBorder(
                         // side: const BorderSide(color: samaColor),
                         borderRadius: BorderRadius.circular(15),
