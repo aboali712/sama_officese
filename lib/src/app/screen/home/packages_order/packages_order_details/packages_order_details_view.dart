@@ -79,7 +79,7 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                         tr("Canceled")
                             : packageDetails!.status=="completed"?
                         tr("Complete")
-                            :tr("Underway ")
+                            :tr("Underway")
                       ,style: GoogleFonts.tajawal(color: Colors.white,
                           fontSize:12,fontWeight: FontWeight.w500),),
                     ),

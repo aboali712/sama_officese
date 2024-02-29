@@ -735,7 +735,7 @@ class _ChatViewState extends ChatViewModel {
           ? Alignment.centerRight
           : Alignment.centerLeft,
       padding: const EdgeInsets.all(8),
-      margin: const EdgeInsets.only(left: 100,right: 5,top: 5,bottom: 5),
+      margin: const EdgeInsets.only(left: 80,right: 5,top: 5,bottom: 5),
       decoration: BoxDecoration(
         color: isCurrentUser == PackagesOrderViewModel.userMdole!.id.toString()
             ? samaColor
@@ -785,7 +785,7 @@ class _ChatViewState extends ChatViewModel {
           ),
           Obx(
                 () => Container(
-                  width: 180,
+                  width: 150,
                   padding: const EdgeInsets.symmetric(
                       horizontal: 10, vertical: 10),
                   child: LinearProgressIndicator(
