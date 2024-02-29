@@ -8,7 +8,7 @@ const Color profile = Color(0xFF5E2D77);
 const Color primaryColor = Color(0xFFd7dae0);
 const Color orange = Color(0xFFF15E31);
 
-const Color samaColor = Color(0xFF1D405C);
+const Color samaColor = Color(0xFF00a8a5);
 const Color saraBorder = Color(0xFF000000);
 const Color samaOfficeColor = Color(0xFF00a8a5);
 const Color grayColor = Color(0xFFE6E6E6);

@@ -28,6 +28,33 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	   <key>NSMicrophoneUsageDescription</key>
+        <string>Microphone permission is required for audio playback.</string>
+		<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+        <string>The app needs the location to  use it to filter offices and offers  to get the nearest offers an offices</string>
+    	<key>NSSpeechRecognitionUsageDescription</key>
+        <string>recognize speech</string>
+    	<key>NSCameraUsageDescription</key>
+        <string>Used to demonstrate image picker plugin</string>
+    	<key>NSLocationWhenInUseUsageDescription</key>
+    	<string>The app needs the location to  use it to filter offices and offers  to get the nearest offers an offices</string>
+    	<key>NSPhotoLibraryUsageDescription</key>
+    	<string>Used to demonstrate image picker plugin</string>
+    	<key>NSMicrophoneUsageDescription</key>
+                 <string>Microphone permission is required for audio playback.</string>
+    	<key>UIApplicationSupportsIndirectInputEvents</key>
+    	<true/>
+
+        	<key>NSSpeechRecognitionUsageDescription</key>
+        	<string>This application needs the speech recognition permission</string>
+
+                 <key>NSPhotoLibraryUsageDescription</key>
+                 <string>use photos and videos to  upload  </string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>remote-notification</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

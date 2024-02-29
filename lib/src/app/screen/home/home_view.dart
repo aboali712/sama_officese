@@ -71,7 +71,7 @@ class _HomePageState extends HomeViewModel {
                 SizedBox(width: 250,
                   child: Text("${ HomeViewModel.profileModel!.firstName??""} ${ HomeViewModel.profileModel!.lastName??""}",
                     style: GoogleFonts.tajawal(color: Colors.white,
-                      fontSize:Platform.isIOS?23: 18,fontWeight: FontWeight.w500),),
+                      fontSize:Platform.isIOS?16: 15,fontWeight: FontWeight.w500),),
                 )
                 :const SizedBox.shrink(),
               ],
