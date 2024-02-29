@@ -189,15 +189,10 @@ abstract class ChatViewModel extends State<ChatView> with StorageHelper {
     if (!await Permission.microphone.isGranted) {
 
       PermissionStatus status = await Permission.microphone.request();
-      if (await Permission.microphone.isPermanentlyDenied) {
-        // The user opted to never again see the permission request dialog for this
-        // app. The only way to change the permission's status now is to let the
-        // user manually enables it in the system settings.
-        openAppSettings();
-      }
-     else if (status != PermissionStatus.granted) {
-
-        return false;
+      print(status);
+      if (status != PermissionStatus.granted) {
+        await Permission.microphone.request();
+        // return tr;
       }
 
     }
