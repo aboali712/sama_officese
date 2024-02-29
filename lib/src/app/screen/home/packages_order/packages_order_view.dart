@@ -39,7 +39,7 @@ class _PackagesOrderViewState extends PackagesOrderViewModel {
                     ,child: const Icon(Icons.arrow_back_ios,color: Colors.white,)),
                  Text(
                   tr("PackageRequests"),
-                  style: const TextStyle(
+                  style: GoogleFonts.tajawal(
                       color:  Colors.white,
                       fontSize: 21, fontWeight: FontWeight.w500),
                 ),

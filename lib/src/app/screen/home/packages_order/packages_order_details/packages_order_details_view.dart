@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sama_officese/src/app.dart';
+import 'package:sama_officese/src/app/screen/chat_page/chat_view.dart';
 import 'package:sama_officese/src/app/screen/home/home_viewmodel.dart';
 import 'package:sama_officese/src/app/screen/home/packages_order/packages_order_details/packages_order_details_viewmodel.dart';
+import 'package:sama_officese/src/app/screen/home/packages_order/packages_order_viewmodel.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../chat/chat_page.dart';
@@ -173,9 +175,11 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                                           BorderRadius.circular(10)),
                                       backgroundColor: const Color(0xff00A8A5)),
                                   onPressed: () {
+                                    PackagesOrderViewModel.bookingId=packageDetails!.id.toString();
+                                    PackagesOrderViewModel.userId=packageDetails!.userId.toString();
 
                                     SamaOfficeApp.navKey.currentState!.push(
-                                        MaterialPageRoute(builder: (context) => const ChatPage(),));
+                                        MaterialPageRoute(builder: (context) => const ChatView(),));
 
                                   },
                                   child: Text(

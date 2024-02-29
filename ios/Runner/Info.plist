@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -24,6 +26,35 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
+	   <key>NSMicrophoneUsageDescription</key>
+        <string>Microphone permission is required for audio playback.</string>
+		<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+        <string>The app needs the location to  use it to filter offices and offers  to get the nearest offers an offices</string>
+    	<key>NSSpeechRecognitionUsageDescription</key>
+        <string>recognize speech</string>
+    	<key>NSCameraUsageDescription</key>
+        <string>Used to demonstrate image picker plugin</string>
+    	<key>NSLocationWhenInUseUsageDescription</key>
+    	<string>The app needs the location to  use it to filter offices and offers  to get the nearest offers an offices</string>
+    	<key>NSPhotoLibraryUsageDescription</key>
+    	<string>Used to demonstrate image picker plugin</string>
+    	<key>NSMicrophoneUsageDescription</key>
+                 <string>Microphone permission is required for audio playback.</string>
+    	<key>UIApplicationSupportsIndirectInputEvents</key>
+    	<true/>
+
+        	<key>NSSpeechRecognitionUsageDescription</key>
+        	<string>This application needs the speech recognition permission</string>
+
+                 <key>NSPhotoLibraryUsageDescription</key>
+                 <string>use photos and videos to  upload  </string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>remote-notification</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -31,19 +62,13 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
-	<key>CADisableMinimumFrameDurationOnPhone</key>
-	<true/>
-	<key>UIApplicationSupportsIndirectInputEvents</key>
-	<true/>
 </dict>
 </plist>

@@ -58,7 +58,7 @@ Future<void> main() async {
 }
 getTokenDevice() async {
   tokenDevice = await FirebaseMessaging.instance.getToken();
-  print("${tokenDevice} 66666666666666666666666666666666666666");
+  print("${tokenDevice}");
   SharedPreferences prefs = await SharedPreferences.getInstance();
   await prefs.setString(CacheManagerKey.tokenDevice.toString(), tokenDevice!);
 }
