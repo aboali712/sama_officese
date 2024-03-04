@@ -120,7 +120,7 @@ abstract class HomeViewModel extends State<HomePage> with StorageHelper{
         profileModel = rs.data;
 
       });
-      log("${profileModel!.office!.toJson().toString()} 333333333333333333333333333333333333333333");
+      log("${profileModel!.id} 333333333333333333333333333333333333333333");
 
     }
 

@@ -6,6 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 import 'package:flutter/cupertino.dart';
+import 'package:sama_officese/src/app/screen/home/home_viewmodel.dart';
 
 import '../../../../app.dart';
 import '../../home/packages_order/packages_order_viewmodel.dart';
@@ -32,7 +33,7 @@ class ChatServices extends ChangeNotifier {
     print(timestamp.toDate().toString());
 
     DatabaseReference ref = FirebaseDatabase.instance.ref("chat_rooms").child(chatRoomId)
-        .child('messages')
+
           .child(DateTime.now().millisecondsSinceEpoch.toString());
 
 
@@ -40,8 +41,8 @@ class ChatServices extends ChangeNotifier {
 
     await ref.set(
         {
-      'senderId':PackagesOrderViewModel.userMdole!.id,
-          'senderEmail': PackagesOrderViewModel.userMdole!.email,
+      'senderId':HomeViewModel.profileModel!.id,
+          'senderEmail': HomeViewModel.profileModel!.email,
       'receverId':PackagesOrderViewModel.userId,
       'type':type,
       'message':message,
@@ -75,9 +76,9 @@ class ChatServices extends ChangeNotifier {
 
     final ref = FirebaseDatabase.instance.ref();
     final snapshot = await ref.child('chat_rooms').child(chatRoomId)
-        .child("messages").orderByChild("timestamp").get();
+        .orderByChild("timestamp").get();
     if (snapshot.exists) {
-      print(snapshot.value);
+      // print(snapshot.value);
     } else {
       print('No data available.');
     }

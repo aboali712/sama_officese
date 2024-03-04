@@ -5,6 +5,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
@@ -26,6 +27,7 @@ import 'package:uuid/uuid.dart';
 
 import '../../core/local/storagehelper.dart';
 import '../../core/utils/helper_manager.dart';
+import '../home/home_viewmodel.dart';
 import 'chat_service/chat_service.dart';
 import 'chat_view.dart';
 import 'dart:io';
@@ -73,6 +75,9 @@ abstract class ChatViewModel extends State<ChatView> with StorageHelper {
 
     super.initState();
   }
+
+
+
 
   _scrollListener() {
     if (_scrollController.offset >=
@@ -132,11 +137,11 @@ abstract class ChatViewModel extends State<ChatView> with StorageHelper {
     DatabaseReference sendImg = FirebaseDatabase.instance
         .ref("chat_rooms")
         .child(chatRoomId)
-        .child('messages')
+
         .child(timestamp.millisecondsSinceEpoch.toString());
     await sendImg.set({
-      'senderId':PackagesOrderViewModel.userMdole!.id.toString(),
-      'senderEmail': PackagesOrderViewModel.userMdole!.email.toString(),
+      'senderId':HomeViewModel.profileModel!.id.toString(),
+      'senderEmail': HomeViewModel.profileModel!.email.toString(),
       'receverId': PackagesOrderViewModel.userId.toString(),
       'type': "img",
       'message': "",
@@ -149,7 +154,7 @@ abstract class ChatViewModel extends State<ChatView> with StorageHelper {
       await FirebaseDatabase.instance
           .ref("chat_rooms")
           .child(chatRoomId)
-          .child('messages')
+
           .child(fileName)
           .remove();
 
@@ -169,7 +174,7 @@ abstract class ChatViewModel extends State<ChatView> with StorageHelper {
       await FirebaseDatabase.instance
           .ref("chat_rooms")
           .child(chatRoomId)
-          .child('messages')
+
           .child(timestamp.millisecondsSinceEpoch.toString())
           .update({
         'message': imageUrl,

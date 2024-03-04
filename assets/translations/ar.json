@@ -237,5 +237,9 @@
   "IOsIsAvli": "متوفر تحديث جديد  من سما ",
   "Pl": " من فضلك قم بتحديث التطبيق لتحصل علي المميزات الجديده",
   "TalkToTheClient": "التحدث مع العميل",
-  "OrderNumber": "طلب رقم"
+  "OrderNumber": "طلب رقم",
+  "Conversations": "المحادثات",
+  "orderNumber": "رقم الطلب",
+  "MessageFromTheMedia": "رسالة من الوسائط",
+  "ThereAreNoConversations": "لا يوجد محادثات"
 }

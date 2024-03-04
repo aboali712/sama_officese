@@ -16,7 +16,7 @@ class NetworkService extends Interceptor with StorageHelper {
   }
 
 
-  final String _baseUrl1 ="https://samaapp.com/api/";
+  final String _baseUrl1 ="https://base.samaapp.com/api/";
       // "https://test.samaapp.com/api/";
   late final Dio dio;
 

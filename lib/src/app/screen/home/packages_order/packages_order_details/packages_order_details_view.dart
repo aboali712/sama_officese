@@ -162,7 +162,7 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                                 // },child: SvgPicture.asset("assets/images/phone.svg"))
 
 
-
+                                packageDetails!.status!="canceled"?
                                 TextButton(
                                   style: TextButton.styleFrom(
                                       foregroundColor: Colors.white, padding: const EdgeInsets.all(0),
@@ -190,6 +190,7 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                                         fontWeight: FontWeight.w400),
                                   ),
                                 )
+                                    :const SizedBox.shrink()
                               ],
                             ),
                           ) ,

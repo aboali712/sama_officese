@@ -11,6 +11,7 @@ import '../../../home_core.dart';
 import '../home_viewmodel.dart';
 import 'about_us/about_us_view.dart';
 import 'contact_us/contact_us_view.dart';
+import 'convesations_page/conversations_view.dart';
 import 'more_viewModel.dart';
 
 class MoreView extends StatefulWidget {
@@ -242,6 +243,32 @@ class _MoreViewState extends MoreViewModel {
 
 
                       ],),
+
+
+                      const SizedBox(height: 20,),
+
+                      InkWell(
+                        onTap: (){
+
+                          SamaOfficeApp.navKey.currentState!.push(
+                            MaterialPageRoute(builder: (context) => const ConversationsView()),
+                          );
+                        },
+                        child: Row(children: [
+                          Image.asset(
+                            "assets/images/conversations.png",height: 40,width: 40,),
+                          const SizedBox(width: 15,),
+
+                          Text(tr("Conversations"),style: GoogleFonts.tajawal(color: Colors.black,
+                              fontSize:15,fontWeight: FontWeight.w500),),
+                        ],),
+
+
+
+
+
+                      ),
+
 
                       const SizedBox(height: 20,),
 
