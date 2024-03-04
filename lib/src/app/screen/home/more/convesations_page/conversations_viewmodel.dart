@@ -57,9 +57,7 @@ abstract class ConversationsViewModel extends State<ConversationsView> with Stor
                 officeId: int.parse(allThreads.children.toList()[0].child("receverId").value.toString(),)
             ));
           });
-          print("${ allThreads.children.toList()[0].child("message").value.toString()} 2222222222222222");
-          print("${ allThreads.children.toList()[0].child("timestamp").value.toString()} 2222222222222222");
-          print("${ allThreads.children.length} 2222222222222222");
+
 
 
 
