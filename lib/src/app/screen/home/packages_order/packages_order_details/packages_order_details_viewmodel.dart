@@ -17,7 +17,7 @@ abstract class PackagesOrderDetailsViewModel extends State<PackagesOrderDetailsV
   static BookingsServiceModel? bookingsServiceModel;
    BookingsServiceModel? packageDetails;
    bool isLoading=false;
-  List listStatues= ["pending","accepted","inReview","processing","completed","cancelled" ];
+  List listStatues= ["pending","accepted","inReview","processing","completed","canceled" ];
   @override
   void initState() {
   setState(() {
@@ -102,7 +102,7 @@ abstract class PackagesOrderDetailsViewModel extends State<PackagesOrderDetailsV
                               tr("Processing")
                                   : e=="completed"?
                               tr("Completed")
-                                  :e=="cancelled"?
+                                  :e=="canceled"?
                               tr("Cancelled")
                                   : tr("")
 
