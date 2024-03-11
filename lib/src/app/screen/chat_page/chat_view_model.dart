@@ -45,7 +45,7 @@ abstract class ChatViewModel extends State<ChatView> with StorageHelper {
   List<QueryDocumentSnapshot> listMessage = [];
 
   Stream<QuerySnapshot>? chatMessageStream;
-  final ScrollController _scrollController = ScrollController();
+  final ScrollController scrollController = ScrollController();
   String groupChatId = "";
   bool isShowSticker = false;
   final FocusNode focusNode = FocusNode();
@@ -71,7 +71,7 @@ abstract class ChatViewModel extends State<ChatView> with StorageHelper {
         firebaseFirestore: FirebaseFirestore.instance,
         firebaseStorage: FirebaseStorage.instance));
     focusNode.addListener(onFocusChange);
-    _scrollController.addListener(_scrollListener);
+    scrollController.addListener(_scrollListener);
 
     super.initState();
   }
@@ -80,9 +80,9 @@ abstract class ChatViewModel extends State<ChatView> with StorageHelper {
 
 
   _scrollListener() {
-    if (_scrollController.offset >=
-            _scrollController.position.maxScrollExtent &&
-        !_scrollController.position.outOfRange &&
+    if (scrollController.offset >=
+            scrollController.position.maxScrollExtent &&
+        !scrollController.position.outOfRange &&
         _limit <= listMessage.length) {
       setState(() {
         _limit += _limitIncrement;
@@ -107,8 +107,13 @@ abstract class ChatViewModel extends State<ChatView> with StorageHelper {
       await chatServices.sendMessage(messageControl.text, "text");
       print(messageControl.text);
       messageControl.clear();
+      scrollDown();
     }
   }
+  void scrollDown() {
+    scrollController.jumpTo(scrollController.position.maxScrollExtent);
+  }
+
 
   File? imageFile;
 

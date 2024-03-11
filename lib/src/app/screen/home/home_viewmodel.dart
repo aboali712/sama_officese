@@ -1,7 +1,9 @@
 
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:map_location_picker/map_location_picker.dart';
@@ -10,6 +12,7 @@ import 'package:sama_officese/src/app.dart';
 import 'package:sama_officese/src/app/core/local/storagehelper.dart';
 import 'package:sama_officese/src/app/screen/home/packages/models/OffersResponse.dart';
 import 'package:sama_officese/src/app/screen/home/packages/models/offer_model.dart';
+import 'package:sama_officese/src/app/screen/home/packages_order/packages_order_viewmodel.dart';
 import 'package:sama_officese/src/app/screen/home/services/model/booking_servive_model.dart';
 import 'package:sama_officese/src/app/screen/home/services/model/service_response.dart';
 
@@ -17,6 +20,7 @@ import '../../auth/auth_model/auth_response.dart';
 import '../../auth/auth_model/user_model.dart';
 import '../../core/network/network_service.dart';
 import '../../core/utils/helper_manager.dart';
+import '../chat_page/chat_view.dart';
 import 'home_view.dart';
 import 'is_office_subscribe_expired/ofice_subscribe_expired_view.dart';
 
@@ -45,20 +49,43 @@ abstract class HomeViewModel extends State<HomePage> with StorageHelper{
   static int pageVipExpired=0;
   DateTime? minus5Days;
   static  bool? valDateMinus5Days;
-
+UserModel? userModel ;
 
   @override
   void initState() {
     getCurrentLocation();
     getUserData();
     getLang().then((value) => setState((){lang=value!; }));
+    getUser().then((value) => setState(() {
+      userModel=value;
+    }));
     getReservationsApi();
     getPackageOrderApi();
     getOffersDataApi();
+    getNotifications();
     super.initState();
   }
 
+  getNotifications(){
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      // Handle notification when the app is opened from the terminated state
+      print("onMessageOpenedApp: ${message.data["firebase"]}");
+      if(message.data["firebase"]!=null) {
+        var dt=json.decode(message.data["firebase"]);
+        if(dt["notification_type"].toString()=="message") {
+          PackagesOrderViewModel.userMdole!=userModel;
+          PackagesOrderViewModel.userId=dt["userId"]!;
+          PackagesOrderViewModel.bookingId=dt["bookingId"]!;
+          Navigator.of(context)
+              .push(MaterialPageRoute(
+            builder: (context) => const ChatView(),
+          ));
+        }
 
+      }
+
+    });
+  }
 
   // void sub(){
   //

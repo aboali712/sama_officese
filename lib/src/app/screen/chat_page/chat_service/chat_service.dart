@@ -54,7 +54,10 @@ class ChatServices extends ChangeNotifier {
     Map<String,String> headers = {'Content-Type':'application/json'};
     Map mp={};
     mp["type"]="user";
-    mp["id"]=PackagesOrderViewModel.userId;
+    mp["userId"]=PackagesOrderViewModel.userId;
+    mp["officeId"]=PackagesOrderViewModel.userMdole!.office!.id.toString();
+    mp["bookingId"]=PackagesOrderViewModel.bookingId;
+
 
     final response = await dio.post( "v1/sendMessage",options: Options(headers: headers), data:(mp), );
 

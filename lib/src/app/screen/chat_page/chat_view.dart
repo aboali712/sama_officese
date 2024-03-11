@@ -210,6 +210,7 @@ class _ChatViewState extends ChatViewModel {
     messagesSubscriptions = snapshot.onChildAdded.listen(
           (DatabaseEvent event) {
         // print('Child added: ${event.snapshot.value}');
+            scrollDown();
       },
       // onError: (Object o) {
       //   final error = o as FirebaseException;
@@ -219,6 +220,7 @@ class _ChatViewState extends ChatViewModel {
 
     return FirebaseAnimatedList(
       reverse: false,
+      controller: scrollController,
       query: msgQury,
       itemBuilder: (BuildContext context, DataSnapshot snapshot,
           Animation<double> animation, int index) {

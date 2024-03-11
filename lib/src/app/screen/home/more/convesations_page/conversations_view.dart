@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sama_officese/src/app.dart';
+import 'package:sama_officese/src/app/screen/home/home_viewmodel.dart';
 
 import '../../../../core/values/colors.dart';
 import '../../../chat_page/chat_view.dart';
@@ -107,6 +108,7 @@ class _ConversationsViewState extends ConversationsViewModel{
                         return InkWell(onTap: () {
                           setState(() {
                             PackagesOrderViewModel.bookingId= e.orderId.toString();
+                            PackagesOrderViewModel.userMdole=HomeViewModel.profileModel;
                             PackagesOrderViewModel.userId= e.officeId.toString();
                           });
                           SamaOfficeApp.navKey
