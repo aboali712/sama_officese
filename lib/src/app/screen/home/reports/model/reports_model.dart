@@ -4,7 +4,7 @@ class ReportModel {
   int? completedReservationsCount;
   int? totalReservations;
   int? totalSales;
-  int? totalIncome;
+  dynamic totalIncome;
 
   ReportModel(
       {this.offersCount,
