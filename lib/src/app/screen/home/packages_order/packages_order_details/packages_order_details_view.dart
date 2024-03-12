@@ -228,7 +228,7 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                                              ),
                                               const SizedBox(width: 10,),
 
-                                              SizedBox(height: 100,
+                                              SizedBox(
                                                 child: Column(crossAxisAlignment: CrossAxisAlignment.start,
                                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                   children: [
@@ -402,7 +402,23 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                                       ]) ,
                                 ),
                               ),
-                              const SizedBox(height: 10,)
+                              const SizedBox(height: 10,),
+
+                              packageDetails!.status=="canceled"  ?
+                              Row(
+                                children: [
+                                  packageDetails!.cancellation_reasons!=null?
+                                  Text("${tr("ReasonForCancellation")} : "
+                                    ,style: GoogleFonts.tajawal(color: const Color(0xff00A8A5),
+                                        fontSize:14,fontWeight: FontWeight.w500),):const SizedBox.shrink(),
+
+                                  Text(packageDetails!.cancellation_reasons??""
+                                    ,style: GoogleFonts.tajawal(color: Colors.black,
+                                        fontSize:14,fontWeight: FontWeight.w500),),
+                                ],
+                              ):const SizedBox.shrink(),
+
+
                             ],
                           )
 
@@ -444,6 +460,7 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                           setState(() {
                             changeState=packageDetails!.status!;
                           });
+
                           changeStatus();
                         },
                           child: Container(height: 40,width: size.width,
@@ -453,18 +470,20 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
 
                             child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(
-                                    packageDetails!.status=="pending"?
-                                    tr("New")
-                                        : packageDetails!.status=="inReview"?
-                                    tr("Underway")
-                                        : packageDetails!.status=="canceled"  ?
-                                    tr("Canceled")
-                                        : packageDetails!.status=="completed"?
-                                    tr("Complete")
-                                        :tr("Underway")
-                                    ,style: GoogleFonts.tajawal(color: Colors.black,
-                                      fontSize:15,fontWeight: FontWeight.w500),),
+                                Text(
+                                  packageDetails!.status=="pending"?
+                                  tr("New")
+                                      : packageDetails!.status=="inReview"?
+                                  tr("Underway")
+                                      : packageDetails!.status=="canceled"  ?
+                                  tr("Canceled")
+                                      : packageDetails!.status=="completed"?
+                                  tr("Complete")
+                                      :tr("Underway")
+                                  ,style: GoogleFonts.tajawal(color: Colors.black,
+                                    fontSize:15,fontWeight: FontWeight.w500),),
+                                const SizedBox(width: 10,),
+
 
                                   const Icon(Icons.keyboard_arrow_down,color: Color(0xff8e8e93),),
 

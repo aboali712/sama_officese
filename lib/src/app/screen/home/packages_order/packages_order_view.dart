@@ -10,6 +10,7 @@ import 'package:sama_officese/src/app/screen/home/packages_order/packages_order_
 
 
 import '../../../../app.dart';
+import '../../../core/values/colors.dart';
 
 class PackagesOrderView extends StatefulWidget {
   const PackagesOrderView({Key? key}) : super(key: key);
@@ -177,476 +178,494 @@ class _PackagesOrderViewState extends PackagesOrderViewModel {
         backgroundColor: Colors.transparent,
         automaticallyImplyLeading: false,
       ),
-      body: Padding(
-        padding: const EdgeInsets.only(left: 10,right: 10),
-        child: Flex(direction: Axis.horizontal,
-          children: [ Expanded(
-            child: SingleChildScrollView(
-              child: Column(children: [
-                const SizedBox(height: 10,),
+      body: Stack(
+        children:[
+          Padding(
+          padding: const EdgeInsets.only(left: 10,right: 10),
+          child: Flex(direction: Axis.horizontal,
+            children: [
 
-                packageStat==0?
-               Column(children: [
-                 packagePending.isNotEmpty?
-                 Column(children: packagePending.map((e) =>
-                     Card(elevation: 5,
-                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                       child: Container(width: size.width,
+              Expanded(
+              child: SingleChildScrollView(
+                child: Column(children: [
+                  const SizedBox(height: 10,),
 
-                         decoration: BoxDecoration( color: Colors.white,borderRadius: BorderRadius.circular(10)),
-                         child: Column(
-                           children: [
+                  packageStat==0?
+                 Column(children: [
+                   packagePending.isNotEmpty?
+                   Column(children: packagePending.map((e) =>
+                       Card(elevation: 5,
+                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                         child: Container(width: size.width,
 
-                             Padding(
-                               padding: const EdgeInsets.only(left: 10,right: 10,top: 10,bottom: 5),
-                               child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                 crossAxisAlignment: CrossAxisAlignment.end,
-                                 children: [
-                                   Text("#${e.id}",style: GoogleFonts.tajawal(color: Colors.black,
-                                       fontSize:15,fontWeight: FontWeight.w400),),
+                           decoration: BoxDecoration( color: Colors.white,borderRadius: BorderRadius.circular(10)),
+                           child: Column(
+                             children: [
 
-                                   Container(height: 25,
-                                     padding: const EdgeInsets.all(5),
-                                     decoration: BoxDecoration(borderRadius:  BorderRadius.circular(20),
-                                         color:const Color(0xffCCEEED) ),
-                                     child: Row(mainAxisAlignment: MainAxisAlignment.center,
+                               Padding(
+                                 padding: const EdgeInsets.only(left: 10,right: 10,top: 10,bottom: 5),
+                                 child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                   crossAxisAlignment: CrossAxisAlignment.end,
+                                   children: [
+                                     Text("#${e.id}",style: GoogleFonts.tajawal(color: Colors.black,
+                                         fontSize:15,fontWeight: FontWeight.w400),),
 
-                                         children: [
-                                           SvgPicture.asset("assets/images/packplan.svg",),
-                                           const SizedBox(width: 3,),
-                                           Text(
-                                             e.offer!.type=="weekend"?
-                                             tr("weekend")
-                                                 :tr("aTrip"),style: GoogleFonts.tajawal(color: Colors.black,
-                                               fontSize:12,fontWeight: FontWeight.w500),),
-                                         ]),
-                                   )
+                                     Container(height: 25,
+                                       padding: const EdgeInsets.all(5),
+                                       decoration: BoxDecoration(borderRadius:  BorderRadius.circular(20),
+                                           color:const Color(0xffCCEEED) ),
+                                       child: Row(mainAxisAlignment: MainAxisAlignment.center,
+
+                                           children: [
+                                             SvgPicture.asset("assets/images/packplan.svg",),
+                                             const SizedBox(width: 3,),
+                                             Text(
+                                               e.offer!.type=="weekend"?
+                                               tr("weekend")
+                                                   :tr("aTrip"),style: GoogleFonts.tajawal(color: Colors.black,
+                                                 fontSize:12,fontWeight: FontWeight.w500),),
+                                           ]),
+                                     )
+
+                                   ],),
+                               ),
+
+                               Divider(height: 5,thickness: 1,color: Colors.grey.shade300,),
+
+
+                               Padding(
+                                 padding: const EdgeInsets.all(10.0),
+                                 child: Row(children: [
+                                   Container(
+                                     height: 45,width: 50,
+                                     padding: const EdgeInsets.all(11),
+                                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),
+                                         color: const Color(0xff8a8c8e),
+                                         border: Border.all(width: 1.5,color: Colors.white,),
+                                         image:  DecorationImage(
+                                             image: NetworkImage(e.user!.image!), fit: BoxFit.cover)
+                                     ),
+                                   ),
+
+                                   const SizedBox(width: 10,),
+
+                                   Column(crossAxisAlignment: CrossAxisAlignment.start,
+                                     children: [
+
+                                       Text("${e.user!.firstName} ${e.user!.lastName}",
+                                         style: GoogleFonts.tajawal(color: Colors.black,
+                                           fontSize:15,fontWeight: FontWeight.w500),),
+                                       SizedBox(width: 250,
+                                         child: Text(
+                                           HomeViewModel.lang=="ar"?
+                                           e.offer!.name!
+                                               :e.offer!.nameEn!,style: GoogleFonts.tajawal(color: Colors.black,
+                                             fontSize:13,fontWeight: FontWeight.w400),),
+                                       ),
+
+                                     ],)
+
+
 
                                  ],),
-                             ),
+                               ),
 
-                             Divider(height: 5,thickness: 1,color: Colors.grey.shade300,),
+                               Divider(height: 5,thickness: 1,color: Colors.grey.shade300,),
 
-
-                             Padding(
-                               padding: const EdgeInsets.all(10.0),
-                               child: Row(children: [
-                                 Container(
-                                   height: 45,width: 50,
-                                   padding: const EdgeInsets.all(11),
-                                   decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),
-                                       color: const Color(0xff8a8c8e),
-                                       border: Border.all(width: 1.5,color: Colors.white,),
-                                       image:  DecorationImage(
-                                           image: NetworkImage(e.user!.image!), fit: BoxFit.cover)
-                                   ),
-                                 ),
-
-                                 const SizedBox(width: 10,),
-
-                                 Column(crossAxisAlignment: CrossAxisAlignment.start,
+                               Padding(
+                                 padding: const EdgeInsets.all(10.0),
+                                 child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                    children: [
-
-                                     Text("${e.user!.firstName} ${e.user!.lastName}",
-                                       style: GoogleFonts.tajawal(color: Colors.black,
-                                         fontSize:15,fontWeight: FontWeight.w500),),
-                                     SizedBox(width: 250,
-                                       child: Text(
-                                         HomeViewModel.lang=="ar"?
-                                         e.offer!.name!
-                                             :e.offer!.nameEn!,style: GoogleFonts.tajawal(color: Colors.black,
-                                           fontSize:13,fontWeight: FontWeight.w400),),
+                                     Row(crossAxisAlignment: CrossAxisAlignment.center,
+                                       children: [
+                                         SvgPicture.asset("assets/images/time.svg"),
+                                         const SizedBox(width: 5,),
+                                         Text(DateFormat("MMM d,yyyy","en" ).format(DateTime.parse(e.createdAt!)),
+                                           style: GoogleFonts.tajawal(color: const Color(0xff9196AE),
+                                               fontSize:12,fontWeight: FontWeight.w400),),
+                                       ],
                                      ),
 
-                                   ],)
+
+                                     InkWell(onTap: () {
+                                       setState(() {
+                                         PackagesOrderDetailsViewModel.bookingsServiceModel=e;
+                                       });
+                                       SamaOfficeApp.navKey.currentState!.push
+                                         (MaterialPageRoute(builder: (context) => const PackagesOrderDetailsView(),));
+                                     },
+                                       child: Row(children: [
+                                         Text(tr("Details"),style: GoogleFonts.tajawal(color: Colors.blue,
+                                             fontSize:13,fontWeight: FontWeight.w400),),
+                                         const SizedBox(width: 5,),
+
+                                         const Icon(Icons.arrow_forward_ios,size: 18,color: Colors.grey,)
+
+                                       ],),
+                                     )
 
 
 
-                               ],),
-                             ),
-
-                             Divider(height: 5,thickness: 1,color: Colors.grey.shade300,),
-
-                             Padding(
-                               padding: const EdgeInsets.all(10.0),
-                               child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                 children: [
-                                   Row(crossAxisAlignment: CrossAxisAlignment.center,
-                                     children: [
-                                       SvgPicture.asset("assets/images/time.svg"),
-                                       const SizedBox(width: 5,),
-                                       Text(DateFormat("MMM d,yyyy","en" ).format(DateTime.parse(e.createdAt!)),
-                                         style: GoogleFonts.tajawal(color: const Color(0xff9196AE),
-                                             fontSize:12,fontWeight: FontWeight.w400),),
-                                     ],
-                                   ),
-
-
-                                   InkWell(onTap: () {
-                                     setState(() {
-                                       PackagesOrderDetailsViewModel.bookingsServiceModel=e;
-                                     });
-                                     SamaOfficeApp.navKey.currentState!.push
-                                       (MaterialPageRoute(builder: (context) => const PackagesOrderDetailsView(),));
-                                   },
-                                     child: Row(children: [
-                                       Text(tr("Details"),style: GoogleFonts.tajawal(color: Colors.blue,
-                                           fontSize:13,fontWeight: FontWeight.w400),),
-                                       const SizedBox(width: 5,),
-
-                                       const Icon(Icons.arrow_forward_ios,size: 18,color: Colors.grey,)
-
-                                     ],),
-                                   )
-
-
-
-                                 ],
+                                   ],
+                                 ),
                                ),
-                             ),
 
 
-                           ],
-                         ) ,
-                       ),
-                     )).toList(),)
-                     :Container(
-                   margin: EdgeInsets.only(
-                       top: MediaQuery.of(context).size.height / 5),
-                   child: Column(
-                     children: [
-                       SvgPicture.asset("assets/images/empty_orders.svg"),
-                       const SizedBox(
-                         height: 20,
-                       ),
-                       Text(
-                         tr("no_orders"),
-                         style: const TextStyle(
-                             fontSize: 17, fontWeight: FontWeight.bold),
-                       ),
-                       const SizedBox(
-                         height: 10,
-                       ),
-                       Text(textAlign: TextAlign.center,
-                         tr("NoOrdersDesc"),
-                         style: const TextStyle(
-                             fontSize: 15, fontWeight: FontWeight.w500),
-                       ),
-                     ],
+                             ],
+                           ) ,
+                         ),
+                       )).toList(),)
+                       :Container(
+                     margin: EdgeInsets.only(
+                         top: MediaQuery.of(context).size.height / 5),
+                     child: Column(
+                       children: [
+                         SvgPicture.asset("assets/images/empty_orders.svg"),
+                         const SizedBox(
+                           height: 20,
+                         ),
+                         Text(
+                           tr("no_orders"),
+                           style: const TextStyle(
+                               fontSize: 17, fontWeight: FontWeight.bold),
+                         ),
+                         const SizedBox(
+                           height: 10,
+                         ),
+                         Text(textAlign: TextAlign.center,
+                           tr("NoOrdersDesc"),
+                           style: const TextStyle(
+                               fontSize: 15, fontWeight: FontWeight.w500),
+                         ),
+                       ],
+                     ),
                    ),
-                 ),
-               ],)
-              :  packageStat==1?
-                Column(children: [
-                  packageInReview.isNotEmpty?
-                  Column(children: packageInReview.map((e) =>
-                      Card(elevation: 5,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                        child: Container(width: size.width,
+                 ],)
+                :  packageStat==1?
+                  Column(children: [
+                    packageInReview.isNotEmpty?
+                    Column(children: packageInReview.map((e) =>
+                        Card(elevation: 5,
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                          child: Container(width: size.width,
 
-                          decoration: BoxDecoration( color: Colors.white,borderRadius: BorderRadius.circular(10)),
-                          child: Column(
-                            children: [
+                            decoration: BoxDecoration( color: Colors.white,borderRadius: BorderRadius.circular(10)),
+                            child: Column(
+                              children: [
 
-                              Padding(
-                                padding: const EdgeInsets.only(left: 10,right: 10,top: 10,bottom: 5),
-                                child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    Text("#${e.id}",style: GoogleFonts.tajawal(color: Colors.black,
-                                        fontSize:15,fontWeight: FontWeight.w400),),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 10,right: 10,top: 10,bottom: 5),
+                                  child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      Text("#${e.id}",style: GoogleFonts.tajawal(color: Colors.black,
+                                          fontSize:15,fontWeight: FontWeight.w400),),
 
-                                    Container(height: 25,
-                                      padding: const EdgeInsets.all(5),
-                                      decoration: BoxDecoration(borderRadius:  BorderRadius.circular(20),
-                                          color:const Color(0xffCCEEED) ),
-                                      child: Row(mainAxisAlignment: MainAxisAlignment.center,
+                                      Container(height: 25,
+                                        padding: const EdgeInsets.all(5),
+                                        decoration: BoxDecoration(borderRadius:  BorderRadius.circular(20),
+                                            color:const Color(0xffCCEEED) ),
+                                        child: Row(mainAxisAlignment: MainAxisAlignment.center,
 
-                                          children: [
-                                            SvgPicture.asset("assets/images/packplan.svg",),
-                                            const SizedBox(width: 3,),
-                                            Text(
-                                              e.offer!.type=="weekend"?
-                                              tr("weekend")
-                                                  :tr("aTrip"),style: GoogleFonts.tajawal(color: Colors.black,
-                                                fontSize:12,fontWeight: FontWeight.w500),),
-                                          ]),
-                                    )
+                                            children: [
+                                              SvgPicture.asset("assets/images/packplan.svg",),
+                                              const SizedBox(width: 3,),
+                                              Text(
+                                                e.offer!.type=="weekend"?
+                                                tr("weekend")
+                                                    :tr("aTrip"),style: GoogleFonts.tajawal(color: Colors.black,
+                                                  fontSize:12,fontWeight: FontWeight.w500),),
+                                            ]),
+                                      )
+
+                                    ],),
+                                ),
+
+                                Divider(height: 5,thickness: 1,color: Colors.grey.shade300,),
+
+
+                                Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Row(children: [
+                                    Container(
+                                      height: 45,width: 50,
+                                      padding: const EdgeInsets.all(11),
+                                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),
+                                          color: const Color(0xff8a8c8e),
+                                          border: Border.all(width: 1.5,color: Colors.white,),
+                                          image:  DecorationImage(
+                                              image: NetworkImage(e.user!.image!), fit: BoxFit.cover)
+                                      ),
+                                    ),
+
+                                    const SizedBox(width: 10,),
+
+                                    Column(crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+
+                                        Text("${e.user!.firstName} ${e.user!.lastName}",
+                                          style: GoogleFonts.tajawal(color: Colors.black,
+                                            fontSize:15,fontWeight: FontWeight.w500),),
+                                        SizedBox(width: 250,
+                                          child: Text(
+                                            HomeViewModel.lang=="ar"?
+                                            e.offer!.name!
+                                                :e.offer!.nameEn!,style: GoogleFonts.tajawal(color: Colors.black,
+                                              fontSize:13,fontWeight: FontWeight.w400),),
+                                        ),
+
+                                      ],)
+
+
 
                                   ],),
-                              ),
+                                ),
 
-                              Divider(height: 5,thickness: 1,color: Colors.grey.shade300,),
+                                Divider(height: 5,thickness: 1,color: Colors.grey.shade300,),
 
-
-                              Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Row(children: [
-                                  Container(
-                                    height: 45,width: 50,
-                                    padding: const EdgeInsets.all(11),
-                                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),
-                                        color: const Color(0xff8a8c8e),
-                                        border: Border.all(width: 1.5,color: Colors.white,),
-                                        image:  DecorationImage(
-                                            image: NetworkImage(e.user!.image!), fit: BoxFit.cover)
-                                    ),
-                                  ),
-
-                                  const SizedBox(width: 10,),
-
-                                  Column(crossAxisAlignment: CrossAxisAlignment.start,
+                                Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
-
-                                      Text("${e.user!.firstName} ${e.user!.lastName}",
-                                        style: GoogleFonts.tajawal(color: Colors.black,
-                                          fontSize:15,fontWeight: FontWeight.w500),),
-                                      SizedBox(width: 250,
-                                        child: Text(
-                                          HomeViewModel.lang=="ar"?
-                                          e.offer!.name!
-                                              :e.offer!.nameEn!,style: GoogleFonts.tajawal(color: Colors.black,
-                                            fontSize:13,fontWeight: FontWeight.w400),),
+                                      Row(crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          SvgPicture.asset("assets/images/time.svg"),
+                                          const SizedBox(width: 5,),
+                                          Text(DateFormat("MMM d,yyyy","en" ).format(DateTime.parse(e.createdAt!)),
+                                            style: GoogleFonts.tajawal(color: const Color(0xff9196AE),
+                                                fontSize:12,fontWeight: FontWeight.w400),),
+                                        ],
                                       ),
 
-                                    ],)
+
+                                      InkWell(onTap: () {
+                                        setState(() {
+                                          PackagesOrderDetailsViewModel.bookingsServiceModel=e;
+                                        });
+                                        SamaOfficeApp.navKey.currentState!.push
+                                          (MaterialPageRoute(builder: (context) => const PackagesOrderDetailsView(),));
+                                      },
+                                        child: Row(children: [
+                                          Text(tr("Details"),style: GoogleFonts.tajawal(color: Colors.blue,
+                                              fontSize:13,fontWeight: FontWeight.w400),),
+                                          const SizedBox(width: 5,),
+
+                                          const Icon(Icons.arrow_forward_ios,size: 18,color: Colors.grey,)
+
+                                        ],),
+                                      )
 
 
 
-                                ],),
-                              ),
+                                    ],
+                                  ),
+                                ),
 
-                              Divider(height: 5,thickness: 1,color: Colors.grey.shade300,),
 
-                              Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Row(crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: [
-                                        SvgPicture.asset("assets/images/time.svg"),
-                                        const SizedBox(width: 5,),
-                                        Text(DateFormat("MMM d,yyyy","en" ).format(DateTime.parse(e.createdAt!)),
-                                          style: GoogleFonts.tajawal(color: const Color(0xff9196AE),
-                                              fontSize:12,fontWeight: FontWeight.w400),),
-                                      ],
+                              ],
+                            ) ,
+                          ),
+                        )).toList(),)
+                        :Container(
+                      margin: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height / 5),
+                      child: Column(
+                        children: [
+                          SvgPicture.asset("assets/images/empty_orders.svg"),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Text(
+                            tr("no_orders"),
+                            style: const TextStyle(
+                                fontSize: 17, fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Text(textAlign: TextAlign.center,
+                            tr("NoOrdersDesc"),
+                            style: const TextStyle(
+                                fontSize: 15, fontWeight: FontWeight.w500),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],)
+                      :   Column(children: [
+                    packageCompleted.isNotEmpty?
+                    Column(children: packageCompleted.map((e) =>
+                        Card(elevation: 5,
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                          child: Container(width: size.width,
+
+                            decoration: BoxDecoration( color: Colors.white,borderRadius: BorderRadius.circular(10)),
+                            child: Column(
+                              children: [
+
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 10,right: 10,top: 10,bottom: 5),
+                                  child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      Text("#${e.id}",style: GoogleFonts.tajawal(color: Colors.black,
+                                          fontSize:15,fontWeight: FontWeight.w400),),
+
+                                      Container(height: 25,
+                                        padding: const EdgeInsets.all(5),
+                                        decoration: BoxDecoration(borderRadius:  BorderRadius.circular(20),
+                                            color:const Color(0xffCCEEED) ),
+                                        child: Row(mainAxisAlignment: MainAxisAlignment.center,
+
+                                            children: [
+                                              SvgPicture.asset("assets/images/packplan.svg",),
+                                              const SizedBox(width: 3,),
+                                              Text(
+                                                e.offer!.type=="weekend"?
+                                                tr("weekend")
+                                                    :tr("aTrip"),style: GoogleFonts.tajawal(color: Colors.black,
+                                                  fontSize:12,fontWeight: FontWeight.w500),),
+                                            ]),
+                                      )
+
+                                    ],),
+                                ),
+
+                                Divider(height: 5,thickness: 1,color: Colors.grey.shade300,),
+
+
+                                Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Row(children: [
+                                    Container(
+                                      height: 45,width: 50,
+                                      padding: const EdgeInsets.all(11),
+                                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),
+                                          color: const Color(0xff8a8c8e),
+                                          border: Border.all(width: 1.5,color: Colors.white,),
+                                          image:  DecorationImage(
+                                              image: NetworkImage(e.user!.image!), fit: BoxFit.cover)
+                                      ),
                                     ),
 
+                                    const SizedBox(width: 10,),
 
-                                    InkWell(onTap: () {
-                                      setState(() {
-                                        PackagesOrderDetailsViewModel.bookingsServiceModel=e;
-                                      });
-                                      SamaOfficeApp.navKey.currentState!.push
-                                        (MaterialPageRoute(builder: (context) => const PackagesOrderDetailsView(),));
-                                    },
-                                      child: Row(children: [
-                                        Text(tr("Details"),style: GoogleFonts.tajawal(color: Colors.blue,
-                                            fontSize:13,fontWeight: FontWeight.w400),),
-                                        const SizedBox(width: 5,),
+                                    Column(crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
 
-                                        const Icon(Icons.arrow_forward_ios,size: 18,color: Colors.grey,)
+                                        Text("${e.user!.firstName} ${e.user!.lastName}",
+                                          style: GoogleFonts.tajawal(color: Colors.black,
+                                            fontSize:15,fontWeight: FontWeight.w500),),
+                                        SizedBox(width: 250,
+                                          child: Text(
+                                            HomeViewModel.lang=="ar"?
+                                            e.offer!.name!
+                                                :e.offer!.nameEn!,style: GoogleFonts.tajawal(color: Colors.black,
+                                              fontSize:13,fontWeight: FontWeight.w400),),
+                                        ),
 
-                                      ],),
-                                    )
-
-
-
-                                  ],
-                                ),
-                              ),
+                                      ],)
 
 
-                            ],
-                          ) ,
-                        ),
-                      )).toList(),)
-                      :Container(
-                    margin: EdgeInsets.only(
-                        top: MediaQuery.of(context).size.height / 5),
-                    child: Column(
-                      children: [
-                        SvgPicture.asset("assets/images/empty_orders.svg"),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Text(
-                          tr("no_orders"),
-                          style: const TextStyle(
-                              fontSize: 17, fontWeight: FontWeight.bold),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Text(textAlign: TextAlign.center,
-                          tr("NoOrdersDesc"),
-                          style: const TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.w500),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],)
-                    :   Column(children: [
-                  packageCompleted.isNotEmpty?
-                  Column(children: packageCompleted.map((e) =>
-                      Card(elevation: 5,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                        child: Container(width: size.width,
-
-                          decoration: BoxDecoration( color: Colors.white,borderRadius: BorderRadius.circular(10)),
-                          child: Column(
-                            children: [
-
-                              Padding(
-                                padding: const EdgeInsets.only(left: 10,right: 10,top: 10,bottom: 5),
-                                child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    Text("#${e.id}",style: GoogleFonts.tajawal(color: Colors.black,
-                                        fontSize:15,fontWeight: FontWeight.w400),),
-
-                                    Container(height: 25,
-                                      padding: const EdgeInsets.all(5),
-                                      decoration: BoxDecoration(borderRadius:  BorderRadius.circular(20),
-                                          color:const Color(0xffCCEEED) ),
-                                      child: Row(mainAxisAlignment: MainAxisAlignment.center,
-
-                                          children: [
-                                            SvgPicture.asset("assets/images/packplan.svg",),
-                                            const SizedBox(width: 3,),
-                                            Text(
-                                              e.offer!.type=="weekend"?
-                                              tr("weekend")
-                                                  :tr("aTrip"),style: GoogleFonts.tajawal(color: Colors.black,
-                                                fontSize:12,fontWeight: FontWeight.w500),),
-                                          ]),
-                                    )
 
                                   ],),
-                              ),
+                                ),
 
-                              Divider(height: 5,thickness: 1,color: Colors.grey.shade300,),
+                                Divider(height: 5,thickness: 1,color: Colors.grey.shade300,),
 
-
-                              Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Row(children: [
-                                  Container(
-                                    height: 45,width: 50,
-                                    padding: const EdgeInsets.all(11),
-                                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),
-                                        color: const Color(0xff8a8c8e),
-                                        border: Border.all(width: 1.5,color: Colors.white,),
-                                        image:  DecorationImage(
-                                            image: NetworkImage(e.user!.image!), fit: BoxFit.cover)
-                                    ),
-                                  ),
-
-                                  const SizedBox(width: 10,),
-
-                                  Column(crossAxisAlignment: CrossAxisAlignment.start,
+                                Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
-
-                                      Text("${e.user!.firstName} ${e.user!.lastName}",
-                                        style: GoogleFonts.tajawal(color: Colors.black,
-                                          fontSize:15,fontWeight: FontWeight.w500),),
-                                      SizedBox(width: 250,
-                                        child: Text(
-                                          HomeViewModel.lang=="ar"?
-                                          e.offer!.name!
-                                              :e.offer!.nameEn!,style: GoogleFonts.tajawal(color: Colors.black,
-                                            fontSize:13,fontWeight: FontWeight.w400),),
+                                      Row(crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          SvgPicture.asset("assets/images/time.svg"),
+                                          const SizedBox(width: 5,),
+                                          Text(DateFormat("MMM d,yyyy","en" ).format(DateTime.parse(e.createdAt!)),
+                                            style: GoogleFonts.tajawal(color: const Color(0xff9196AE),
+                                                fontSize:12,fontWeight: FontWeight.w400),),
+                                        ],
                                       ),
 
-                                    ],)
+
+                                      InkWell(onTap: () {
+                                        setState(() {
+                                          PackagesOrderDetailsViewModel.bookingsServiceModel=e;
+                                        });
+                                        SamaOfficeApp.navKey.currentState!.push
+                                          (MaterialPageRoute(builder: (context) => const PackagesOrderDetailsView(),));
+                                      },
+                                        child: Row(children: [
+                                          Text(tr("Details"),style: GoogleFonts.tajawal(color: Colors.blue,
+                                              fontSize:13,fontWeight: FontWeight.w400),),
+                                          const SizedBox(width: 5,),
+
+                                          const Icon(Icons.arrow_forward_ios,size: 18,color: Colors.grey,)
+
+                                        ],),
+                                      )
 
 
 
-                                ],),
-                              ),
-
-                              Divider(height: 5,thickness: 1,color: Colors.grey.shade300,),
-
-                              Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Row(crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: [
-                                        SvgPicture.asset("assets/images/time.svg"),
-                                        const SizedBox(width: 5,),
-                                        Text(DateFormat("MMM d,yyyy","en" ).format(DateTime.parse(e.createdAt!)),
-                                          style: GoogleFonts.tajawal(color: const Color(0xff9196AE),
-                                              fontSize:12,fontWeight: FontWeight.w400),),
-                                      ],
-                                    ),
-
-
-                                    InkWell(onTap: () {
-                                      setState(() {
-                                        PackagesOrderDetailsViewModel.bookingsServiceModel=e;
-                                      });
-                                      SamaOfficeApp.navKey.currentState!.push
-                                        (MaterialPageRoute(builder: (context) => const PackagesOrderDetailsView(),));
-                                    },
-                                      child: Row(children: [
-                                        Text(tr("Details"),style: GoogleFonts.tajawal(color: Colors.blue,
-                                            fontSize:13,fontWeight: FontWeight.w400),),
-                                        const SizedBox(width: 5,),
-
-                                        const Icon(Icons.arrow_forward_ios,size: 18,color: Colors.grey,)
-
-                                      ],),
-                                    )
-
-
-
-                                  ],
+                                    ],
+                                  ),
                                 ),
-                              ),
 
 
-                            ],
-                          ) ,
-                        ),
-                      )).toList(),)
-                      :Container(
-                    margin: EdgeInsets.only(
-                        top: MediaQuery.of(context).size.height / 5),
-                    child: Column(
-                      children: [
-                        SvgPicture.asset("assets/images/empty_orders.svg"),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Text(
-                          tr("no_orders"),
-                          style: const TextStyle(
-                              fontSize: 17, fontWeight: FontWeight.bold),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Text(textAlign: TextAlign.center,
-                          tr("NoOrdersDesc"),
-                          style: const TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.w500),
-                        ),
-                      ],
+                              ],
+                            ) ,
+                          ),
+                        )).toList(),)
+                        :Container(
+                      margin: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height / 5),
+                      child: Column(
+                        children: [
+                          SvgPicture.asset("assets/images/empty_orders.svg"),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Text(
+                            tr("no_orders"),
+                            style: const TextStyle(
+                                fontSize: 17, fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Text(textAlign: TextAlign.center,
+                            tr("NoOrdersDesc"),
+                            style: const TextStyle(
+                                fontSize: 15, fontWeight: FontWeight.w500),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],)
-                ,
+                  ],)
+                  ,
 
-                const SizedBox(height: 30,),
+                  const SizedBox(height: 30,),
 
 
-              ]),
+                ]),
+              ),
             ),
-          ),
+          ]),
+        ),
+
+
+          isLoading==true?
+          SizedBox(
+              height: size.height/1.80,
+              child: const Center(child: CircularProgressIndicator(color: samaOfficeColor,
+              )))
+              :const SizedBox.shrink()
+
+
+
+
+
         ]),
-      ),
 
 
     );

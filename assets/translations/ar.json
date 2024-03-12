@@ -241,5 +241,8 @@
   "Conversations": "المحادثات",
   "orderNumber": "رقم الطلب",
   "MessageFromTheMedia": "رسالة من الوسائط",
-  "ThereAreNoConversations": "لا يوجد محادثات"
+  "ThereAreNoConversations": "لا يوجد محادثات",
+  "Apply": "موافق",
+  "ChooseTheReasonForCancellation": "أختر سبب الألغاء",
+  "ReasonForCancellation": "سبب الألغاء"
 }

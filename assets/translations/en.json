@@ -242,6 +242,9 @@
   "Conversations": "Conversations",
   "orderNumber": "order number",
   "MessageFromTheMedia": "Message from the media",
-  "ThereAreNoConversations": "There are no conversations"
+  "ThereAreNoConversations": "There are no conversations",
+  "Apply": "Apply",
+  "ChooseTheReasonForCancellation": "Choose the reason for cancellation",
+  "ReasonForCancellation": "Reason for cancellation"
 
 }

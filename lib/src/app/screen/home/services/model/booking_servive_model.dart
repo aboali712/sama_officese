@@ -23,6 +23,7 @@ class BookingsServiceModel {
   List<MyServiceModel>? services;
   UserModel? user;
   OfferModel? offer;
+  String?cancellation_reasons;
 
   BookingsServiceModel(
       {this.id,
@@ -41,7 +42,8 @@ class BookingsServiceModel {
         this.createdAt,
         this.services,
         this.user,
-        this.offer
+        this.offer,
+        this.cancellation_reasons,
       });
 
   BookingsServiceModel.fromJson(Map<String, dynamic> json) {
@@ -73,6 +75,8 @@ class BookingsServiceModel {
       });
     }
 
+    cancellation_reasons = json['cancellation_reasons'];
+
   }
 
   Map<String, dynamic> toJson() {
@@ -101,6 +105,8 @@ class BookingsServiceModel {
     if (this.services != null) {
       data['services'] = this.services!.map((v) => v.toJson()).toList();
     }
+
+    data['cancellation_reasons'] = this.cancellation_reasons;
 
     return data;
   }
