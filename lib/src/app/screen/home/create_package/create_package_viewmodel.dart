@@ -259,8 +259,9 @@ abstract class CreatePackageViewModel extends  State<CreatePackageView>{
       mp["is_vip"]= switchValue==true ? "1":"0";
 
       mp["city_id"]=selectedCitesId;
-      mp["price_after"]=packagePriceControl.value.text.toString();
-      mp["price_before"]=packageDiscountControl.value.text.toString();
+      mp["price_after"]=packageDiscountControl.value.text.toString();
+
+      mp["price_before"]=packagePriceControl.value.text.toString();
       mp["start_date"]=startSelectedDate;
       mp["end_date"]=endSelectedDate;
       selectedCountryId.asMap().forEach((index, value) =>  mp["countries[$index]"] = value);
