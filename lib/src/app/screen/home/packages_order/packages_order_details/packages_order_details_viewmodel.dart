@@ -65,7 +65,11 @@ abstract class PackagesOrderDetailsViewModel extends State<PackagesOrderDetailsV
     mp["reservation_id"]=packageDetails!.id.toString();
 
     mp["status"] = changeState;
-    mp["cancellation_reasons"]=cancelIndex;
+    if(changeState=="canceled"){
+      mp["cancellation_reasons"]=cancelIndex;
+    }
+
+
     final response =
     await dio.post("v1/office/changeStatus", data: mp);
     setState(() {
