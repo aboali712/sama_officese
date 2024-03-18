@@ -21,7 +21,7 @@ abstract class PackagesOrderDetailsViewModel extends State<PackagesOrderDetailsV
   static BookingsServiceModel? bookingsServiceModel;
    BookingsServiceModel? packageDetails;
    bool isLoading=false;
-  List listStatues= ["pending","accepted","inReview","processing","completed","canceled" ];
+  List listStatues= ["pending","accepted","inReview","processing","waiting_for_pay","completed","canceled" ];
 
   String cancelReason="";
   String cancelIndex="";
@@ -101,7 +101,7 @@ abstract class PackagesOrderDetailsViewModel extends State<PackagesOrderDetailsV
         builder: (context) {
           return StatefulBuilder(builder: (context, setState) {
             return  SizedBox(
-              height: 450,
+              height: 500,
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
@@ -134,6 +134,8 @@ abstract class PackagesOrderDetailsViewModel extends State<PackagesOrderDetailsV
                               tr("Reviewing")
                                   : e=="processing"?
                               tr("Processing")
+                                  : e=="waiting_for_pay"?
+                              tr("waiting_for_pay")
                                   : e=="completed"?
                               tr("Completed")
                                   :e=="canceled"?

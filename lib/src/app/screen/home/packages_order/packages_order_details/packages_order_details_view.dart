@@ -77,8 +77,11 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                         tr("Underway")
                             : packageDetails!.status=="canceled"  ?
                         tr("Canceled")
+                            : packageDetails!.status=="waiting_for_pay"?
+                        tr("waiting_for_pay")
                             : packageDetails!.status=="completed"?
                         tr("Complete")
+
                             :tr("Underway")
                       ,style: GoogleFonts.tajawal(color: Colors.white,
                           fontSize:12,fontWeight: FontWeight.w500),),
@@ -477,6 +480,8 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                                   tr("Underway")
                                       : packageDetails!.status=="canceled"  ?
                                   tr("Canceled")
+                                      : packageDetails!.status=="waiting_for_pay"?
+                                  tr("waiting_for_pay")
                                       : packageDetails!.status=="completed"?
                                   tr("Complete")
                                       :tr("Underway")

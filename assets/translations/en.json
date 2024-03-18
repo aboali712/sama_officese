@@ -245,6 +245,7 @@
   "ThereAreNoConversations": "There are no conversations",
   "Apply": "Apply",
   "ChooseTheReasonForCancellation": "Choose the reason for cancellation",
-  "ReasonForCancellation": "Reason for cancellation"
+  "ReasonForCancellation": "Reason for cancellation",
+  "waiting_for_pay": "Waiting for pay"
 
 }
