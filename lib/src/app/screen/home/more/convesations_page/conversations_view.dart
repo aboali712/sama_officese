@@ -99,7 +99,7 @@ class _ConversationsViewState extends ConversationsViewModel{
                   conversationModel.isNotEmpty?
                   Column(children:
 
-                  conversationModel.map((e) => Builder(
+                  conversationModel.reversed.map((e) => Builder(
                       builder: (context) {
                         var parsed = DateTime.fromMillisecondsSinceEpoch(
                             int.parse(e.date.toString()));
@@ -159,12 +159,14 @@ class _ConversationsViewState extends ConversationsViewModel{
                                       "assets/images/conversations.png",height: 20,width: 20,color: samaColor,),
                                     const SizedBox(width: 5,),
 
-                                    Text(
-                                      e.type=="text"?
-                                      e.message.toString()
-                                          :"${tr("MessageFromTheMedia")}...."
-                                      ,style: GoogleFonts.tajawal(fontWeight: FontWeight.w400,
-                                        fontSize: 14),),
+                                    SizedBox(width: 280,
+                                      child: Text(
+                                        e.type=="text"?
+                                        e.message.toString()
+                                            :"${tr("MessageFromTheMedia")}...."
+                                        ,style: GoogleFonts.tajawal(fontWeight: FontWeight.w400,
+                                          fontSize: 14),),
+                                    ),
                                   ],),
 
 
