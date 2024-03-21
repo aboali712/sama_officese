@@ -72,7 +72,7 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                     child: Center(
                       child: Text(
                         packageDetails!.status=="pending"?
-                        tr("New")
+                        tr("Pending")
                             : packageDetails!.status=="inReview"?
                         tr("Underway")
                             : packageDetails!.status=="canceled"  ?
@@ -475,7 +475,7 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                                 children: [
                                 Text(
                                   packageDetails!.status=="pending"?
-                                  tr("New")
+                                  tr("Pending")
                                       : packageDetails!.status=="inReview"?
                                   tr("Underway")
                                       : packageDetails!.status=="canceled"  ?
