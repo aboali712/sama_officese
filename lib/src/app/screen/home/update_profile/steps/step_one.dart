@@ -52,7 +52,7 @@ class StepOneProfile extends StatelessWidget {
 
                   errorStyle: const TextStyle(color: accentColor),
                   contentPadding: const EdgeInsets.symmetric(
-                      vertical: 17.0, horizontal: 10.0),
+                      vertical: 10.0, horizontal: 10.0),
 
                   filled: true,
                   fillColor: const Color(0xFFF3F3F5),
@@ -132,7 +132,7 @@ class StepOneProfile extends StatelessWidget {
 
                     errorStyle: const TextStyle(color: accentColor),
                     contentPadding: const EdgeInsets.symmetric(
-                        vertical: 17.0, horizontal: 10.0),
+                        vertical: 10.0, horizontal: 10.0),
 
                     filled: true,
                     fillColor: const Color(0xFFF3F3F5),
