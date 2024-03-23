@@ -64,7 +64,7 @@ abstract class ChatViewModel extends State<ChatView> with StorageHelper {
 
   @override
   void initState() {
-
+    getCurrentLocation();
 
 
     chatProvider = Get.put(ChatProvider(
@@ -323,7 +323,12 @@ abstract class ChatViewModel extends State<ChatView> with StorageHelper {
 
     Navigator.of(context).push(
         MaterialPageRoute(builder: (context) => MapLocationPicker
-          (
+
+          (currentLatLng:
+        currentPosition!=null?
+        LatLng(currentPosition!.latitude, currentPosition!.longitude)
+          :LatLng(HomeViewModel.currentPosition!.latitude, HomeViewModel.currentPosition!.longitude),
+
           language: "ar",
           apiKey: "AIzaSyBeAsv9F4ONue2XY9a6redv-o6rKxLuBGc",
           onNext: (GeocodingResult? resu) {

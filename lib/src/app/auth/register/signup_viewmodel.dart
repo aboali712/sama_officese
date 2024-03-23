@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:map_location_picker/map_location_picker.dart';
+// import 'package:map_location_picker/map_location_picker.dart';
 import 'package:sama_officese/src/app.dart';
 import 'package:sama_officese/src/app/auth/register/signup_view.dart';
 import 'package:sama_officese/src/app/core/local/storagehelper.dart';
@@ -212,33 +212,33 @@ abstract class SignUpViewModel extends State<SignUp> with StorageHelper{
     }
 
   }
-  GeocodingResult? result;
-  void showPlacePicker() async {
-
-    Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => MapLocationPicker
-          (
-          language:"ar",
-          currentLatLng: LatLng(LoginViewModel.currentPosition!.latitude,LoginViewModel.currentPosition!.longitude) ,
-          apiKey: "AIzaSyBeAsv9F4ONue2XY9a6redv-o6rKxLuBGc",
-          onNext: (GeocodingResult? resu) {
-            setState(() {
-              result=resu;
-              print(result!.formattedAddress!);
-              print(result!.geometry.location.lat);
-              print(result!.geometry.location.lng);
-
-              Navigator.pop(context);
-            });
-          },
-        )));
-    // setState(() {
-    //   result=re;
-    //   print(result);
-    // });
-
-  }
-
+  // GeocodingResult? result;
+  // void showPlacePicker() async {
+  //
+  //   Navigator.of(context).push(
+  //       MaterialPageRoute(builder: (context) => MapLocationPicker
+  //         (
+  //         language:"ar",
+  //         currentLatLng: LatLng(LoginViewModel.currentPosition!.latitude,LoginViewModel.currentPosition!.longitude) ,
+  //         apiKey: "AIzaSyBeAsv9F4ONue2XY9a6redv-o6rKxLuBGc",
+  //         onNext: (GeocodingResult? resu) {
+  //           setState(() {
+  //             result=resu;
+  //             print(result!.formattedAddress!);
+  //             print(result!.geometry.location.lat);
+  //             print(result!.geometry.location.lng);
+  //
+  //             Navigator.pop(context);
+  //           });
+  //         },
+  //       )));
+  //   // setState(() {
+  //   //   result=re;
+  //   //   print(result);
+  //   // });
+  //
+  // }
+  //
 
 
   bool validStepOne(){
@@ -306,10 +306,10 @@ abstract class SignUpViewModel extends State<SignUp> with StorageHelper{
       return false;
     }
 
-    if(result==null){
-      toastApp(tr("ChooseAddressFrom"),context);
-      return false;
-    }
+    // if(result==null){
+    //   toastApp(tr("ChooseAddressFrom"),context);
+    //   return false;
+    // }
 
     if(selectedOfficeBranch==null){
       toastApp(tr("ChooseTheOfficeBranch"),context);
@@ -449,8 +449,8 @@ abstract class SignUpViewModel extends State<SignUp> with StorageHelper{
     mp["plan_id"]=planId.toString();
     mp["address"]=addressArControl.value.text;
     mp["office_name"]=completeNameArControl.value.text;
-    mp["lat"]=result!.geometry.location.lat.toString();
-    mp["lng"]=result!.geometry.location.lng.toString();
+    // mp["lat"]=result!.geometry.location.lat.toString();
+    // mp["lng"]=result!.geometry.location.lng.toString();
     mp["bank_name"]=bankNameControl.value.text;
     mp["bank_account"]=bankNumberControl.value.text;
     mp["iban"]=ibanNumberControl.value.text;
