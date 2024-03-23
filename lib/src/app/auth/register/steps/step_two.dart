@@ -575,23 +575,23 @@ class StepTwo extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          InkWell(
-            onTap: (){
-              signUpViewModel.showPlacePicker();
-            },
-            child: Container(
-                height: 45,
-                decoration: BoxDecoration(
-                    color: const Color(0xFFF3F3F5),
-                    borderRadius: BorderRadius.circular(5)
-                ),
-                padding: const EdgeInsets.all(10),
-                alignment: AlignmentDirectional.centerStart,
-                width: MediaQuery.of(context).size.width,
-                child: Text(signUpViewModel.result!=null ?
-                signUpViewModel.result!.formattedAddress! : tr("ChooseAddressFrom"),
-                    style: GoogleFonts.tajawal(fontSize: 12))),
-          ),
+          // InkWell(
+          //   onTap: (){
+          //     signUpViewModel.showPlacePicker();
+          //   },
+          //   child: Container(
+          //       height: 45,
+          //       decoration: BoxDecoration(
+          //           color: const Color(0xFFF3F3F5),
+          //           borderRadius: BorderRadius.circular(5)
+          //       ),
+          //       padding: const EdgeInsets.all(10),
+          //       alignment: AlignmentDirectional.centerStart,
+          //       width: MediaQuery.of(context).size.width,
+          //       child: Text(signUpViewModel.result!=null ?
+          //       signUpViewModel.result!.formattedAddress! : tr("ChooseAddressFrom"),
+          //           style: GoogleFonts.tajawal(fontSize: 12))),
+          // ),
 
           const SizedBox(height: 20,),
           Text(
