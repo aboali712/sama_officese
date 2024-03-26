@@ -55,7 +55,7 @@ abstract class ChatViewModel extends State<ChatView> with StorageHelper {
   AudioPlayer audioPlayer = AudioPlayer();
   String audioURL = "";
 
-  final TextEditingController messageControl = TextEditingController();
+ static final TextEditingController messageControl = TextEditingController();
   final ChatServices chatServices = ChatServices();
 
   int moreStatus = 0;

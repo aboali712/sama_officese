@@ -933,7 +933,7 @@ class _ChatViewState extends ChatViewModel {
           SizedBox(
             width: 270,
             child: TextField(
-              controller: messageControl,
+              controller: ChatViewModel.messageControl,
               style: const TextStyle(height: .6),
               textAlign: TextAlign.left,
               keyboardType: TextInputType.text,

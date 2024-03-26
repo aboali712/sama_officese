@@ -6,10 +6,12 @@ import 'package:dio/dio.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 import 'package:flutter/cupertino.dart';
+import 'package:html_editor_enhanced/utils/utils.dart';
 import 'package:sama_officese/src/app/screen/home/home_viewmodel.dart';
 
 import '../../../../app.dart';
 import '../../home/packages_order/packages_order_viewmodel.dart';
+import '../chat_view_model.dart';
 
 
 
@@ -24,9 +26,6 @@ class ChatServices extends ChangeNotifier {
   Future<void> sendMessage( String message,String type,{String? duration = ""}) async {
 
     final Timestamp timestamp = Timestamp.now();
-
-
-
 
     String chatRoomId =PackagesOrderViewModel.bookingId;
 
@@ -50,6 +49,9 @@ class ChatServices extends ChangeNotifier {
           "duration": duration
         }
     );
+    ChatViewModel.messageControl.clear();
+
+
 
     Map<String,String> headers = {'Content-Type':'application/json'};
     Map mp={};
