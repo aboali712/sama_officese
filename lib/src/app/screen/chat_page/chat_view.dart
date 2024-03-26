@@ -621,7 +621,7 @@ class _ChatViewState extends ChatViewModel {
         : _audio1(
         message: data.child("message").value.toString(),
         isCurrentUser: data.child("senderId").value.toString(),
-        index: index,
+        index: int.parse(data.child("timestamp").value.toString()),
         timestamp: data.child("timestamp").value.toString(),
         duration: data.child("duration").value.toString(),
         time: data.child("timestamp").value.toString());
