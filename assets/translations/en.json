@@ -246,6 +246,13 @@
   "Apply": "Apply",
   "ChooseTheReasonForCancellation": "Choose the reason for cancellation",
   "ReasonForCancellation": "Reason for cancellation",
-  "waiting_for_pay": "Waiting for pay"
-
+  "waiting_for_pay": "Waiting for pay",
+  "Installments": "Installments",
+  "dueDate": "Due date",
+  "Paid": "Paid",
+  "dueAmount": "due_amount",
+  "WaitingForPayment": "Wait payment",
+  "InstallmentDetails": "Installment details",
+  "ClientDetails": "Client details",
+  "Payments": "Payments"
 }

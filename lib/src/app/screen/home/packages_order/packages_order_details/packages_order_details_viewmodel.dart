@@ -10,6 +10,8 @@ import 'package:sama_officese/src/app/screen/home/packages_order/packages_order_
 import '../../../../auth/auth_model/empty_response.dart';
 import '../../../../core/network/network_service.dart';
 import '../../../../core/utils/helper_manager.dart';
+import '../../more/Installments/model/installment_model.dart';
+import '../../more/Installments/model/installment_response.dart';
 import '../../services/model/booking_servive_model.dart';
 import 'model/cancel_reason_model.dart';
 import 'model/cancel_response.dart';
@@ -27,14 +29,31 @@ abstract class PackagesOrderDetailsViewModel extends State<PackagesOrderDetailsV
   String cancelIndex="";
 
    CancelModel?cancelModel;
-  // List<String>? cancelModel =[];
+  List<InstallmentModel>? installmentModel;
+
   @override
   void initState() {
   setState(() {
     packageDetails=bookingsServiceModel;
   });
   getReason();
+  getReserveInstallment();
     super.initState();
+  }
+  Future<void> getReserveInstallment() async {
+    setState(() {
+      isLoading=true;
+    });
+    Map<String, String> mp = {};
+    mp["reservation_id"] = packageDetails!.id.toString();
+    final response = await dio.get("v1/office/ReservationInstallments", queryParameters: mp);
+    var rs = InstallmentResponse(response.data!);
+    setState(() {
+      isLoading=false;
+    });
+    if (rs.status == 200) {
+      installmentModel=rs.data;
+    }
   }
 
 
@@ -214,7 +233,6 @@ abstract class PackagesOrderDetailsViewModel extends State<PackagesOrderDetailsV
 
 
 
-
   Future<void> showMyDialog(BuildContext context) async {
     Size size = MediaQuery.of(context).size;
 
@@ -382,6 +400,160 @@ abstract class PackagesOrderDetailsViewModel extends State<PackagesOrderDetailsV
       },
     );
   }
+
+
+
+
+
+  Future<void> showBottomSheetInstallment(BuildContext context) async {
+    Size size = MediaQuery.of(context).size;
+
+    return showModalBottomSheet(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(0),
+      ),
+      backgroundColor: Colors.white,
+      isScrollControlled: true,
+      context: context,
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return SizedBox(
+              height:installmentModel!.length>=4?550: 450,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 10, width: size.width),
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Center(
+                      child: Text(
+                        tr("Payments"),
+                        style: const TextStyle(
+                          color: Color(0xff043C7C),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Divider(
+                    height: 10,
+                    thickness: 2,
+                    color: Colors.grey.shade400,
+                  ),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+
+
+                            Column( children: installmentModel!.map((e) => Card(
+                              elevation: 5,shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                              child: Container(
+                                width: size.width,
+                                padding: const EdgeInsets.all(10),                             
+                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(15),
+                                    color: Colors.white,
+
+                                ),
+                                child: Column(children: [
+                              
+                                  Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Column(crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Text(
+                                                "${tr("dueDate")} : ",
+                                                style: const TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                              ),
+                                              Text(
+                                                e.dueDate.toString(),
+                                                style: const TextStyle(
+                                                  color: Color(0xff043C7C),
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                              
+                                              Text(
+                                                "${tr("dueAmount")} : ",
+                                                style: const TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                              ),
+                                              Text(
+                                                "${e.dueAmount.toString().substring(0,4)} ${tr("Sar")}",
+                                                style: const TextStyle(
+                                                  color: Color(0xff043C7C),
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],),
+                              
+                              
+                              
+                                      Column(crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            e.status=="paid"?
+                                            tr("Paid")
+                                                :tr("WaitingForPayment"),
+                                            style:  TextStyle(
+                                              color:
+                                              e.status=="paid"?
+                                              Colors.green
+                                                  :Colors.red,
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                              
+                                        ],)
+                                    ],),
+                              
+                              
+                              
+                              
+                              
+                              
+                                ],),
+                              ),
+                            )).toList(),)
+
+
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
 
 
 }

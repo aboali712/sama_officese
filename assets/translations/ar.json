@@ -245,5 +245,13 @@
   "Apply": "موافق",
   "ChooseTheReasonForCancellation": "أختر سبب الألغاء",
   "ReasonForCancellation": "سبب الألغاء",
-  "waiting_for_pay": "فى أنتظار الدفع"
+  "waiting_for_pay": "فى أنتظار الدفع",
+  "Installments": "الأقساط",
+  "dueDate": "تاريخ الاستحقاق",
+  "Paid": "تم الدفع",
+  "dueAmount": "المبلغ المستحق",
+  "WaitingForPayment": "أنتظار الدفع",
+  "InstallmentDetails": "تفاصيل الدفعات",
+  "ClientDetails": "تفاصيل العميل",
+  "Payments": "الدفعات"
 }

@@ -144,14 +144,14 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                                   ),
 
 
-                                  const SizedBox(width: 10,),
+                                  const SizedBox(width: 5,),
 
                                   Column(crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
 
                                       Text("${packageDetails!.user!.firstName!} ${packageDetails!.user!.lastName}",
                                         style: GoogleFonts.tajawal(color: Colors.black,
-                                          fontSize:15,fontWeight: FontWeight.w500),),
+                                          fontSize:14,fontWeight: FontWeight.w500),),
                                       // Text(packageDetails!.user!.phone!,style: GoogleFonts.tajawal(color: Colors.black,
                                       //     fontSize:13,fontWeight: FontWeight.w400),),
 
@@ -200,6 +200,7 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                         ),
                       ),
                       const SizedBox(height: 5,),
+
 
                       Padding(
                         padding: const EdgeInsets.all(8),
@@ -426,6 +427,57 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                           )
 
                         ,).toList(),),
+
+
+                          installmentModel==null?
+                           const SizedBox.shrink()
+                          :installmentModel!.isNotEmpty?
+                          Card(elevation: 5,
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                            child: Container(width: size.width,
+
+                              decoration: BoxDecoration( color: Colors.white,borderRadius: BorderRadius.circular(10)),
+                              child: Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(tr("InstallmentDetails"),
+                                      style: GoogleFonts.tajawal(color: Colors.black,
+                                          fontSize:15,fontWeight: FontWeight.w500),),
+
+
+                                    installmentModel!.isNotEmpty?
+                                    TextButton(
+                                      style: TextButton.styleFrom(
+                                          foregroundColor: Colors.white, padding: const EdgeInsets.all(0),
+                                          fixedSize:  const Size(130, 35),
+                                          shape: RoundedRectangleBorder(
+
+                                              side: const BorderSide(
+                                                  color: Color(0xff00A8A5)),
+                                              borderRadius:
+                                              BorderRadius.circular(10)),
+                                          backgroundColor: const Color(0xff00A8A5)),
+                                      onPressed: () {
+                                        showBottomSheetInstallment(context);
+                                      },
+                                      child: Text(
+                                        tr('Payments'),
+                                        style: const TextStyle(
+                                            fontSize: 13,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                    )
+                                        :const SizedBox.shrink(),
+                                  ],
+                                ),
+                              ) ,
+                            ),
+                          )
+                          :const SizedBox.shrink(),
+                          const SizedBox(height: 5,),
+
 
                       const SizedBox(height: 30,),
 

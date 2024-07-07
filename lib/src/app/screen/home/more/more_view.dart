@@ -9,6 +9,7 @@ import 'package:sama_officese/src/app.dart';
 import '../../../core/values/colors.dart';
 import '../../../home_core.dart';
 import '../home_viewmodel.dart';
+import 'Installments/Installments_view.dart';
 import 'about_us/about_us_view.dart';
 import 'contact_us/contact_us_view.dart';
 import 'convesations_page/conversations_view.dart';
@@ -260,6 +261,31 @@ class _MoreViewState extends MoreViewModel {
                           const SizedBox(width: 15,),
 
                           Text(tr("Conversations"),style: GoogleFonts.tajawal(color: Colors.black,
+                              fontSize:15,fontWeight: FontWeight.w500),),
+                        ],),
+
+
+
+
+
+                      ),
+
+
+                      const SizedBox(height: 20,),
+
+                      InkWell(
+                        onTap: (){
+
+                          SamaOfficeApp.navKey.currentState!.push(
+                            MaterialPageRoute(builder: (context) => const InstallmentsView()),
+                          );
+                        },
+                        child: Row(children: [
+                          Image.asset(
+                            "assets/images/installment.png",height: 35,width: 35,),
+                          const SizedBox(width: 15,),
+
+                          Text(tr("Installments"),style: GoogleFonts.tajawal(color: Colors.black,
                               fontSize:15,fontWeight: FontWeight.w500),),
                         ],),
 
