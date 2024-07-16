@@ -257,10 +257,8 @@ abstract class CreatePackageViewModel extends  State<CreatePackageView>{
       mp["description_en"]=detailsEn;
       mp["country_id"]=countryId;
       mp["is_vip"]= switchValue==true ? "1":"0";
-
       mp["city_id"]=selectedCitesId;
       mp["price_after"]=packageDiscountControl.value.text.toString();
-
       mp["price_before"]=packagePriceControl.value.text.toString();
       mp["start_date"]=startSelectedDate;
       mp["end_date"]=endSelectedDate;

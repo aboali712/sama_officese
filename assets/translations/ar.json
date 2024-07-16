@@ -253,5 +253,10 @@
   "WaitingForPayment": "أنتظار الدفع",
   "InstallmentDetails": "تفاصيل الدفعات",
   "ClientDetails": "تفاصيل العميل",
-  "Payments": "الدفعات"
+  "Payments": "الدفعات",
+  "bookingConfirmed": "تم تأكيد الحجز",
+  "TheChangedToCompletedBefore": "لا يجوز التغير الى مكتمل قبل الدفع",
+  "ItIsNotPermissibleToChangeFromCompletedToCanceled": "لا يجوز التغير من مكتمل الى ملغى",
+  "TheOrderIsComplete": "الطلب مكتمل",
+  "theRequestHasBeenCanceled": "تم الغاء الطلب"
 }

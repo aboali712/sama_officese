@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/countdown_timer_controller.dart';
@@ -29,6 +30,7 @@ abstract class VerifyCodeViewModel extends State<VrifyCode> with StorageHelper {
   static String phone = "";
   static String pageType = "0";
   static bool? subscriptionPage ;
+  String? tokenDevice;
 
   int endTime = DateTime.now().millisecondsSinceEpoch + 1500 * 30;
   late CountdownTimerController controller =
@@ -39,7 +41,21 @@ abstract class VerifyCodeViewModel extends State<VrifyCode> with StorageHelper {
       isTimeOff = true;
     });
   }
+  @override
+  void initState() {
+    super.initState();
+    getTokenDevice();
+  }
 
+  getTokenDevice() async {
+    await FirebaseMessaging.instance.getToken().then((value) => {
+      setState(() {
+        tokenDevice = value!;
+      })
+    });
+
+    print(tokenDevice);
+  }
   bool checkPinCode() {
     if (pinCode == "") {
       toastApp(tr("EnterTheVerificationCode"), context);
@@ -64,7 +80,7 @@ abstract class VerifyCodeViewModel extends State<VrifyCode> with StorageHelper {
     setState(() {
       isLoading = true;
     });
-    var rs = await dio.post("v1/office/verify-code", data: Map.of({"code": pinCode,"phone":phone}));
+    var rs = await dio.post("v1/office/verify-code", data: Map.of({"code": pinCode,"phone":phone,"device_token":tokenDevice}));
     var response = AuthResponse(rs.data!);
 
 

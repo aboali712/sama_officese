@@ -534,6 +534,8 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                                   tr("Canceled")
                                       : packageDetails!.status=="waiting_for_pay"?
                                   tr("waiting_for_pay")
+                                      : packageDetails!.status=="payment_confirmed"?
+                                  tr("bookingConfirmed")
                                       : packageDetails!.status=="completed"?
                                   tr("Complete")
                                       :tr("Underway")

@@ -4,6 +4,7 @@ import 'package:easy_image_viewer/easy_image_viewer.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -292,13 +293,25 @@ class _PackagesDetailsState extends PackagesDetailsVieModel {
 
                           const SizedBox(height: 15,),
 
-
-                          Text(
-                            HomeViewModel.lang=="ar"?
+                          Html(
+                            data:   HomeViewModel.lang=="ar"?
                             offer!.descriptionAr!
-                            :offer!.descriptionEn!,
-                            style: GoogleFonts.tajawal(color: Colors.black,
-                              fontSize:14,fontWeight: FontWeight.w400),),
+                                :offer!.descriptionEn!,
+                            style: {
+                              "body": Style(
+                                fontSize: FontSize(14.0),
+                                fontWeight: FontWeight.w400,
+                                color: Colors.black,
+                                fontFamily: GoogleFonts.tajawal().fontFamily,
+                              ),
+                            },
+                          ),
+                          // Text(
+                          //   HomeViewModel.lang=="ar"?
+                          //   offer!.descriptionAr!
+                          //   :offer!.descriptionEn!,
+                          //   style: GoogleFonts.tajawal(color: Colors.black,
+                          //     fontSize:14,fontWeight: FontWeight.w400),),
                           const SizedBox(height: 10,),
 
 

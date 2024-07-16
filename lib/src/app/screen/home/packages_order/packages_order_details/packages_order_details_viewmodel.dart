@@ -23,7 +23,7 @@ abstract class PackagesOrderDetailsViewModel extends State<PackagesOrderDetailsV
   static BookingsServiceModel? bookingsServiceModel;
    BookingsServiceModel? packageDetails;
    bool isLoading=false;
-  List listStatues= ["pending","accepted","inReview","processing","waiting_for_pay","completed","canceled" ];
+  List listStatues= ["pending","accepted","inReview","processing","waiting_for_pay","payment_confirmed","completed","canceled" ];
 
   String cancelReason="";
   String cancelIndex="";
@@ -120,7 +120,7 @@ abstract class PackagesOrderDetailsViewModel extends State<PackagesOrderDetailsV
         builder: (context) {
           return StatefulBuilder(builder: (context, setState) {
             return  SizedBox(
-              height: 500,
+              height: 540,
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
@@ -155,6 +155,8 @@ abstract class PackagesOrderDetailsViewModel extends State<PackagesOrderDetailsV
                               tr("Processing")
                                   : e=="waiting_for_pay"?
                               tr("waiting_for_pay")
+                                  : e=="payment_confirmed"?
+                              tr("bookingConfirmed")
                                   : e=="completed"?
                               tr("Completed")
                                   :e=="canceled"?
@@ -165,9 +167,37 @@ abstract class PackagesOrderDetailsViewModel extends State<PackagesOrderDetailsV
                                 fontSize:14,fontWeight: FontWeight.w400),),
 
                             InkWell(onTap: () {
-                              setState((){
-                                changeState=e;
-                              });
+
+                              if(packageDetails!.status=="waiting_for_pay"){
+                                if(e=="completed"){
+                                  toastApp(tr("TheChangedToCompletedBefore"), context);
+                                }else if(e=="canceled"){setState((){changeState=e;});}
+                                else if(e=="waiting_for_pay"){setState((){changeState=e;});}
+                                }
+                              else if(packageDetails!.status=="payment_confirmed"){
+                                if(e=="completed"){
+                                  setState((){changeState=e;});
+                                }
+
+                              }
+                              else if(packageDetails!.status=="completed"){
+                                if(e=="canceled"){
+                                  toastApp(tr("ItIsNotPermissibleToChangeFromCompletedToCanceled"), context);
+                                }else{
+                                  toastApp(tr("TheOrderIsComplete"), context);
+                                }
+
+                              } else if(packageDetails!.status=="canceled"){
+                                toastApp(tr("theRequestHasBeenCanceled"), context);
+                              }
+
+                              else{
+                                setState((){
+                                  changeState=e;
+                                });
+                              }
+                              print(e);
+
                             },
                               child: Container(height: 30,width: 30,
                                 padding: const EdgeInsets.all(3),
@@ -205,10 +235,10 @@ abstract class PackagesOrderDetailsViewModel extends State<PackagesOrderDetailsV
                               BorderRadius.circular(15)),
                           backgroundColor: const Color(0xffea8024)),
                       onPressed: () {
-                        if(changeState=="canceled"){
-                          showMyDialog(context);
-                        }else{   changeStatusApi();}
-
+                        // if(changeState=="canceled"){
+                        //   showMyDialog(context);
+                        // }else{   changeStatusApi();}
+                        //
 
 
 

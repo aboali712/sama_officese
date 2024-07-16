@@ -254,5 +254,10 @@
   "WaitingForPayment": "Wait payment",
   "InstallmentDetails": "Installment details",
   "ClientDetails": "Client details",
-  "Payments": "Payments"
+  "Payments": "Payments",
+  "bookingConfirmed": "booking confirmed",
+  "TheChangedToCompletedBefore": "The reservation has been confirmed and may not be changed to completed before payment",
+  "ItIsNotPermissibleToChangeFromCompletedToCanceled": "It is not permissible to change from completed to canceled",
+  "TheOrderIsComplete": "The order is complete",
+  "theRequestHasBeenCanceled": "the request has been canceled"
 }

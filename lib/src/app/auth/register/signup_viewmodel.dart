@@ -119,8 +119,18 @@ abstract class SignUpViewModel extends State<SignUp> with StorageHelper{
   @override
   void initState() {
     getFilterDataApi();
-    getDeviceToken().then((value) => setState((){tokenDevice=value!;}));
+    getTokenDevice();
+    // getDeviceToken().then((value) => setState((){tokenDevice=value!;}));
     super.initState();
+  }
+  getTokenDevice() async {
+    await FirebaseMessaging.instance.getToken().then((value) => {
+      setState(() {
+        tokenDevice = value!;
+      })
+    });
+
+    print(tokenDevice);
   }
 
   void passwordEyeSetState(bool eye ){ setState(() { obscureTxt=eye;}); }
@@ -413,11 +423,6 @@ abstract class SignUpViewModel extends State<SignUp> with StorageHelper{
 
 
   Future<void> registerCallApi() async {
-
-
-
-
-
     var ph=phoneNumber;
     if (ph.startsWith("0")) {
       ph = phoneNumber.substring(1);
@@ -431,10 +436,6 @@ abstract class SignUpViewModel extends State<SignUp> with StorageHelper{
     });
 
     // tokenDevice=(await FirebaseMessaging.instance.getToken())!;
-
-
-
-
 
     String imageOfficeName = imageOffice!.path.split('/').last;
     String imageCommercialName = imageOffice!.path.split('/').last;

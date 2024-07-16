@@ -33,14 +33,24 @@ abstract class LoginViewModel extends State<LoginPage> with StorageHelper {
   @override
   void initState() {
     getCurrentLocation();
-    getDeviceToken().then((value) => setState(() {
-      tokenDevice = value!;
-    }));
+    // getDeviceToken().then((value) => setState(() {
+    //   tokenDevice = value!;
+    // }));
+    getTokenDevice();
     getCurrentLocation();
     print("${tokenDevice} 3333333333333333333333330");
     super.initState();
   }
 
+  getTokenDevice() async {
+    await FirebaseMessaging.instance.getToken().then((value) => {
+      setState(() {
+        tokenDevice = value!;
+      })
+    });
+
+    print(tokenDevice);
+  }
 
 
 
