@@ -235,10 +235,10 @@ abstract class PackagesOrderDetailsViewModel extends State<PackagesOrderDetailsV
                               BorderRadius.circular(15)),
                           backgroundColor: const Color(0xffea8024)),
                       onPressed: () {
-                        // if(changeState=="canceled"){
-                        //   showMyDialog(context);
-                        // }else{   changeStatusApi();}
-                        //
+                        if(changeState=="canceled"){
+                          showMyDialog(context);
+                        }else{   changeStatusApi();}
+
 
 
 
