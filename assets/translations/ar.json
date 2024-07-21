@@ -258,5 +258,13 @@
   "TheChangedToCompletedBefore": "لا يجوز التغير الى مكتمل قبل الدفع",
   "ItIsNotPermissibleToChangeFromCompletedToCanceled": "لا يجوز التغير من مكتمل الى ملغى",
   "TheOrderIsComplete": "الطلب مكتمل",
-  "theRequestHasBeenCanceled": "تم الغاء الطلب"
+  "theRequestHasBeenCanceled": "تم الغاء الطلب",
+  "AddAService": "أضافة خدمة",
+  "AddServices": "أضافة خدمات",
+  "ServiceName": "أسم الخدمة",
+  "ServicePrice": "سعر الخدمة",
+  "Add": "أضافة",
+  "AddedServices": "الخدمات المضافة",
+  "service": "الخدمة",
+  "price": "السعر"
 }

@@ -259,5 +259,13 @@
   "TheChangedToCompletedBefore": "The reservation has been confirmed and may not be changed to completed before payment",
   "ItIsNotPermissibleToChangeFromCompletedToCanceled": "It is not permissible to change from completed to canceled",
   "TheOrderIsComplete": "The order is complete",
-  "theRequestHasBeenCanceled": "the request has been canceled"
+  "theRequestHasBeenCanceled": "the request has been canceled",
+  "AddAService": "Add a service",
+  "AddServices": "Add services",
+  "ServiceName": "Service name",
+  "ServicePrice": "Service price",
+  "Add": "Add",
+  "AddedServices": "Added services",
+  "service": "service",
+  "price": "price"
 }

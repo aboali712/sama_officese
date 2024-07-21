@@ -14,6 +14,8 @@ import '../../../../chat/chat_page.dart';
 import '../../../../core/values/colors.dart';
 import '../../packages/packages_details/packages_details_view.dart';
 import '../../packages/packages_details/packages_details_viewmodel.dart';
+import 'add_service/add_service_view.dart';
+import 'add_service/add_service_viewmodel.dart';
 
 class PackagesOrderDetailsView extends StatefulWidget {
   const PackagesOrderDetailsView({Key? key}) : super(key: key);
@@ -199,15 +201,15 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                           ) ,
                         ),
                       ),
-                      const SizedBox(height: 5,),
+                      const SizedBox(height: 10,),
 
 
                       Padding(
-                        padding: const EdgeInsets.all(8),
+                        padding: const EdgeInsets.only(left: 8,right: 8),
                         child: Text(tr("BookingDetails"),style: GoogleFonts.tajawal(color: Colors.black,
                             fontSize:17,fontWeight: FontWeight.w500),),
                       ),
-                      const SizedBox(height: 5,),
+                      const SizedBox(height: 3,),
                       Column(children: [1].map((e) =>
                           Column(
                             children: [
@@ -408,7 +410,7 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                               ),
                               const SizedBox(height: 10,),
 
-                              packageDetails!.status=="canceled"  ?
+                              packageDetails!.status=="canceled"?
                               Row(
                                 children: [
                                   packageDetails!.cancellation_reasons!=null?
@@ -427,7 +429,47 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                           )
 
                         ,).toList(),),
+                          const SizedBox(height: 10,),
 
+                          packageDetails!.status!="canceled" &&
+                              packageDetails!.status!="completed"&&
+                              packageDetails!.status!="payment_confirmed"?
+                       Card(elevation: 5,
+                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                         child: Container(width: size.width,
+                           padding: const EdgeInsets.all(10),
+                           decoration: BoxDecoration( color: Colors.white,borderRadius: BorderRadius.circular(10)),
+                           child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                             children: [
+                               Text(tr("AddAService"),style: GoogleFonts.tajawal(color: Colors.black,
+                                   fontSize:17,fontWeight: FontWeight.w500),),
+
+
+
+                               TextButton(
+                                 style: TextButton.styleFrom(
+                                     foregroundColor: Colors.white,
+                                     padding: const EdgeInsets.all(0),
+                                     fixedSize:  const Size(80, 30),
+                                     shape: RoundedRectangleBorder(
+                                         side: const BorderSide(
+                                             color: Color(0xff00A8A5)),
+                                         borderRadius:
+                                         BorderRadius.circular(10)),
+                                     backgroundColor: const Color(0xff00A8A5)),
+                                 onPressed: () {
+                                   AddServiceViewModel.reservationId=packageDetails!.id;
+                                   SamaOfficeApp.navKey.currentState!.push(
+                                       MaterialPageRoute(builder: (context) => const AddServiceView(),));
+
+                                 },
+                                 child: const Icon(Icons.add,color: Colors.white,size: 25,),
+                               )
+
+                             ],) ,
+                         ),
+                       )
+                              :const SizedBox.shrink(),
 
                           installmentModel==null?
                            const SizedBox.shrink()
@@ -479,7 +521,7 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                           const SizedBox(height: 5,),
 
 
-                      const SizedBox(height: 30,),
+                      const SizedBox(height: 100,),
 
 
                     ]),
@@ -530,7 +572,7 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                                   tr("Pending")
                                       : packageDetails!.status=="inReview"?
                                   tr("Underway")
-                                      : packageDetails!.status=="canceled"  ?
+                                      : packageDetails!.status=="canceled"?
                                   tr("Canceled")
                                       : packageDetails!.status=="waiting_for_pay"?
                                   tr("waiting_for_pay")
