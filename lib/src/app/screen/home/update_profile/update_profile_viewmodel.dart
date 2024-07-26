@@ -195,7 +195,7 @@ abstract class UpDateProfileViewModel  extends State<UpDateProfileView> with Sto
   void showPlacePicker() async {
 
     Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => MapLocationPicker
+        MaterialPageRoute(builder: (context) => GoogleMapLocationPicker
           (
           language: HomeViewModel.lang,
           currentLatLng: LatLng(HomeViewModel.currentPosition!.latitude,HomeViewModel.currentPosition!.longitude) ,

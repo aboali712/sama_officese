@@ -322,7 +322,7 @@ abstract class ChatViewModel extends State<ChatView> with StorageHelper {
   void showPlacePicker() async {
 
     Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => MapLocationPicker
+        MaterialPageRoute(builder: (context) => GoogleMapLocationPicker
 
           (currentLatLng:
         currentPosition!=null?

@@ -6,6 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:map_location_picker/map_location_picker.dart';
 import 'package:sama_officese/src/app.dart';
 
@@ -184,8 +185,9 @@ UserModel? userModel ;
   GeocodingResult? result;
   void showPlacePicker() async {
 
+
    Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => MapLocationPicker
+        MaterialPageRoute(builder: (context) => GoogleMapLocationPicker
           (
           language: HomeViewModel.lang,
            currentLatLng: LatLng(currentPosition!.latitude,currentPosition!.longitude) ,
