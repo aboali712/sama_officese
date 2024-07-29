@@ -79,7 +79,7 @@ abstract class LoginViewModel extends State<LoginPage> with StorageHelper {
 
       });
     }).catchError((e) {
-      toastApp(e.toString(), context);
+     toastApp(e.toString(), context);
     });
   }
 

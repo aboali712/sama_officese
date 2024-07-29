@@ -3,7 +3,7 @@ class ReportModel {
   int? pendingReservationsCount;
   int? completedReservationsCount;
   int? totalReservations;
-  int? totalSales;
+  dynamic totalSales;
   dynamic totalIncome;
 
   ReportModel(
