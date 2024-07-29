@@ -266,5 +266,8 @@
   "Add": "أضافة",
   "AddedServices": "الخدمات المضافة",
   "service": "الخدمة",
-  "price": "السعر"
+  "price": "السعر",
+  "IsInstallmentAvailable": "الباكدج متاحة للتقسيط ؟",
+  "available": "متاح",
+  "Unavailable": "غيرمتاح"
 }
