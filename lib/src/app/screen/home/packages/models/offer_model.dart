@@ -38,6 +38,10 @@ class OfferModel {
   int? num_of_reserved_persons;
   String? is_single;
   String? is_international;
+  String? price_before_without_app_percent;
+  String? price_after_without_app_percent;
+  int? is_installment;
+
 
 
   OfferModel(
@@ -70,7 +74,10 @@ class OfferModel {
         this.num_of_nights,
         this.num_of_reserved_persons,
         this.is_single,
-        this.is_international
+        this.is_international,
+        this.price_before_without_app_percent,
+        this.price_after_without_app_percent,
+        this.is_installment
 
       });
 
@@ -117,6 +124,9 @@ class OfferModel {
     num_of_reserved_persons = json['num_of_reserved_persons'];
     is_single = json['is_single'];
     is_international = json['is_international'];
+    price_before_without_app_percent = json['price_before_without_app_percent'];
+    price_after_without_app_percent = json['price_after_without_app_percent'];
+    is_installment = json['is_installment'];
 
   }
 
@@ -162,6 +172,9 @@ class OfferModel {
 
     data['is_single'] = this.is_single;
     data['is_international'] = this.is_international;
+    data['price_before_without_app_percent'] = this.price_before_without_app_percent;
+    data['price_after_without_app_percent'] = this.price_after_without_app_percent;
+    data['is_installment'] = this.is_installment;
 
     return data;
   }

@@ -1368,6 +1368,89 @@ class _UpDateViewState extends UpDateViewModel {
                                 ],
                               ),
 
+
+                              const SizedBox(
+                                height: 20,
+                              ),
+
+                              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  SizedBox(width: 130,
+                                    child: Text(
+                                      tr("IsInstallmentAvailable"),
+                                      style: const TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 14),
+                                      textAlign: TextAlign.start,
+                                    ),
+                                  ),
+
+                                  Row(children: [
+
+                                    TextButton(
+                                      style: TextButton.styleFrom(
+                                          foregroundColor: Colors.white, padding: const EdgeInsets.all(0),
+                                          fixedSize:  const Size(100, 40),
+                                          shape: RoundedRectangleBorder(
+
+                                              side:  BorderSide(
+                                                  color:installmentAvailable==1 ?const Color(0xff00A8A5)
+                                                      :Colors.grey),
+                                              borderRadius:
+                                              BorderRadius.circular(5)),
+                                          backgroundColor: installmentAvailable==1 ?const Color(0xff00A8A5)
+                                              :Colors.white70),
+                                      onPressed: () {
+                                        setState(() {
+                                          installmentAvailable=1;
+                                        });
+
+                                      },
+                                      child: Text(
+                                        tr('available'),
+                                        style:  TextStyle(
+                                            fontSize: 14,
+                                            color: installmentAvailable==1?Colors.white :Colors.grey,
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 10,),
+
+                                    TextButton(
+                                      style: TextButton.styleFrom(
+                                          foregroundColor: Colors.white, padding: const EdgeInsets.all(0),
+                                          fixedSize:  const Size(100, 40),
+                                          shape: RoundedRectangleBorder(
+
+                                              side:  BorderSide(
+                                                  color: installmentAvailable==0 ?const Color(0xff00A8A5)
+                                                      :Colors.grey),
+                                              borderRadius:
+                                              BorderRadius.circular(5)),
+                                          backgroundColor: installmentAvailable==0?const Color(0xff00A8A5)
+                                              :Colors.white70),
+                                      onPressed: () {
+                                        setState(() {
+                                          installmentAvailable=0;
+                                        });
+
+                                      },
+                                      child: Text(
+                                        tr('Unavailable'),
+                                        style:  TextStyle(
+                                            fontSize: 14,
+                                            color:installmentAvailable==0?Colors.white :Colors.grey,
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                    )
+
+                                  ],),
+
+
+                                ],
+                              ),
+
                               const SizedBox(height: 20,),
                               offerType=="group"?
                               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -61,6 +61,7 @@ abstract class CreatePackageViewModel extends  State<CreatePackageView>{
   bool isLoading=false;
   String isSingle="";
   String isInternational="";
+  int installmentAvailable=0;
 
 
   @override
@@ -271,6 +272,7 @@ abstract class CreatePackageViewModel extends  State<CreatePackageView>{
       mp["num_of_nights"]=nightsControl.value.text;
       mp["is_single"]=isSingle;
       mp["is_international"]=isInternational;
+      mp["is_installment"]=installmentAvailable;
 
 
 

@@ -67,6 +67,8 @@ abstract class UpDateViewModel extends State<UpDateView>{
  bool? isVIP;
   String isSingle="";
   String isInternational="";
+  int? installmentAvailable;
+
 
   @override
   void initState() {
@@ -79,6 +81,10 @@ abstract class UpDateViewModel extends State<UpDateView>{
     });
     setData();
     getFilterDataApi();
+    print("${offerModel!.priceAfter.toString()} 88888888888888888888888888888");
+    print("${offerModel!.priceBefore.toString()} 88888888888888888888888888888");
+    print("${offerModel!.price_after_without_app_percent.toString()} 88888888888888888888888888888");
+    print("${offerModel!.price_before_without_app_percent.toString()} 88888888888888888888888888888");
 
     super.initState();
   }
@@ -184,15 +190,15 @@ abstract class UpDateViewModel extends State<UpDateView>{
     detailsAr=offerModel!.descriptionAr!;
     detailsEn=offerModel!.descriptionEn!;
     selectStatus= offerModel!.type.toString();
-    packagePriceControl.text=offerModel!.priceBefore!.toString();
+    packagePriceControl.text=offerModel!.price_before_without_app_percent!.toString();
     packageImages=offerModel!.images;
      // imageFileList=[];
   switchValue=offerModel!.is_vip.toString()=="1"? true :false;
-    packageDiscountControl.text=offerModel!.priceAfter!.toString();
+    packageDiscountControl.text=offerModel!.price_after_without_app_percent!.toString();
     selectedCountryId=offerModel!.countries_list!.toList();
     selectedCitesId=offerModel!.cities_list!.toList();
-    print(selectedCitesId);
-    print(selectedCountryId);
+    // print(selectedCitesId);
+    // print(selectedCountryId);
     countryId = offerModel!.countryId.toString();
     offerType=offerModel!.offer_type!;
     if(offerType=="group"){
@@ -207,7 +213,7 @@ abstract class UpDateViewModel extends State<UpDateView>{
 
     isSingle=offerModel!.is_single.toString();
     isInternational=offerModel!.is_international.toString();
-
+    installmentAvailable=offerModel!.is_installment;
 
     setState(() {
       isLoading = false;
@@ -311,10 +317,12 @@ abstract class UpDateViewModel extends State<UpDateView>{
     mp["num_of_nights"]=nightsControl.value.text;
     mp["is_single"]=isSingle;
     mp["is_international"]=isInternational;
+    mp["is_installment"]=installmentAvailable;
 
 
 
-   //  imageFileList.asMap().forEach((index, element) async {
+
+    //  imageFileList.asMap().forEach((index, element) async {
    //    mp["images[$index]"] = await MultipartFile.fromFile(element.path,filename: element.path.split('/').last);
    //  });
    //

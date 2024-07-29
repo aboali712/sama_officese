@@ -267,5 +267,8 @@
   "Add": "Add",
   "AddedServices": "Added services",
   "service": "service",
-  "price": "price"
+  "price": "price",
+  "IsInstallmentAvailable": "Is Installment Available ?",
+  "available": "available",
+  "Unavailable": "Unavailable"
 }
