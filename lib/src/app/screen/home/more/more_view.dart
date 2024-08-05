@@ -397,6 +397,69 @@ class _MoreViewState extends MoreViewModel {
                       ),
 
 
+                      const SizedBox(height: 20,),
+                      SizedBox(
+                        width: 300,
+                        child: Wrap(
+                          alignment: WrapAlignment.center,
+                          direction: Axis.horizontal,
+                          spacing: 0,
+                          children: [
+                            Row(mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "© ",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.w300),
+                                ),
+                                Text(
+                                  currentYear.toString(),
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400, color: samaColor),
+                                ),
+                                SizedBox(width: 3,),
+                                Text(
+                                  tr("AllRightsReservedLicenseNo"),
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(fontSize: 11, fontWeight: FontWeight.w300, color: Colors.black),
+                                ),
+                              ],),
+                            Text(
+                              tr("AllRightsReserved"),
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: 11, fontWeight: FontWeight.w300, color: Colors.black),
+                            ),
+                            Row(mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  tr("licenseNumber"),
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(fontSize: 11, fontWeight: FontWeight.w300, color: Colors.black),
+                                ),
+                                Text(
+                                  "73100173",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400, color: samaColor),
+                                ),
+                              ],
+                            ),
+                            Row(mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  tr("CommercialRegistration"),
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(fontSize: 11, fontWeight: FontWeight.w300, color: Colors.black),
+                                ),
+                                Text(
+                                  "7015746378",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400, color: samaColor),
+                                ),
+                              ],)
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 20,),
 
 
 

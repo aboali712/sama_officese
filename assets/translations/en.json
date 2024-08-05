@@ -272,5 +272,9 @@
   "available": "available",
   "Unavailable": "Unavailable",
   "Departure": "Departure",
-  "Return": "Return"
+  "Return": "Return",
+  "AllRightsReservedLicenseNo": "All rights reserved.",
+  "AllRightsReserved": "Sama application, a branch of Sama Travel Agency for Tourism",
+  "CommercialRegistration": "Unified number: ",
+  "licenseNumber": "Ministry of Tourism License Number: "
 }

@@ -271,5 +271,9 @@
   "available": "متاح",
   "Unavailable": "غيرمتاح",
   "Departure": "المغادرة",
-  "Return": "العودة"
+  "Return": "العودة",
+  "AllRightsReservedLicenseNo": "جميع الحقوق محفوظة.",
+  "AllRightsReserved": "تطبيق سما فرع لوكالة سمو السفر للسياحة",
+  "CommercialRegistration": "الرقم الموحد: ",
+  "licenseNumber": "رقم ترخيص وزارة السياحة: "
 }

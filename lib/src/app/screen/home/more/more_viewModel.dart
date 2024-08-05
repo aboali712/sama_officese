@@ -17,6 +17,8 @@ abstract class MoreViewModel extends State<MoreView> with StorageHelper{
   bool isLoading=false;
 
   static SettingsModel? settingsModel;
+  int currentYear = DateTime.now().year;
+
 
   @override
   void initState() {
