@@ -270,5 +270,7 @@
   "price": "price",
   "IsInstallmentAvailable": "Is Installment Available ?",
   "available": "available",
-  "Unavailable": "Unavailable"
+  "Unavailable": "Unavailable",
+  "Departure": "Departure",
+  "Return": "Return"
 }

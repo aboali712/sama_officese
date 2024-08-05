@@ -269,5 +269,7 @@
   "price": "السعر",
   "IsInstallmentAvailable": "الباكدج متاحة للتقسيط ؟",
   "available": "متاح",
-  "Unavailable": "غيرمتاح"
+  "Unavailable": "غيرمتاح",
+  "Departure": "المغادرة",
+  "Return": "العودة"
 }

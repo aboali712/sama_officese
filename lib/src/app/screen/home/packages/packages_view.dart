@@ -136,12 +136,12 @@ class _PackagesViewState extends PackagesViewModel {
 
                                                       Text("${e.priceAfter!} ${tr("Sar")}",style: GoogleFonts.tajawal(
                                                           color:const Color(0xff00A8A5),
-                                                          fontSize:15,fontWeight: FontWeight.w400),),
+                                                          fontSize:14,fontWeight: FontWeight.w400),),
                                                       const SizedBox(width: 10,),
 
                                                       Text("${e.priceBefore!} ${tr("Sar")}",
                                               style: GoogleFonts.tajawal(color:Colors.grey,
-                                                          fontSize:15,fontWeight: FontWeight.w400),),
+                                                          fontSize:14,fontWeight: FontWeight.w400),),
 
 
                                                     ],)

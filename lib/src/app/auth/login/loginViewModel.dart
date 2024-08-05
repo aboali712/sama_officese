@@ -62,7 +62,7 @@ abstract class LoginViewModel extends State<LoginPage> with StorageHelper {
     permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
-      toastApp("Location permission are denied", context);
+      // toastApp("Location permission are denied", context);
 
       if (permission == LocationPermission.deniedForever) {
         toastApp("Location permission are permanetly denied", context);

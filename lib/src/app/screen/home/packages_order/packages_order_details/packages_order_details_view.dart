@@ -277,7 +277,7 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                                                           fontSize:15,fontWeight: FontWeight.w400),),
 
 
-                                                    ],)
+                                                    ],),
 
 
 
@@ -288,6 +288,48 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                                             ],
                                           ),
                                         ),
+
+
+
+                                        const SizedBox(height: 5,),
+                                        Padding(
+                                          padding: const EdgeInsets.only(left: 10,right: 10),
+                                          child: Row(crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              SvgPicture.asset("assets/images/calender.svg") ,
+                                              const SizedBox(width: 10,),
+                                          
+                                              Row(
+                                                children: [
+                                                  Text("${tr("Departure")}: ",
+                                                    style: GoogleFonts.tajawal(
+                                                        color:Colors.black,
+                                                        fontSize:14,fontWeight: FontWeight.w400),),
+                                                  Text(packageDetails!.startDate.toString(),
+                                                    style: GoogleFonts.tajawal(
+                                                        color:const Color(0xff00A8A5),
+                                                        fontSize:14,fontWeight: FontWeight.w400),),
+                                                ],
+                                              ),
+                                              const SizedBox(width: 10,),
+                                          
+                                              Row(
+                                                children: [
+                                                  Text("${tr("Return")}: ",
+                                                    style: GoogleFonts.tajawal(
+                                                        color:Colors.black,
+                                                        fontSize:14,fontWeight: FontWeight.w400),),
+                                                  Text(packageDetails!.endDate.toString(),
+                                                    style: GoogleFonts.tajawal(color:const Color(0xff00A8A5),
+                                                        fontSize:14,fontWeight: FontWeight.w400),),
+                                                ],
+                                              ),
+                                          
+                                          
+                                            ],),
+                                        ),
+                                        const SizedBox(height: 5,),
+
                                         Divider(height: 10,thickness: 1,color: Colors.grey.shade300,),
 
 
