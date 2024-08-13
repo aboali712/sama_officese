@@ -14,6 +14,7 @@ import '../../more/Installments/model/installment_model.dart';
 import '../../more/Installments/model/installment_response.dart';
 import '../../services/model/booking_servive_model.dart';
 import '../../services/model/service_response.dart';
+import '../packages_order_view.dart';
 import '../packages_order_viewmodel.dart';
 import 'model/cancel_reason_model.dart';
 import 'model/cancel_response.dart';
@@ -106,6 +107,8 @@ abstract class PackagesOrderDetailsViewModel extends State<PackagesOrderDetailsV
       Navigator.pop(context);
       setState(() {
         packageDetails!.status=changeState;
+
+
 
       });
 
