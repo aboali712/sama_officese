@@ -4,12 +4,14 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:notification_permissions/notification_permissions.dart';
+import 'package:provider/provider.dart';
 import 'package:sama_officese/src/app/core/local/storagehelper.dart';
 
 import '../main.dart';
 import 'app/core/network/network_service.dart';
 import 'app/core/values/theme.dart';
 import 'app/screen/start/splash/splash.dart';
+import 'listen/listen_message_data.dart';
 
 
 final Dio dio = NetworkService.instance.dio;
@@ -85,16 +87,19 @@ class _SamaOfficeAppState extends State<SamaOfficeApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        navigatorKey: SamaOfficeApp.navKey, // GlobalKey()
-        localizationsDelegates: context.localizationDelegates,
-        supportedLocales: context.supportedLocales,
-        locale: context.locale,
-        debugShowCheckedModeBanner: false,
-        theme: AppTheme.of(context),
+    return ChangeNotifierProvider(
+      create: (_) => MessageListenerService(),
+      child: MaterialApp(
+          navigatorKey: SamaOfficeApp.navKey, // GlobalKey()
+          localizationsDelegates: context.localizationDelegates,
+          supportedLocales: context.supportedLocales,
+          locale: context.locale,
+          debugShowCheckedModeBanner: false,
+          theme: AppTheme.of(context),
 
 
-        home:  const SplashView());
+          home:  const SplashView()),
+    );
   }
 }
 

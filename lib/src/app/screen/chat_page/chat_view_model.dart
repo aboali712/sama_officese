@@ -61,6 +61,8 @@ abstract class ChatViewModel extends State<ChatView> with StorageHelper {
   int moreStatus = 0;
 
   static String? chatRoomId;
+  static int? offerId;
+  int listen=0;
 
   @override
   void initState() {
@@ -145,12 +147,15 @@ abstract class ChatViewModel extends State<ChatView> with StorageHelper {
 
         .child(timestamp.millisecondsSinceEpoch.toString());
     await sendImg.set({
-      'senderId':HomeViewModel.profileModel!.id.toString(),
+      'senderId':HomeViewModel.profileModel!.office!.id.toString(),
       'senderEmail': HomeViewModel.profileModel!.email.toString(),
       'receverId': PackagesOrderViewModel.userId.toString(),
       'type': "img",
       'message': "",
-      'timestamp': DateTime.now().millisecondsSinceEpoch
+      'timestamp': DateTime.now().millisecondsSinceEpoch,
+      "offerId":ChatViewModel.offerId,
+      "isReadUser":0
+
     });
 
     var ref =

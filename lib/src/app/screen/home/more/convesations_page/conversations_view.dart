@@ -11,6 +11,7 @@ import 'package:sama_officese/src/app/screen/home/home_viewmodel.dart';
 
 import '../../../../core/values/colors.dart';
 import '../../../chat_page/chat_view.dart';
+import '../../../chat_page/chat_view_model.dart';
 import '../../packages_order/packages_order_viewmodel.dart';
 import 'conversations_viewmodel.dart';
 
@@ -107,20 +108,7 @@ class _ConversationsViewState extends ConversationsViewModel{
                         var dateFormat = DateFormat.yMd().add_jm();
                         var formatted = dateFormat.format(parsed).toString();
                         return InkWell(onTap: () {
-                          setState(() {
-                            PackagesOrderViewModel.bookingId= e.orderId.toString();
-                            PackagesOrderViewModel.userMdole=HomeViewModel.profileModel;
-                            PackagesOrderViewModel.userId= e.officeId.toString();
-                          });
-                          SamaOfficeApp.navKey
-                              .currentState!
-                              .push(
-                            MaterialPageRoute(
-                                builder:
-                                    (context) =>
-                                const ChatView()),
-                          );
-
+                          gotoChat(e);
                         },
                           child: Card(elevation:5,
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -161,12 +149,65 @@ class _ConversationsViewState extends ConversationsViewModel{
                                     const SizedBox(width: 5,),
 
                                     SizedBox(width: 280,
-                                      child: Text(
-                                        e.type=="text"?
-                                        e.message.toString()
-                                            :"${tr("MessageFromTheMedia")}...."
-                                        ,style: GoogleFonts.tajawal(fontWeight: FontWeight.w400,
-                                          fontSize: 14),),
+                                      child: Row( mainAxisAlignment :MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            e.type == "text"
+                                                ? (e.message.toString().length > 20
+                                                ? e.message.toString().substring(0, 20) + "..."
+                                                : e.message.toString())
+                                                : "${tr("MessageFromTheMedia")}....",style: GoogleFonts.tajawal(
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 14),),
+
+
+
+
+
+                                          e.isReadUser!=null?
+                                          Row(
+                                            children: [
+                                              SizedBox(width: 30,
+                                                child: Stack(
+                                                  alignment: Alignment.center,
+                                                  children: [
+                                                    Icon(
+                                                      Icons.done,
+                                                      size: 17,
+                                                      color: e.isReadUser == 1 ? Colors.blue : Colors.grey,
+                                                    ),
+                                                    Positioned(
+                                                      left: 2, // Adjust this value as needed to position the second icon
+                                                      child: Icon(
+                                                        Icons.done,
+                                                        size: 17,
+                                                        color: e.isReadUser == 1 ? Colors.blue : Colors.grey,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          )
+
+
+                                              : e.isReadOffice!=0?
+                                          Container(
+                                            width: 25,height: 25,
+                                            padding: const EdgeInsets.all(5),
+                                            decoration: BoxDecoration(borderRadius:  BorderRadius.circular(50),
+                                                color: Colors.red
+                                            ),
+                                            child: Center(
+                                              child: Text(
+                                                e.isReadOffice
+                                                    .toString(),style: GoogleFonts.tajawal(fontWeight: FontWeight.w500,
+                                                  fontSize: 15,color:Colors.white ),),
+                                            ),
+                                          )
+                                              : const SizedBox.shrink(),
+                                        ],
+                                      ),
                                     ),
                                   ],),
 

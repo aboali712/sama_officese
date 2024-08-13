@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../home_core.dart';
+import '../../screen/home/home_viewmodel.dart';
 import '../local/storagehelper.dart';
 import '../values/colors.dart';
 
@@ -74,7 +75,9 @@ class BottomMenu extends StatelessWidget
                 // break;
             }
 
-
+            if(HomeViewModel.profileModel==null){
+              onChanged!(0);
+            }
 
 
           },

@@ -20,8 +20,6 @@ import '../chat_view_model.dart';
 
 class ChatServices extends ChangeNotifier {
 
-
-
   final databaseReference  = FirebaseFirestore.instance;
   Future<void> sendMessage( String message,String type,{String? duration = ""}) async {
 
@@ -40,13 +38,17 @@ class ChatServices extends ChangeNotifier {
 
     await ref.set(
         {
-      'senderId':HomeViewModel.profileModel!.id,
-          'senderEmail': HomeViewModel.profileModel!.email,
+      'senderId':HomeViewModel.profileModel!.office!.id,
+      'senderEmail': HomeViewModel.profileModel!.email,
       'receverId':PackagesOrderViewModel.userId,
       'type':type,
       'message':message,
       'timestamp':DateTime.now().millisecondsSinceEpoch,
-          "duration": duration
+          "duration": duration,
+          "offerId":ChatViewModel.offerId,
+          "isReadUser":0
+
+
         }
     );
     ChatViewModel.messageControl.clear();

@@ -12,6 +12,7 @@ import 'package:provider/provider.dart';
 import 'package:sama_officese/src/app.dart';
 import 'package:sama_officese/src/app/core/local/storagehelper.dart';
 import 'package:sama_officese/src/app/core/values/auth_manager.dart';
+import 'package:sama_officese/src/listen/listen_message_data.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 String? tokenDevice;
@@ -25,6 +26,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   await Firebase.initializeApp();
+  MessageListenerService().initializeListener();
   // await Upgrader.clearSavedSettings();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   await flutterLocalNotificationsPlugin

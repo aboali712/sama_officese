@@ -23,6 +23,8 @@ import '../home/home_viewmodel.dart';
 import '../home/packages_order/packages_order_viewmodel.dart';
 import 'chatBuble.dart';
 import 'chat_view_model.dart';
+import 'dart:ui' as ui;
+
 
 class ChatView extends StatefulWidget {
   const ChatView({Key? key}) : super(key: key);
@@ -181,12 +183,12 @@ class _ChatViewState extends ChatViewModel {
                 Center(
                   child: Obx(
                         () => audioController.isSending.value
-                        ?  Text(
+                        ?  const Text(
                       "Uploading Audio...",
                       style: TextStyle(color: Colors.black),
                     )
                         : isLoading
-                        ?  Text(
+                        ?  const Text(
                       "Uploading Image...",
                       style: TextStyle(color: Colors.black),
                     )
@@ -209,7 +211,39 @@ class _ChatViewState extends ChatViewModel {
 
     messagesSubscriptions = snapshot.onChildAdded.listen(
           (DatabaseEvent event) {
-        // print('Child added: ${event.snapshot.value}');
+
+
+            setState(() {
+              listen=0;
+            });
+            if(listen==0){
+
+              DatabaseReference databaseReference = FirebaseDatabase.instance.reference();
+              DatabaseReference messagesRef = databaseReference.child('chat_rooms');
+              messagesRef.get().then((allChats) {
+                allChats.children.forEach((allThreads) {
+                  if (allThreads.key!.contains(event.snapshot.ref.key.toString()) ) {
+                    allThreads.children.forEach((message) async {
+
+                     if(message.child('senderId').value.toString()!=HomeViewModel.profileModel!.office!.id.toString()){
+                       print(message.child('senderId').value.toString());
+                        await   message.ref.child('isReadOffice').set(1);
+                      }
+
+                    });
+                  }
+                });
+              });
+
+            }
+
+
+            setState(() {
+              listen=1;
+            });
+
+
+
             scrollDown();
       },
       // onError: (Object o) {
@@ -271,7 +305,7 @@ class _ChatViewState extends ChatViewModel {
   Widget _buildMessageItem(int index, DataSnapshot? document) {
     var data = document!;
     var alignment = (data.child("senderId").value.toString() ==
-        HomeViewModel.profileModel!.id.toString())
+        HomeViewModel.profileModel!.office!.id.toString())
         ? Alignment.centerRight
         : Alignment.centerLeft;
 
@@ -284,11 +318,11 @@ class _ChatViewState extends ChatViewModel {
         child: Column(
             crossAxisAlignment:
             (data.child("senderId").value.toString() !=
-                HomeViewModel.profileModel!.id.toString())
+                HomeViewModel.profileModel!.office!.id.toString())
                 ? CrossAxisAlignment.end
                 : CrossAxisAlignment.start,
             mainAxisAlignment: (data.child("senderId").value.toString() !=
-                HomeViewModel.profileModel!.id.toString())
+                HomeViewModel.profileModel!.office!.id.toString())
                 ? MainAxisAlignment.end
                 : MainAxisAlignment.start,
             children: [
@@ -296,7 +330,7 @@ class _ChatViewState extends ChatViewModel {
                 height: 5,
               ),
               (data.child("senderId").value.toString() !=
-                  HomeViewModel.profileModel!.id.toString())
+                  HomeViewModel.profileModel!.office!.id.toString())
                   ? Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -366,7 +400,7 @@ class _ChatViewState extends ChatViewModel {
       height: MediaQuery.of(context).size.height / 2.5,
       width: MediaQuery.of(context).size.width,
       alignment:   (data.child("senderId").value.toString() ==
-          HomeViewModel.profileModel!.id.toString())
+          HomeViewModel.profileModel!.office!.id.toString())
           ? Alignment.centerRight
           : Alignment.centerLeft,
       child: Container(
@@ -404,12 +438,12 @@ class _ChatViewState extends ChatViewModel {
         child: Column(
             crossAxisAlignment:
             (data.child("senderId").value.toString() !=
-                HomeViewModel.profileModel!.id.toString())
+                HomeViewModel.profileModel!.office!.id.toString())
                 ? CrossAxisAlignment.end
                 : CrossAxisAlignment.start,
             mainAxisAlignment:
             (data.child("senderId").value.toString() !=
-                HomeViewModel.profileModel!.id.toString())
+                HomeViewModel.profileModel!.office!.id.toString())
                 ? MainAxisAlignment.end
                 : MainAxisAlignment.start,
             children: [
@@ -417,7 +451,7 @@ class _ChatViewState extends ChatViewModel {
                 height: 5,
               ),
               (data.child("senderId").value.toString() !=
-                  HomeViewModel.profileModel!.id.toString())
+                  HomeViewModel.profileModel!.office!.id.toString())
                   ? Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -495,7 +529,7 @@ class _ChatViewState extends ChatViewModel {
                           .child("senderId")
                           .value
                           .toString() ==
-                          HomeViewModel.profileModel!.id.toString())
+                          HomeViewModel.profileModel!.office!.id.toString())
                           ? "https://www.smashingmagazine.com/images/authors/guest-author.jpg"
                           : "https://www.smashingmagazine.com/images/authors/guest-author.jpg",
                       width: 30,
@@ -515,7 +549,7 @@ class _ChatViewState extends ChatViewModel {
                           .child("senderId")
                           .value
                           .toString() ==
-                          HomeViewModel.profileModel!.id.toString())
+                          HomeViewModel.profileModel!.office!.id.toString())
                           ? "https://www.smashingmagazine.com/images/authors/guest-author.jpg"
                           : "https://www.smashingmagazine.com/images/authors/guest-author.jpg",
                       width: 30,
@@ -635,15 +669,15 @@ class _ChatViewState extends ChatViewModel {
     required String duration,
     required timestamp,
   }) {
-    return isCurrentUser != HomeViewModel.profileModel!.id.toString()
+    return isCurrentUser != HomeViewModel.profileModel!.office!.id.toString()
         ? Container(
-      alignment: (isCurrentUser == HomeViewModel.profileModel!.id.toString())
+      alignment: (isCurrentUser == HomeViewModel.profileModel!.office!.id.toString())
           ? Alignment.centerRight
           : Alignment.centerLeft,
       margin: const EdgeInsets.only(right: 80,left: 5,top: 5,bottom: 5),
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: isCurrentUser == HomeViewModel.profileModel!.id.toString()
+        color: isCurrentUser == HomeViewModel.profileModel!.office!.id.toString()
             ?  samaColor.withOpacity(0.6)
             : samaColor.withOpacity(0.18),
         borderRadius: BorderRadius.circular(10),
@@ -657,7 +691,7 @@ class _ChatViewState extends ChatViewModel {
                 duration,
                 style: TextStyle(
                     fontSize: 12,
-                    color: isCurrentUser == HomeViewModel.profileModel!.id.toString()
+                    color: isCurrentUser == HomeViewModel.profileModel!.office!.id.toString()
                         ? Colors.black
                         : samaColor),
               ),
@@ -671,7 +705,7 @@ class _ChatViewState extends ChatViewModel {
                     minHeight: 5,
                     backgroundColor: Colors.grey,
                     valueColor: AlwaysStoppedAnimation<Color>(
-                      isCurrentUser == HomeViewModel.profileModel!.id.toString()
+                      isCurrentUser == HomeViewModel.profileModel!.office!.id.toString()
                           ? Colors.white
                           : samaColor,
                     ),
@@ -702,14 +736,14 @@ class _ChatViewState extends ChatViewModel {
                       ? Icon(
                     Icons.cancel,
                     color: isCurrentUser ==
-                        HomeViewModel.profileModel!.id.toString()
+                        HomeViewModel.profileModel!.office!.id.toString()
                         ? Colors.white
                         : samaColor,
                   )
                       : Icon(
                     Icons.play_arrow,
                     color: isCurrentUser ==
-                        HomeViewModel.profileModel!.id.toString()
+                        HomeViewModel.profileModel!.office!.id.toString()
                         ? Colors.white
                         : samaColor,
                   ),
@@ -722,7 +756,7 @@ class _ChatViewState extends ChatViewModel {
           ClipRRect(
             borderRadius: BorderRadius.circular(50),
             child: Image.network(
-              (isCurrentUser == HomeViewModel.profileModel!.id.toString())
+              (isCurrentUser == HomeViewModel.profileModel!.office!.id.toString())
                   ? "https://www.smashingmagazine.com/images/authors/guest-author.jpg"
                   : "https://www.smashingmagazine.com/images/authors/guest-author.jpg",
               width: 25,
@@ -734,13 +768,13 @@ class _ChatViewState extends ChatViewModel {
       ),
     )
         : Container(
-      alignment: (isCurrentUser == HomeViewModel.profileModel!.id.toString())
+      alignment: (isCurrentUser == HomeViewModel.profileModel!.office!.id.toString())
           ? Alignment.centerRight
           : Alignment.centerLeft,
       padding: const EdgeInsets.all(8),
       margin: const EdgeInsets.only(left: 80,right: 5,top: 5,bottom: 5),
       decoration: BoxDecoration(
-        color: isCurrentUser == HomeViewModel.profileModel!.id.toString()
+        color: isCurrentUser == HomeViewModel.profileModel!.office!.id.toString()
             ? samaColor
             : samaColor.withOpacity(0.18),
         borderRadius: BorderRadius.circular(10),
@@ -750,7 +784,7 @@ class _ChatViewState extends ChatViewModel {
           ClipRRect(
             borderRadius: BorderRadius.circular(50),
             child: Image.network(
-              (isCurrentUser == HomeViewModel.profileModel!.id.toString())
+              (isCurrentUser == HomeViewModel.profileModel!.office!.id.toString())
                   ? "https://www.smashingmagazine.com/images/authors/guest-author.jpg"
                  : "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png",
               width: 25,
@@ -773,14 +807,14 @@ class _ChatViewState extends ChatViewModel {
                   ? Icon(
                 Icons.cancel,
                 color: isCurrentUser ==
-                    HomeViewModel.profileModel!.id.toString()
+                    HomeViewModel.profileModel!.office!.id.toString()
                     ? Colors.white
                     : samaColor,
               )
                   : Icon(
                 Icons.play_arrow,
                 color: isCurrentUser ==
-                    HomeViewModel.profileModel!.id.toString()
+                    HomeViewModel.profileModel!.office!.id.toString()
                     ? Colors.white
                     : samaColor,
               ),
@@ -796,7 +830,7 @@ class _ChatViewState extends ChatViewModel {
                     backgroundColor: Colors.grey,
                     valueColor: AlwaysStoppedAnimation<Color>(
                       isCurrentUser ==
-                          HomeViewModel.profileModel!.id.toString()
+                          HomeViewModel.profileModel!.office!.id.toString()
                           ? Colors.white
                           : samaColor,
                     ),
@@ -815,7 +849,7 @@ class _ChatViewState extends ChatViewModel {
             duration,
             style: TextStyle(
                 fontSize: 12,
-                color: isCurrentUser != HomeViewModel.profileModel!.id.toString()
+                color: isCurrentUser != HomeViewModel.profileModel!.office!.id.toString()
                     ? Colors.black
                     : Colors.white),
           ),
@@ -832,8 +866,8 @@ class _ChatViewState extends ChatViewModel {
 
       width: size.width,
       padding: const EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        color: const Color(0xFFF9F9F9),
+      decoration: const BoxDecoration(
+        color: Color(0xFFF9F9F9),
 
       ),
       child: Row(
@@ -935,8 +969,13 @@ class _ChatViewState extends ChatViewModel {
             child: TextField(
               controller: ChatViewModel.messageControl,
               style: const TextStyle(height: .6),
-              textAlign: TextAlign.left,
-              keyboardType: TextInputType.text,
+              // textAlign: TextAlign.left,
+              // keyboardType: TextInputType.text,
+              maxLines: null,
+              textAlign: TextAlign.right,
+              textDirection: ui.TextDirection.rtl,
+              keyboardType: TextInputType.multiline,
+              textInputAction: TextInputAction.newline,
               decoration: InputDecoration(
                 // fillColor: Colors.red,
                   prefixIcon: GestureDetector(

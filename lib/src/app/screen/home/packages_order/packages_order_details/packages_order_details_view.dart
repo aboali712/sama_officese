@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sama_officese/src/app.dart';
 import 'package:sama_officese/src/app/screen/chat_page/chat_view.dart';
+import 'package:sama_officese/src/app/screen/chat_page/chat_view_model.dart';
 import 'package:sama_officese/src/app/screen/home/home_viewmodel.dart';
 import 'package:sama_officese/src/app/screen/home/packages_order/packages_order_details/packages_order_details_viewmodel.dart';
 import 'package:sama_officese/src/app/screen/home/packages_order/packages_order_viewmodel.dart';
@@ -25,8 +26,13 @@ class PackagesOrderDetailsView extends StatefulWidget {
 }
 
 class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
+
+
+
   @override
   Widget build(BuildContext context) {
+
+
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -77,13 +83,14 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                         tr("Pending")
                             : packageDetails!.status=="inReview"?
                         tr("Underway")
-                            : packageDetails!.status=="canceled"  ?
+                            : packageDetails!.status=="canceled"?
                         tr("Canceled")
                             : packageDetails!.status=="waiting_for_pay"?
                         tr("waiting_for_pay")
+                            : packageDetails!.status=="payment_confirmed"?
+                        tr("bookingConfirmed")
                             : packageDetails!.status=="completed"?
                         tr("Complete")
-
                             :tr("Underway")
                       ,style: GoogleFonts.tajawal(color: Colors.white,
                           fontSize:12,fontWeight: FontWeight.w500),),
@@ -180,9 +187,12 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                                           BorderRadius.circular(10)),
                                       backgroundColor: const Color(0xff00A8A5)),
                                   onPressed: () {
-                                    PackagesOrderViewModel.bookingId=packageDetails!.id.toString();
-                                    PackagesOrderViewModel.userId=packageDetails!.userId.toString();
 
+                                   setState(() {
+                                     ChatViewModel.offerId=packageDetails!.offerId;
+                                     PackagesOrderViewModel.bookingId=packageDetails!.id.toString();
+                                     PackagesOrderViewModel.userId=packageDetails!.userId.toString();
+                                   });
                                     SamaOfficeApp.navKey.currentState!.push(
                                         MaterialPageRoute(builder: (context) => const ChatView(),));
 
@@ -269,12 +279,12 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                      Text("${packageDetails!.offer!.priceBefore!} ${tr("Sar")}",
                        style: GoogleFonts.tajawal(
                                                           color:const Color(0xff00A8A5),
-                                                          fontSize:15,fontWeight: FontWeight.w400),),
+                                                          fontSize:14,fontWeight: FontWeight.w400),),
                                                       const SizedBox(width: 10,),
 
                     Text("${packageDetails!.offer!.priceAfter!} ${tr("Sar")}",
                       style: GoogleFonts.tajawal(color:Colors.grey,
-                                                          fontSize:15,fontWeight: FontWeight.w400),),
+                                                          fontSize:14,fontWeight: FontWeight.w400),),
 
 
                                                     ],),
@@ -330,7 +340,7 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                                         ),
                                         const SizedBox(height: 5,),
 
-                                        Divider(height: 10,thickness: 1,color: Colors.grey.shade300,),
+                                        Divider(height: 5,thickness: 1,color: Colors.grey.shade300,),
 
 
 
@@ -424,7 +434,7 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                                           ),
                                         ),
 
-                                        Divider(height: 10,thickness: 1,color: Colors.grey.shade300,),
+                                        Divider(height: 5,thickness: 1,color: Colors.grey.shade300,),
 
 
                                         Padding(
@@ -471,7 +481,7 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
                           )
 
                         ,).toList(),),
-                          const SizedBox(height: 10,),
+                          // const SizedBox(height: ,),
 
                           packageDetails!.status!="canceled" &&
                               packageDetails!.status!="completed"&&

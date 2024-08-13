@@ -13,6 +13,8 @@ import '../../../../core/utils/helper_manager.dart';
 import '../../more/Installments/model/installment_model.dart';
 import '../../more/Installments/model/installment_response.dart';
 import '../../services/model/booking_servive_model.dart';
+import '../../services/model/service_response.dart';
+import '../packages_order_viewmodel.dart';
 import 'model/cancel_reason_model.dart';
 import 'model/cancel_response.dart';
 
@@ -23,13 +25,15 @@ abstract class PackagesOrderDetailsViewModel extends State<PackagesOrderDetailsV
   static BookingsServiceModel? bookingsServiceModel;
    BookingsServiceModel? packageDetails;
    bool isLoading=false;
-  List listStatues= ["pending","accepted","inReview","processing","waiting_for_pay","payment_confirmed","completed","canceled" ];
-
+  List listStatues= ["pending","waiting_for_pay","payment_confirmed","completed","canceled" ];
+  // "accepted","inReview","processing"
   String cancelReason="";
   String cancelIndex="";
 
    CancelModel?cancelModel;
   List<InstallmentModel>? installmentModel;
+
+
 
   @override
   void initState() {
@@ -40,6 +44,9 @@ abstract class PackagesOrderDetailsViewModel extends State<PackagesOrderDetailsV
   getReserveInstallment();
     super.initState();
   }
+
+
+
   Future<void> getReserveInstallment() async {
     setState(() {
       isLoading=true;
@@ -82,7 +89,6 @@ abstract class PackagesOrderDetailsViewModel extends State<PackagesOrderDetailsV
       isLoading=true;
     });
     mp["reservation_id"]=packageDetails!.id.toString();
-
     mp["status"] = changeState;
     if(changeState=="canceled"){
       mp["cancellation_reasons"]=cancelIndex;
@@ -100,12 +106,15 @@ abstract class PackagesOrderDetailsViewModel extends State<PackagesOrderDetailsV
       Navigator.pop(context);
       setState(() {
         packageDetails!.status=changeState;
+
       });
+
     }else{
       toastApp(rs.msg!, context);
 
     }
   }
+
 
 
   void changeStatus() {
@@ -120,7 +129,7 @@ abstract class PackagesOrderDetailsViewModel extends State<PackagesOrderDetailsV
         builder: (context) {
           return StatefulBuilder(builder: (context, setState) {
             return  SizedBox(
-              height: 540,
+              height: 420,
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
@@ -147,12 +156,12 @@ abstract class PackagesOrderDetailsViewModel extends State<PackagesOrderDetailsV
                             Text(
                               e=="pending"?
                               tr("Pending")
-                                  : e=="accepted"?
-                              tr("Accepted")
-                                  : e=="inReview"?
-                              tr("Reviewing")
-                                  : e=="processing"?
-                              tr("Processing")
+                              //     : e=="accepted"?
+                              // tr("Accepted")
+                              //     : e=="inReview"?
+                              // tr("Reviewing")
+                              //     : e=="processing"?
+                              // tr("Processing")
                                   : e=="waiting_for_pay"?
                               tr("waiting_for_pay")
                                   : e=="payment_confirmed"?
@@ -430,10 +439,6 @@ abstract class PackagesOrderDetailsViewModel extends State<PackagesOrderDetailsV
       },
     );
   }
-
-
-
-
 
   Future<void> showBottomSheetInstallment(BuildContext context) async {
     Size size = MediaQuery.of(context).size;

@@ -9,20 +9,23 @@ import '../../../auth/auth_model/user_model.dart';
 import '../../../core/network/network_service.dart';
 import '../services/model/booking_servive_model.dart';
 import '../services/model/service_response.dart';
+import 'package:flutter/material.dart';
 
-abstract class PackagesOrderViewModel extends State<PackagesOrderView> with StorageHelper{
+
+abstract class PackagesOrderViewModel extends State<PackagesOrderView> with StorageHelper {
   final Dio dio = NetworkService.instance.dio;
 
   int packageStat=0;
 bool isLoading=false;
-  List<BookingsServiceModel> packages = [];
-  List<BookingsServiceModel> packagePending = [];
-  List<BookingsServiceModel> packageInReview = [];
-  List<BookingsServiceModel> packageCompleted = [];
+   List<BookingsServiceModel> packages = [];
+   List<BookingsServiceModel> packagePending = [];
+   List<BookingsServiceModel> packageInReview = [];
+   List<BookingsServiceModel> packageCompleted = [];
 
   static UserModel? userMdole;
   static String bookingId="";
   static String userId="";
+  int? set=0;
 
   @override
   void initState() {
@@ -38,8 +41,8 @@ bool isLoading=false;
   Future<void> getReservationsApi() async {
     Map<String, String> mp = {};
     setState(() {
-      isLoading=true;
-    });
+      isLoading= set==1?false:true;
+    } );
 
     mp["type"] = "offer";
     final response =
