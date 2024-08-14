@@ -968,7 +968,7 @@ class _ChatViewState extends ChatViewModel {
             width: 270,
             child: TextField(
               controller: ChatViewModel.messageControl,
-              style: const TextStyle(height: .6),
+              style: const TextStyle(height: 1.1,fontSize: 14),
               // textAlign: TextAlign.left,
               // keyboardType: TextInputType.text,
               maxLines: null,
