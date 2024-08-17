@@ -203,21 +203,23 @@ class _ChatViewState extends ChatViewModel {
 
   Widget _buildMessageList() {
     String chatRoomId = PackagesOrderViewModel.bookingId;
-
     var database = FirebaseDatabase.instance;
     var msgQury = database.ref("chat_rooms/$chatRoomId");
-
     var snapshot = msgQury.orderByChild("timestamp");
-
     messagesSubscriptions = snapshot.onChildAdded.listen(
           (DatabaseEvent event) {
-
+            if(firstTime==0){
+              scrollDown();
+              setState(() {
+                firstTime=1;
+              });
+            }
 
             setState(() {
               listen=0;
             });
-            if(listen==0){
 
+            if(listen==0){
               DatabaseReference databaseReference = FirebaseDatabase.instance.reference();
               DatabaseReference messagesRef = databaseReference.child('chat_rooms');
               messagesRef.get().then((allChats) {
@@ -237,20 +239,19 @@ class _ChatViewState extends ChatViewModel {
 
             }
 
-
             setState(() {
               listen=1;
             });
 
 
-
-            scrollDown();
       },
+
       // onError: (Object o) {
       //   final error = o as FirebaseException;
       //   // print('Error: ${error.code} ${error.message}');
       // },
     );
+
 
     return FirebaseAnimatedList(
       reverse: false,

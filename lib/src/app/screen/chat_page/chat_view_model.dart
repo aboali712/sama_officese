@@ -63,6 +63,7 @@ abstract class ChatViewModel extends State<ChatView> with StorageHelper {
   static String? chatRoomId;
   static int? offerId;
   int listen=0;
+  int firstTime=0;
 
   @override
   void initState() {
