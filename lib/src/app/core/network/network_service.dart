@@ -16,7 +16,7 @@ class NetworkService extends Interceptor with StorageHelper {
   }
 
 
-  static  const String baseUrl1 ="https://base.samaapp.com/api/";
+  static  const String baseUrl1 ="https://test.samaapp.com/api/";
       // "https://test.samaapp.com/api/";
   late final Dio dio;
 

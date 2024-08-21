@@ -225,7 +225,8 @@ class _ChatViewState extends ChatViewModel {
   Widget _buildMessageList() {
     String chatRoomId = ChatViewModel.bookingId;
     var database = FirebaseDatabase.instance;
-    var msgQury = database.ref("chat_rooms/$chatRoomId");
+    // var msgQury = database.ref("chat_rooms/$chatRoomId").child(chatRoomId);
+    var msgQury = database.ref(NetworkService.baseUrl1.contains("test.")?'chat_rooms_test':'chat_rooms').child(chatRoomId);
     var snapshot = msgQury.orderByChild("timestamp");
     messagesSubscriptions = snapshot.onChildAdded.listen(
           (DatabaseEvent event) {
@@ -882,7 +883,7 @@ class _ChatViewState extends ChatViewModel {
               speed: 0.10,
             ),
             options: const IOS9SiriWaveformOptions(
-              height: 100,
+              height: 150,
               width: 230,
             ),
           ),
