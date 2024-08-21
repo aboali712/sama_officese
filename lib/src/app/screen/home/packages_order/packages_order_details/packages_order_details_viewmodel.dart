@@ -164,7 +164,8 @@ abstract class PackagesOrderDetailsViewModel extends State<PackagesOrderDetailsV
         context: context,
         builder: (context) {
           return StatefulBuilder(builder: (context, setState) {
-            return  SizedBox(
+            return  Container(decoration: const BoxDecoration(borderRadius: BorderRadius.only(
+                topRight: Radius.circular(30), topLeft: Radius.circular(30)),color: Colors.white),
               height: 420,
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
