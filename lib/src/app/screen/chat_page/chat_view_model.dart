@@ -118,7 +118,8 @@ abstract class ChatViewModel extends State<ChatView> with StorageHelper {
   Future<void> checkIfQueryIsEmpty() async {
     String chatRoomId = ChatViewModel.bookingId;
     var database = FirebaseDatabase.instance;
-    DataSnapshot snapshot = await database.ref('chat_rooms').child(chatRoomId).get();
+
+    DataSnapshot snapshot = await database.ref(NetworkService.baseUrl1.contains("test.")?'chat_rooms_test':'chat_rooms').child(chatRoomId).get();
     setState(() {
       isEmpty = !snapshot.exists || !snapshot.children.isNotEmpty;
     });
@@ -191,7 +192,7 @@ abstract class ChatViewModel extends State<ChatView> with StorageHelper {
 
     // Create a reference to the chat room in Firebase Realtime Database
     DatabaseReference sendImg = FirebaseDatabase.instance
-        .ref("chat_rooms")
+        .ref(NetworkService.baseUrl1.contains("test.")?'chat_rooms_test':'chat_rooms')
         .child(chatRoomId)
         .child(timestamp.millisecondsSinceEpoch.toString());
 
@@ -210,7 +211,7 @@ abstract class ChatViewModel extends State<ChatView> with StorageHelper {
     var ref = FirebaseStorage.instance.ref().child("images").child("$fileName.jpg");
     var uploadTask = await ref.putFile(imageFile!).catchError((error) async {
       await FirebaseDatabase.instance
-          .ref("chat_rooms")
+          .ref(NetworkService.baseUrl1.contains("test.")?'chat_rooms_test':'chat_rooms')
           .child(chatRoomId)
           .child(fileName)
           .remove();
@@ -227,7 +228,7 @@ abstract class ChatViewModel extends State<ChatView> with StorageHelper {
 
       // Update the message in the chat with the image URL
       await FirebaseDatabase.instance
-          .ref("chat_rooms")
+          .ref(NetworkService.baseUrl1.contains("test.")?'chat_rooms_test':'chat_rooms')
           .child(chatRoomId)
           .child(timestamp.millisecondsSinceEpoch.toString())
           .update({

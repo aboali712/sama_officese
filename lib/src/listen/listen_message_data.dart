@@ -1,6 +1,8 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
+import '../app/core/network/network_service.dart';
+
 class MessageListenerService with ChangeNotifier {
   static final MessageListenerService _instance = MessageListenerService._internal();
   factory MessageListenerService() => _instance;
@@ -15,7 +17,7 @@ class MessageListenerService with ChangeNotifier {
 
   Future<void> initializeListener() async {
     DatabaseReference databaseReference = FirebaseDatabase.instance.reference();
-    DatabaseReference messagesRef = databaseReference.child('chat_rooms');
+    DatabaseReference messagesRef = databaseReference.child(NetworkService.baseUrl1.contains("test.")?'chat_rooms_test':'chat_rooms');
 
     messagesRef.onValue.listen((event) {
       int unreadThreadsCount = 0;

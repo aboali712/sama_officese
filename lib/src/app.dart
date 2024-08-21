@@ -137,7 +137,7 @@ class _SamaOfficeAppState extends State<SamaOfficeApp> with StorageHelper{
             (Route<dynamic> route) => false,
       );
       DatabaseReference databaseReference = FirebaseDatabase.instance.reference();
-      DatabaseReference messagesRef = databaseReference.child('chat_rooms');
+      DatabaseReference messagesRef = databaseReference.child(NetworkService.baseUrl1.contains("test.")?'chat_rooms_test':'chat_rooms');
       messagesRef.get().then((allChats) {
         allChats.children.forEach((allThreads) {
           if (allThreads.key.toString() == reservationId.toString()) {

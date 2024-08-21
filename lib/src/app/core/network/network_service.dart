@@ -16,12 +16,12 @@ class NetworkService extends Interceptor with StorageHelper {
   }
 
 
-  final String _baseUrl1 ="https://test.samaapp.com/api/";
+  static  const String baseUrl1 ="https://test.samaapp.com/api/";
       // "https://test.samaapp.com/api/";
   late final Dio dio;
 
   NetworkService._init() {
-    dio = Dio(BaseOptions(baseUrl: _baseUrl1));
+    dio = Dio(BaseOptions(baseUrl: baseUrl1));
           dio.interceptors.add(CustomInterceptor());
           dio.interceptors.add(LogInterceptor(
             request: true,

@@ -29,7 +29,7 @@
 //
 //     print(timestamp.toDate().toString());
 //
-//     DatabaseReference ref = FirebaseDatabase.instance.ref("chat_rooms").child(chatRoomId)
+//     DatabaseReference ref = FirebaseDatabase.instance.ref(NetworkService.baseUrl1.contains("test.")?'chat_rooms_test':'chat_rooms').child(chatRoomId)
 //
 //           .child(DateTime.now().millisecondsSinceEpoch.toString());
 //
@@ -120,6 +120,7 @@ import 'package:html_editor_enhanced/utils/utils.dart'; // HTML editor utilities
 // Import project-specific view models
 import 'package:sama_officese/src/app/screen/home/home_viewmodel.dart';
 import '../../../../app.dart';
+import '../../../core/network/network_service.dart';
 import '../../home/packages_order/packages_order_viewmodel.dart';
 import '../chat_view_model.dart'; // Importing chat view model
 
@@ -139,7 +140,7 @@ class ChatServices extends ChangeNotifier {
     print(timestamp.toDate().toString()); // Debug print of the timestamp
 
     // Reference to the specific chat room in Firebase Realtime Database
-    DatabaseReference ref = FirebaseDatabase.instance.ref("chat_rooms").child(chatRoomId)
+    DatabaseReference ref = FirebaseDatabase.instance.ref(NetworkService.baseUrl1.contains("test.")?'chat_rooms_test':'chat_rooms').child(chatRoomId)
         .child(DateTime.now().millisecondsSinceEpoch.toString());
 
     // Set the chat message details in the database
@@ -184,7 +185,7 @@ class ChatServices extends ChangeNotifier {
 
     // Reference to the specific chat room in Firebase Realtime Database
     final ref = FirebaseDatabase.instance.ref();
-    final snapshot = await ref.child('chat_rooms').child(chatRoomId)
+    final snapshot = await ref.child(NetworkService.baseUrl1.contains("test.")?'chat_rooms_test':'chat_rooms').child(chatRoomId)
         .orderByChild("timestamp").get(); // Retrieve messages ordered by timestamp
 
     if (snapshot.exists) {

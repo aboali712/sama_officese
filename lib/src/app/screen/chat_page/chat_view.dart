@@ -20,6 +20,7 @@ import 'package:sama_officese/src/app/screen/chat_page/show_chat_image.dart';
 
 import 'package:siri_wave/siri_wave.dart';
 
+import '../../core/network/network_service.dart';
 import '../../core/values/colors.dart';
 import '../../home_core.dart';
 import '../home/home_viewmodel.dart';
@@ -241,7 +242,7 @@ class _ChatViewState extends ChatViewModel {
 
             if(listen==0){
               DatabaseReference databaseReference = FirebaseDatabase.instance.reference();
-              DatabaseReference messagesRef = databaseReference.child('chat_rooms');
+              DatabaseReference messagesRef = databaseReference.child(NetworkService.baseUrl1.contains("test.")?'chat_rooms_test':'chat_rooms');
               messagesRef.get().then((allChats) {
                 allChats.children.forEach((allThreads) {
                   if (allThreads.key!.contains(event.snapshot.ref.key.toString()) ) {

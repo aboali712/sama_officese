@@ -6,6 +6,7 @@ import 'package:sama_officese/src/app/core/local/storagehelper.dart';
 import 'package:sama_officese/src/app/screen/home/home_viewmodel.dart';
 
 import '../../../../auth/auth_model/user_model.dart';
+import '../../../../core/network/network_service.dart';
 import '../../../chat_page/chat_view.dart';
 import '../../../chat_page/chat_view_model.dart';
 import '../../packages_order/packages_order_viewmodel.dart';
@@ -34,16 +35,12 @@ abstract class ConversationsViewModel extends State<ConversationsView> with Stor
     setState(() {
       isLoading=true;
     });
-    // DatabaseReference ref = FirebaseDatabase.instance.ref("chat_rooms");
-    // final event = await ref.once(DatabaseEventType.value);
-    // final data = event.snapshot.value as Map;
-    // print("${data.keys}  000000000000000000000000000000000000");
-    //
+
     // Reference to your Firebase database
     DatabaseReference databaseReference = FirebaseDatabase.instance.reference();
 
     // Query to get messages based on receiver ID and sender ID
-    DatabaseReference messagesRef = databaseReference.child('chat_rooms');
+    DatabaseReference messagesRef = databaseReference.child(NetworkService.baseUrl1.contains("test.")?'chat_rooms_test':'chat_rooms');
 
     messagesRef.onValue.listen((event) {
       conversationModel.clear();  // Clear the existing conversation model to avoid duplicates
@@ -127,7 +124,7 @@ abstract class ConversationsViewModel extends State<ConversationsView> with Stor
     );
 
     DatabaseReference databaseReference = FirebaseDatabase.instance.reference();
-    DatabaseReference messagesRef = databaseReference.child('chat_rooms');
+    DatabaseReference messagesRef = databaseReference.child(NetworkService.baseUrl1.contains("test.")?'chat_rooms_test':'chat_rooms');
     messagesRef.get().then((allChats) {
       allChats.children.forEach((allThreads) {
         if (allThreads.key.toString() == e!.orderId.toString()) {
