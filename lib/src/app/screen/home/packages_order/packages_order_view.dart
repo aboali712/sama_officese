@@ -714,6 +714,7 @@ class _PackagesOrderViewState extends PackagesOrderViewModel {
     return Scaffold(
       backgroundColor: const Color(0xffFCFCFF),
       appBar: AppBar(
+        surfaceTintColor: Colors.transparent,
         title: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Column(
