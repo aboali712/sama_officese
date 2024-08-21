@@ -111,9 +111,9 @@ abstract class ConversationsViewModel extends State<ConversationsView> with Stor
 
   void gotoChat(ConversModel?e ){
     setState(() {
-      PackagesOrderViewModel.bookingId= e!.orderId.toString();
-      PackagesOrderViewModel.userMdole=HomeViewModel.profileModel;
-      PackagesOrderViewModel.userId= e.officeId.toString();
+      ChatViewModel.bookingId= e!.orderId.toString();
+      ChatViewModel.userMdole=HomeViewModel.profileModel;
+      ChatViewModel.userId= e.officeId.toString();
       ChatViewModel.offerId= int.parse(e.offerId.toString());
     });
 

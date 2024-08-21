@@ -12,8 +12,6 @@ class OfferModel {
   String? nameEn;
   String? status;
   dynamic is_vip;
-
-
   String? image;
   bool? is_favourite;
   String? description;
@@ -23,7 +21,7 @@ class OfferModel {
   List<String>? countries_list;
   List<String>? cities_list;
   int? cityId;
-
+  String? office_rate;
   String? fromCity;
   String? toCity;
   String? priceBefore;
@@ -77,7 +75,8 @@ class OfferModel {
         this.is_international,
         this.price_before_without_app_percent,
         this.price_after_without_app_percent,
-        this.is_installment
+        this.is_installment,
+        this.office_rate
 
       });
 
@@ -99,6 +98,7 @@ class OfferModel {
     description = json['description'];
     descriptionAr = json['description_ar'];
     descriptionEn = json['description_en'];
+    office_rate= json['office_rate'];
 
     countryId = json['country_id'];
     cityId = json['city_id'];
@@ -142,6 +142,7 @@ class OfferModel {
     data['name_en'] = this.nameEn;
     data['status'] = this.status;
     data['is_vip'] = this.is_vip;
+    data['office_rate'] = this.office_rate;
 
     data['image'] = this.image;
     data['description'] = this.description;

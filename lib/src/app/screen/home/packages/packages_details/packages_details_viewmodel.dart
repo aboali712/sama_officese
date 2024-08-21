@@ -10,74 +10,94 @@ import '../models/offer_model.dart';
 import 'model/PackagerDetailsResponse.dart';
 import 'model/package_details_model.dart';
 
-abstract class PackagesDetailsVieModel extends State<PackagesDetails>{
+abstract class PackagesDetailsVieModel extends State<PackagesDetails> {
+  final Dio dio = NetworkService.instance.dio; // Dio instance for network requests
+  PackageDetailsModel? offerDetailsModel; // Holds the package details model
 
-  final Dio dio = NetworkService.instance.dio;
-  PackageDetailsModel? offerDetailsModel;
+  bool isLoading = false; // Loading state indicator
+  int activeIndex = 0; // Index for the active carousel item
+  bool switchValue = true; // Switch value for offer status
+  OfferModel? offer; // Holds the offer model
+  static String offerId = ""; // ID of the current offer
 
-
-  bool isLoading=false;
-  int activeIndex =0;
-  bool switchValue= true;
- OfferModel? offer;
-static String offerId ="";
- @override
+  @override
   void initState() {
-   getOfferDetailsApi();
+    // Initialize the state by fetching offer details
+    getOfferDetailsApi();
     super.initState();
   }
 
-
-
+  /// Method to change the status of the offer
   Future<void> changeOfferApi(String status) async {
     setState(() {
-      isLoading = true;
+      isLoading = true; // Show loading indicator
     });
-    Map<String, String> mp = {};
-    mp["offer_id"] = offerId;
-    mp["status"] = status;
 
-    final response = await dio.post("v1/office/change-offer-status", data: mp);
+    Map<String, String> data = {
+      "offer_id": offerId,
+      "status": status,
+    };
 
-    var rs = EmptyResponse(response.data!);
-    setState(() {
-      isLoading = false;
-    });
-    if (rs.status == 200) {
-      getOfferDetailsApi();
-      toastAppSuccess(rs.msg!, context);
-    }else{
-      toastApp(rs.msg!, context);
-    }
-  }
+    try {
+      // API call to change the offer status
+      final response = await dio.post("v1/office/change-offer-status", data: data);
 
+      var result = EmptyResponse(response.data!);
 
-
-
-  Future<void> getOfferDetailsApi() async {
-   setState(() {
-     isLoading=true;
-   });
-    Map<String, String> mp = {};
-
-    mp["offer_id"] = offerId;
-
-
-    final response = await dio.get("v1/office/offerDetails", queryParameters: mp);
-   setState(() {
-     isLoading=false;
-   });
-    var rs = OffersDetailsResponse(response.data!);
-    if (rs.status == 200) {
       setState(() {
-        offer = rs.data!.offerDetails;
-        switchValue= offer!.status=="active" ? true: false ;
-
+        isLoading = false; // Hide loading indicator
       });
-    }
 
+      if (result.status == 200) {
+        // If successful, refresh the offer details and show success message
+        await getOfferDetailsApi();
+        toastAppSuccess(result.msg!, context);
+      } else {
+        // If failed, show error message
+        toastApp(result.msg!, context);
+      }
+    } catch (e) {
+      // Handle any errors
+      setState(() {
+        isLoading = false; // Hide loading indicator
+      });
+      toastApp("An error occurred. Please try again.", context);
+    }
   }
 
+  /// Method to fetch offer details from the API
+  Future<void> getOfferDetailsApi() async {
+    setState(() {
+      isLoading = true; // Show loading indicator
+    });
 
+    Map<String, String> params = {
+      "offer_id": offerId,
+    };
 
+    try {
+      // API call to get the offer details
+      final response = await dio.get("v1/office/offerDetails", queryParameters: params);
+
+      var result = OffersDetailsResponse(response.data!);
+
+      setState(() {
+        isLoading = false; // Hide loading indicator
+      });
+
+      if (result.status == 200) {
+        // If successful, update the offer and switch value
+        setState(() {
+          offer = result.data!.offerDetails;
+          switchValue = offer!.status == "active";
+        });
+      }
+    } catch (e) {
+      // Handle any errors
+      setState(() {
+        isLoading = false; // Hide loading indicator
+      });
+      toastApp("An error occurred. Please try again.", context);
+    }
+  }
 }

@@ -1,10 +1,13 @@
+
 class NotificationModel {
   int? id;
   String? type;
-  String? userId;
-  int? officeId;
+  int? userId;
+  dynamic officeId;
   String? title;
   String? message;
+  String? notificationType;
+  int? reservationId;
 
   NotificationModel(
       {this.id,
@@ -12,7 +15,9 @@ class NotificationModel {
         this.userId,
         this.officeId,
         this.title,
-        this.message});
+        this.message,
+        this.notificationType,
+        this.reservationId});
 
   NotificationModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -21,6 +26,8 @@ class NotificationModel {
     officeId = json['office_id'];
     title = json['title'];
     message = json['message'];
+    notificationType = json['notification_type'];
+    reservationId = json['reservation_id'];
   }
 
   Map<String, dynamic> toJson() {
@@ -31,6 +38,8 @@ class NotificationModel {
     data['office_id'] = this.officeId;
     data['title'] = this.title;
     data['message'] = this.message;
+    data['notification_type'] = this.notificationType;
+    data['reservation_id'] = this.reservationId;
     return data;
   }
 }

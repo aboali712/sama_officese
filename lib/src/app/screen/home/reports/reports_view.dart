@@ -1,3 +1,4 @@
+
 import 'dart:io';
 
 import 'package:easy_localization/easy_localization.dart';
@@ -23,338 +24,201 @@ class _ReportsViewState extends ReportsViewModel {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        surfaceTintColor: Colors.transparent,
-        title: Row(
-          children: [
-            const SizedBox(width: 20,),
-
-            Text(tr("Reports"),style: GoogleFonts.tajawal(color: Colors.white,
-                fontSize:Platform.isIOS?25: 20,fontWeight: FontWeight.w500),),
-          ],
-        ),
-        flexibleSpace:  Stack(
-            children: [
-              Container(height: 30,color: const Color(0xff231f20),),
-
-              Image(
-                image: const AssetImage('assets/images/signback.png'),
-                fit: BoxFit.cover,width: size.width,
-              ),
-            ]),toolbarHeight: 120,
-        backgroundColor: Colors.transparent,
-        automaticallyImplyLeading: false,
-      ),
+      appBar: _buildAppBar(size), // Builds the custom AppBar
       body: Stack(
-          children: [
-
-            reportModel!=null?
-            Padding(
-              padding: const EdgeInsets.only(left: 10,right: 10),
-              child: Flex(
-                  direction: Axis.horizontal,
-                  children: [ Expanded(
-                    child: SingleChildScrollView(
-                      child: Column(children: [
-                        const SizedBox(height: 10,),
-
-                        const SizedBox(height: 10,),
-
-                        Row( mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-
-                            Container( height: 165,width: size.width/2.2,
-                              padding: const EdgeInsets.only(left: 20,right: 20,top: 15,bottom: 10),
-                              decoration: BoxDecoration(
-                                borderRadius:  BorderRadius.circular(20) ,
-                                color: const Color(0xffCAD7E5),
-
-                              ),child: Column( crossAxisAlignment:  CrossAxisAlignment.start,
-                                  children: [
-
-                                    Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                            height: 53,width: 58,
-                                            padding: const EdgeInsets.all(10),
-                                            decoration: BoxDecoration(borderRadius:  BorderRadius.circular(14),
-                                                color:const Color(0xff00417e) ),
-                                            child: SvgPicture.asset("assets/images/plan.svg",)),
-
-
-                                        Container(
-                                            height: 27,width: 27,
-                                            padding: const EdgeInsets.all(5),
-                                            decoration: BoxDecoration(borderRadius:  BorderRadius.circular(14),
-                                                color:const Color(0xff5AC41A) ),
-                                            child: Center(
-                                              child: Text(reportModel!.offersCount.toString(),
-                                                style: GoogleFonts.tajawal( color: Colors.white,fontSize: 13,
-                                                    fontWeight: FontWeight.w400
-                                                ),),
-                                            )),
-
-                                      ],
-                                    ),
-
-
-                                    const SizedBox(height: 20,),
-                                    Column(crossAxisAlignment: CrossAxisAlignment.start,
-
-                                      children: [
-                                        Text(
-                                          tr("NumberOfOffers"),
-                                          style: const TextStyle(
-                                              color:  Colors.black,
-                                              fontSize: 15, fontWeight: FontWeight.w500),
-                                        ),
-
-
-                                      ],
-                                    )
-                                  ]),),
-
-                            Container( height: 165,width: size.width/2.2,
-                              padding: const EdgeInsets.only(left: 20,right: 20,top: 15,bottom: 10),
-                              decoration: BoxDecoration(
-                                borderRadius:  BorderRadius.circular(20) ,
-                                color: const Color(0xffCAEBED),
-
-                              ),child: Column( crossAxisAlignment:  CrossAxisAlignment.start,
-                                  children: [
-
-                                    Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                            height: 53,width: 58,
-                                            padding: const EdgeInsets.all(14),
-                                            decoration: BoxDecoration(borderRadius:  BorderRadius.circular(14),
-                                                color:const Color(0xff00a8a5) ),
-                                            child: SvgPicture.asset("assets/images/planee.svg",)),
-
-
-                                        Container(
-                                            height: 27,width: 27,
-                                            padding: const EdgeInsets.all(5),
-                                            decoration: BoxDecoration(borderRadius:  BorderRadius.circular(14),
-                                                color:const Color(0xff8A8C8E) ),
-                                            child: Center(
-                                              child: Text( reportModel!.pendingReservationsCount.toString(),
-                                                style: GoogleFonts.tajawal( color: Colors.white,fontSize: 13,
-                                                  fontWeight: FontWeight.w400
-                                              ),),
-                                            )),
-
-                                      ],
-                                    ),
-
-
-                                    const SizedBox(height: 20,),
-                                    Column(crossAxisAlignment: CrossAxisAlignment.start,
-
-                                      children: [
-                                        Text(
-                                          tr("pendingReservations"),
-                                          style: const TextStyle(
-                                              color:  Colors.black,
-                                              fontSize: 15, fontWeight: FontWeight.w500),
-                                        ),
-
-                                      ],
-                                    )
-                                  ]),),
-
-                          ],),
-                        const SizedBox(height: 20,),
-
-
-
-                        Row( mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-
-                            Container( height: 165,width: size.width/2.2,
-                              padding: const EdgeInsets.only(left: 20,right: 20,top: 15,bottom: 10),
-                              decoration: BoxDecoration(
-                                borderRadius:  BorderRadius.circular(20) ,
-                                color: const Color(0xffF8E3D3),
-
-                              ),child: Column( crossAxisAlignment:  CrossAxisAlignment.start,
-                                  children: [
-
-                                    Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                            height: 53,width: 58,
-                                            padding: const EdgeInsets.all(13),
-                                            decoration: BoxDecoration(borderRadius:  BorderRadius.circular(14),
-                                                color:const Color(0xffea8024) ),
-                                            child: SvgPicture.asset("assets/images/plancc.svg",)),
-
-
-                                        Container(
-                                            height: 27,width: 27,
-                                            padding: const EdgeInsets.all(5),
-                                            decoration: BoxDecoration(borderRadius:  BorderRadius.circular(14),
-                                                color:const Color(0xff5AC41A) ),
-                                            child: Center(
-                                              child: Text(
-                                              reportModel!.completedReservationsCount.toString(),
-                                                style: GoogleFonts.tajawal( color: Colors.white,fontSize: 13,
-                                                    fontWeight: FontWeight.w400
-                                                ),),
-                                            )),
-
-                                      ],
-                                    ),
-
-
-                                    const SizedBox(height: 20,),
-                                    Column(crossAxisAlignment: CrossAxisAlignment.start,
-
-                                      children: [
-                                        Text(
-                                          tr("completedReservations"),
-                                          style: const TextStyle(
-                                              color:  Colors.black,
-                                              fontSize: 15, fontWeight: FontWeight.w500),
-                                        ),
-
-
-                                      ],
-                                    )
-                                  ]),),
-                            Container( height: 165,width: size.width/2.2,
-                              padding: const EdgeInsets.only(left: 20,right: 20,top: 15,bottom: 15),
-                              decoration: BoxDecoration(
-                                borderRadius:  BorderRadius.circular(20) ,
-                                color: const Color(0xffE5E6E8),
-
-                              ),child: Column( crossAxisAlignment:  CrossAxisAlignment.start,
-                                  children: [
-
-                                    Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                            height: 53,width: 58,
-                                            padding: const EdgeInsets.all(10),
-                                            decoration: BoxDecoration(borderRadius:  BorderRadius.circular(14),
-                                                color: Colors.grey ),
-                              child: SvgPicture.asset("assets/images/plan.svg",color: Colors.grey.shade400,),),
-
-
-                                        Container(
-                                            height: 27,width: 27,
-                                            padding: const EdgeInsets.all(5),
-                                            decoration: BoxDecoration(borderRadius:  BorderRadius.circular(14),
-                                                color:const Color(0xff5AC41A) ),
-                                            child: Center(
-                                              child: Text(
-                                                reportModel!.totalReservations.toString(),
-                                                style: GoogleFonts.tajawal( color: Colors.white,fontSize: 13,
-                                                    fontWeight: FontWeight.w400
-                                                ),),
-                                            )),
-                                      ],
-                                    ),
-
-
-                                    const SizedBox(height: 30,),
-                                    Column(crossAxisAlignment: CrossAxisAlignment.start,
-
-                                      children: [
-                                        Text(
-                                          tr("TotalReservations"),
-                                          style: const TextStyle(
-                                              color:  Colors.black,
-                                              fontSize: 15, fontWeight: FontWeight.w500),
-                                        ),
-
-
-                                      ],
-                                    )
-                                  ]),),
-
-                          ],),
-                        const SizedBox(height: 20,),
-
-
-                        Container( height: 165,width: size.width/2.2,
-                          padding: const EdgeInsets.only(left: 20,right: 20,top: 15,bottom: 10),
-                          decoration: BoxDecoration(
-                            borderRadius:  BorderRadius.circular(20) ,
-                            color: const Color(0xffCAEBED),
-
-                          ),child: Column( crossAxisAlignment:  CrossAxisAlignment.start,
-                              children: [
-
-                                Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                        height: 53,width: 58,
-                                        padding: const EdgeInsets.all(14),
-                                        decoration: BoxDecoration(borderRadius:  BorderRadius.circular(14),
-                                            color:const Color(0xff00a8a5) ),
-                                        child: SvgPicture.asset("assets/images/planee.svg",)),
-
-
-                                    Container(
-                                        height: 27,width: 27,
-                                        padding: const EdgeInsets.all(5),
-                                        decoration: BoxDecoration(borderRadius:  BorderRadius.circular(14),
-                                            color:const Color(0xff8A8C8E) ),
-                                        child: Center(
-                                          child: Text( reportModel!.totalSales.toString(),
-                                            style: GoogleFonts.tajawal( color: Colors.white,fontSize: 13,
-                                                fontWeight: FontWeight.w400
-                                            ),),
-                                        )),
-
-                                  ],
-                                ),
-
-
-                                const SizedBox(height: 20,),
-                                Column(crossAxisAlignment: CrossAxisAlignment.start,
-
-                                  children: [
-                                    Text(
-                                      tr("TotalSales"),
-                                      style: const TextStyle(
-                                          color:  Colors.black,
-                                          fontSize: 15, fontWeight: FontWeight.w500),
-                                    ),
-
-                                  ],
-                                )
-                              ]),),
-
-
-
-                      ]),
-                    ),
-                  ),
-                  ]),
-            )
-            :const SizedBox.shrink(),
-
-            isLoading==true?
+        children: [
+          if (reportModel != null) _buildReportCards(size), // Builds report cards if data is available
+          if (isLoading)
             SizedBox(
-                height: size.height/1,
-                child: const Center(child: CircularProgressIndicator(color: samaOfficeColor,
-                )))
-                :const SizedBox.shrink()
+              height: size.height,
+              child: const Center(
+                child: CircularProgressIndicator(color: samaOfficeColor),
+              ),
+            ),
+        ],
+      ),
+    );
+  }
 
+  /// Builds the custom AppBar with a background image and title
+  AppBar _buildAppBar(Size size) {
+    return AppBar(
+      surfaceTintColor: Colors.transparent,
+      title: Row(
+        children: [
+          const SizedBox(width: 20),
+          Text(
+            tr("Reports"),
+            style: GoogleFonts.tajawal(
+              color: Colors.white,
+              fontSize: Platform.isIOS ? 25 : 20,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ],
+      ),
+      flexibleSpace: Stack(
+        children: [
+          Container(height: 30, color: const Color(0xff231f20)),
+          Image.asset(
+            'assets/images/signback.png',
+            fit: BoxFit.cover,
+            width: size.width,
+          ),
+        ],
+      ),
+      toolbarHeight: 120,
+      backgroundColor: Colors.transparent,
+      automaticallyImplyLeading: false,
+    );
+  }
 
+  /// Builds the report cards
+  Widget _buildReportCards(Size size) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: Flex(
+        direction: Axis.horizontal,
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  const SizedBox(height: 10),
+                  _buildReportCardRow(size, [
+                    _buildReportCard(
+                      size,
+                      color: const Color(0xffCAD7E5),
+                      iconColor: const Color(0xff00417e),
+                      iconAsset: "assets/images/plan.svg",
+                      count: reportModel!.offersCount.toString(),
+                      label: tr("NumberOfOffers"),
+                    ),
+                    _buildReportCard(
+                      size,
+                      color: const Color(0xffCAEBED),
+                      iconColor: const Color(0xff00a8a5),
+                      iconAsset: "assets/images/planee.svg",
+                      count: reportModel!.pendingReservationsCount.toString(),
+                      label: tr("pendingReservations"),
+                    ),
+                  ]),
+                  const SizedBox(height: 20),
+                  _buildReportCardRow(size, [
+                    _buildReportCard(
+                      size,
+                      color: const Color(0xffF8E3D3),
+                      iconColor: const Color(0xffea8024),
+                      iconAsset: "assets/images/plancc.svg",
+                      count: reportModel!.completedReservationsCount.toString(),
+                      label: tr("completedReservations"),
+                    ),
+                    _buildReportCard(
+                      size,
+                      color: const Color(0xffE5E6E8),
+                      iconColor: Colors.grey,
+                      iconAsset: "assets/images/plan.svg",
+                      count: reportModel!.totalReservations.toString(),
+                      label: tr("TotalReservations"),
+                    ),
+                  ]),
+                  const SizedBox(height: 20),
+                  _buildReportCard(
+                    size,
+                    color: const Color(0xffCAEBED),
+                    iconColor: const Color(0xff00a8a5),
+                    iconAsset: "assets/images/planee.svg",
+                    count: reportModel!.totalSales.toString(),
+                    label: tr("TotalSales"),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
-            ,
-          ]),
+  /// Builds a row of report cards
+  Widget _buildReportCardRow(Size size, List<Widget> cards) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: cards,
+    );
+  }
 
+  /// Builds a single report card with specified parameters
+  Widget _buildReportCard(
+      Size size, {
+        required Color color,
+        required Color iconColor,
+        required String iconAsset,
+        required String count,
+        required String label,
+      }) {
+    return Container(
+      height: 165,
+      width: size.width / 2.2,
+      padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        color: color,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildCardHeader(iconColor, iconAsset, count),
+          const SizedBox(height: 20),
+          Text(
+            label,
+            style: const TextStyle(
+              color: Colors.black,
+              fontSize: 15,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
+  /// Builds the header of the report card with an icon and count
+  Widget _buildCardHeader(Color iconColor, String iconAsset, String count) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          height: 53,
+          width: 58,
+          padding: const EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(14),
+            color: iconColor,
+          ),
+          child: SvgPicture.asset(iconAsset),
+        ),
+        Container(
+          height: 27,
+          width: 27,
+          padding: const EdgeInsets.all(5),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(14),
+            color: const Color(0xff5AC41A),
+          ),
+          child: Center(
+            child: Text(
+              count,
+              style: GoogleFonts.tajawal(
+                color: Colors.white,
+                fontSize: 13,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

@@ -4,12 +4,16 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sama_officese/src/app/core/local/storagehelper.dart';
 import 'package:sama_officese/src/app/core/values/colors.dart';
 import 'package:sama_officese/src/app/screen/home/packages_order/packages_order_details/packages_order_details_view.dart';
 
+import '../../../../../app.dart';
 import '../../../../auth/auth_model/empty_response.dart';
 import '../../../../core/network/network_service.dart';
 import '../../../../core/utils/helper_manager.dart';
+import '../../../chat_page/chat_view.dart';
+import '../../../chat_page/chat_view_model.dart';
 import '../../more/Installments/model/installment_model.dart';
 import '../../more/Installments/model/installment_response.dart';
 import '../../services/model/booking_servive_model.dart';
@@ -18,42 +22,71 @@ import '../packages_order_view.dart';
 import '../packages_order_viewmodel.dart';
 import 'model/cancel_reason_model.dart';
 import 'model/cancel_response.dart';
+import 'model/myreservation_details_response.dart';
 
-abstract class PackagesOrderDetailsViewModel extends State<PackagesOrderDetailsView>{
+abstract class PackagesOrderDetailsViewModel extends State<PackagesOrderDetailsView> with StorageHelper{
   final Dio dio = NetworkService.instance.dio;
 
   String changeState="";
-  static BookingsServiceModel? bookingsServiceModel;
    BookingsServiceModel? packageDetails;
    bool isLoading=false;
   List listStatues= ["pending","waiting_for_pay","payment_confirmed","completed","canceled" ];
   // "accepted","inReview","processing"
   String cancelReason="";
   String cancelIndex="";
-
    CancelModel?cancelModel;
   List<InstallmentModel>? installmentModel;
-
-
+  static String reservationId="";
+  String lang="";
+  static int pageNu=0;
 
   @override
   void initState() {
-  setState(() {
-    packageDetails=bookingsServiceModel;
-  });
-  getReason();
-  getReserveInstallment();
+    getLang().then((onValue){setState(() {lang=onValue!; });});
+    getMyReservationDetails();
+    getReason();
+    getReserveInstallment();
     super.initState();
   }
 
 
+  Future<void> getMyReservationDetails() async {
+    setState(() {
+      isLoading=true;
+    });
+    final response =
+    await dio.get("/v1/getReservationDetails/${reservationId}", );
+    var rs = MyReservationDetailsResponse(response.data!);
+
+    setState(() {
+      isLoading=false;
+    });
+    if (rs.status == 200) {
+      setState(() {
+        packageDetails=rs.data;
+      });
+    }
+  }
+
+
+  /// Method to start chat with the client
+  void startChatWithClient() {
+    setState(() {
+      ChatViewModel.offerId = packageDetails!.offerId;
+      ChatViewModel.bookingId = packageDetails!.id.toString();
+      ChatViewModel.userId = packageDetails!.userId.toString();
+    });
+    SamaOfficeApp.navKey.currentState!.push(
+      MaterialPageRoute(builder: (context) => const ChatView()),
+    );
+  }
 
   Future<void> getReserveInstallment() async {
     setState(() {
       isLoading=true;
     });
     Map<String, String> mp = {};
-    mp["reservation_id"] = packageDetails!.id.toString();
+    mp["reservation_id"] =reservationId.toString();
     final response = await dio.get("v1/office/ReservationInstallments", queryParameters: mp);
     var rs = InstallmentResponse(response.data!);
     setState(() {
@@ -492,13 +525,13 @@ abstract class PackagesOrderDetailsViewModel extends State<PackagesOrderDetailsV
                               elevation: 5,shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                               child: Container(
                                 width: size.width,
-                                padding: const EdgeInsets.all(10),                             
+                                padding: const EdgeInsets.all(10),
                                 decoration: BoxDecoration(borderRadius: BorderRadius.circular(15),
                                     color: Colors.white,
 
                                 ),
                                 child: Column(children: [
-                              
+
                                   Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
@@ -526,7 +559,7 @@ abstract class PackagesOrderDetailsViewModel extends State<PackagesOrderDetailsV
                                           ),
                                           Row(
                                             children: [
-                              
+
                                               Text(
                                                 "${tr("dueAmount")} : ",
                                                 style: const TextStyle(
@@ -546,9 +579,9 @@ abstract class PackagesOrderDetailsViewModel extends State<PackagesOrderDetailsV
                                             ],
                                           ),
                                         ],),
-                              
-                              
-                              
+
+
+
                                       Column(crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
@@ -564,15 +597,15 @@ abstract class PackagesOrderDetailsViewModel extends State<PackagesOrderDetailsV
                                               fontWeight: FontWeight.w500,
                                             ),
                                           ),
-                              
+
                                         ],)
                                     ],),
-                              
-                              
-                              
-                              
-                              
-                              
+
+
+
+
+
+
                                 ],),
                               ),
                             )).toList(),)

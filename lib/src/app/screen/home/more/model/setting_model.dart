@@ -19,6 +19,14 @@ class SettingsModel {
   String? snapchatPixel;
   String? tiktokPixel;
   String? office_terms ;
+  String? consultationsPhone;
+  String? consultationsStart;
+  String? consultationsEnd;
+  String? androidVersion;
+  String? iosVersion;
+  String? office_android_version;
+  String? office_ios_version;
+
 
   SettingsModel(
       {this.id,
@@ -40,7 +48,14 @@ class SettingsModel {
         this.googlePixel,
         this.snapchatPixel,
         this.tiktokPixel,
-      this. office_terms
+      this. office_terms,
+        this.consultationsPhone,
+        this.consultationsStart,
+        this.consultationsEnd,
+        this.androidVersion,
+        this.iosVersion,
+        this.office_android_version,
+        this.office_ios_version
       });
 
   SettingsModel.fromJson(Map<String, dynamic> json) {
@@ -64,6 +79,13 @@ class SettingsModel {
     snapchatPixel = json['snapchat_pixel'];
     tiktokPixel = json['tiktok_pixel'];
     office_terms = json['office_terms'];
+    consultationsPhone = json['consultations_phone'];
+    consultationsStart = json['consultations_start'];
+    consultationsEnd = json['consultations_end'];
+    androidVersion = json['android_version'];
+    iosVersion = json['ios_version'];
+    office_android_version = json['office_android_version'];
+    office_ios_version = json['office_ios_version'];
 
   }
 
@@ -89,6 +111,13 @@ class SettingsModel {
     data['snapchat_pixel'] = this.snapchatPixel;
     data['tiktok_pixel'] = this.tiktokPixel;
     data['office_terms'] = this.office_terms;
+    data['consultations_phone'] = this.consultationsPhone;
+    data['consultations_start'] = this.consultationsStart;
+    data['consultations_end'] = this.consultationsEnd;
+    data['android_version'] = this.androidVersion;
+    data['ios_version'] = this.iosVersion;
+    data['office_android_version'] = this.office_android_version;
+    data['office_ios_version'] = this.office_ios_version;
 
     return data;
   }

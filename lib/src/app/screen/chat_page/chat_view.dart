@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
@@ -14,11 +15,13 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:maps_launcher/maps_launcher.dart';
 import 'package:provider/provider.dart';
+import 'package:sama_officese/src/app.dart';
 import 'package:sama_officese/src/app/screen/chat_page/show_chat_image.dart';
 
 import 'package:siri_wave/siri_wave.dart';
 
 import '../../core/values/colors.dart';
+import '../../home_core.dart';
 import '../home/home_viewmodel.dart';
 import '../home/packages_order/packages_order_viewmodel.dart';
 import 'chatBuble.dart';
@@ -38,171 +41,188 @@ class _ChatViewState extends ChatViewModel {
 
   @override
   Widget build(BuildContext context) {
-      return
-        Scaffold(
-          backgroundColor:Colors.white,
-          appBar: AppBar(
-            centerTitle: true,
-            iconTheme: const IconThemeData(
-              color: Colors.white, //change your color here
-            ),
-            title:   Text(
-              "${tr("OrderNumber")} ${PackagesOrderViewModel.bookingId}"..toString(),
-              style: GoogleFonts.tajawal(
-                  fontSize: 15,
-                  color:Colors.white,
-                  fontWeight:
-                  FontWeight.w500),
-            ),
-            backgroundColor: samaColor,
-            automaticallyImplyLeading: true,
-          ),
-          body: SingleChildScrollView(
-            child: Column(
-              children: [
-                SizedBox(
-                  height: Platform.isIOS?
-                  MediaQuery.of(context).size.height-200
-                      :MediaQuery.of(context).size.height-150,
+    Size size = MediaQuery.of(context).size;
+    ChatViewModel.bookingId;
 
-                  child: Stack(children: [
-                    _buildMessageList(),
-                    moreStatus == 1
-                        ? Positioned(
-                        right: 15,
-                        bottom: 20,
-                        height: 150,
-                        width: 40,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return
+      WillPopScope(
+        onWillPop: () async {
+          if(ChatViewModel.pageNu==1){
+            setState(() {
+              HomeCorePage.index=0;
+            });
+            SamaOfficeApp.navKey.currentState!.pushReplacement(MaterialPageRoute(builder: (context) => HomeCore(),));
+            setState(() {
+              ChatViewModel.pageNu=0;
+            });
+          }
+
+          return true;
+        },
+          child: Scaffold(
+            backgroundColor:Colors.white,
+            appBar:  _buildAppBar(),
+            body:  CustomScrollView(
+                slivers: [
+                  SliverToBoxAdapter(
+                    child: Stack(
+                      children: [
+                        Column(
                           children: [
-                            GestureDetector(
-                              onTap: () {
-                                getImage();
-                                setState(() {
-                                  moreStatus = 0;
-                                });
-                              },
-                              child: Container(
-                                  height: 40,
-                                  width: 40,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(50),
-                                      color: Colors.white,
-                                      border: Border.all(
-                                          color: Colors.blue.shade300, width: .4),
-                                      boxShadow: [
-                                        BoxShadow(
-                                            color: Colors.grey.withOpacity(0.2),
-                                            spreadRadius: 2,
-                                            blurRadius: 2,
-                                            offset: const Offset(1, 1))
-                                      ]),
-                                  child: Center(
-                                    child: Icon(
-                                      Icons.photo,
-                                      color: Colors.blue.shade300,
-                                      size: 25,
-                                    ),
-                                  )),
+                            SizedBox(
+                              height: Platform.isIOS ? size.height - 200 : size.height - 160,
+                              child: Stack(
+                                children: [
+                                  // Check if the message list is empty
+                                  isEmpty ? _buildOfferDetails() : _buildMessageList(),
+                                  _buildMoreOptions()
+                                ],
+                              ),
                             ),
-                            GestureDetector(
-                              onTap: () {
-                                // getCurrentLocation().then((value) async {
-                                //   if(currentPosition!.longitude.toString().isNotEmpty){
-                                //
-                                //     // var mess='https://www.google.com/maps/search/?api=1&query=${currentPosition!.latitude},${currentPosition!.longitude}';
-                                //
-                                //     double lat = currentPosition!.latitude;
-                                //     double long = currentPosition!.longitude;
-                                //    String mess="$lat, $long";
-                                //
-                                //     await   chatServices.sendMessage(ChatViewModel.user.toString(),mess,"location",duration: audioController.total);
-                                //
-                                //   }
-                                // });
-
-                                showPlacePicker();
-
-                                setState(() {
-                                  moreStatus = 0;
-                                });
-                              },
-                              child: Container(
-                                  height: 40,
-                                  width: 40,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(50),
-                                      color: Colors.white,
-                                      border: Border.all(
-                                          color: Colors.blue.shade300, width: .4),
-                                      boxShadow: [
-                                        BoxShadow(
-                                            color: Colors.grey.withOpacity(0.2),
-                                            spreadRadius: 2,
-                                            blurRadius: 2,
-                                            offset: const Offset(1, 1))
-                                      ]),
-                                  child: const Center(
-                                    child: Icon(
-                                      Icons.location_on,
-                                      color: Colors.red,
-                                      size: 25,
-                                    ),
-                                  )),
-                            ),
-                            GestureDetector(
-                              child: Container(
-                                  height: 40,
-                                  width: 40,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(50),
-                                      color: Colors.white,
-                                      border: Border.all(
-                                          color: Colors.blue.shade300, width: .4),
-                                      boxShadow: [
-                                        BoxShadow(
-                                            color: Colors.grey.withOpacity(0.2),
-                                            spreadRadius: 2,
-                                            blurRadius: 2,
-                                            offset: const Offset(1, 1))
-                                      ]),
-                                  child: Center(
-                                    child: Icon(
-                                      Icons.attach_file,
-                                      color: Colors.blue.shade300,
-                                      size: 25,
-                                    ),
-                                  )),
+                            Center(
+                              child: Obx(
+                                    () => audioController.isSending.value
+                                    ? const Text("Uploading Audio...", style: TextStyle(color: Colors.black))
+                                    : isLoading
+                                    ? const Text("Uploading Image...", style: TextStyle(color: Colors.black))
+                                    : _buildInput(),
+                              ),
                             ),
                           ],
-                        ))
-                        : const SizedBox.shrink(),
-                  ]),
-                ),
-                Center(
-                  child: Obx(
-                        () => audioController.isSending.value
-                        ?  const Text(
-                      "Uploading Audio...",
-                      style: TextStyle(color: Colors.black),
-                    )
-                        : isLoading
-                        ?  const Text(
-                      "Uploading Image...",
-                      style: TextStyle(color: Colors.black),
-                    )
-                        : _buildInput(),
+                        ),
+                        _buildLoadingIndicator(size),
+                      ],
+                    ),
                   ),
-                )
-              ],
-            ),
+                ]),
           ),
         );
   }
 
+  /// Builds the AppBar widget with a centered title and custom styling
+  _buildAppBar() {
+    return AppBar(
+      centerTitle: true,
+      iconTheme: const IconThemeData(
+        color: Colors.white, // Icon color
+      ),
+      title: Text(
+        "${tr("OrderNumber")} ${ChatViewModel.bookingId}",
+        style: GoogleFonts.tajawal(
+          fontSize: 15,
+          color: Colors.white,
+          fontWeight: FontWeight.w500,
+        ),
+      ),
+      backgroundColor: samaColor,
+      automaticallyImplyLeading: false, // Disable the automatic back arrow
+      leading: IconButton(
+        icon: const Icon(Icons.arrow_back),
+        onPressed: () {
+
+          if(ChatViewModel.pageNu==1){
+            setState(() {
+              HomeCorePage.index=0;
+            });
+            SamaOfficeApp.navKey.currentState!.pushReplacement(MaterialPageRoute(builder: (context) => HomeCore(),));
+            setState(() {
+              ChatViewModel.pageNu=0;
+            });
+          }else{
+            Navigator.pop(context);
+          }
+
+        },
+      ),
+
+    );
+
+  }
+
+  /// Builds the widget that displays additional options (photo, location, attachment)
+  Widget _buildMoreOptions() {
+    // Check if more options should be displayed
+    if (moreStatus != 1) return const SizedBox.shrink();
+
+    return Positioned(
+      right: 15,
+      bottom: 20,
+      height: 150,
+      width: 40,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          _buildOptionButton(
+            icon: Icons.photo,
+            color: Colors.blue.shade300,
+            onTap: () {
+              getImage();
+              setState(() {
+                moreStatus = 0;
+              });
+            },
+          ),
+          _buildOptionButton(
+            icon: Icons.location_on,
+            color: Colors.red,
+            onTap: () {
+              showPlacePicker();
+              setState(() {
+                moreStatus = 0;
+              });
+            },
+          ),
+          _buildOptionButton(
+            icon: Icons.attach_file,
+            color: Colors.blue.shade300,
+            onTap: () {
+              // Handle file attachment
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// Helper method to create an option button with icon, color, and tap action
+  Widget _buildOptionButton({
+    required IconData icon,
+    required Color color,
+    required VoidCallback onTap,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        height: 40,
+        width: 40,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(50),
+          color: Colors.white,
+          border: Border.all(color: color, width: 0.4),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.2),
+              spreadRadius: 2,
+              blurRadius: 2,
+              offset: const Offset(1, 1),
+            ),
+          ],
+        ),
+        child: Center(
+          child: Icon(
+            icon,
+            color: color,
+            size: 25,
+          ),
+        ),
+      ),
+    );
+  }
+
+
+  /// Builds the message list widget that displays chat messages in real-time
   Widget _buildMessageList() {
-    String chatRoomId = PackagesOrderViewModel.bookingId;
+    String chatRoomId = ChatViewModel.bookingId;
     var database = FirebaseDatabase.instance;
     var msgQury = database.ref("chat_rooms/$chatRoomId");
     var snapshot = msgQury.orderByChild("timestamp");
@@ -259,50 +279,21 @@ class _ChatViewState extends ChatViewModel {
       query: msgQury,
       itemBuilder: (BuildContext context, DataSnapshot snapshot,
           Animation<double> animation, int index) {
-        return Flex(direction: Axis.horizontal, children: [
-          Expanded(
-            child: SingleChildScrollView(
-              reverse: false,
-              child: ListView.builder(
-                shrinkWrap: true,
-                physics: const ScrollPhysics(),
-                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                itemBuilder: (context, index) => _buildMessageItem(
-                    index, snapshot),
-                itemCount: 1,
-                reverse: true,
-              ),
-            ),
-          ),
-        ]);
+        return Column(
+          children: [
+            index == 0 ? _buildOfferDetails() : const SizedBox.shrink(),
+            SizedBox(height: index == 0 ? 20 : 0,),
+            _buildMessageItem( index, snapshot),
+          ],
+        );
       },
     );
 
-    // return
-    //
-    //   StreamBuilder<QuerySnapshot>(
-    //     stream: chatServices.getMessage(ChatViewModel.user!,_firebaseAuth.currentUser!.uid),
-    //
-    //     builder: (context , snapshot){
-    //       if(snapshot.hasError){
-    //         return Text("Erorr${snapshot.error}");
-    //       }
-    //       if(snapshot.connectionState==ConnectionState.waiting){
-    //         return const Text("Loading...");
-    //       }
-    //       return ListView.builder(
-    //         padding: const EdgeInsets.fromLTRB(10, 10, 10, 40),
-    //         itemBuilder: (context, index) =>
-    //             _buildMessageItem(index, snapshot.data?.docs[index]),
-    //         itemCount: snapshot.data?.docs.length,
-    //         reverse: true,
-    //     );
-    //
-    //
-    //
-    //     });
+
   }
 
+
+  /// Builds a message item based on the message type (text, image, location, or audio)
   Widget _buildMessageItem(int index, DataSnapshot? document) {
     var data = document!;
     var alignment = (data.child("senderId").value.toString() ==
@@ -662,6 +653,7 @@ class _ChatViewState extends ChatViewModel {
         time: data.child("timestamp").value.toString());
   }
 
+  /// Builds a widget to display an audio message
   Widget _audio1({
     required String message,
     required String isCurrentUser,
@@ -859,6 +851,8 @@ class _ChatViewState extends ChatViewModel {
     );
   }
 
+
+  /// Builds the input area widget, allowing users to type messages or record audio
   Widget _buildInput() {
     Size size = MediaQuery.of(context).size;
     return viewRecord==1?
@@ -1018,6 +1012,7 @@ class _ChatViewState extends ChatViewModel {
               ),
               onPressed: () {
                 sendMessage();
+                checkIfQueryIsEmpty();
               },
               icon: const Icon(
                 Icons.send,
@@ -1027,5 +1022,183 @@ class _ChatViewState extends ChatViewModel {
         ],
       ),
     );
+  }
+
+/// Build offer details at the top of the chat screen
+  Widget _buildOfferDetails() {
+    return offerDetailsModel != null
+        ? Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(width: 50,),
+        Container(
+          width: MediaQuery.of(context).size.width - 105,
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20)),
+          ),
+          child: Stack(
+            children: [
+              Image.network(
+                offerDetailsModel!.image.toString(),
+                height: 130,
+                width: MediaQuery.of(context).size.width,
+                fit: BoxFit.cover,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 70,),
+                  Container(
+                      width: MediaQuery.of(context).size.width,
+                      padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
+                      decoration: const BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(topRight: Radius.circular(10), topLeft: Radius.circular(10))
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                width: 200,
+                                child: Text(
+                                  offerDetailsModel!.name.toString(),
+                                  style: const TextStyle(color: Colors.black, fontSize: 13, fontWeight: FontWeight.w500),
+                                ),
+                              ),
+                              Container(
+                                  height: 20,
+                                  padding: const EdgeInsets.all(3),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(3),
+                                      color: Colors.grey.shade200
+                                  ),
+                                  child: Row(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        offerDetailsModel!.office_rate.toString(),
+                                        style: const TextStyle(
+                                            decoration: TextDecoration.underline,
+                                            fontSize: 13
+                                        ),
+                                      ),
+                                      const SizedBox(width: 2,),
+                                      const Icon(Icons.star, color: Color(0xffFFC635), size: 18,)
+                                    ],
+                                  )
+                              )
+                            ],
+                          ),
+                          Text(
+                            "${offerDetailsModel!.numOfDays!} ${tr("Days")} ${offerDetailsModel!.num_of_nights!} ${tr("Nights")}",
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                            softWrap: false,
+                            style: GoogleFonts.tajawal(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.black54),
+                          ),
+                        ],
+                      )
+                  ),
+                  Container(
+                      width: MediaQuery.of(context).size.width,
+                      padding: const EdgeInsets.all(10),
+                      decoration: const BoxDecoration(
+                          color: Color(0xffF0F0EF),
+                          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20))
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "${tr("Hello")} ${HomeViewModel.profileModel!.firstName.toString()} ;",
+                            style: const TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            tr("ICongratulate"),
+                            style: GoogleFonts.tajawal(fontSize: 13, fontWeight: FontWeight.w500, color: Colors.black),
+                          ),
+                        ],
+                      )
+                  ),
+                  const SizedBox(height: 10,),
+                  Container(
+                      width: MediaQuery.of(context).size.width,
+                      padding: const EdgeInsets.all(10),
+                      decoration: const BoxDecoration(
+                          color: Color(0xffF0F0EF),
+                          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20))
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            tr("WeHaveOnlyDays"),
+                            style: GoogleFonts.tajawal(fontSize: 13, fontWeight: FontWeight.w500, color: Colors.black),
+                            textAlign: TextAlign.start,
+                          ),
+                          const SizedBox(height: 16),
+                          Text(
+                            tr("StepnConfirmTheTripdateForUs"),
+                            style: GoogleFonts.tajawal(fontSize: 13, fontWeight: FontWeight.w500, color: Colors.black),
+                            textAlign: TextAlign.start,
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            tr("StepnSendUsThePassportPhotos"),
+                            style: GoogleFonts.tajawal(fontSize: 13, fontWeight: FontWeight.w500, color: Colors.black),
+                            textAlign: TextAlign.start,
+                          ),
+                          const SizedBox(height: 16),
+                          Text(
+                            tr("AndWithThatWithoutAnyIssues"),
+                            style: GoogleFonts.tajawal(fontSize: 13, fontWeight: FontWeight.w500, color: Colors.black),
+                            textAlign: TextAlign.start,
+                          ),
+                          const SizedBox(height: 16),
+                          Text(
+                            tr("ThisIsThe920031518"),
+                            style: GoogleFonts.tajawal(fontSize: 13, fontWeight: FontWeight.w500, color: Colors.blue),
+                            textAlign: TextAlign.start,
+                          ),
+                        ],
+                      )
+                  ),
+                ],
+              )
+            ],
+          ),
+        ),
+        const SizedBox(width: 5,),
+        Container(
+          height: 45, width: 45,
+          padding: const EdgeInsets.all(10),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(50),
+              border: Border.all(width: 1, color: const Color(0xff043C7C))
+          ),
+          child: SvgPicture.asset(
+            "assets/images/logo1.svg", height: 18, width: 18,
+          ),
+        ),
+        const SizedBox(width: 5,),
+      ],
+    ) : const SizedBox.shrink();
+  }
+
+/// Build the loading indicator when data is being fetched
+  Widget _buildLoadingIndicator(Size size) {
+    return isLoad == true
+        ? SizedBox(
+      height: size.height / 1.2,
+      child: const Center(
+        child: CircularProgressIndicator(
+          color: Color(0xff043C7C),
+        ),
+      ),
+    ) : const SizedBox.shrink();
   }
 }

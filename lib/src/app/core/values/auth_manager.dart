@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../../app.dart';
+import '../../auth/auth_model/auth_response.dart';
+import '../../screen/home/home_viewmodel.dart';
 import '../local/storagehelper.dart';
 
 
@@ -47,6 +50,13 @@ class AuthenticationManager with StorageHelper {
   }
 
 
+  Future<void> getProfileDate() async {
+    final response = await dio.get("/v1/office/profile"); // Get user profile
+    var rs = AuthResponse(response.data!);
+    if (rs.status == 200) {
+      HomeViewModel.profileModel = rs.data;
 
+          }
+  }
 
 }
