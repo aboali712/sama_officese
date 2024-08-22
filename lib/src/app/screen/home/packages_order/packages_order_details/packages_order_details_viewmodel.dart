@@ -65,6 +65,7 @@ abstract class PackagesOrderDetailsViewModel extends State<PackagesOrderDetailsV
       setState(() {
         packageDetails=rs.data;
       });
+      print("${packageDetails!.user!.firstName.toString()} 999999999999999999999999999999999999999999");
     }
   }
 

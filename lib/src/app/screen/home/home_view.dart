@@ -260,6 +260,7 @@ class _HomePageState extends HomeViewModel {
                                                             )
                                                             :Row(
                                                               children: [
+                                                                packages.isEmpty?
                                                                 const SizedBox(
                                                                   height: 15.0, // Set the desired height
                                                                   width: 15.0,  // Set the desired width
@@ -268,7 +269,7 @@ class _HomePageState extends HomeViewModel {
                                                                     strokeWidth: 1,    // Adjust the thickness of the progress indicator
                                                                     strokeAlign: 0.2,  // Custom stroke alignment if supported by your Flutter version
                                                                   ),
-                                                                ),
+                                                                ):const SizedBox.shrink(),
                                                                 const SizedBox(width: 3,),
                                                                 Text(
                                                                   tr("ThereAreCurrentlyNoRequests"),
