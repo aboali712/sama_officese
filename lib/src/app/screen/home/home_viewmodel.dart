@@ -294,7 +294,7 @@ abstract class HomeViewModel extends State<HomePage> with StorageHelper {
   static int pageVipExpired = 0; // VIP expired page flag
   DateTime? minus5Days; // Date 5 days before the end date
   static bool? valDateMinus5Days; // Flag to check if current date is before minus 5 days
-  UserModel? userModel; // User model instance
+static  UserModel? userModel; // User model instance
 
   String pendingPackageNumber ="";
   @override

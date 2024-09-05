@@ -11,6 +11,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:sama_officese/src/app.dart';
+import 'package:sama_officese/src/app/screen/home/home_viewmodel.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../auth/login/loginPage.dart';
@@ -66,6 +67,7 @@ class SplashViewState extends State<SplashView> with StorageHelper {
   void initState() {
     super.initState();
     _fetchVersion().then((onValue){getAppVersion();}).then((onVal){controlToApp();});
+    getUser().then((val){setState(() {HomeViewModel.userModel=val!;});});
 
   }
 

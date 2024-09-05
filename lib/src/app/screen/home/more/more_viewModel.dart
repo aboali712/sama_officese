@@ -22,7 +22,6 @@ abstract class MoreViewModel extends State<MoreView> with StorageHelper{
 
   @override
   void initState() {
-
     getSettingsDataApi();
     super.initState();
   }
