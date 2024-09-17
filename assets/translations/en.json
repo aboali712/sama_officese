@@ -286,5 +286,9 @@
   "AndWithThatWithoutAnyIssues": "And with that, your package is ready, and we wish you a successful trip, God willing.\n We will follow up with you during the trip to ensure that you received the full package without any issues.",
   "ThisIsThe920031518": "This is the customer service number: 920031518",
   "ThereIsANew": "There is a new update for the application.",
-  "update": "Update"
+  "update": "Update",
+  "PriceIncludes": "Price includes",
+  "PriceDoesNotInclude": "Price does not include",
+  "WhatAfterPayment": "What after payment",
+  "note": "note"
 }

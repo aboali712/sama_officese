@@ -17,6 +17,8 @@ import '../../../auth/register/all_filter/country_model.dart';
 import '../../../core/utils/input_validators.dart';
 import '../../../core/values/colors.dart';
 import 'create_package_viewmodel.dart';
+import 'dart:ui' as ui;
+
 
 class CreatePackageView extends StatefulWidget {
   const CreatePackageView({Key? key}) : super(key: key);
@@ -64,13 +66,15 @@ class _CreatePackageViewState extends CreatePackageViewModel {
 
                           countryCityDate(size),
 
+                          const SizedBox( height: 20,),
 
-                          const SizedBox(
-                            height: 20,
-                          ),
                           multipleChoices(size),
 
-                      const SizedBox(height: 120,),
+                          const SizedBox( height: 20,),
+
+                          buildPriceDetailsNotes(size),
+
+                      const SizedBox(height: 130,),
 
 
                     ]),
@@ -1467,6 +1471,337 @@ class _CreatePackageViewState extends CreatePackageViewModel {
         ],
       ),
     ],);
+  }
+
+  /// Builds price Details Notes
+  Widget buildPriceDetailsNotes(Size size){
+    return Column(crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+      Text(
+        tr("PriceIncludes"),
+        style: const TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.w500,
+            fontSize: 14),
+        textAlign: TextAlign.start,
+      ),
+      const SizedBox(height: 10,),
+      TextFormField(
+        controller: priceIncludeControl,
+        style: const TextStyle(height: 1.1,fontSize: 14),
+        // textAlign: TextAlign.left,
+        // keyboardType: TextInputType.text,
+        maxLines: null,
+        textAlign: TextAlign.right,
+        textDirection: ui.TextDirection.rtl,
+        keyboardType: TextInputType.multiline,
+        textInputAction: TextInputAction.newline,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        decoration: InputDecoration(
+          hintText: (tr("PriceIncludes")),
+          hintStyle: GoogleFonts.tajawal(
+              fontSize: 12,
+              color: const Color.fromRGBO(196, 196, 196, 1)),
+
+          errorStyle: const TextStyle(color: accentColor),
+          contentPadding: const EdgeInsets.symmetric(
+              vertical: 17.0, horizontal: 10.0),
+
+          filled: true,
+          fillColor: const Color(0xFFF3F3F5),
+          focusedBorder: OutlineInputBorder(
+            borderRadius:
+            const BorderRadius.all(Radius.circular(5)),
+            borderSide: BorderSide(width: 1, color: klightGray),
+          ),
+          disabledBorder: OutlineInputBorder(
+            borderRadius:
+            const BorderRadius.all(Radius.circular(5)),
+            borderSide: BorderSide(width: .7, color: klightGray),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius:
+            const BorderRadius.all(Radius.circular(5)),
+            borderSide: BorderSide(
+              width: .7,
+              color: klightGray,
+            ),
+          ),
+          border: const OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(5)),
+              borderSide: BorderSide(
+                width: 1,
+              )),
+          errorBorder: const OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(5)),
+              borderSide:
+              BorderSide(width: 0.7, color: accentColor)),
+          focusedErrorBorder: const OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(5)),
+              borderSide:
+              BorderSide(width: 0.7, color: accentColor)),
+        ),
+        onChanged: (value) {
+          if (value.isEmpty ||
+              value == null ||
+              !InputValidators()
+                  .nameValidator(name: value, context: context)) {
+
+          } else {
+
+          }
+        },
+        onSaved: (value) {
+
+        },
+        cursorColor: Colors.black,
+      ),
+
+        const SizedBox(height: 10,),
+        Text(
+          tr("PriceDoesNotInclude"),
+          style: const TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.w500,
+              fontSize: 14),
+          textAlign: TextAlign.start,
+        ),
+        const SizedBox(height: 10,),
+        TextFormField(
+          controller: priceNotIncludeControl,
+          style: const TextStyle(height: 1.1,fontSize: 14),
+          // textAlign: TextAlign.left,
+          // keyboardType: TextInputType.text,
+          maxLines: null,
+          textAlign: TextAlign.right,
+          textDirection: ui.TextDirection.rtl,
+          keyboardType: TextInputType.multiline,
+          textInputAction: TextInputAction.newline,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          decoration: InputDecoration(
+            hintText: (tr("PriceDoesNotInclude")),
+            hintStyle: GoogleFonts.tajawal(
+                fontSize: 12,
+                color: const Color.fromRGBO(196, 196, 196, 1)),
+
+            errorStyle: const TextStyle(color: accentColor),
+            contentPadding: const EdgeInsets.symmetric(
+                vertical: 17.0, horizontal: 10.0),
+
+            filled: true,
+            fillColor: const Color(0xFFF3F3F5),
+            focusedBorder: OutlineInputBorder(
+              borderRadius:
+              const BorderRadius.all(Radius.circular(5)),
+              borderSide: BorderSide(width: 1, color: klightGray),
+            ),
+            disabledBorder: OutlineInputBorder(
+              borderRadius:
+              const BorderRadius.all(Radius.circular(5)),
+              borderSide: BorderSide(width: .7, color: klightGray),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius:
+              const BorderRadius.all(Radius.circular(5)),
+              borderSide: BorderSide(
+                width: .7,
+                color: klightGray,
+              ),
+            ),
+            border: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(5)),
+                borderSide: BorderSide(
+                  width: 1,
+                )),
+            errorBorder: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(5)),
+                borderSide:
+                BorderSide(width: 0.7, color: accentColor)),
+            focusedErrorBorder: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(5)),
+                borderSide:
+                BorderSide(width: 0.7, color: accentColor)),
+          ),
+          onChanged: (value) {
+            if (value.isEmpty ||
+                value == null ||
+                !InputValidators()
+                    .nameValidator(name: value, context: context)) {
+
+            } else {
+
+            }
+          },
+          onSaved: (value) {
+
+          },
+          cursorColor: Colors.black,
+        ),
+
+
+        const SizedBox(height: 10,),
+        Text(
+          tr("WhatAfterPayment"),
+          style: const TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.w500,
+              fontSize: 14),
+          textAlign: TextAlign.start,
+        ),
+        const SizedBox(height: 10,),
+        TextFormField(
+          controller: afterPayControl,
+          style: const TextStyle(height: 1.1,fontSize: 14),
+          // textAlign: TextAlign.left,
+          // keyboardType: TextInputType.text,
+          maxLines: null,
+          textAlign: TextAlign.right,
+          textDirection: ui.TextDirection.rtl,
+          keyboardType: TextInputType.multiline,
+          textInputAction: TextInputAction.newline,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          decoration: InputDecoration(
+            hintText: (tr("WhatAfterPayment")),
+            hintStyle: GoogleFonts.tajawal(
+                fontSize: 12,
+                color: const Color.fromRGBO(196, 196, 196, 1)),
+
+            errorStyle: const TextStyle(color: accentColor),
+            contentPadding: const EdgeInsets.symmetric(
+                vertical: 17.0, horizontal: 10.0),
+
+            filled: true,
+            fillColor: const Color(0xFFF3F3F5),
+            focusedBorder: OutlineInputBorder(
+              borderRadius:
+              const BorderRadius.all(Radius.circular(5)),
+              borderSide: BorderSide(width: 1, color: klightGray),
+            ),
+            disabledBorder: OutlineInputBorder(
+              borderRadius:
+              const BorderRadius.all(Radius.circular(5)),
+              borderSide: BorderSide(width: .7, color: klightGray),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius:
+              const BorderRadius.all(Radius.circular(5)),
+              borderSide: BorderSide(
+                width: .7,
+                color: klightGray,
+              ),
+            ),
+            border: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(5)),
+                borderSide: BorderSide(
+                  width: 1,
+                )),
+            errorBorder: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(5)),
+                borderSide:
+                BorderSide(width: 0.7, color: accentColor)),
+            focusedErrorBorder: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(5)),
+                borderSide:
+                BorderSide(width: 0.7, color: accentColor)),
+          ),
+          onChanged: (value) {
+            if (value.isEmpty ||
+                value == null ||
+                !InputValidators()
+                    .nameValidator(name: value, context: context)) {
+
+            } else {
+
+            }
+          },
+          onSaved: (value) {
+
+          },
+          cursorColor: Colors.black,
+        ),
+
+        const SizedBox(height: 10,),
+        Text(
+          tr("note"),
+          style: const TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.w500,
+              fontSize: 14),
+          textAlign: TextAlign.start,
+        ),
+        const SizedBox(height: 10,),
+        TextFormField(
+          controller: notesControl,
+          style: const TextStyle(height: 1.1,fontSize: 14),
+          // textAlign: TextAlign.left,
+          // keyboardType: TextInputType.text,
+          maxLines: null,
+          textAlign: TextAlign.right,
+          textDirection: ui.TextDirection.rtl,
+          keyboardType: TextInputType.multiline,
+          textInputAction: TextInputAction.newline,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          decoration: InputDecoration(
+            hintText: (tr("note")),
+            hintStyle: GoogleFonts.tajawal(
+                fontSize: 12,
+                color: const Color.fromRGBO(196, 196, 196, 1)),
+
+            errorStyle: const TextStyle(color: accentColor),
+            contentPadding: const EdgeInsets.symmetric(
+                vertical: 17.0, horizontal: 10.0),
+
+            filled: true,
+            fillColor: const Color(0xFFF3F3F5),
+            focusedBorder: OutlineInputBorder(
+              borderRadius:
+              const BorderRadius.all(Radius.circular(5)),
+              borderSide: BorderSide(width: 1, color: klightGray),
+            ),
+            disabledBorder: OutlineInputBorder(
+              borderRadius:
+              const BorderRadius.all(Radius.circular(5)),
+              borderSide: BorderSide(width: .7, color: klightGray),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius:
+              const BorderRadius.all(Radius.circular(5)),
+              borderSide: BorderSide(
+                width: .7,
+                color: klightGray,
+              ),
+            ),
+            border: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(5)),
+                borderSide: BorderSide(
+                  width: 1,
+                )),
+            errorBorder: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(5)),
+                borderSide:
+                BorderSide(width: 0.7, color: accentColor)),
+            focusedErrorBorder: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(5)),
+                borderSide:
+                BorderSide(width: 0.7, color: accentColor)),
+          ),
+          onChanged: (value) {
+            if (value.isEmpty ||
+                value == null ||
+                !InputValidators()
+                    .nameValidator(name: value, context: context)) {
+
+            } else {
+
+            }
+          },
+          onSaved: (value) {
+
+          },
+          cursorColor: Colors.black,
+        )
+
+      ],);
   }
 
   /// Builds the bottom action button to submit the form

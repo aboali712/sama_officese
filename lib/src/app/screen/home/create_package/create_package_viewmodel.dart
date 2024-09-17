@@ -39,6 +39,10 @@ abstract class CreatePackageViewModel extends  State<CreatePackageView>{
   TextEditingController numOfPersonControl =TextEditingController();
   HtmlEditorController controllerDetailsAr = HtmlEditorController();
   HtmlEditorController controllerDetailsEn = HtmlEditorController();
+  TextEditingController priceIncludeControl =TextEditingController();
+  TextEditingController priceNotIncludeControl =TextEditingController();
+  TextEditingController afterPayControl =TextEditingController();
+  TextEditingController notesControl =TextEditingController();
 
   String detailsAr="";
   String detailsEn="";
