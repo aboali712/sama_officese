@@ -34,7 +34,7 @@ abstract class PackagesViewModel extends State<PackagesView>{
 
       });
 
-      print(offerPageModel!.map((e) => e.toJson()));
+
     }
   }
 
