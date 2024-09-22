@@ -1473,21 +1473,77 @@ class _CreatePackageViewState extends CreatePackageViewModel {
     ],);
   }
 
+  /// Builds the language toggle buttons
+  Widget languages(Size size,ValueNotifier<int> stat){
+    return    Row(mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        InkWell(onTap: () {
+          setState(() {
+            stat.value=0;
+          });
+
+        },
+          child: Container(height: 30,width: 30,
+            padding: const EdgeInsets.all(4),
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(5),
+              color: stat.value==0? samaOfficeColor :Colors.grey ,
+            ),
+            child: Text("ع",
+              textAlign: TextAlign.center,
+              style: GoogleFonts.tajawal(color:stat.value==0? Colors.white: Colors.white,
+                  fontWeight: FontWeight.w500,fontSize: 14
+
+              ),),),
+        ),
+        const SizedBox(width: 5,),
+
+
+        InkWell(onTap: () {
+          setState(() {
+            stat.value=1;
+          });
+        },
+          child: Container(height: 30,width: 30,
+            padding: const EdgeInsets.all(4),
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(5),
+              color:stat.value==1? samaOfficeColor :Colors.grey ,
+            ),
+            child: Text("en",
+              textAlign: TextAlign.center,
+              style: GoogleFonts.tajawal(color:stat.value==1? Colors.white: Colors.white,
+                  fontWeight: FontWeight.w500,fontSize: 14
+
+              ),),),
+        ),
+
+
+      ],);
+  }
+
   /// Builds price Details Notes
   Widget buildPriceDetailsNotes(Size size){
     return Column(crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-      Text(
-        tr("PriceIncludes"),
-        style: const TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.w500,
-            fontSize: 14),
-        textAlign: TextAlign.start,
+      Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            tr("PriceIncludes"),
+            style: const TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.w500,
+                fontSize: 14),
+            textAlign: TextAlign.start,
+          ),
+          languages(size,priceIncludeLang),
+
+
+
+        ],
       ),
       const SizedBox(height: 10,),
+        priceIncludeLang.value==0?
       TextFormField(
-        controller: priceIncludeControl,
+        controller: priceIncludeArControl,
         style: const TextStyle(height: 1.1,fontSize: 14),
         // textAlign: TextAlign.left,
         // keyboardType: TextInputType.text,
@@ -1555,18 +1611,97 @@ class _CreatePackageViewState extends CreatePackageViewModel {
 
         },
         cursorColor: Colors.black,
-      ),
+      )
+        :TextFormField(
+          controller: priceIncludeEnControl,
+          style: const TextStyle(height: 1.1,fontSize: 14),
+          // textAlign: TextAlign.left,
+          // keyboardType: TextInputType.text,
+          maxLines: null,
+          textAlign: TextAlign.right,
+          textDirection: ui.TextDirection.rtl,
+          keyboardType: TextInputType.multiline,
+          textInputAction: TextInputAction.newline,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          decoration: InputDecoration(
+            hintText: (tr("ThePriceIncludesInEnglish")),
+            hintStyle: GoogleFonts.tajawal(
+                fontSize: 12,
+                color: const Color.fromRGBO(196, 196, 196, 1)),
+
+            errorStyle: const TextStyle(color: accentColor),
+            contentPadding: const EdgeInsets.symmetric(
+                vertical: 17.0, horizontal: 10.0),
+
+            filled: true,
+            fillColor: const Color(0xFFF3F3F5),
+            focusedBorder: OutlineInputBorder(
+              borderRadius:
+              const BorderRadius.all(Radius.circular(5)),
+              borderSide: BorderSide(width: 1, color: klightGray),
+            ),
+            disabledBorder: OutlineInputBorder(
+              borderRadius:
+              const BorderRadius.all(Radius.circular(5)),
+              borderSide: BorderSide(width: .7, color: klightGray),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius:
+              const BorderRadius.all(Radius.circular(5)),
+              borderSide: BorderSide(
+                width: .7,
+                color: klightGray,
+              ),
+            ),
+            border: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(5)),
+                borderSide: BorderSide(
+                  width: 1,
+                )),
+            errorBorder: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(5)),
+                borderSide:
+                BorderSide(width: 0.7, color: accentColor)),
+            focusedErrorBorder: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(5)),
+                borderSide:
+                BorderSide(width: 0.7, color: accentColor)),
+          ),
+          onChanged: (value) {
+            if (value.isEmpty ||
+                value == null ||
+                !InputValidators()
+                    .nameValidator(name: value, context: context)) {
+
+            } else {
+
+            }
+          },
+          onSaved: (value) {
+
+          },
+          cursorColor: Colors.black,
+        ),
 
         const SizedBox(height: 10,),
-        Text(
-          tr("PriceDoesNotInclude"),
-          style: const TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.w500,
-              fontSize: 14),
-          textAlign: TextAlign.start,
+        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              tr("PriceDoesNotInclude"),
+              style: const TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 14),
+              textAlign: TextAlign.start,
+            ),
+
+
+            languages(size,priceNotIncludeLang),
+          ],
         ),
         const SizedBox(height: 10,),
+
+        priceNotIncludeLang.value==0?
         TextFormField(
           controller: priceNotIncludeControl,
           style: const TextStyle(height: 1.1,fontSize: 14),
@@ -1636,19 +1771,96 @@ class _CreatePackageViewState extends CreatePackageViewModel {
 
           },
           cursorColor: Colors.black,
+        )
+        :TextFormField(
+          controller: priceNotIncludeEnControl,
+          style: const TextStyle(height: 1.1,fontSize: 14),
+          // textAlign: TextAlign.left,
+          // keyboardType: TextInputType.text,
+          maxLines: null,
+          textAlign: TextAlign.right,
+          textDirection: ui.TextDirection.rtl,
+          keyboardType: TextInputType.multiline,
+          textInputAction: TextInputAction.newline,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          decoration: InputDecoration(
+            hintText: (tr("PriceDoesNotIncludeEn")),
+            hintStyle: GoogleFonts.tajawal(
+                fontSize: 12,
+                color: const Color.fromRGBO(196, 196, 196, 1)),
+
+            errorStyle: const TextStyle(color: accentColor),
+            contentPadding: const EdgeInsets.symmetric(
+                vertical: 17.0, horizontal: 10.0),
+
+            filled: true,
+            fillColor: const Color(0xFFF3F3F5),
+            focusedBorder: OutlineInputBorder(
+              borderRadius:
+              const BorderRadius.all(Radius.circular(5)),
+              borderSide: BorderSide(width: 1, color: klightGray),
+            ),
+            disabledBorder: OutlineInputBorder(
+              borderRadius:
+              const BorderRadius.all(Radius.circular(5)),
+              borderSide: BorderSide(width: .7, color: klightGray),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius:
+              const BorderRadius.all(Radius.circular(5)),
+              borderSide: BorderSide(
+                width: .7,
+                color: klightGray,
+              ),
+            ),
+            border: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(5)),
+                borderSide: BorderSide(
+                  width: 1,
+                )),
+            errorBorder: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(5)),
+                borderSide:
+                BorderSide(width: 0.7, color: accentColor)),
+            focusedErrorBorder: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(5)),
+                borderSide:
+                BorderSide(width: 0.7, color: accentColor)),
+          ),
+          onChanged: (value) {
+            if (value.isEmpty ||
+                value == null ||
+                !InputValidators()
+                    .nameValidator(name: value, context: context)) {
+
+            } else {
+
+            }
+          },
+          onSaved: (value) {
+
+          },
+          cursorColor: Colors.black,
         ),
 
 
         const SizedBox(height: 10,),
-        Text(
-          tr("WhatAfterPayment"),
-          style: const TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.w500,
-              fontSize: 14),
-          textAlign: TextAlign.start,
+        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              tr("WhatAfterPayment"),
+              style: const TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 14),
+              textAlign: TextAlign.start,
+            ),
+
+            languages(size,afterPaymentLang),
+          ],
         ),
         const SizedBox(height: 10,),
+        afterPaymentLang.value==0?
         TextFormField(
           controller: afterPayControl,
           style: const TextStyle(height: 1.1,fontSize: 14),
@@ -1718,18 +1930,94 @@ class _CreatePackageViewState extends CreatePackageViewModel {
 
           },
           cursorColor: Colors.black,
+        )
+        :TextFormField(
+          controller: afterPayEnControl,
+          style: const TextStyle(height: 1.1,fontSize: 14),
+          // textAlign: TextAlign.left,
+          // keyboardType: TextInputType.text,
+          maxLines: null,
+          textAlign: TextAlign.right,
+          textDirection: ui.TextDirection.rtl,
+          keyboardType: TextInputType.multiline,
+          textInputAction: TextInputAction.newline,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          decoration: InputDecoration(
+            hintText: (tr("WhatAfterEnPayment")),
+            hintStyle: GoogleFonts.tajawal(
+                fontSize: 12,
+                color: const Color.fromRGBO(196, 196, 196, 1)),
+
+            errorStyle: const TextStyle(color: accentColor),
+            contentPadding: const EdgeInsets.symmetric(
+                vertical: 17.0, horizontal: 10.0),
+
+            filled: true,
+            fillColor: const Color(0xFFF3F3F5),
+            focusedBorder: OutlineInputBorder(
+              borderRadius:
+              const BorderRadius.all(Radius.circular(5)),
+              borderSide: BorderSide(width: 1, color: klightGray),
+            ),
+            disabledBorder: OutlineInputBorder(
+              borderRadius:
+              const BorderRadius.all(Radius.circular(5)),
+              borderSide: BorderSide(width: .7, color: klightGray),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius:
+              const BorderRadius.all(Radius.circular(5)),
+              borderSide: BorderSide(
+                width: .7,
+                color: klightGray,
+              ),
+            ),
+            border: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(5)),
+                borderSide: BorderSide(
+                  width: 1,
+                )),
+            errorBorder: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(5)),
+                borderSide:
+                BorderSide(width: 0.7, color: accentColor)),
+            focusedErrorBorder: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(5)),
+                borderSide:
+                BorderSide(width: 0.7, color: accentColor)),
+          ),
+          onChanged: (value) {
+            if (value.isEmpty ||
+                value == null ||
+                !InputValidators()
+                    .nameValidator(name: value, context: context)) {
+
+            } else {
+
+            }
+          },
+          onSaved: (value) {
+
+          },
+          cursorColor: Colors.black,
         ),
 
         const SizedBox(height: 10,),
-        Text(
-          tr("note"),
-          style: const TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.w500,
-              fontSize: 14),
-          textAlign: TextAlign.start,
+        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              tr("note"),
+              style: const TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 14),
+              textAlign: TextAlign.start,
+            ),
+            languages(size,notesLang),
+          ],
         ),
         const SizedBox(height: 10,),
+        notesLang.value==0?
         TextFormField(
           controller: notesControl,
           style: const TextStyle(height: 1.1,fontSize: 14),
@@ -1743,6 +2031,76 @@ class _CreatePackageViewState extends CreatePackageViewModel {
           autovalidateMode: AutovalidateMode.onUserInteraction,
           decoration: InputDecoration(
             hintText: (tr("note")),
+            hintStyle: GoogleFonts.tajawal(
+                fontSize: 12,
+                color: const Color.fromRGBO(196, 196, 196, 1)),
+
+            errorStyle: const TextStyle(color: accentColor),
+            contentPadding: const EdgeInsets.symmetric(
+                vertical: 17.0, horizontal: 10.0),
+
+            filled: true,
+            fillColor: const Color(0xFFF3F3F5),
+            focusedBorder: OutlineInputBorder(
+              borderRadius:
+              const BorderRadius.all(Radius.circular(5)),
+              borderSide: BorderSide(width: 1, color: klightGray),
+            ),
+            disabledBorder: OutlineInputBorder(
+              borderRadius:
+              const BorderRadius.all(Radius.circular(5)),
+              borderSide: BorderSide(width: .7, color: klightGray),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius:
+              const BorderRadius.all(Radius.circular(5)),
+              borderSide: BorderSide(
+                width: .7,
+                color: klightGray,
+              ),
+            ),
+            border: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(5)),
+                borderSide: BorderSide(
+                  width: 1,
+                )),
+            errorBorder: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(5)),
+                borderSide:
+                BorderSide(width: 0.7, color: accentColor)),
+            focusedErrorBorder: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(5)),
+                borderSide:
+                BorderSide(width: 0.7, color: accentColor)),
+          ),
+          onChanged: (value) {
+            if (value.isEmpty ||
+                value == null ||
+                !InputValidators()
+                    .nameValidator(name: value, context: context)) {
+
+            } else {
+
+            }
+          },
+          onSaved: (value) {
+
+          },
+          cursorColor: Colors.black,
+        )
+       :TextFormField(
+          controller: notesEnControl,
+          style: const TextStyle(height: 1.1,fontSize: 14),
+          // textAlign: TextAlign.left,
+          // keyboardType: TextInputType.text,
+          maxLines: null,
+          textAlign: TextAlign.right,
+          textDirection: ui.TextDirection.rtl,
+          keyboardType: TextInputType.multiline,
+          textInputAction: TextInputAction.newline,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          decoration: InputDecoration(
+            hintText: (tr("noteEn")),
             hintStyle: GoogleFonts.tajawal(
                 fontSize: 12,
                 color: const Color.fromRGBO(196, 196, 196, 1)),

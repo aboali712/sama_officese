@@ -385,7 +385,7 @@ import '../../../../core/network/network_service.dart';
 import '../../../../core/utils/helper_manager.dart';
 import '../../../../core/widgets/calender_dialog.dart';
 import '../models/imageModel.dart';
-
+import 'package:html/parser.dart' as html_parser;
 abstract class UpDateViewModel extends State<UpDateView> {
   final Dio dio = NetworkService.instance.dio; // Dio instance for network requests
   final ImagePicker imagePicker = ImagePicker(); // Image picker instance
@@ -408,6 +408,14 @@ abstract class UpDateViewModel extends State<UpDateView> {
   // HTML editors for rich text input
   HtmlEditorController controllerDetailsAr = HtmlEditorController();
   HtmlEditorController controllerDetailsEn = HtmlEditorController();
+  TextEditingController priceIncludeArControl =TextEditingController();
+  TextEditingController priceIncludeEnControl =TextEditingController();
+  TextEditingController priceNotIncludeControl =TextEditingController();
+  TextEditingController priceNotIncludeEnControl =TextEditingController();
+  TextEditingController afterPayControl =TextEditingController();
+  TextEditingController afterPayEnControl =TextEditingController();
+  TextEditingController notesControl =TextEditingController();
+  TextEditingController notesEnControl =TextEditingController();
 
   // Details in Arabic and English
   String detailsAr = "";
@@ -434,6 +442,12 @@ abstract class UpDateViewModel extends State<UpDateView> {
   String isSingle = ""; // Single/couple selection
   String isInternational = ""; // International/local selection
   int? installmentAvailable; // Installment availability
+
+
+  final ValueNotifier<int> priceIncludeLang = ValueNotifier<int>(0);
+  final ValueNotifier<int> priceNotIncludeLang = ValueNotifier<int>(0);
+  final ValueNotifier<int> afterPaymentLang = ValueNotifier<int>(0);
+  final ValueNotifier<int> notesLang = ValueNotifier<int>(0);
 
   @override
   void initState() {
@@ -519,11 +533,30 @@ abstract class UpDateViewModel extends State<UpDateView> {
 
   List<ImagesModel>? packageImages = []; // Package images
 
+
+  // Function to parse HTML and return a readable string
+  String parseHtmlToText(String htmlString) {
+    // Parse the HTML string
+    var document = html_parser.parse(htmlString);
+
+    // Extract the text from <li> elements
+    List<String> listItems = document
+        .querySelectorAll('li')
+        .map((element) => '• ${element.text}')
+        .toList();
+
+    // Join the list items with new lines or bullet points
+    return listItems.join('\n'); // You can use '\n• ' for bullet points
+  }
+
+
+
   // Sets the data from the offer model into the form fields
   Future<void> setData() async {
     setState(() {
       isLoading = true;
     });
+    print("${offerModel!.priceIncludeAr} 7777777777777777777777");
 
     // Set the form fields from the offer model
     packageNameArControl.text = offerModel!.nameAr!;
@@ -531,10 +564,10 @@ abstract class UpDateViewModel extends State<UpDateView> {
     detailsAr = offerModel!.descriptionAr!;
     detailsEn = offerModel!.descriptionEn!;
     selectStatus = offerModel!.type.toString();
-    packagePriceControl.text = offerModel!.price_before_without_app_percent!.toString();
+    packagePriceControl.text = offerModel!.price_before_without_app_percent!=null?offerModel!.price_before_without_app_percent!.toString():"0";
     packageImages = offerModel!.images;
     switchValue = offerModel!.is_vip.toString() == "1" ? true : false;
-    packageDiscountControl.text = offerModel!.price_after_without_app_percent!.toString();
+    packageDiscountControl.text =offerModel!.price_after_without_app_percent!=null? offerModel!.price_after_without_app_percent!.toString():"0";
     selectedCountryId = offerModel!.countries_list!.toList();
     selectedCitesId = offerModel!.cities_list!.toList();
     countryId = offerModel!.countryId.toString();
@@ -549,6 +582,17 @@ abstract class UpDateViewModel extends State<UpDateView> {
     isSingle = offerModel!.is_single.toString();
     isInternational = offerModel!.is_international.toString();
     installmentAvailable = offerModel!.is_installment;
+
+    priceIncludeArControl.text= offerModel!.priceIncludeAr.toString().contains("<li>")? parseHtmlToText(offerModel!.priceIncludeAr.toString()):offerModel!.priceIncludeAr.toString();
+
+    priceIncludeEnControl.text=offerModel!.priceIncludeEn.toString().contains("<li>")?parseHtmlToText(offerModel!.priceIncludeEn.toString()) :offerModel!.priceIncludeEn.toString()
+    ;
+    priceNotIncludeControl.text= offerModel!.priceExcludeAr.toString().contains("<li>")?parseHtmlToText(offerModel!.priceExcludeAr.toString()):offerModel!.priceExcludeAr.toString();
+    priceNotIncludeEnControl.text=offerModel!.priceExcludeEn.toString().contains("<li>")?parseHtmlToText(offerModel!.priceExcludeEn.toString()):offerModel!.priceExcludeEn.toString();
+    afterPayControl.text=offerModel!.whatAfterPayAr.toString().contains("<li>")?parseHtmlToText(offerModel!.whatAfterPayAr.toString()): offerModel!.whatAfterPayAr.toString();
+    afterPayEnControl.text=offerModel!.whatAfterPayEn.toString().contains("<li>")?parseHtmlToText(offerModel!.whatAfterPayEn.toString()): offerModel!.whatAfterPayEn.toString();
+    notesControl.text=offerModel!.notesAr.toString().contains("<li>")?parseHtmlToText(offerModel!.notesAr.toString()): offerModel!.notesAr.toString();
+    notesEnControl.text=offerModel!.notesEn.toString().contains("<li>")?parseHtmlToText(offerModel!.notesEn.toString()): offerModel!.notesEn.toString();
 
     setState(() {
       isLoading = false;
@@ -597,6 +641,40 @@ abstract class UpDateViewModel extends State<UpDateView> {
       toastApp(tr("SelectCities"), context);
       return false;
     }
+
+    if(priceIncludeArControl.text==""){
+      toastApp(tr("EnterPriceIncludes"), context);
+      return false;
+    }
+    if(priceIncludeEnControl.text==""){
+      toastApp(tr("EnterPriceIncludesEn"), context);
+      return false;
+    }
+
+    if(priceNotIncludeControl.text==""){
+      toastApp(tr("EnterPriceDoesNotInclude"), context);
+      return false;
+    }
+    if(priceNotIncludeEnControl.text==""){
+      toastApp(tr("EnterPriceDoesNotIncludeEn"), context);
+      return false;
+    }
+    if(afterPayControl.text==""){
+      toastApp(tr("EnterWhatAfterPayment"), context);
+      return false;
+    }
+    if(afterPayEnControl.text==""){
+      toastApp(tr("EnterWhatAfterPaymentEn"), context);
+      return false;
+    }
+    if(notesControl.text==""){
+      toastApp(tr("EnterNotes"), context);
+      return false;
+    }
+    if(notesEnControl.text==""){
+      toastApp(tr("EnterEnNotes"), context);
+      return false;
+    }
     return true;
   }
 
@@ -628,6 +706,16 @@ abstract class UpDateViewModel extends State<UpDateView> {
         "is_single": isSingle,
         "is_international": isInternational,
         "is_installment": installmentAvailable,
+
+      "price_include_ar":priceIncludeArControl.text,
+      "price_include_en":priceIncludeEnControl.text,
+      "price_exclude_ar":priceNotIncludeControl.text,
+      "price_exclude_en":priceNotIncludeEnControl.text,
+      "what_after_pay_ar":afterPayControl.text,
+      "what_after_pay_en":afterPayEnControl.text,
+      "notes_ar":notesControl.text,
+      "notes_en":notesEnControl.text,
+
       };
 
       // Add selected countries and cities to the request data

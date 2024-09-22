@@ -176,22 +176,9 @@ class _PackagesDetailsState extends PackagesDetailsVieModel {
                     const SizedBox(height: 15),
 
                     // Package description
-                    Html(
-                      data: HomeViewModel.lang == "ar"
-                          ? offer!.descriptionAr!
-                          : offer!.descriptionEn!,
-                      style: {
-                        "body": Style(
-                          fontSize: FontSize(14.0),
-                          fontWeight: FontWeight.w400,
-                          color: Colors.black,
-                          fontFamily: GoogleFonts.tajawal().fontFamily,
-                        ),
-                      },
-                    ),
-                    const SizedBox(height: 10),
-                    Divider(height: 10, thickness: 1, color: Colors.grey.shade300),
-                    const SizedBox(height: 150),
+                    _buildPackageDetails(),
+
+                    const SizedBox(height: 170),
                   ],
                 ),
               ),
@@ -229,6 +216,7 @@ class _PackagesDetailsState extends PackagesDetailsVieModel {
   /// Widget of page
   AppBar widgetAppBar(Size size){
     return AppBar(
+      surfaceTintColor: Colors.transparent,
       flexibleSpace: Stack(
         children: [
           /// Display package images in a carousel if available
@@ -288,16 +276,18 @@ class _PackagesDetailsState extends PackagesDetailsVieModel {
           offer != null
               ? Positioned(
             bottom: 20,
-            left: 210,
-            right: 210,
-            child: AnimatedSmoothIndicator(
-              activeIndex: activeIndex,
-              count: offer!.images!.length,
-              effect: WormEffect(
-                dotHeight: 10,
-                dotWidth: 10,
-                dotColor: Colors.grey.shade400,
-                activeDotColor: const Color(0xffea8024),
+            left: 10,
+            right: 10,
+            child: Center(
+              child: AnimatedSmoothIndicator(
+                activeIndex: activeIndex,
+                count: offer!.images!.isEmpty? 1: offer!.images!.length,
+                effect: WormEffect(
+                  dotHeight: 10,
+                  dotWidth: 10,
+                  dotColor: Colors.grey.shade400,
+                  activeDotColor: const Color(0xffea8024),
+                ),
               ),
             ),
           )
@@ -327,7 +317,7 @@ class _PackagesDetailsState extends PackagesDetailsVieModel {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: SizedBox(
-        height: 60,
+        // height: 60,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -341,11 +331,13 @@ class _PackagesDetailsState extends PackagesDetailsVieModel {
               tr("numOfReservedPersons"),
             ),
             _buildVerticalDivider(),
-            _buildSummaryColumn(
-              (offer!.num_of_persons! -
-                  int.parse(offer!.num_of_reserved_persons.toString() ?? ""))
-                  .toString(),
-              tr("TheRemainingNumber"),
+            SizedBox(width: 78,
+              child: _buildSummaryColumn(
+                (offer!.num_of_persons! -
+                    int.parse(offer!.num_of_reserved_persons.toString() ?? ""))
+                    .toString(),
+                tr("TheRemainingNumber"),
+              ),
             ),
           ],
         ),
@@ -377,6 +369,247 @@ class _PackagesDetailsState extends PackagesDetailsVieModel {
     );
   }
 
+  /// Widget to build Package Details
+  Widget _buildPackageDetails() {
+    return Column(crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Html(
+          data: HomeViewModel.lang == "ar"
+              ? offer!.descriptionAr!
+              : offer!.descriptionEn!,
+          style: {
+            "body": Style(
+              fontSize: FontSize(14.0),
+              fontWeight: FontWeight.w400,
+              color: Colors.black,
+              fontFamily: GoogleFonts.tajawal().fontFamily,
+            ),
+          },
+        ),
+        _buildDivider(),
+        offer!.priceIncludeAr!=null?
+        Column(crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+          Container(
+             padding: const EdgeInsets.all(3),
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(3),color: samaOfficeColor),
+            child: Text(
+              tr("PriceInclude"),
+              style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 14),
+              textAlign: TextAlign.start,
+            ),
+          ),
+
+            offer!.priceIncludeAr!.toString().contains("<li>")?
+            Html(
+              data: HomeViewModel.lang == "ar"
+                  ? offer!.priceIncludeAr!
+                  : offer!.priceExcludeEn!,
+              style: {
+                "body": Style(
+                  fontSize: FontSize(14.0),
+                  fontWeight: FontWeight.w400,
+                  color: Colors.black,
+                  fontFamily: GoogleFonts.tajawal().fontFamily,
+                ),
+              },
+            )
+
+                :
+            Column(
+              children: [
+                const SizedBox(height: 10,),
+                Text(
+                  HomeViewModel.lang == "ar"
+                    ? offer!.priceIncludeAr!
+                     : offer!.priceExcludeEn!,
+                  style: const TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 14),
+                  textAlign: TextAlign.start,
+                ),
+              ],
+            ),
+
+
+            const SizedBox(height: 10,),
+        ],)
+            :const SizedBox.shrink(),
+
+
+        offer!.priceExcludeAr!=null?
+        Column(crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(3),
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(3),color: Colors.red),
+              child: Text(
+                tr("PriceNotInclude"),
+                style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 14),
+                textAlign: TextAlign.start,
+              ),
+            ),
+            const SizedBox(height: 10,),
+            offer!.priceExcludeAr!.toString().contains("<li>")?
+            Html(
+              data: HomeViewModel.lang == "ar"
+                  ? offer!.priceExcludeAr!
+                  : offer!.priceExcludeEn!,
+              style: {
+                "body": Style(
+                  fontSize: FontSize(14.0),
+                  fontWeight: FontWeight.w400,
+                  color: Colors.black,
+                  fontFamily: GoogleFonts.tajawal().fontFamily,
+                ),
+              },
+            )
+
+                :
+
+            Column(
+              children: [
+                const SizedBox(height: 10,),
+                Text(
+                  HomeViewModel.lang == "ar"
+                      ? offer!.priceExcludeAr!
+                      : offer!.priceExcludeEn!,
+                  style: const TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 14),
+                  textAlign: TextAlign.start,
+                ),
+              ],
+            ),
+
+
+            const SizedBox(height: 10,),
+          ],)
+            :const SizedBox.shrink(),
+
+
+        offer!.whatAfterPayAr!=null?
+        Column(crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(3),
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(3),color: const Color(0xff22AF0B)),
+              child: Text(
+                tr("WhatfterPayment"),
+                style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 14),
+                textAlign: TextAlign.start,
+              ),
+            ),
+
+            const SizedBox(height: 10,),
+            offer!.whatAfterPayAr!.toString().contains("<li>")?
+            Html(
+              data: HomeViewModel.lang == "ar"
+                  ? offer!.whatAfterPayAr!
+                  : offer!.whatAfterPayEn!,
+              style: {
+                "body": Style(
+                  fontSize: FontSize(14.0),
+                  fontWeight: FontWeight.w400,
+                  color: Colors.black,
+                  fontFamily: GoogleFonts.tajawal().fontFamily,
+                ),
+              },
+            )
+
+                :
+            Column(
+              children: [
+                const SizedBox(height: 10,),
+                Text(
+                  HomeViewModel.lang == "ar"
+                      ? offer!.whatAfterPayAr!
+                      : offer!.whatAfterPayEn!,
+                  style: const TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 14),
+                  textAlign: TextAlign.start,
+                ),
+              ],
+            ),
+
+
+            const SizedBox(height: 10,),
+          ],)
+            :const SizedBox.shrink(),
+
+
+
+        offer!.notesAr!=null?
+        Column(crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(3),
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(3),color:Colors.blue.shade200),
+              child: Text(
+                tr("notes"),
+                style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 14),
+                textAlign: TextAlign.start,
+              ),
+            ),
+            const SizedBox(height: 10,),
+
+            offer!.notesAr!.toString().contains("<li>")?
+            Html(
+              data: HomeViewModel.lang == "ar"
+                  ? offer!.notesAr!
+                  : offer!.notesEn!,
+              style: {
+                "body": Style(
+                  fontSize: FontSize(14.0),
+                  fontWeight: FontWeight.w400,
+                  color: Colors.black,
+                  fontFamily: GoogleFonts.tajawal().fontFamily,
+                ),
+              },
+            )
+
+            :Column(
+              children: [
+                const SizedBox(height: 10,),
+                Text(
+                  HomeViewModel.lang == "ar"
+                      ? offer!.notesAr!
+                      : offer!.notesEn!,
+                  style: const TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 14),
+                  textAlign: TextAlign.start,
+                ),
+              ],
+            ),
+
+
+            const SizedBox(height: 10,),
+          ],)
+            :const SizedBox.shrink()
+
+
+      ],
+    );
+  }
+
   /// Widget to build a vertical divider
   Widget _buildVerticalDivider() {
     return SizedBox(
@@ -386,6 +619,16 @@ class _PackagesDetailsState extends PackagesDetailsVieModel {
         thickness: 1,
       ),
     );
+  }
+
+  /// Widget to build a vertical divider
+  Widget _buildDivider() {
+    return  Column( children: [
+      const SizedBox(height: 10),
+      Divider(height: 10, thickness: 1, color: Colors.grey.shade300),
+      const SizedBox(height: 10),
+
+    ],);
   }
 
   /// Widget to build the bottom action button

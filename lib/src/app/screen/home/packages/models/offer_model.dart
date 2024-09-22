@@ -39,6 +39,14 @@ class OfferModel {
   String? price_before_without_app_percent;
   String? price_after_without_app_percent;
   int? is_installment;
+  String? priceIncludeAr;
+  String? priceIncludeEn;
+  String? priceExcludeAr;
+  String? priceExcludeEn;
+  String? whatAfterPayAr;
+  String? whatAfterPayEn;
+  String? notesAr;
+  String? notesEn;
 
 
 
@@ -76,7 +84,15 @@ class OfferModel {
         this.price_before_without_app_percent,
         this.price_after_without_app_percent,
         this.is_installment,
-        this.office_rate
+        this.office_rate,
+        this.priceIncludeAr,
+        this.priceIncludeEn,
+        this.priceExcludeAr,
+        this.priceExcludeEn,
+        this.whatAfterPayAr,
+        this.whatAfterPayEn,
+        this.notesAr,
+        this.notesEn
 
       });
 
@@ -127,6 +143,14 @@ class OfferModel {
     price_before_without_app_percent = json['price_before_without_app_percent'];
     price_after_without_app_percent = json['price_after_without_app_percent'];
     is_installment = json['is_installment'];
+    priceIncludeAr = json['price_include_ar'];
+    priceIncludeEn = json['price_include_en'];
+    priceExcludeAr = json['price_exclude_ar'];
+    priceExcludeEn = json['price_exclude_en'];
+    whatAfterPayAr = json['what_after_pay_ar'];
+    whatAfterPayEn = json['what_after_pay_en'];
+    notesAr = json['notes_ar'];
+    notesEn = json['notes_en'];
 
   }
 
@@ -176,6 +200,14 @@ class OfferModel {
     data['price_before_without_app_percent'] = this.price_before_without_app_percent;
     data['price_after_without_app_percent'] = this.price_after_without_app_percent;
     data['is_installment'] = this.is_installment;
+    data['price_include_ar'] = this.priceIncludeAr;
+    data['price_include_en'] = this.priceIncludeEn;
+    data['price_exclude_ar'] = this.priceExcludeAr;
+    data['price_exclude_en'] = this.priceExcludeEn;
+    data['what_after_pay_ar'] = this.whatAfterPayAr;
+    data['what_after_pay_en'] = this.whatAfterPayEn;
+    data['notes_ar'] = this.notesAr;
+    data['notes_en'] = this.notesEn;
 
     return data;
   }

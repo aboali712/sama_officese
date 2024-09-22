@@ -90,6 +90,7 @@ dependencies:
   flutter_inappwebview: ^6.0.0
   flutter_svg: ^2.0.10+1
   package_info_plus: any
+  html: ^0.15.4
 
 
 dev_dependencies:

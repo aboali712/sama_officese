@@ -280,27 +280,29 @@ class _PackagesViewState extends PackagesViewModel {
       margin: EdgeInsets.only(
         top: MediaQuery.of(context).size.height / 5,
       ),
-      child: Column(
-        children: [
-          SvgPicture.asset("assets/images/empty_orders.svg"),
-          const SizedBox(height: 20),
-          Text(
-            tr("NoPackages"),
-            style: const TextStyle(
-              fontSize: 17,
-              fontWeight: FontWeight.bold,
+      child: Center(
+        child: Column(crossAxisAlignment: CrossAxisAlignment.center ,
+          children: [
+            SvgPicture.asset("assets/images/empty_orders.svg"),
+            const SizedBox(height: 20),
+            Text(
+              tr("NoPackages"),
+              style: const TextStyle(
+                fontSize: 17,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-          const SizedBox(height: 10),
-          Text(
-            tr("NoPackagesDes"),
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.w500,
+            const SizedBox(height: 10),
+            Text(
+              tr("NoPackagesDes"),
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w500,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

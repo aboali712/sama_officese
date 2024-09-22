@@ -39,10 +39,14 @@ abstract class CreatePackageViewModel extends  State<CreatePackageView>{
   TextEditingController numOfPersonControl =TextEditingController();
   HtmlEditorController controllerDetailsAr = HtmlEditorController();
   HtmlEditorController controllerDetailsEn = HtmlEditorController();
-  TextEditingController priceIncludeControl =TextEditingController();
+  TextEditingController priceIncludeArControl =TextEditingController();
+  TextEditingController priceIncludeEnControl =TextEditingController();
   TextEditingController priceNotIncludeControl =TextEditingController();
+  TextEditingController priceNotIncludeEnControl =TextEditingController();
   TextEditingController afterPayControl =TextEditingController();
+  TextEditingController afterPayEnControl =TextEditingController();
   TextEditingController notesControl =TextEditingController();
+  TextEditingController notesEnControl =TextEditingController();
 
   String detailsAr="";
   String detailsEn="";
@@ -66,6 +70,11 @@ abstract class CreatePackageViewModel extends  State<CreatePackageView>{
   String isSingle="";
   String isInternational="";
   int installmentAvailable=0;
+
+  final ValueNotifier<int> priceIncludeLang = ValueNotifier<int>(0);
+  final ValueNotifier<int> priceNotIncludeLang = ValueNotifier<int>(0);
+  final ValueNotifier<int> afterPaymentLang = ValueNotifier<int>(0);
+  final ValueNotifier<int> notesLang = ValueNotifier<int>(0);
 
 
   @override
@@ -239,6 +248,40 @@ abstract class CreatePackageViewModel extends  State<CreatePackageView>{
     }
 
 
+    if(priceIncludeArControl.text==""){
+      toastApp(tr("EnterPriceIncludes"), context);
+      return false;
+    }
+    if(priceIncludeEnControl.text==""){
+      toastApp(tr("EnterPriceIncludesEn"), context);
+      return false;
+    }
+
+    if(priceNotIncludeControl.text==""){
+      toastApp(tr("EnterPriceDoesNotInclude"), context);
+      return false;
+    }
+    if(priceNotIncludeEnControl.text==""){
+      toastApp(tr("EnterPriceDoesNotIncludeEn"), context);
+      return false;
+    }
+    if(afterPayControl.text==""){
+      toastApp(tr("EnterWhatAfterPayment"), context);
+      return false;
+    }
+    if(afterPayEnControl.text==""){
+      toastApp(tr("EnterWhatAfterPaymentEn"), context);
+      return false;
+    }
+    if(notesControl.text==""){
+      toastApp(tr("EnterNotes"), context);
+      return false;
+    }
+    if(notesEnControl.text==""){
+      toastApp(tr("EnterEnNotes"), context);
+      return false;
+    }
+
 
     return true;
   }
@@ -277,6 +320,15 @@ abstract class CreatePackageViewModel extends  State<CreatePackageView>{
       mp["is_single"]=isSingle;
       mp["is_international"]=isInternational;
       mp["is_installment"]=installmentAvailable;
+
+      mp["price_include_ar"]=priceIncludeArControl.text;
+      mp["price_include_en"]=priceIncludeEnControl.text;
+      mp["price_exclude_ar"]=priceNotIncludeControl.text;
+      mp["price_exclude_en"]=priceNotIncludeEnControl.text;
+      mp["what_after_pay_ar"]=afterPayControl.text;
+      mp["what_after_pay_en"]=afterPayEnControl.text;
+      mp["notes_ar"]=notesControl.text;
+      mp["notes_en"]=notesEnControl.text;
 
 
 

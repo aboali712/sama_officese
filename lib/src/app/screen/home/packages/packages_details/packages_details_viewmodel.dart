@@ -9,6 +9,8 @@ import '../../../../core/utils/helper_manager.dart';
 import '../models/offer_model.dart';
 import 'model/PackagerDetailsResponse.dart';
 import 'model/package_details_model.dart';
+import 'package:flutter/material.dart';
+import 'package:html/parser.dart' as html_parser;
 
 abstract class PackagesDetailsVieModel extends State<PackagesDetails> {
   final Dio dio = NetworkService.instance.dio; // Dio instance for network requests
@@ -100,4 +102,22 @@ abstract class PackagesDetailsVieModel extends State<PackagesDetails> {
       toastApp("An error occurred. Please try again.", context);
     }
   }
+
+  // Function to parse HTML and return a readable string
+  String parseHtmlToText(String htmlString) {
+    // Parse the HTML string
+    var document = html_parser.parse(htmlString);
+
+    // Extract the text from <li> elements
+    List<String> listItems = document
+        .querySelectorAll('li')
+        .map((element) => '• ${element.text}')
+        .toList();
+
+    // Join the list items with new lines or bullet points
+    return listItems.join('\n'); // You can use '\n• ' for bullet points
+  }
+
+
+
 }

@@ -271,9 +271,11 @@ class _HomePageState extends HomeViewModel {
                                                                   ),
                                                                 ):const SizedBox.shrink(),
                                                                 const SizedBox(width: 3,),
-                                                                Text(
-                                                                  tr("ThereAreCurrentlyNoRequests"),
-                                                                  style: TextStyle(color: Colors.grey, fontSize: packagePending.isNotEmpty ? 13 : 12, fontWeight: FontWeight.w400),
+                                                                SizedBox(width:115,
+                                                                  child: Text(
+                                                                    tr("ThereAreCurrentlyNoRequests"),
+                                                                    style: TextStyle(color: Colors.grey, fontSize: packagePending.isNotEmpty ? 13 : 12, fontWeight: FontWeight.w400),
+                                                                  ),
                                                                 )
                                                               ],
                                                             )
