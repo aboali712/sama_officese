@@ -564,10 +564,10 @@ abstract class UpDateViewModel extends State<UpDateView> {
     detailsAr = offerModel!.descriptionAr!;
     detailsEn = offerModel!.descriptionEn!;
     selectStatus = offerModel!.type.toString();
-    packagePriceControl.text = offerModel!.price_before_without_app_percent!=null?offerModel!.price_before_without_app_percent!.toString():"0";
+    packagePriceControl.text = offerModel!.priceBefore.toString();
     packageImages = offerModel!.images;
     switchValue = offerModel!.is_vip.toString() == "1" ? true : false;
-    packageDiscountControl.text =offerModel!.price_after_without_app_percent!=null? offerModel!.price_after_without_app_percent!.toString():"0";
+    packageDiscountControl.text =offerModel!.priceAfter.toString();
     selectedCountryId = offerModel!.countries_list!.toList();
     selectedCitesId = offerModel!.cities_list!.toList();
     countryId = offerModel!.countryId.toString();
