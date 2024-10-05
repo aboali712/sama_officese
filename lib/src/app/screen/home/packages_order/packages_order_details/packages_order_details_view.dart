@@ -667,9 +667,10 @@ class _PackagesOrderDetailsViewState extends PackagesOrderDetailsViewModel {
   }
 
   bool _showAddServiceButton() {
-    return packageDetails!.status != "canceled" &&
-        packageDetails!.status != "completed" &&
-        packageDetails!.status != "payment_confirmed";
+    return
+        // packageDetails!.status != "canceled" &&
+        // packageDetails!.status != "completed" &&
+        packageDetails!.status == "payment_confirmed";
   }
 
 /// Widget to build the "Add Service" card
