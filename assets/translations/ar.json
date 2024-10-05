@@ -304,6 +304,9 @@
   "PriceInclude": "السعر يشمل",
   "PriceNotInclude": "السعر لا يشمل",
   "WhatfterPayment": "ماذا بعد الدفع",
-  "notes": "ملاحظه"
+  "notes": "ملاحظه",
+  "paid": "تم الدفع",
+  "unpaid": "أنتظار الدفع"
+
 
 }

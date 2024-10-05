@@ -305,5 +305,7 @@
   "PriceInclude": "Price includes",
   "PriceNotInclude": "Price does not include",
   "WhatfterPayment": "What after payment",
-  "notes": "note"
+  "notes": "note",
+  "paid": "paid",
+  "unpaid": "unpaid"
 }

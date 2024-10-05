@@ -118,15 +118,28 @@ class _AddServiceViewState extends AddServiceViewModel {
                                             ],
                                           ),
 
+                                         Row(children: [
+                                           Text(e.status=="paid"?
+                                               tr("paid")
+                                              : tr("unpaid")
+                                             ,style: GoogleFonts.tajawal(
+                                                 color: e.status=="paid"?
+                                                 Colors.green
+                                                 :Colors.red,
+                                               fontSize:13,fontWeight: FontWeight.w500),),
+                                           const SizedBox(width: 50,),
+
                                            InkWell( onTap: () {
-                                               setState(() {
-                                                 serviceId=e.id.toString();
-                                               });
-                                               deleteServiceApi();
+                                             setState(() {
+                                               serviceId=e.id.toString();
+                                             });
+                                             deleteServiceApi();
 
                                            },child: const SizedBox(
                                                height: 35,width: 35,
                                                child: Icon(Icons.delete_rounded,color:Color(0xffEA8024),size: 25,)))
+
+                                         ],)
 
 
 
