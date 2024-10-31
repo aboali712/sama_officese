@@ -51,8 +51,8 @@ dependencies:
   image_picker: ^1.0.7
   dropdown_button2: ^2.3.9
   flutter_switch: ^0.3.2
-  upgrader: ^10.3.0
-  carousel_slider: ^4.2.1
+  upgrader: ^11.3.0
+  carousel_slider: ^5.0.0
   easy_image_viewer: ^1.2.1
   smooth_page_indicator: ^1.1.0
   dotted_border: ^2.0.0+3
@@ -71,7 +71,7 @@ dependencies:
   firebase_core_platform_interface: ^5.0.0
   cloud_firestore: ^4.14.0
   siri_wave: ^2.0.0+1
-  flutter_local_notifications: ^13.0.0
+  flutter_local_notifications: ^17.2.4
   get: null
   path_provider: null
   photo_view: ^0.14.0
@@ -91,6 +91,7 @@ dependencies:
   flutter_svg: ^2.0.10+1
   package_info_plus: any
   html: ^0.15.4
+  win32: ^5.7.2
 
 
 dev_dependencies:

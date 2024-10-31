@@ -373,10 +373,10 @@ class _PackagesDetailsState extends PackagesDetailsVieModel {
   Widget _buildPackageDetails() {
     return Column(crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+
+        containsHtmlTags(offer!.description!.toString())?
         Html(
-          data: HomeViewModel.lang == "ar"
-              ? offer!.descriptionAr!
-              : offer!.descriptionEn!,
+          data: offer!.description!.toString() ?? '',
           style: {
             "body": Style(
               fontSize: FontSize(14.0),
@@ -385,7 +385,16 @@ class _PackagesDetailsState extends PackagesDetailsVieModel {
               fontFamily: GoogleFonts.tajawal().fontFamily,
             ),
           },
+        )
+            : Text(
+          offer!.description!.toString(),
+          style: const TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.w400,
+              fontSize: 14),
+          textAlign: TextAlign.start,
         ),
+
         _buildDivider(),
         offer!.priceIncludeAr!=null?
         Column(crossAxisAlignment: CrossAxisAlignment.start,
@@ -403,7 +412,7 @@ class _PackagesDetailsState extends PackagesDetailsVieModel {
             ),
           ),
 
-            offer!.priceIncludeAr!.toString().contains("<li>")?
+            containsHtmlTags(offer!.priceIncludeAr!)?
             Html(
               data: HomeViewModel.lang == "ar"
                   ? offer!.priceIncludeAr!
@@ -417,9 +426,7 @@ class _PackagesDetailsState extends PackagesDetailsVieModel {
                 ),
               },
             )
-
-                :
-            Column(
+          :  Column(
               children: [
                 const SizedBox(height: 10,),
                 Text(
@@ -457,7 +464,7 @@ class _PackagesDetailsState extends PackagesDetailsVieModel {
               ),
             ),
             const SizedBox(height: 10,),
-            offer!.priceExcludeAr!.toString().contains("<li>")?
+            containsHtmlTags(offer!.priceExcludeAr!)?
             Html(
               data: HomeViewModel.lang == "ar"
                   ? offer!.priceExcludeAr!
@@ -513,7 +520,7 @@ class _PackagesDetailsState extends PackagesDetailsVieModel {
             ),
 
             const SizedBox(height: 10,),
-            offer!.whatAfterPayAr!.toString().contains("<li>")?
+            containsHtmlTags(offer!.whatAfterPayAr!)?
             Html(
               data: HomeViewModel.lang == "ar"
                   ? offer!.whatAfterPayAr!
@@ -569,7 +576,7 @@ class _PackagesDetailsState extends PackagesDetailsVieModel {
             ),
             const SizedBox(height: 10,),
 
-            offer!.notesAr!.toString().contains("<li>")?
+            containsHtmlTags(offer!.notesAr!)?
             Html(
               data: HomeViewModel.lang == "ar"
                   ? offer!.notesAr!

@@ -29,6 +29,14 @@ abstract class PackagesDetailsVieModel extends State<PackagesDetails> {
     super.initState();
   }
 
+  /// check for return html
+  bool containsHtmlTags(String? text) {
+    if (text == null) return false;
+    // Regular expression to match any HTML tag
+    final htmlTagPattern = RegExp(r'<[^>]+>');
+    return htmlTagPattern.hasMatch(text);
+  }
+
   /// Method to change the status of the offer
   Future<void> changeOfferApi(String status) async {
     setState(() {
